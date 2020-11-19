@@ -21,6 +21,7 @@
     <PackageCertificateKeyFile>IOTProj_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppxPackage>true</AppxPackage>
     <ContainsStartupTask>true</ContainsStartupTask>
+    <PackageCertificateThumbprint>2E7805633A6BCE3F05FA609BECF048D2965EF1F7</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -93,9 +94,11 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="IOTProj_TemporaryKey.pfx" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SerialComms.cs" />
     <Compile Include="StartupTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -103,7 +106,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="IOTProj_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\Default.rd.xml" />
@@ -133,9 +135,19 @@
     <Reference Include="GrovePi">
       <HintPath>..\..\GrovePi.dll</HintPath>
     </Reference>
+    <Reference Include="RpiCommsUtil">
+      <HintPath>..\..\DataCommsStarters\RpiCommsUtil.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
