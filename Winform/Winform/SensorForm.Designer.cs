@@ -1,6 +1,6 @@
 ﻿namespace Winform
 {
-    partial class Form1
+    partial class SensorForm
     {
         /// <summary>
         /// Required designer variable.

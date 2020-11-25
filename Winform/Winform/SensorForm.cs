@@ -12,7 +12,7 @@ using System.Data.SqlClient;
 
 namespace Winform
 {
-    public partial class Form1 : Form
+    public partial class SensorForm : Form
     {
 
         //string strConnectionString =
@@ -136,7 +136,7 @@ namespace Winform
             dataComms.dataSendErrorEvent += new DataComms.DataSendErrorDelegate(commsSendError);
             Console.WriteLine("Connected");
         }
-        public Form1()
+        public SensorForm()
         {
             InitializeComponent();
         }
