@@ -54,6 +54,23 @@ namespace Winform
             //update database
             //saveLightSensorDataToDB(strTime, strlightValue, status);
         }
+        private void handleLightSensorData(string strData, string strTime, string ID)
+        {
+            string strlightValue = extractStringValue(strData, ID);
+            //update GUI component in any tabs
+            //tb_light.Text = strlightValue;
+
+            float fLightValue = extractFlotValue(strData, ID);
+            string status = "";
+            if (fLightValue <= 500)
+                 status = "Dark";
+            else
+                 status = "Bright";
+             tb_light.Text = status;
+
+            //update database
+            //saveLightSensorDataToDB(strTime, strlightValue, status);
+        }
         private void handleRfidData(string strData, string strTime, string ID)
         {
             string strRFID = extractStringValue(strData, ID);
@@ -71,6 +88,8 @@ namespace Winform
             //check whether temperature is sent
             if (strData.IndexOf("TEMP=") != -1)
                 handleTempSensorData(strData, strTime, "TEMP=");
+            if (strData.IndexOf("LIGHT=") != -1)
+                handleLightSensorData(strData, strTime, "LIGHT=");
             else if (strData.IndexOf("RFID=") != -1)
                 handleRfidData(strData, strTime, "RFID=");
 
@@ -141,6 +160,11 @@ namespace Winform
         private void btnClear_Click(object sender, EventArgs e)
         {
             lbDataComms.Items.Clear();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

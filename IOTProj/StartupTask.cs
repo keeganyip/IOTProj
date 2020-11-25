@@ -21,11 +21,20 @@ namespace IOTProj
         static int curMode;
 
         Pin tempPin = Pin.AnalogPin0;
+        Pin lightPin = Pin.AnalogPin1;
+        Pin waterPin = Pin.AnalogPin2;
 
         private System.Threading.Semaphore sm = new System.Threading.Semaphore(1, 1);
 
         double temp = 23;
         double sensorTemp;
+        //used by sensor for internal processing
+        // 1023 : completely dry , more water : value will drop
+        int moistureAdcValue = 1023;
+
+        //This is or main logic controller to check for water moisture
+        private int sensorMoistureAdcValue;
+
 
         DataComms datacomms;
         string strDataReceived = "";
@@ -70,10 +79,24 @@ namespace IOTProj
             return temp;
         }
 
+        private int getMoisture()
+        {
+            int adcValue;
+
+            sm.WaitOne();
+            adcValue = DeviceFactory.Build.GrovePi().AnalogRead(waterPin);
+            sm.Release();
+            if (adcValue <= 1023)
+                moistureAdcValue = adcValue;
+            return moistureAdcValue;
+        }//End of getMoisture()
         private void handleModeSendTemp()
         {
-            
+            int adcValue = 0;
+            adcValue = GetLightValue(lightPin);
+            Debug.WriteLine("Light ADC = " + adcValue);
             sendDataToWindows("TEMP=" + getTemp());
+            sendDataToWindows("LIGHT=" + GetLightValue(lightPin));
 
 
 
@@ -93,6 +116,13 @@ namespace IOTProj
                     sendDataToWindows("RFID=" + strRfidDetected);
                 }
             }
+        }
+        private int GetLightValue(Pin pin)
+        {
+            sm.WaitOne();
+            int value = DeviceFactory.Build.GrovePi().AnalogRead(pin);
+            sm.Release();
+            return value;
         }
         public void commsDataReceive(string dataReceived)
         {
@@ -130,6 +160,7 @@ namespace IOTProj
             initcomms();
             StartUart();
             curMode = MODE_SENDTEMP;
+           
 
             while (true)
             {
@@ -140,7 +171,16 @@ namespace IOTProj
                     handleModeSendTemp();
                 else if (curMode == MODE_RFID)
                     handleRFID();
-                //Debug.WriteLine("Temp in degrees Celsisus is " + sensorTemp.ToString("N2"));
+
+                sensorMoistureAdcValue = getMoisture(); //get moisture from sensor
+                Debug.WriteLine("Moisture = " + sensorMoistureAdcValue);
+                if (sensorMoistureAdcValue > 1000)
+                    Debug.WriteLine("Dry");
+                else if (sensorMoistureAdcValue < 100)
+                    Debug.WriteLine("There is water pnding");
+                else
+                    Debug.WriteLine("Moderately Wet");
+
             }
         }
     }
