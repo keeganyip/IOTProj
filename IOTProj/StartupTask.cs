@@ -23,6 +23,7 @@ namespace IOTProj
         Pin tempPin = Pin.AnalogPin0;
         Pin lightPin = Pin.AnalogPin1;
         Pin waterPin = Pin.AnalogPin2;
+        IDHTTemperatureAndHumiditySensor humtemp = DeviceFactory.Build.DHTTemperatureAndHumiditySensor(Pin.DigitalPin2, 0);
 
         private System.Threading.Semaphore sm = new System.Threading.Semaphore(1, 1);
 
@@ -142,6 +143,16 @@ namespace IOTProj
                 Debug.WriteLine("ERROR. DId u forget to initcomms()?");
             }
         }
+        private void getTempD()
+        {
+            sm.WaitOne();
+            humtemp.Measure();
+            double tempC = humtemp.TemperatureInCelsius;
+            double hum = humtemp.Humidity;
+            sm.Release();
+            if (!Double.IsNaN(tempC) && !Double.IsNaN(hum))
+                Debug.WriteLine(tempC+ "temp\n" + hum + "hum");
+        }
 
         private void initcomms()
         {
@@ -165,21 +176,23 @@ namespace IOTProj
             while (true)
             {
                 Sleep(300);
+                
                 sensorTemp = getTemp();
 
                 if (curMode == MODE_SENDTEMP)
                     handleModeSendTemp();
                 else if (curMode == MODE_RFID)
                     handleRFID();
-
+                getTempD();
+                
                 sensorMoistureAdcValue = getMoisture(); //get moisture from sensor
-                Debug.WriteLine("Moisture = " + sensorMoistureAdcValue);
-                if (sensorMoistureAdcValue > 1000)
-                    Debug.WriteLine("Dry");
-                else if (sensorMoistureAdcValue < 100)
-                    Debug.WriteLine("There is water pnding");
-                else
-                    Debug.WriteLine("Moderately Wet");
+                //Debug.WriteLine("Moisture = " + sensorMoistureAdcValue);
+                //if (sensorMoistureAdcValue > 1000)
+                //    Debug.WriteLine("Dry");
+                //else if (sensorMoistureAdcValue < 100)
+                //    Debug.WriteLine("There is water pnding");
+                //else
+                //    Debug.WriteLine("Moderately Wet");
 
             }
         }

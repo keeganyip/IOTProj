@@ -136,7 +136,7 @@
       <HintPath>..\..\GrovePi.dll</HintPath>
     </Reference>
     <Reference Include="RpiCommsUtil">
-      <HintPath>..\..\DataCommsStarters\RpiCommsUtil.dll</HintPath>
+      <HintPath>..\..\RpiCommsUtil.dll</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
