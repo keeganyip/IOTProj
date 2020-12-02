@@ -23,7 +23,9 @@ namespace WebForm_DB_Createuser.Account
             if (!String.IsNullOrEmpty(returnUrl))
             {
                 RegisterHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
+               
             }
+            Session.Clear();
         }
 
         protected void LogIn(object sender, EventArgs e)
@@ -82,16 +84,22 @@ namespace WebForm_DB_Createuser.Account
                 {
                     
                     string id = "select UniqueUserID from UserTable where Email='" + Email.Text + "'";
-                    SqlCommand cmdd = new SqlCommand(id, conn);
-                    string id_collected = cmdd.ExecuteScalar().ToString().Trim();
-
+                    SqlCommand cmdid = new SqlCommand(id, conn);
+                    string id_collected = cmdid.ExecuteScalar().ToString().Trim();
+                    conn.Close();
+                   
                     Response.Write("password check");
                     Response.Write(id_collected);
                     Session["id"] = id_collected;
-                    Session.Add("id", id_collected);
+                    
+                   
                     Response.Write(Session["id"]);
 
-                    Response.Redirect("/");
+                    Response.Redirect("Useraccount");
+                }
+                else
+                {
+
                 }
 
 

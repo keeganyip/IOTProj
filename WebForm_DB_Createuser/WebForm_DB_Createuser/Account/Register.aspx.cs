@@ -35,7 +35,7 @@ namespace WebForm_DB_Createuser.Account
                 ErrorMessage.Text = result.Errors.FirstOrDefault();
             }
             */
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["CreateConnectionString"].ConnectionString);
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString);
             conn.Open();
             string checkuser = "select count(*) from UserTable where Email='" + Email.Text + "'";
             SqlCommand cmds = new SqlCommand(checkuser, conn);
@@ -51,13 +51,19 @@ namespace WebForm_DB_Createuser.Account
             {
                 
 
-                    string insertQuery = "insert into UserTable(Email,Password)values(@Email,@password)";
+                    string insertQuery = "insert into UserTable(Email,Password,Name,Contact,Type)values(@Email,@password,@Name,@Contact,@Type)";
                     SqlCommand cmd = new SqlCommand(insertQuery, conn);
                     cmd.Parameters.AddWithValue("@Email", Email.Text);
                     cmd.Parameters.AddWithValue("@password", Password.Text);
+                    cmd.Parameters.AddWithValue("@Name", Name.Text);
+                    cmd.Parameters.AddWithValue("@Contact", Contact.Text);
+                    cmd.Parameters.AddWithValue("@Type", "User");
 
 
-                    cmd.ExecuteNonQuery();
+
+
+
+                cmd.ExecuteNonQuery();
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "notification", ";alert('account created');", true);
                 Response.Redirect("Login.aspx");
                 
@@ -85,6 +91,16 @@ namespace WebForm_DB_Createuser.Account
         }
 
         protected void ConfirmPassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Name_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Contact_TextChanged(object sender, EventArgs e)
         {
 
         }
