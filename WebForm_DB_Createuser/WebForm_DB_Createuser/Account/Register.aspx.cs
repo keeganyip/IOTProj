@@ -44,8 +44,8 @@ namespace WebForm_DB_Createuser.Account
             if (temp == 1)
             {
                 
-                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Email already exist');", true);
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "Somestartupscipt", ";alert('page loaded');", true);
+                //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Email already exist');", true);
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "Alert", ";alert('email already exit ');", true);
             }
             else
             {
@@ -58,7 +58,8 @@ namespace WebForm_DB_Createuser.Account
 
 
                     cmd.ExecuteNonQuery();
-                    Response.Write("registered");
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "notification", ";alert('account created');", true);
+                Response.Redirect("Login.aspx");
                 
                
                 

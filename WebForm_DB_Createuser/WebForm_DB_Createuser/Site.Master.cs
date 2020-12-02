@@ -76,6 +76,11 @@ namespace WebForm_DB_Createuser
         {
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
         }
+
+        protected void session(object sender,EventArgs e)
+        {
+           
+        }
     }
 
 }

@@ -52,7 +52,7 @@
                     <%-- Enable this once you have account confirmation enabled for password reset functionality
                     <asp:HyperLink runat="server" ID="ForgotPasswordHyperLink" ViewStateMode="Disabled">Forgot your password?</asp:HyperLink>
                     --%>
-                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:CreateConnectionString %>" SelectCommand="SELECT * FROM [UserTable]"></asp:SqlDataSource>
+                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:UserdbConnectionString %>" SelectCommand="SELECT * FROM [UserTable]"></asp:SqlDataSource>
                 </p>
             </section>
         </div>

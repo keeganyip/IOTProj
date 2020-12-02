@@ -8,6 +8,7 @@ using WebForm_DB_Createuser.Models;
 using System.Data.SqlClient;
 using System.Configuration;
 
+
 namespace WebForm_DB_Createuser.Account
 {
     public partial class Login : Page
@@ -61,7 +62,7 @@ namespace WebForm_DB_Createuser.Account
                 }
 
             }*/
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["CreateConnectionString"].ConnectionString);
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString);
             conn.Open();
             string checkuser = "select count(*) from UserTable where Email='" + Email.Text + "'";
             SqlCommand cmd = new SqlCommand(checkuser, conn);
@@ -76,14 +77,25 @@ namespace WebForm_DB_Createuser.Account
                 string pass = Password.Text;
                 Response.Write(checkpw+Password.Text);
                 Response.Write(pass == checkpw);
+
                 if (pass == checkpw)
                 {
+                    
+                    string id = "select UniqueUserID from UserTable where Email='" + Email.Text + "'";
+                    SqlCommand cmdd = new SqlCommand(id, conn);
+                    string id_collected = cmdd.ExecuteScalar().ToString().Trim();
+
                     Response.Write("password check");
+                    Response.Write(id_collected);
+                    Session["id"] = id_collected;
+                    Session.Add("id", id_collected);
+                    Response.Write(Session["id"]);
+
                     Response.Redirect("/");
                 }
 
 
-
+        
 
 
             }
