@@ -30,6 +30,8 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tb_Moisture = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.tb_light = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -39,9 +41,9 @@
             this.tbtemp = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnTempSettings = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.btnRFID = new System.Windows.Forms.Button();
-            this.tb_Moisture = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -76,6 +78,23 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tb_Moisture
+            // 
+            this.tb_Moisture.Location = new System.Drawing.Point(561, 65);
+            this.tb_Moisture.Name = "tb_Moisture";
+            this.tb_Moisture.ReadOnly = true;
+            this.tb_Moisture.Size = new System.Drawing.Size(181, 22);
+            this.tb_Moisture.TabIndex = 15;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(461, 68);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(66, 17);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Moisture:";
             // 
             // tb_light
             // 
@@ -152,6 +171,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.btnTempSettings);
+            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.btnRFID);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
             this.tabPage1.Name = "tabPage1";
@@ -160,6 +181,26 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // btnTempSettings
+            // 
+            this.btnTempSettings.Location = new System.Drawing.Point(116, 41);
+            this.btnTempSettings.Name = "btnTempSettings";
+            this.btnTempSettings.Size = new System.Drawing.Size(205, 88);
+            this.btnTempSettings.TabIndex = 2;
+            this.btnTempSettings.Text = "Temp Settings";
+            this.btnTempSettings.UseVisualStyleBackColor = true;
+            this.btnTempSettings.Click += new System.EventHandler(this.btnTempSettings_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(445, 168);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "buZZ";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnRFID
             // 
@@ -170,23 +211,6 @@
             this.btnRFID.Text = "RFID";
             this.btnRFID.UseVisualStyleBackColor = true;
             this.btnRFID.Click += new System.EventHandler(this.btnRFID_Click);
-            // 
-            // tb_Moisture
-            // 
-            this.tb_Moisture.Location = new System.Drawing.Point(561, 65);
-            this.tb_Moisture.Name = "tb_Moisture";
-            this.tb_Moisture.ReadOnly = true;
-            this.tb_Moisture.Size = new System.Drawing.Size(181, 22);
-            this.tb_Moisture.TabIndex = 15;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(461, 68);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(66, 17);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "Moisture:";
             // 
             // SensorForm
             // 
@@ -222,6 +246,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tb_Moisture;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnTempSettings;
     }
 }
 

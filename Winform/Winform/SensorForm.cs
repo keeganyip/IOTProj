@@ -252,5 +252,16 @@ namespace Winform
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            dataComms.sendData("BUZZ");
+        }
+
+        private void btnTempSettings_Click(object sender, EventArgs e)
+        {
+            TemperatureSettings settings = new TemperatureSettings();
+            settings.Show();
+        }
     }
 }

@@ -209,7 +209,8 @@ namespace IOTProj
                 else if (curMode == MODE_RFID)
                     handleRFID();
                 getTempD();
-                
+                if (strDataReceived.Equals("BUZZ"))
+                    soundBuzzer();
                 sensorMoistureAdcValue = getMoisture(); //get moisture from sensor
                 //Debug.WriteLine("Moisture = " + sensorMoistureAdcValue);
                 
