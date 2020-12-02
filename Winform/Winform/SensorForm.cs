@@ -15,12 +15,88 @@ namespace Winform
     public partial class SensorForm : Form
     {
 
-        //string strConnectionString =
-        //   ConfigurationManager.ConnectionStrings["DataCommsDBConnection"].ConnectionString;
+        string strConnectionString =
+           ConfigurationManager.ConnectionStrings["Winform.Properties.Settings.UserdbConnectionString"].ConnectionString;
 
         DataComms dataComms;
 
         public delegate void myprocessDataDelegate(String strData);
+
+        //To save sensor data to DB, you need to change to suite your project needs
+        private void saveLightSensorDataToDB(string strTime, string strlightValue, string strStatus)
+        {
+            //Step 1: Create connection
+            SqlConnection myConnect = new SqlConnection(strConnectionString);
+
+            //Step 2: Create Command
+            String strCommandText =
+                "INSERT lightSensor (TimeOccured, lightValue, lightStatus) " +
+                " VALUES (@time, @value, @status)";
+
+            SqlCommand updateCmd = new SqlCommand(strCommandText, myConnect);
+            updateCmd.Parameters.AddWithValue("@time", strTime);
+            updateCmd.Parameters.AddWithValue("@value", strlightValue);
+            updateCmd.Parameters.AddWithValue("@status", strStatus);
+
+            //Step 3: Open Connection
+            myConnect.Open();
+
+            //Step 4: ExecuteCommand
+            int result = updateCmd.ExecuteNonQuery();
+
+            //Step 5: Close Connection
+            myConnect.Close();
+        } //End saveLightSensorDataToDB
+
+        private void saveTempSensorDataToDB(string strTime, string strTempValue, string strTempStatus)
+        {
+            //Step 1: Create connection
+            SqlConnection myConnect = new SqlConnection(strConnectionString);
+
+            //Step 2: Create Command
+            String strCommandText =
+                "INSERT tempSensor (TimeOccured, tempValue, tempStatus) " +
+                " VALUES (@time, @value, @status)";
+
+            SqlCommand updateCmd = new SqlCommand(strCommandText, myConnect);
+            updateCmd.Parameters.AddWithValue("@time", strTime);
+            updateCmd.Parameters.AddWithValue("@value", strTempValue);
+            updateCmd.Parameters.AddWithValue("@status", strTempStatus);
+
+            //Step 3: Open Connection
+            myConnect.Open();
+
+            //Step 4: ExecuteCommand
+            int result = updateCmd.ExecuteNonQuery();
+
+            //Step 5: Close Connection
+            myConnect.Close();
+        } //End saveTempSensorDataToDB
+
+        private void saveMoistureSensorDataToDB(string strTime, string strMoistureValue, string strMoistureStatus)
+        {
+            //Step 1: Create connection
+            SqlConnection myConnect = new SqlConnection(strConnectionString);
+
+            //Step 2: Create Command
+            String strCommandText =
+                "INSERT moistureSensor (TimeOccured, moistureLevel, status) " +
+                " VALUES (@time, @value, @status)";
+
+            SqlCommand updateCmd = new SqlCommand(strCommandText, myConnect);
+            updateCmd.Parameters.AddWithValue("@time", strTime);
+            updateCmd.Parameters.AddWithValue("@value", strMoistureValue);
+            updateCmd.Parameters.AddWithValue("@status", strMoistureStatus);
+
+            //Step 3: Open Connection
+            myConnect.Open();
+
+            //Step 4: ExecuteCommand
+            int result = updateCmd.ExecuteNonQuery();
+
+            //Step 5: Close Connection
+            myConnect.Close();
+        } //End saveMoistureSensorDataToDB
 
         private string extractStringValue(string strData, string ID)
         {
@@ -38,26 +114,20 @@ namespace Winform
         //create your own data handler for your project needs
         private void handleTempSensorData(string strData, string strTime, string ID)
         {
-            string strtempValue = extractStringValue(strData, ID);
-            string temp = strtempValue.Substring(0,5) + "°C";
             //update GUI component in any tabs
+            string strtempValue = extractStringValue(strData, ID);
+            Console.Write(strtempValue);
+            string temp = strtempValue.Substring(0, 5) + "°C";
             tbtemp.Text = temp;
 
-           /* float fLightValue = extractFlotValue(strData, ID);
-            string status = "";
-            if (fLightValue <= 500)
-                status = "Dark";
-            else
-                status = "Bright";
-            tbRoomStatus.Text = status; */
+            saveTempSensorDataToDB(strTime, strtempValue, temp);
 
-            //update database
-            //saveLightSensorDataToDB(strTime, strlightValue, status);
         }
         private void handleLightSensorData(string strData, string strTime, string ID)
         {
-            string strlightValue = extractStringValue(strData, ID);
             //update GUI component in any tabs
+            string strlightValue = extractStringValue(strData, ID);
+            
             //tb_light.Text = strlightValue;
 
             float fLightValue = extractFlotValue(strData, ID);
@@ -69,7 +139,7 @@ namespace Winform
              tb_light.Text = status;
 
             //update database
-            //saveLightSensorDataToDB(strTime, strlightValue, status);
+            saveLightSensorDataToDB(strTime, strlightValue, status);
         }
         private void handleRfidData(string strData, string strTime, string ID)
         {
@@ -82,13 +152,16 @@ namespace Winform
         {
             string strMoistureValue = extractStringValue(strData, ID);
             float fMoistureValue = extractFlotValue(strData, ID);
-
+            string status = "";
             if (fMoistureValue > 1000)
-                tb_Moisture.Text = "Dry";
+                status = "Dry";
             else if (fMoistureValue < 100)
-                tb_Moisture.Text = "There is water pending";
+                status = "There is water pending";
             else
-                tb_Moisture.Text = "Moderately Wet";
+                status = "Moderately Wet";
+            tb_Moisture.Text = status;
+
+            saveMoistureSensorDataToDB(strTime, strMoistureValue, status);
         }
         private void extractSensorData(string strData, string strTime)
         {

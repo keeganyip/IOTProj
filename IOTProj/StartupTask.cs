@@ -23,11 +23,13 @@ namespace IOTProj
         Pin tempPin = Pin.AnalogPin0;
         Pin lightPin = Pin.AnalogPin1;
         Pin waterPin = Pin.AnalogPin2;
+        Pin buzzerPin = Pin.DigitalPin3;
+
         IDHTTemperatureAndHumiditySensor humtemp = DeviceFactory.Build.DHTTemperatureAndHumiditySensor(Pin.DigitalPin2, 0);
 
         private System.Threading.Semaphore sm = new System.Threading.Semaphore(1, 1);
 
-        double temp = 23;
+        double temp = 23.00;
         double sensorTemp;
         //used by sensor for internal processing
         // 1023 : completely dry , more water : value will drop
@@ -44,6 +46,26 @@ namespace IOTProj
         private void Sleep(int MS)
         {
             Task.Delay(MS).Wait();
+        }
+        private void activateBuzzer(Pin pin, byte val)
+        {
+            sm.WaitOne();
+            DeviceFactory.Build.GrovePi().AnalogWrite(pin, val);
+            sm.Release();
+        }
+
+        private void soundBuzzer()
+        {
+            activateBuzzer(buzzerPin, 60);
+            Sleep(80);
+            activateBuzzer(buzzerPin, 120);
+            Sleep(80);
+            activateBuzzer(buzzerPin, 60);
+            Sleep(80);
+            activateBuzzer(buzzerPin, 120);
+            Sleep(80);
+            activateBuzzer(buzzerPin, 0);
+            Sleep(2000);
         }
         static void uartDataHandler(object sender, SerialComms.UartEventArgs e)
         {
@@ -76,7 +98,8 @@ namespace IOTProj
             tempCalculated = 1 / (Math.Log(R / R0) / B + 1 / 298.15) - 273.15;
             if (!Double.IsNaN(tempCalculated) && tempCalculated > 15 && tempCalculated < 40)
                 temp = tempCalculated;
-
+            if (temp > 24)
+                soundBuzzer();
             return temp;
         }
 
@@ -98,7 +121,7 @@ namespace IOTProj
             Debug.WriteLine("Light ADC = " + adcValue);
             sendDataToWindows("TEMP=" + getTemp());
             sendDataToWindows("LIGHT=" + GetLightValue(lightPin));
-
+            sendDataToWindows("MOISTURE=" + getMoisture());
 
 
             if (strDataReceived.Equals("RFIDMODE"))
@@ -152,6 +175,8 @@ namespace IOTProj
             sm.Release();
             if (!Double.IsNaN(tempC) && !Double.IsNaN(hum))
                 Debug.WriteLine(tempC+ "temp\n" + hum + "hum");
+            //if (tempC >= warning)
+                // ring buzzer 
         }
 
         private void initcomms()
@@ -187,12 +212,7 @@ namespace IOTProj
                 
                 sensorMoistureAdcValue = getMoisture(); //get moisture from sensor
                 //Debug.WriteLine("Moisture = " + sensorMoistureAdcValue);
-                //if (sensorMoistureAdcValue > 1000)
-                //    Debug.WriteLine("Dry");
-                //else if (sensorMoistureAdcValue < 100)
-                //    Debug.WriteLine("There is water pnding");
-                //else
-                //    Debug.WriteLine("Moderately Wet");
+                
 
             }
         }
