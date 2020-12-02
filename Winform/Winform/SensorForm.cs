@@ -78,7 +78,18 @@ namespace Winform
             tbRFID.Text = strRFID;
 
         }
+        private void handleMoisture(string strData, string strTime, string ID)
+        {
+            string strMoistureValue = extractStringValue(strData, ID);
+            float fMoistureValue = extractFlotValue(strData, ID);
 
+            if (fMoistureValue > 1000)
+                tb_Moisture.Text = "Dry";
+            else if (fMoistureValue < 100)
+                tb_Moisture.Text = "There is water pending";
+            else
+                tb_Moisture.Text = "Moderately Wet";
+        }
         private void extractSensorData(string strData, string strTime)
         {
             //Any type of data may be sent over by hardware
@@ -92,6 +103,8 @@ namespace Winform
                 handleLightSensorData(strData, strTime, "LIGHT=");
             else if (strData.IndexOf("RFID=") != -1)
                 handleRfidData(strData, strTime, "RFID=");
+            if (strData.IndexOf("MOISTURE=") != -1)
+                handleMoisture(strData, strTime, "MOISTURE=");
 
             //else if (strData.IndexOf("BUTTON=") != -1) //check button status
             //    handleButtonData(strData, strTime, "BUTTON=");
