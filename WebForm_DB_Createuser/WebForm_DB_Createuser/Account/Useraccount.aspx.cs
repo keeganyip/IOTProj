@@ -15,7 +15,8 @@ namespace WebForm_DB_Createuser.Account
         protected void Page_Load(object sender, EventArgs e)
         {
             string logged = Session["id"] as string;
-            Label1.Text = logged;
+            
+            
 
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString); 
             try
@@ -41,4 +42,5 @@ namespace WebForm_DB_Createuser.Account
 
         }
     }
+
 }

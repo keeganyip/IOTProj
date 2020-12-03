@@ -91,11 +91,13 @@ namespace WebForm_DB_Createuser.Account
                     Response.Write("password check");
                     Response.Write(id_collected);
                     Session["id"] = id_collected;
-                    
-                   
+
+
+
                     Response.Write(Session["id"]);
 
                     Response.Redirect("Useraccount");
+                    
                 }
                 else
                 {
