@@ -229,7 +229,7 @@ namespace Winform
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            InitComms();
+            //InitComms();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -258,10 +258,26 @@ namespace Winform
             dataComms.sendData("BUZZ");
         }
 
-        private void btnTempSettings_Click(object sender, EventArgs e)
+       
+
+        private void btn_Dash_Click(object sender, EventArgs e)
+        {
+            panelSensors.Visible = true;
+            panelSettings.Visible = false;
+        }
+
+        private void btn_Settings_Click(object sender, EventArgs e)
+        {
+            panelSensors.Visible = false;
+            panelSettings.Visible = true;
+
+        }
+
+        private void btnTempSettings_Click_1(object sender, EventArgs e)
         {
             TemperatureSettings settings = new TemperatureSettings();
             settings.Show();
+          
         }
     }
 }
