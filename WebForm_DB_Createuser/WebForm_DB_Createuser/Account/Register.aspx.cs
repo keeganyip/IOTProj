@@ -40,38 +40,44 @@ namespace WebForm_DB_Createuser.Account
             string checkuser = "select count(*) from UserTable where Email='" + Email.Text + "'";
             SqlCommand cmds = new SqlCommand(checkuser, conn);
             int temp = Convert.ToInt32(cmds.ExecuteScalar().ToString());
-            
+
             if (temp == 1)
             {
-                
+
                 //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Email already exist');", true);
                 ScriptManager.RegisterStartupScript(Page, Page.GetType(), "Alert", ";alert('email already exit ');", true);
             }
             else
             {
-                
 
-                    string insertQuery = "insert into UserTable(Email,Password,Name,Contact,Type)values(@Email,@password,@Name,@Contact,@Type)";
+                if (Password.Text.Length >= 8)
+                {
+
+
+
+                    string insertQuery = "insert into UserTable(Email,Password,Name,Contact,Type,UniqueRFID)values(@Email,@password,@Name,@Contact,@Type,@UniqueRFID)";
                     SqlCommand cmd = new SqlCommand(insertQuery, conn);
                     cmd.Parameters.AddWithValue("@Email", Email.Text);
                     cmd.Parameters.AddWithValue("@password", Password.Text);
                     cmd.Parameters.AddWithValue("@Name", Name.Text);
                     cmd.Parameters.AddWithValue("@Contact", Contact.Text);
                     cmd.Parameters.AddWithValue("@Type", "User");
+                    cmd.Parameters.AddWithValue("@UniqueRFID", "-");
+                    cmd.ExecuteNonQuery();
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "notification", ";alert('account created');", true);
+                    Response.Redirect("Login.aspx");
+
+                }
 
 
 
 
 
-                cmd.ExecuteNonQuery();
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "notification", ";alert('account created');", true);
-                Response.Redirect("Login.aspx");
-                
-               
-                
+
+
 
             }
-            
+
             conn.Close();
         }
 
@@ -82,7 +88,7 @@ namespace WebForm_DB_Createuser.Account
 
         protected void Email_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void Password_TextChanged(object sender, EventArgs e)
@@ -103,6 +109,17 @@ namespace WebForm_DB_Createuser.Account
         protected void Contact_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+       
+
+        protected void customValidator_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs args)
+        {
+            if (Password.Text.Length < 8)
+            {
+                customValidator1.ErrorMessage = "Password must be minimum 8 characters";
+                args.IsValid = false;
+            }
         }
     }
 }

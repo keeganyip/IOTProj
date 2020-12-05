@@ -18,13 +18,13 @@ namespace WebForm_DB_Createuser.Account
             RegisterHyperLink.NavigateUrl = "Register";
             // Enable this once you have account confirmation enabled for password reset functionality
             //ForgotPasswordHyperLink.NavigateUrl = "Forgot";
-            OpenAuthLogin.ReturnUrl = Request.QueryString["ReturnUrl"];
-            var returnUrl = HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
-            if (!String.IsNullOrEmpty(returnUrl))
-            {
-                RegisterHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
+            //OpenAuthLogin.ReturnUrl = Request.QueryString["ReturnUrl"];
+            //var returnUrl = HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
+           // if (!String.IsNullOrEmpty(returnUrl))
+           // {
+            //    RegisterHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
                
-            }
+           // }
             Session.Clear();
         }
 
@@ -114,6 +114,21 @@ namespace WebForm_DB_Createuser.Account
         protected void Email_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void customValidator_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs args)
+        {
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString);
+            conn.Open();
+            string correctpw = "select Password from UserTable where Email='" + Email.Text + "'";
+            SqlCommand cmds = new SqlCommand(correctpw, conn);
+            string checkpw = cmds.ExecuteScalar().ToString().Trim();
+            string pass = Password.Text;
+            if (pass != checkpw)
+            {
+                customValidator1.ErrorMessage = " Wrong login Credentials";
+                args.IsValid = false;
+            }
         }
     }
 }

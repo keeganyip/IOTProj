@@ -87,8 +87,8 @@
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
-            <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+            <footer style="">
+                <p>&copy; <%: DateTime.Now.Year %> Smart Greenhouse</p>
             </footer>
         </div>
     </form>

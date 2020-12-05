@@ -26,6 +26,10 @@ namespace WebForm_DB_Createuser.Account
                 SqlCommand cmd = new SqlCommand(getname, conn);
                 string name = cmd.ExecuteScalar().ToString().Trim();
                 lblname.Text = name;
+                /*
+                Label lblUserVal = (Label)Page.Master.FindControl("accoutname");
+                lblUserVal.Text = name;
+                */
 
             }
             catch (Exception)

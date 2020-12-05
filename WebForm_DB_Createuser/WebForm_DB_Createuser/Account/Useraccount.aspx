@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="useraccount.aspx.cs" Inherits="WebForm_DB_Createuser.Account.user" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Afterlogin.Master" AutoEventWireup="true" CodeBehind="useraccount.aspx.cs" Inherits="WebForm_DB_Createuser.Account.user" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent1" runat="server">
   
 
     <div class="jumbotron">
@@ -18,7 +18,7 @@
     
    <div class="row">
         <div class="col-md-4">
-            <h2>Update RDID</h2>
+            <h2>Update RFID</h2>
            
             <p>
                 <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301949">Click here &raquo;</a>
