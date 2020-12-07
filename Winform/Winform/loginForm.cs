@@ -23,6 +23,11 @@ namespace Winform
             InitializeComponent();
         }
 
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             //Step 1: Open Connection
@@ -31,7 +36,7 @@ namespace Winform
             //Step 2: Create Command
             string strCommandText = "SELECT Email, Password FROM UserTable";
             //Add a WHERE clause to SQL Statement
-            strCommandText += " WHERE Name=@Email AND Password=@Password";
+            strCommandText += " WHERE Email=@Email AND Password=@Password";
             SqlCommand cmd = new SqlCommand(strCommandText, myConnect);
             cmd.Parameters.AddWithValue("@Email", tbUserName.Text);
             cmd.Parameters.AddWithValue("@Password", tbPassword.Text);
@@ -44,7 +49,12 @@ namespace Winform
                 //Step 4: Access Data
                 SqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
+                {
                     MessageBox.Show("Login Successful");
+                    this.Hide();
+                    mainForm fm = new mainForm();
+                    fm.Show();
+                }
                 else
                     MessageBox.Show("Login Fail");
 
@@ -62,11 +72,6 @@ namespace Winform
                 //Step 5: Close Connection
                 myConnect.Close();
             }
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }
