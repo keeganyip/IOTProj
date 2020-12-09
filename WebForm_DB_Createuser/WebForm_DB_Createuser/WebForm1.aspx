@@ -5,10 +5,12 @@
     <br />
 
     <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" AutoPostBack="True">
-        <asp:ListItem Value="Temp" Selected="True">Temperature</asp:ListItem>
+        <asp:ListItem Value="All" Selected="True">Display All</asp:ListItem>
+        <asp:ListItem Value="Temp">Temperature</asp:ListItem>
         <asp:ListItem Value="Humidity">Humidity</asp:ListItem>
         <asp:ListItem Value="Moisture">Moisture</asp:ListItem>
         <asp:ListItem Value="Light">Light Intensity</asp:ListItem>
+        <asp:ListItem Value="RFID">RFID</asp:ListItem>
     </asp:DropDownList>
 
     <table id="tempTable" runat="server">
@@ -79,9 +81,17 @@
                 text: "Hourly Temp"
             },
             xAxis: {
+                type: 'datetime',
+                tickAmount: 24,
+                tickInterval: 3600 * 1000,
+                minTickInterval: 3600 * 1000,
+                lineWidth: 1,
+                dateTimeLabelFormats: {
+                    day: '%H:%M'
+                },
                 title: {
                     text: "Time"
-                }
+                }                
             },
             yAxis: {
                 title: {
@@ -105,6 +115,14 @@
                 text: "Hourly Humidity %"
             },
             xAxis: {
+                type: 'datetime',
+                tickAmount: 24,
+                tickInterval: 3600 * 1000,
+                minTickInterval: 3600 * 1000,
+                lineWidth: 1,
+                dateTimeLabelFormats: {
+                    day: '%H:%M'
+                },
                 title: {
                     text: "Time"
                 }
@@ -131,6 +149,14 @@
                 text: "Hourly Moisture Value"
             },
             xAxis: {
+                type: 'datetime',
+                tickAmount: 24,
+                tickInterval: 3600 * 1000,
+                minTickInterval: 3600 * 1000,
+                lineWidth: 1,
+                dateTimeLabelFormats: {
+                    day: '%H:%M'
+                },
                 title: {
                     text: "Time"
                 }
@@ -157,6 +183,14 @@
                 text: "Hourly Light Intensity Value"
             },
             xAxis: {
+                type: 'datetime',
+                tickAmount: 24,
+                tickInterval: 3600 * 1000,
+                minTickInterval: 3600 * 1000,
+                lineWidth: 1,
+                dateTimeLabelFormats: {
+                    day: '%H:%M'
+                },
                 title: {
                     text: "Time"
                 }
@@ -183,9 +217,16 @@
                 text: "Daily Record of Greenhouse User Entry"
             },
             xAxis: {
-                type: "time",
-                labels: {
-                    format:'{value:%H:%M}'
+                type: 'datetime',
+                tickAmount: 24,
+                tickInterval: 3600 * 1000,
+                minTickInterval: 3600 * 1000,
+                lineWidth: 1,
+                dateTimeLabelFormats: {
+                    day: '%H:%M'
+                },
+                title: {
+                    text: "Time"
                 }
             },
             

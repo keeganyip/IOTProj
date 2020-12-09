@@ -26,8 +26,7 @@ namespace WebForm_DB_Createuser
             LoadDataofHumidityChart();
             LoadDataofMoistureChart();
             LoadDataofLightChart();
-            LoadDataofRFIDChart();
-            
+            LoadDataofRFIDChart();        
             
         }
 
@@ -35,48 +34,61 @@ namespace WebForm_DB_Createuser
         {
             if (DropDownList1.SelectedIndex == 0)
             {
-                LoadDataofTempChart();               
+                LoadDataofTempChart();
+                LoadDataofHumidityChart();
+                LoadDataofMoistureChart();
+                LoadDataofLightChart();
+                LoadDataofRFIDChart();
                 tempTable.Visible = true;
-                humidityTable.Visible = false;
-                moistureTable.Visible = false;
-                lightTable.Visible = false;
-
-
-
+                humidityTable.Visible = true;
+                moistureTable.Visible = true;
+                lightTable.Visible = true;
+                RFIDTable.Visible = true;
             }
             if (DropDownList1.SelectedIndex == 1)
             {
-
-                LoadDataofHumidityChart();
-                humidityTable.Visible = true;
-                tempTable.Visible = false;
+                LoadDataofTempChart();
+                humidityTable.Visible = false;
+                tempTable.Visible = true;
                 moistureTable.Visible = false;
                 lightTable.Visible = false;
-
-
-
+                RFIDTable.Visible = false;
             }
             if (DropDownList1.SelectedIndex == 2)
             {
-
-                LoadDataofMoistureChart();
-                moistureTable.Visible = true;
-                humidityTable.Visible = false;
+                LoadDataofHumidityChart();
+                moistureTable.Visible = false;
+                humidityTable.Visible = true;
                 tempTable.Visible = false;
                 lightTable.Visible = false;
-
-
+                RFIDTable.Visible = false;
             }
             if (DropDownList1.SelectedIndex == 3)
             {
-
+                LoadDataofMoistureChart();
+                lightTable.Visible = false;
+                moistureTable.Visible = true;
+                humidityTable.Visible = false;
+                tempTable.Visible = false;
+                RFIDTable.Visible = false;
+            }
+            if (DropDownList1.SelectedIndex == 4)
+            {
                 LoadDataofLightChart();
                 lightTable.Visible = true;
                 moistureTable.Visible = false;
                 humidityTable.Visible = false;
                 tempTable.Visible = false;
-
-
+                RFIDTable.Visible = false;
+            }
+            if (DropDownList1.SelectedIndex == 5)
+            {
+                LoadDataofRFIDChart();
+                lightTable.Visible = false;
+                moistureTable.Visible = false;
+                humidityTable.Visible = false;
+                tempTable.Visible = false;
+                RFIDTable.Visible = true;
             }
 
         }
@@ -89,7 +101,7 @@ namespace WebForm_DB_Createuser
 
             myConnect.Open();
 
-            string strCommandText = "Select Time, Temp From Temperature Where EventType='HighLimit'";
+            string strCommandText = "Select Date, Time, Temp From Temperature Where EventType='HighLimit'";
 
             SqlCommand comm = new SqlCommand(strCommandText, myConnect);
             DataTable dt = new DataTable();
@@ -98,17 +110,23 @@ namespace WebForm_DB_Createuser
             gvtemp.DataBind();
 
 
-            //data format is [  [x1,y1], [x2,y2], ...]
+            //data format is [  {x1,y1}, {x2,y2}, ...]
+            //date format: Date.UTC(2010, 1, 1, 12, 0, 0)
             tempData = "[";
             foreach (DataRow dr in dt.Rows)
             {
+                string date = Convert.ToString(dr["Date"]);
+                string year = date.Substring(6, 4);
+                string month = date.Substring(3, 2);
+                string day = date.Substring(0, 2);
                 string time = Convert.ToString(dr["Time"]);               
-                string Temptime = time.Substring(0, 2) + time.Substring(3, 2);
+                string hour = time.Substring(0, 2);
                 
 
-                tempData += "[" + Temptime + "," + dr["Temp"] + "],";
+                tempData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "), y: " +dr["Temp"] + "},";
             }
             tempData = tempData.Remove(tempData.Length - 1) + ']';
+            Debug.WriteLine(tempData);
         }
 
         public void LoadDataofHumidityChart()
@@ -119,7 +137,7 @@ namespace WebForm_DB_Createuser
 
             myConnect.Open();
 
-            string strCommandText = "Select Time, Humidity From Humidity Where EventType='HighHumidity'";
+            string strCommandText = "Select Date, Time, Humidity From Humidity Where EventType='HighHumidity'";
 
             SqlCommand comm = new SqlCommand(strCommandText, myConnect);
             DataTable dt = new DataTable();
@@ -132,11 +150,15 @@ namespace WebForm_DB_Createuser
             humidityData = "[";
             foreach (DataRow dr in dt.Rows)
             {
+                string date = Convert.ToString(dr["Date"]);
+                string year = date.Substring(6, 4);
+                string month = date.Substring(3, 2);
+                string day = date.Substring(0, 2);
                 string time = Convert.ToString(dr["Time"]);
-                string Temptime = time.Substring(0, 2) + time.Substring(3, 2);
+                string hour = time.Substring(0, 2);
                 
 
-                humidityData += "[" + Temptime + "," + dr["Humidity"] + "],";
+                humidityData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "), y: " + dr["Humidity"] + "},";
                 
             }
             humidityData = humidityData.Remove(humidityData.Length - 1) + ']';
@@ -151,7 +173,7 @@ namespace WebForm_DB_Createuser
 
             myConnect.Open();
 
-            string strCommandText = "Select Time, Moisture From Moisture Where EventType='HighMoisture'";
+            string strCommandText = "Select Date, Time, Moisture From Moisture Where EventType='HighMoisture'";
 
             SqlCommand comm = new SqlCommand(strCommandText, myConnect);
             DataTable dt = new DataTable();
@@ -164,11 +186,15 @@ namespace WebForm_DB_Createuser
             moistureData = "[";
             foreach (DataRow dr in dt.Rows)
             {
+                string date = Convert.ToString(dr["Date"]);
+                string year = date.Substring(6, 4);
+                string month = date.Substring(3, 2);
+                string day = date.Substring(0, 2);
                 string time = Convert.ToString(dr["Time"]);
-                string Temptime = time.Substring(0, 2) + time.Substring(3, 2);
-                
+                string hour = time.Substring(0, 2);
 
-                moistureData += "[" + Temptime + "," + dr["Moisture"] + "],";
+
+                moistureData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "), y: " + dr["Moisture"] + "},";
 
             }
             moistureData = moistureData.Remove(moistureData.Length - 1) + ']';
@@ -183,7 +209,7 @@ namespace WebForm_DB_Createuser
 
             myConnect.Open();
 
-            string strCommandText = "Select Time, Light From Light Where EventType='HighIntensity'";
+            string strCommandText = "Select Date, Time, Light From Light Where EventType='HighIntensity'";
 
             SqlCommand comm = new SqlCommand(strCommandText, myConnect);
             DataTable dt = new DataTable();
@@ -196,11 +222,15 @@ namespace WebForm_DB_Createuser
             lightData = "[";
             foreach (DataRow dr in dt.Rows)
             {
+                string date = Convert.ToString(dr["Date"]);
+                string year = date.Substring(6, 4);
+                string month = date.Substring(3, 2);
+                string day = date.Substring(0, 2);
                 string time = Convert.ToString(dr["Time"]);
-                string Temptime = time.Substring(0, 2) + time.Substring(3, 2);
-                
+                string hour = time.Substring(0, 2);
 
-                lightData += "[" + Temptime + "," + dr["Light"] + "],";
+
+                lightData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "), y: " + dr["Light"] + "},";
 
             }
             lightData = lightData.Remove(lightData.Length - 1) + ']';
@@ -215,7 +245,7 @@ namespace WebForm_DB_Createuser
 
             myConnect.Open();
 
-            string strCommandText = "Select Time, UserID From RFID Where EventType='NormalUser' ORDER BY 'UserID'";
+            string strCommandText = "Select Date, Time, UserID From RFID Where EventType='NormalUser' ORDER BY 'UserID'";
 
             SqlCommand comm = new SqlCommand(strCommandText, myConnect);
             DataTable dt = new DataTable();
@@ -227,15 +257,23 @@ namespace WebForm_DB_Createuser
             {
                 DataRow row = dt.Rows[i];
                 DataRow nextRow = dt.Rows[i + 1];
-                string time = Convert.ToString(row["Time"]);
-                string Temptime1 = time.Substring(0, 2) + time.Substring(3, 2);
+                string datemin = Convert.ToString(row["Date"]);
+                string yearmin = datemin.Substring(6, 4);
+                string monthmin = datemin.Substring(3, 2);
+                string daymin = datemin.Substring(0, 2);
+                string timemin = Convert.ToString(row["Time"]);
+                string hourmin = timemin.Substring(0, 2);
 
-                string time2 = Convert.ToString(nextRow["Time"]);
-                string Temptime2 = time2.Substring(0, 2) + time2.Substring(3, 2);
+                string datemax = Convert.ToString(nextRow["Date"]);
+                string yearmax = datemax.Substring(6, 4);
+                string monthmax = datemax.Substring(3, 2);
+                string daymax = datemax.Substring(0, 2);
+                string timemax = Convert.ToString(nextRow["Time"]);
+                string hourmax = timemax.Substring(0, 2);
                 int userID = Convert.ToInt32(row["UserID"]);
 
 
-                RFIDData += "{x:" + Temptime1 + "," + "x2:" + Temptime2 + "," + "y:" + (userID - 1) + "},";
+                RFIDData += "{" + "x: Date.UTC(" + yearmin + "," + monthmin + "," + daymin + "," + hourmin + "), x2: Date.UTC(" + yearmax + "," + monthmax + "," + daymax + "," + hourmax + "), y:" + (userID - 1) + "},";
 
                 i = i + 2;
 
