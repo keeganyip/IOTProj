@@ -45,7 +45,7 @@ namespace WebForm_DB_Createuser.Account
             {
 
                 //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Email already exist');", true);
-                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "Alert", ";alert('email already exit ');", true);
+                //ScriptManager.RegisterStartupScript(Page, Page.GetType(), "Alert", ";alert('email already exit ');", true);
             }
             else
             {
@@ -119,6 +119,19 @@ namespace WebForm_DB_Createuser.Account
             {
                 customValidator1.ErrorMessage = "Password must be minimum 8 characters";
                 args.IsValid = false;
+            }
+
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString);
+            conn.Open();
+            string checkuser = "select count(*) from UserTable where Email='" + Email.Text + "'";
+            SqlCommand cmds = new SqlCommand(checkuser, conn);
+            int temp = Convert.ToInt32(cmds.ExecuteScalar().ToString());
+
+            if (temp == 1)
+            {
+                customValidator1.ErrorMessage = "This email already has an account";
+                args.IsValid = false;
+
             }
         }
     }

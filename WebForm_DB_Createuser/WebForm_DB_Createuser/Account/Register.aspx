@@ -40,7 +40,6 @@
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="Password"
                     CssClass="text-danger" ErrorMessage="The password field is required." />
                 <br />
-               <asp:CustomValidator runat="server" Display="Dynamic" ID="customValidator1"  ForeColor="Red" ErrorMessage="" OnServerValidate="customValidator_ServerValidate"></asp:CustomValidator>
             </div>
         </div>
    
@@ -56,6 +55,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
+               <asp:CustomValidator runat="server" Display="Dynamic" ID="customValidator1"  ForeColor="Red" ErrorMessage="" OnServerValidate="customValidator_ServerValidate"></asp:CustomValidator>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:UserdbConnectionString %>" OnSelecting="SqlDataSource1_Selecting" SelectCommand="SELECT * FROM [UserTable]"></asp:SqlDataSource>
                 <asp:Button runat="server" OnClick="CreateUser_Click" Text="Register" CssClass="btn btn-default" />
             </div>
