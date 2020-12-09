@@ -11,7 +11,7 @@
                 <asp:TextBox runat="server" ID="Email" CssClass="form-control" TextMode="Email" />
                 <asp:Button ID="emailsubmit" runat="server" OnClick="submit" Text="Button" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="Email"
-                    CssClass="text-danger" ErrorMessage="The email field is required." />
+                    CssClass="text-danger" ErrorMessage="Please key in your email address." />
             </div>
         </div>
         </div>
