@@ -111,16 +111,59 @@ namespace Winform
         }
 
 
+
         //create your own data handler for your project needs
         private void handleTempSensorData(string strData, string strTime, string ID)
         {
+            int max = Convert.ToInt32(retrieveTempSetting()[0]);
+            int warn = Convert.ToInt32(retrieveTempSetting()[1]);
+
             //update GUI component in any tabs
             string strtempValue = extractStringValue(strData, ID);
-            Console.Write(strtempValue);
-            string temp = strtempValue.Substring(0, 5) + "°C";
-            tbtemp.Text = temp;
+            float ftempValue = extractFlotValue(strData, ID);
 
-            saveTempSensorDataToDB(strTime, strtempValue, temp);
+            if (ftempValue > max)
+            { 
+                dataComms.sendData("BUZZ");
+                Console.WriteLine("BUZZING");
+            }
+            else if (ftempValue > warn)
+                dataComms.sendData("WARN");
+            else
+                dataComms.sendData("Normal");
+            //string temp = strtempValue.Substring(0, 5) + "°C";
+            tbtemp.Text = strtempValue + "°C";
+            retrieveTempSetting();
+
+            saveTempSensorDataToDB(strTime, strtempValue, strtempValue);
+
+        }
+        public string[] retrieveTempSetting()
+        {
+            string max = "";
+            string warn = "";
+            //Step 1: Create connection
+            SqlConnection myConnect = new SqlConnection(strConnectionString);
+
+            //Step 2: Create Command
+            String strCommandText =
+                "SELECT MaxTemp, WarningTemp FROM TempSettings";
+
+            //Step 3: Open Connection
+            myConnect.Open();
+
+            SqlCommand readcmd = new SqlCommand(strCommandText, myConnect);
+
+            SqlDataReader reader = readcmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                max = reader["MaxTemp"].ToString().Trim();
+                warn = reader["WarningTemp"].ToString().Trim();
+            }
+            myConnect.Close();
+            string[] Settings = { max, warn };
+            return Settings;
 
         }
         private void handleLightSensorData(string strData, string strTime, string ID)
@@ -163,6 +206,18 @@ namespace Winform
 
             saveMoistureSensorDataToDB(strTime, strMoistureValue, status);
         }
+        private void handleHumidity(string strData, string strTime, string ID)
+        {
+            float fHumiditiy = extractFlotValue(strData, ID);
+            string status = "";
+            if (fHumiditiy > 50)
+                status = "Humid";
+            else
+                status = "Not Humid";
+            Console.WriteLine(status);
+            tb_Humidity.Text = status;
+
+        }
         private void extractSensorData(string strData, string strTime)
         {
             //Any type of data may be sent over by hardware
@@ -178,6 +233,9 @@ namespace Winform
                 handleRfidData(strData, strTime, "RFID=");
             if (strData.IndexOf("MOISTURE=") != -1)
                 handleMoisture(strData, strTime, "MOISTURE=");
+            if (strData.IndexOf("HUMIDITY=") != -1)
+                handleHumidity(strData, strTime, "HUMIDITY=");
+
 
             //else if (strData.IndexOf("BUTTON=") != -1) //check button status
             //    handleButtonData(strData, strTime, "BUTTON=");
@@ -229,7 +287,7 @@ namespace Winform
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //InitComms();
+            InitComms();
         }
 
         private void label1_Click(object sender, EventArgs e)

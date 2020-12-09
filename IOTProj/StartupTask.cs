@@ -25,6 +25,7 @@ namespace IOTProj
         Pin waterPin = Pin.AnalogPin2;
         Pin buzzerPin = Pin.DigitalPin3;
 
+        ILed red = DeviceFactory.Build.Led(Pin.DigitalPin5);
         IDHTTemperatureAndHumiditySensor humtemp = DeviceFactory.Build.DHTTemperatureAndHumiditySensor(Pin.DigitalPin2, 0);
 
         private System.Threading.Semaphore sm = new System.Threading.Semaphore(1, 1);
@@ -53,7 +54,21 @@ namespace IOTProj
             DeviceFactory.Build.GrovePi().AnalogWrite(pin, val);
             sm.Release();
         }
+        private SensorStatus GetLEDstate(ILed led)
+        {
+            sm.WaitOne();
+            SensorStatus sensorState = led.CurrentState;
+            sm.Release();
+            return sensorState;
+        }
 
+        private void ChangeLedState(ILed led, SensorStatus targetState)
+        {
+            sm.WaitOne();
+            led.ChangeState(targetState);
+            sm.Release();
+        }
+ 
         private void soundBuzzer()
         {
             activateBuzzer(buzzerPin, 60);
@@ -119,10 +134,21 @@ namespace IOTProj
             int adcValue = 0;
             adcValue = GetLightValue(lightPin);
             Debug.WriteLine("Light ADC = " + adcValue);
-            sendDataToWindows("TEMP=" + getTemp());
+            //sendDataToWindows("TEMP=" + humtemp.TemperatureInCelsius);
+            getTempD();
             sendDataToWindows("LIGHT=" + GetLightValue(lightPin));
             sendDataToWindows("MOISTURE=" + getMoisture());
 
+            if (strDataReceived.Equals("WARN"))
+            {
+                Debug.WriteLine(GetLEDstate(red));
+                if (GetLEDstate(red) == SensorStatus.Off)
+                    ChangeLedState(red, SensorStatus.On);
+            }
+            if (strDataReceived.Equals("Normal"))
+            {
+                ChangeLedState(red, SensorStatus.Off);
+            }
 
             if (strDataReceived.Equals("RFIDMODE"))
             {
@@ -174,11 +200,27 @@ namespace IOTProj
             double hum = humtemp.Humidity;
             sm.Release();
             if (!Double.IsNaN(tempC) && !Double.IsNaN(hum))
+            { 
                 Debug.WriteLine(tempC+ "temp\n" + hum + "hum");
+                sendDataToWindows("TEMP=" + tempC);
+                sendDataToWindows("HUMIDITY=" + hum);
+            }
             //if (tempC >= warning)
-                // ring buzzer 
+            // ring buzzer 
         }
-
+        private void emeregency()
+        {
+            if (GetLEDstate(red) == SensorStatus.Off)
+            {
+                ChangeLedState(red, SensorStatus.On);
+                Debug.WriteLine("ON");
+            }
+            else
+            {
+                ChangeLedState(red, SensorStatus.Off);
+                Debug.WriteLine("OFF");
+            }
+        }
         private void initcomms()
         {
             datacomms = new DataComms();
@@ -210,7 +252,11 @@ namespace IOTProj
                     handleRFID();
                 getTempD();
                 if (strDataReceived.Equals("BUZZ"))
+                { 
+                    emeregency();
                     soundBuzzer();
+                }
+               
                 sensorMoistureAdcValue = getMoisture(); //get moisture from sensor
                 //Debug.WriteLine("Moisture = " + sensorMoistureAdcValue);
                 
