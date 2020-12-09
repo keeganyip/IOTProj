@@ -19,7 +19,7 @@ namespace WebForm_DB_Createuser
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Label1.Visible = false;
         }
 
         protected void submit(object sender, EventArgs e)
@@ -79,6 +79,9 @@ namespace WebForm_DB_Createuser
                 smtp.Credentials = NetworkCred;
                 smtp.Port = 587;
                 smtp.Send(mm);
+                Label1.Visible = true;
+                Label1.Text = "email sent";
+               
             }
 
             catch (Exception ex)
