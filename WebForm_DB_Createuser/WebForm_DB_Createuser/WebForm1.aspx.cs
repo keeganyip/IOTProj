@@ -245,13 +245,19 @@ namespace WebForm_DB_Createuser
 
             myConnect.Open();
 
-            string strCommandText = "Select Date, Time, UserID From RFID Where EventType='NormalUser' ORDER BY 'UserID'";
+            //string strCommandText = "Select UserID, Date, Time From RFID Where EventType='NormalUser' ORDER BY 'UserID'";
+
+            string strCommandText = "Select UserID, CONVERT(VARCHAR(10), Date, 111) AS Date, Time From RFID Where EventType='NormalUser' ORDER BY 'UserID'";
 
             SqlCommand comm = new SqlCommand(strCommandText, myConnect);
             DataTable dt = new DataTable();
             dt.Load(comm.ExecuteReader());
             gvRFID.DataSource = dt;
             gvRFID.DataBind();
+
+            Debug.WriteLine("gvRFID DATAAAAA");
+            string datadata = Convert.ToString(dt.Rows[1]["Date"]);
+            Debug.WriteLine(datadata);
 
             for (int i = 0; i < dt.Rows.Count - 1; )
             {

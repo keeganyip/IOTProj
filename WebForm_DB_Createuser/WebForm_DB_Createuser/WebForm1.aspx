@@ -13,33 +13,40 @@
         <asp:ListItem Value="RFID">RFID</asp:ListItem>
     </asp:DropDownList>
 
+    <div class="container">
+    <div class="row">
+    <div class="col-sm-12">
     <table id="tempTable" runat="server">
         <tr>
             <td>&nbsp;</td>
             <td>
-                <div id="temp">
+                <div id="temp" style="min-height: 600px; min-width:800px;">
                     <asp:GridView ID="gvtemp" runat="server">
                     </asp:GridView>
                 </div>
             </td>
         </tr>
     </table>
+    </div>
+    <div class="col-sm-12">
     <table id="humidityTable" runat="server">
         <tr>
             <td>&nbsp;</td>
             <td>
-                <div id="humidity">
+                <div id="humidity" style="min-height: 600px; min-width:800px;">
                     <asp:GridView ID="gvhumidity" runat="server">
                     </asp:GridView>
                 </div>
             </td>
         </tr>
     </table>
+    </div>
+    </div>
     <table id="moistureTable" runat="server">
         <tr>
             <td>&nbsp;</td>
             <td>
-                <div id="moisture">
+                <div id="moisture" style="min-height: 600px; min-width:800px;">
                     <asp:GridView ID="gvmoisture" runat="server">
                     </asp:GridView>
                 </div>
@@ -50,7 +57,7 @@
         <tr>
             <td>&nbsp;</td>
             <td>
-                <div id="light">
+                <div id="light" style="min-height: 600px; min-width:800px;">
                     <asp:GridView ID="gvlight" runat="server">
                     </asp:GridView>
                 </div>
@@ -61,16 +68,17 @@
         <tr>
             <td>&nbsp;</td>
             <td>
-                <div id="RFID">
-                    <asp:GridView ID="gvRFID" runat="server">
+                <div id="RFID" style="min-height: 600px; min-width:800px;">
+                    <p>User Entry Records</p>
+                    <asp:GridView ID="gvRFID" runat="server" CssClass="table table-striped">
                     </asp:GridView>
                 </div>
             </td>
         </tr>
-    </table>
-
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/xrange.js"></script>
+    </table>     
+    </div>
+    
+    <script src="http://code.highcharts.com/stock/highstock.js"></script>
 
     <script>
         $("#temp").highcharts({
@@ -79,19 +87,63 @@
             },
             title: {
                 text: "Hourly Temp"
+            },            
+            navigator: {
+                enabled: true,
+            },
+            rangeSelector: {
+                //allButtonsEnabled: true,
+                enabled: true,
+                inputEnabled: false,
+                buttonPosition: {
+                    align: 'left'
+                },
+                labelStyle: {
+                    display: 'none'
+                },
+                buttons: [{
+                    type: 'hour',
+                    count: 1,
+                    text: '1h'
+                },
+                {
+                    type: 'hour',
+                    count: 3,
+                    text: '3h'
+                },
+                {
+                    type: 'hour',
+                    count: 6,
+                    text: '6h'
+                },
+                {
+                    type: 'day',
+                    count: 1,
+                    text: 'day'
+                },
+                {
+                    type: 'week',
+                    count: 1,
+                    text: 'week'
+                },                
+                {
+                    type: 'all',
+                    text: 'All'
+                }],                
             },
             xAxis: {
                 type: 'datetime',
                 tickAmount: 24,
                 tickInterval: 3600 * 1000,
                 minTickInterval: 3600 * 1000,
-                lineWidth: 1,
-                dateTimeLabelFormats: {
-                    day: '%H:%M'
-                },
+                lineWidth: 1,                
                 title: {
                     text: "Time"
-                }                
+                },
+                minRange: 1,
+                scrollbar: {
+                    enabled: true
+                },
             },
             yAxis: {
                 title: {
@@ -114,18 +166,62 @@
             title: {
                 text: "Hourly Humidity %"
             },
+            navigator: {
+                enabled: true,
+            },
+            rangeSelector: {
+                //allButtonsEnabled: true,
+                enabled: true,
+                inputEnabled: false,
+                buttonPosition: {
+                    align: 'left'
+                },
+                labelStyle: {
+                    display: 'none'
+                },
+                buttons: [{
+                    type: 'hour',
+                    count: 1,
+                    text: '1h'
+                },
+                {
+                    type: 'hour',
+                    count: 3,
+                    text: '3h'
+                },
+                {
+                    type: 'hour',
+                    count: 6,
+                    text: '6h'
+                },
+                {
+                    type: 'day',
+                    count: 1,
+                    text: 'day'
+                },
+                {
+                    type: 'week',
+                    count: 1,
+                    text: 'week'
+                },
+                {
+                    type: 'all',
+                    text: 'All'
+                }],
+            },
             xAxis: {
                 type: 'datetime',
                 tickAmount: 24,
                 tickInterval: 3600 * 1000,
                 minTickInterval: 3600 * 1000,
                 lineWidth: 1,
-                dateTimeLabelFormats: {
-                    day: '%H:%M'
-                },
                 title: {
                     text: "Time"
-                }
+                },
+                minRange: 1,
+                scrollbar: {
+                    enabled: true
+                },
             },
             yAxis: {
                 title: {
@@ -148,18 +244,62 @@
             title: {
                 text: "Hourly Moisture Value"
             },
+            navigator: {
+                enabled: true,
+            },
+            rangeSelector: {
+                //allButtonsEnabled: true,
+                enabled: true,
+                inputEnabled: false,
+                buttonPosition: {
+                    align: 'left'
+                },
+                labelStyle: {
+                    display: 'none'
+                },
+                buttons: [{
+                    type: 'hour',
+                    count: 1,
+                    text: '1h'
+                },
+                {
+                    type: 'hour',
+                    count: 3,
+                    text: '3h'
+                },
+                {
+                    type: 'hour',
+                    count: 6,
+                    text: '6h'
+                },
+                {
+                    type: 'day',
+                    count: 1,
+                    text: 'day'
+                },
+                {
+                    type: 'week',
+                    count: 1,
+                    text: 'week'
+                },
+                {
+                    type: 'all',
+                    text: 'All'
+                }],
+            },
             xAxis: {
                 type: 'datetime',
                 tickAmount: 24,
                 tickInterval: 3600 * 1000,
                 minTickInterval: 3600 * 1000,
                 lineWidth: 1,
-                dateTimeLabelFormats: {
-                    day: '%H:%M'
-                },
                 title: {
                     text: "Time"
-                }
+                },
+                minRange: 1,
+                scrollbar: {
+                    enabled: true
+                },
             },
             yAxis: {
                 title: {
@@ -182,18 +322,62 @@
             title: {
                 text: "Hourly Light Intensity Value"
             },
+            navigator: {
+                enabled: true,
+            },
+            rangeSelector: {
+                //allButtonsEnabled: true,
+                enabled: true,
+                inputEnabled: false,
+                buttonPosition: {
+                    align: 'left'
+                },
+                labelStyle: {
+                    display: 'none'
+                },
+                buttons: [{
+                    type: 'hour',
+                    count: 1,
+                    text: '1h'
+                },
+                {
+                    type: 'hour',
+                    count: 3,
+                    text: '3h'
+                },
+                {
+                    type: 'hour',
+                    count: 6,
+                    text: '6h'
+                },
+                {
+                    type: 'day',
+                    count: 1,
+                    text: 'day'
+                },
+                {
+                    type: 'week',
+                    count: 1,
+                    text: 'week'
+                },
+                {
+                    type: 'all',
+                    text: 'All'
+                }],
+            },
             xAxis: {
                 type: 'datetime',
                 tickAmount: 24,
                 tickInterval: 3600 * 1000,
                 minTickInterval: 3600 * 1000,
                 lineWidth: 1,
-                dateTimeLabelFormats: {
-                    day: '%H:%M'
-                },
                 title: {
                     text: "Time"
-                }
+                },
+                minRange: 1,
+                scrollbar: {
+                    enabled: true
+                },
             },
             yAxis: {
                 title: {
@@ -208,7 +392,12 @@
         });
     </script>
 
+    <!-- RFID x-range chart using high charts -->
+    <!--
+    <script src="https://code.highcharts.com/modules/xrange.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
     <script>
+
         $("#RFID").highcharts({
             chart: {
                 type: 'xrange'
@@ -246,6 +435,7 @@
             }]
         });
     </script>
+    -->
 
 
 
