@@ -12,49 +12,75 @@ namespace Winform
 {
     public partial class mainForm : Form
     {
-        //private Button currentButton;
-        //private Random random;
-        //private int tempIndex;
-
-
         public mainForm()
         {
             InitializeComponent();
         }
-
-        //private void ActivateButton(object btnSender)
-        //{
-        //    if (btnSender != null)
-        //    {
-        //        if (currentButton != (Button)btnSender)
-        //        {
-        //            DisableButton();
-        //            currentButton = (Button)btnSender;
-        //            currentButton.BackColor = Color.Green;
-        //            currentButton.ForeColor = Color.White;
-        //            currentButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        //        }
-        //    }
-        //}
-
-        //private void DisableButton()
-        //{
-        //    foreach (Control previousBtn in panelMenu.Controls)
-        //    {
-        //        if (previousBtn.GetType() == typeof(Button))
-        //        {
-        //            previousBtn.BackColor = Color.ForestGreen;
-        //            previousBtn.ForeColor = Color.Gainsboro;
-        //            previousBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        //        }
-        //    }
-        //}
-
+     
         private void btnLogout_Click(object sender, EventArgs e)
         {
             this.Hide();
             loginForm fl = new loginForm();
             fl.Show();
+        }
+
+        //Temperature Panel Settings
+        private void panelTemp_MouseHover(object sender, EventArgs e)
+        {
+            panelTemp.BackColor = Color.LimeGreen;
+        }
+
+        private void panelTemp_MouseLeave(object sender, EventArgs e)
+        {
+            panelTemp.BackColor = Color.ForestGreen;
+        }
+
+        private void panelTemp_DoubleClick(object sender, EventArgs e)
+        {
+            this.Hide();
+            SettingsForm fm = new SettingsForm();
+            fm.Show();
+        }
+
+        //Moisture Panel Settings
+        private void panelMoisture_MouseHover(object sender, EventArgs e)
+        {
+            panelMoisture.BackColor = Color.LimeGreen;
+        }
+
+        private void panelMoisture_MouseLeave(object sender, EventArgs e)
+        {
+            panelMoisture.BackColor = Color.ForestGreen;
+        }
+
+        private void panelMoisture_DoubleClick(object sender, EventArgs e)
+        {
+            this.Hide();
+            SettingsForm fm = new SettingsForm();
+            fm.Show();
+        }
+
+        //Light Panel Settings
+        private void panelLight_MouseHover(object sender, EventArgs e)
+        {
+            panelLight.BackColor = Color.LimeGreen;
+        }
+
+        private void panelLight_MouseLeave(object sender, EventArgs e)
+        {
+            panelLight.BackColor = Color.ForestGreen;
+        }
+
+        private void panelLight_DoubleClick(object sender, EventArgs e)
+        {
+            this.Hide();
+            SettingsForm fm = new SettingsForm();
+            fm.Show();
+        }
+
+        private void mainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
