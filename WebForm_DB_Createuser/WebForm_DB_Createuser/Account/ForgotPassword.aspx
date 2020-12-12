@@ -12,7 +12,7 @@
                 <asp:Button ID="emailsubmit" runat="server" OnClick="submit" Text="Recover my account" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="Email"
                     CssClass="text-danger" ErrorMessage="Please key in your email address." />
-                <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                <asp:Label ID="Label1" runat="server" Text="Label" Forecolor="Red"></asp:Label>
             </div>
         </div>
         </div>

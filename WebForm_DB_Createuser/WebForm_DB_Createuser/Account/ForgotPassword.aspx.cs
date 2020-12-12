@@ -62,31 +62,43 @@ namespace WebForm_DB_Createuser
             }
 
             Debug.WriteLine(Email.Text.Trim());
-            try
+            if (username != "")
             {
-                MailMessage mm = new MailMessage("jovanleunglw@gmail.com", Email.Text.Trim());
-                mm.Subject = "Password Recovery";
-                mm.Body = string.Format("Hi {0},<br /><br />Your password is {1}.<br /><br />Thank You.", username, randompw);
-                mm.IsBodyHtml = true;
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = "smtp.gmail.com";
-                smtp.EnableSsl = true;
-                
-                NetworkCredential NetworkCred = new NetworkCredential();
-                NetworkCred.UserName = "jovanleunglw@gmail.com";
-                NetworkCred.Password = "t0219219a";
-                smtp.UseDefaultCredentials = true;
-                smtp.Credentials = NetworkCred;
-                smtp.Port = 587;
-                smtp.Send(mm);
-                Label1.Visible = true;
-                Label1.Text = "email sent";
-               
-            }
 
-            catch (Exception ex)
+
+                try
+                {
+                    MailMessage mm = new MailMessage("jovanleunglw@gmail.com", Email.Text.Trim());
+                    mm.Subject = "Password Recovery";
+                    mm.Body = string.Format("Hi {0},<br /><br />Your password is {1}.<br /><br />Thank You.", username, randompw);
+                    mm.IsBodyHtml = true;
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com";
+                    smtp.EnableSsl = true;
+
+                    NetworkCredential NetworkCred = new NetworkCredential();
+                    NetworkCred.UserName = "jovanleunglw@gmail.com";
+                    NetworkCred.Password = "t0219219a";
+                    smtp.UseDefaultCredentials = true;
+                    smtp.Credentials = NetworkCred;
+                    smtp.Port = 587;
+                    smtp.Send(mm);
+                    Label1.Visible = true;
+                    Label1.ForeColor = System.Drawing.Color.Green;
+                    Label1.Text = "email sent";
+
+                }
+
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex);
+                }
+            }
+            else
             {
-                Debug.WriteLine(ex);
+                Label1.Visible = true;
+                Label1.Text = "Email does not have an account yet";
+                Debug.WriteLine("email doesnt have an account that exist");
             }
 
             /*
