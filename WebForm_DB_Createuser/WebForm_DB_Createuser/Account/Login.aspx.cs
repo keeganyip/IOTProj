@@ -8,6 +8,7 @@ using WebForm_DB_Createuser.Models;
 using System.Data.SqlClient;
 using System.Configuration;
 
+
 namespace WebForm_DB_Createuser.Account
 {
     public partial class Login : Page
@@ -15,14 +16,17 @@ namespace WebForm_DB_Createuser.Account
         protected void Page_Load(object sender, EventArgs e)
         {
             RegisterHyperLink.NavigateUrl = "Register";
+            forgetpassword.NavigateUrl = "ForgotPassword";
             // Enable this once you have account confirmation enabled for password reset functionality
             //ForgotPasswordHyperLink.NavigateUrl = "Forgot";
-            OpenAuthLogin.ReturnUrl = Request.QueryString["ReturnUrl"];
-            var returnUrl = HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
-            if (!String.IsNullOrEmpty(returnUrl))
-            {
-                RegisterHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
-            }
+            //OpenAuthLogin.ReturnUrl = Request.QueryString["ReturnUrl"];
+            //var returnUrl = HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
+           // if (!String.IsNullOrEmpty(returnUrl))
+           // {
+            //    RegisterHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
+               
+           // }
+            Session.Clear();
         }
 
         protected void LogIn(object sender, EventArgs e)
@@ -61,7 +65,7 @@ namespace WebForm_DB_Createuser.Account
                 }
 
             }*/
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["CreateConnectionString"].ConnectionString);
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString);
             conn.Open();
             string checkuser = "select count(*) from UserTable where Email='" + Email.Text + "'";
             SqlCommand cmd = new SqlCommand(checkuser, conn);
@@ -76,14 +80,33 @@ namespace WebForm_DB_Createuser.Account
                 string pass = Password.Text;
                 Response.Write(checkpw+Password.Text);
                 Response.Write(pass == checkpw);
+
                 if (pass == checkpw)
                 {
+                    
+                    string id = "select UniqueUserID from UserTable where Email='" + Email.Text + "'";
+                    SqlCommand cmdid = new SqlCommand(id, conn);
+                    string id_collected = cmdid.ExecuteScalar().ToString().Trim();
+                    conn.Close();
+                   
                     Response.Write("password check");
-                    Response.Redirect("/");
+                    Response.Write(id_collected);
+                    Session["id"] = id_collected;
+
+
+
+                    Response.Write(Session["id"]);
+
+                    Response.Redirect("Useraccount");
+                    
+                }
+                else
+                {
+
                 }
 
 
-
+        
 
 
             }
@@ -92,6 +115,21 @@ namespace WebForm_DB_Createuser.Account
         protected void Email_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void customValidator_ServerValidate(object source, System.Web.UI.WebControls.ServerValidateEventArgs args)
+        {
+            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString);
+            conn.Open();
+            string correctpw = "select Password from UserTable where Email='" + Email.Text + "'";
+            SqlCommand cmds = new SqlCommand(correctpw, conn);
+            string checkpw = cmds.ExecuteScalar().ToString().Trim();
+            string pass = Password.Text;
+            if (pass != checkpw)
+            {
+                customValidator1.ErrorMessage = " Wrong login Credentials";
+                args.IsValid = false;
+            }
         }
     }
 }

@@ -11,13 +11,14 @@ using Microsoft.AspNet.Identity;
 namespace WebForm_DB_Createuser
 {
     public partial class SiteMaster : MasterPage
-    {
+    {/*
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
         private string _antiXsrfTokenValue;
 
         protected void Page_Init(object sender, EventArgs e)
         {
+            
             // The code below helps to protect against XSRF attacks
             var requestCookie = Request.Cookies[AntiXsrfTokenKey];
             Guid requestCookieGuidValue;
@@ -66,6 +67,7 @@ namespace WebForm_DB_Createuser
                 }
             }
         }
+        */
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -75,6 +77,11 @@ namespace WebForm_DB_Createuser
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+        }
+
+        protected void session(object sender,EventArgs e)
+        {
+           
         }
     }
 
