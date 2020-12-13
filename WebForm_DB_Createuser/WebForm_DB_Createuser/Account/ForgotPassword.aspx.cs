@@ -78,7 +78,7 @@ namespace WebForm_DB_Createuser
 
                     NetworkCredential NetworkCred = new NetworkCredential();
                     NetworkCred.UserName = "jovanleunglw@gmail.com";
-                    NetworkCred.Password = "t0219219a";
+                    NetworkCred.Password = "T0219219a";
                     smtp.UseDefaultCredentials = true;
                     smtp.Credentials = NetworkCred;
                     smtp.Port = 587;

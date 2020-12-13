@@ -7,7 +7,7 @@ using Owin;
 using WebForm_DB_Createuser.Models;
 using System.Data.SqlClient;
 using System.Configuration;
-
+using System.Diagnostics;
 
 namespace WebForm_DB_Createuser.Account
 {
@@ -75,36 +75,49 @@ namespace WebForm_DB_Createuser.Account
             {
 
                 string correctpw = "select Password from UserTable where Email='" + Email.Text + "'";
+              
                 SqlCommand cmds = new SqlCommand(correctpw, conn);
+            
                 string checkpw = cmds.ExecuteScalar().ToString().Trim();
-                string pass = Password.Text;
-                Response.Write(checkpw+Password.Text);
-                Response.Write(pass == checkpw);
-
-                if (pass == checkpw)
-                {
-                    
-                    string id = "select UniqueUserID from UserTable where Email='" + Email.Text + "'";
-                    SqlCommand cmdid = new SqlCommand(id, conn);
-                    string id_collected = cmdid.ExecuteScalar().ToString().Trim();
-                    conn.Close();
-                   
-                    Response.Write("password check");
-                    Response.Write(id_collected);
-                    Session["id"] = id_collected;
-
-
-
-                    Response.Write(Session["id"]);
-
-                    Response.Redirect("Useraccount");
-                    
-                }
-                else
+                if (checkpw != null)
                 {
 
-                }
+                    string pass = Password.Text;
+                    Response.Write(checkpw + Password.Text);
+                    Response.Write(pass == checkpw);
+                    Debug.WriteLine(pass, "pass");
+                    Debug.WriteLine(checkpw, "checkpw");
 
+                    try
+                    {
+
+
+                        if (pass == checkpw)
+                        {
+
+                            string id = "select UniqueUserID from UserTable where Email='" + Email.Text + "'";
+                            SqlCommand cmdid = new SqlCommand(id, conn);
+                            string id_collected = cmdid.ExecuteScalar().ToString().Trim();
+                            conn.Close();
+
+                            Response.Write("password check");
+                            Response.Write(id_collected);
+                            Session["id"] = id_collected;
+
+
+
+                            Response.Write(Session["id"]);
+
+                            Response.Redirect("Useraccount");
+
+                        }
+                    }
+                    catch (Exception s)
+                    {
+                        Debug.WriteLine(s);
+                    }
+
+                }
 
         
 
@@ -123,13 +136,33 @@ namespace WebForm_DB_Createuser.Account
             conn.Open();
             string correctpw = "select Password from UserTable where Email='" + Email.Text + "'";
             SqlCommand cmds = new SqlCommand(correctpw, conn);
-            string checkpw = cmds.ExecuteScalar().ToString().Trim();
-            string pass = Password.Text;
-            if (pass != checkpw)
+
+
+
+            try
             {
-                customValidator1.ErrorMessage = " Wrong login Credentials";
+                string checkpw = cmds.ExecuteScalar().ToString().Trim();
+              
+                
+                string pass = Password.Text;
+                if (pass != checkpw)
+                {
+                    customValidator1.ErrorMessage = " Wrong login Credentials";
+                    args.IsValid = false;
+                }
+
+
+                
+            }
+            catch(Exception s)
+            {
+                Debug.WriteLine(s);
+                customValidator1.ErrorMessage = "Email does not exist ";
                 args.IsValid = false;
             }
         }
+           
+           
     }
+    
 }
