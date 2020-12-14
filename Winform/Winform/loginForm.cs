@@ -53,7 +53,7 @@ namespace Winform
                 {
                     MessageBox.Show("Login Successful");
                     this.Hide();
-                    mainForm fm = new mainForm();
+                    SensorForm fm = new SensorForm();
                     fm.Show();
                 }
                 else

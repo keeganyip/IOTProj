@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommsUtil">
-      <HintPath>..\..\..\CommsUtil.dll</HintPath>
+      <HintPath>D:\School\Year 2\Sem 2\IOT Project\CommsUtil.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
