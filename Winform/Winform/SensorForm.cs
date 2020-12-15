@@ -328,6 +328,9 @@ namespace Winform
         {
             panelSensors.Visible = false;
             panelSettings.Visible = true;
+            this.Hide();
+            mainForm fm = new mainForm();
+            fm.Show();
 
         }
 

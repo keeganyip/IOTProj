@@ -16,7 +16,7 @@ namespace Winform
     {
         //retrieve connection information from App.Config
         private string strConnectionString =
-            ConfigurationManager.ConnectionStrings["LoginDBConnection"].ConnectionString;
+            ConfigurationManager.ConnectionStrings["Winform.Properties.Settings.UserdbConnectionString"].ConnectionString;
 
         public loginForm()
         {
@@ -53,7 +53,7 @@ namespace Winform
                 {
                     MessageBox.Show("Login Successful");
                     this.Hide();
-                    mainForm fm = new mainForm();
+                    SensorForm fm = new SensorForm();
                     fm.Show();
                 }
                 else
