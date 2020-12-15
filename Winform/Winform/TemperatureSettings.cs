@@ -94,6 +94,8 @@ namespace Winform
             { 
                 saveSettingsToDB(tbMax.Text, tbWarn.Text);
                 this.Close();
+                //SensorForm fm = new SensorForm();
+                //fm.Show();
             }
         }
 

@@ -52,9 +52,10 @@
             // 
             // btnLogout
             // 
-            this.btnLogout.Location = new System.Drawing.Point(902, 12);
+            this.btnLogout.Location = new System.Drawing.Point(1203, 15);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(168, 45);
+            this.btnLogout.Size = new System.Drawing.Size(224, 55);
             this.btnLogout.TabIndex = 0;
             this.btnLogout.Text = "Logout";
             this.btnLogout.UseVisualStyleBackColor = true;
@@ -66,10 +67,12 @@
             this.panelTemp.Controls.Add(this.label1);
             this.panelTemp.Controls.Add(this.pictureBox1);
             this.panelTemp.Controls.Add(this.lblTemperature);
-            this.panelTemp.Location = new System.Drawing.Point(57, 217);
+            this.panelTemp.Location = new System.Drawing.Point(76, 267);
+            this.panelTemp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelTemp.Name = "panelTemp";
-            this.panelTemp.Size = new System.Drawing.Size(248, 155);
+            this.panelTemp.Size = new System.Drawing.Size(331, 191);
             this.panelTemp.TabIndex = 1;
+            this.panelTemp.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTemp_Paint);
             this.panelTemp.DoubleClick += new System.EventHandler(this.panelTemp_DoubleClick);
             this.panelTemp.MouseLeave += new System.EventHandler(this.panelTemp_MouseLeave);
             this.panelTemp.MouseHover += new System.EventHandler(this.panelTemp_MouseHover);
@@ -78,18 +81,20 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(8, 49);
+            this.label1.Location = new System.Drawing.Point(11, 60);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 31);
+            this.label1.Size = new System.Drawing.Size(125, 39);
             this.label1.TabIndex = 2;
             this.label1.Text = "Sensor";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(167, 52);
+            this.pictureBox1.Location = new System.Drawing.Point(223, 64);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(78, 81);
+            this.pictureBox1.Size = new System.Drawing.Size(104, 100);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -98,9 +103,10 @@
             // 
             this.lblTemperature.AutoSize = true;
             this.lblTemperature.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTemperature.Location = new System.Drawing.Point(8, 18);
+            this.lblTemperature.Location = new System.Drawing.Point(11, 22);
+            this.lblTemperature.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTemperature.Name = "lblTemperature";
-            this.lblTemperature.Size = new System.Drawing.Size(169, 31);
+            this.lblTemperature.Size = new System.Drawing.Size(211, 39);
             this.lblTemperature.TabIndex = 1;
             this.lblTemperature.Text = "Temperature";
             // 
@@ -110,9 +116,10 @@
             this.panelMoisture.Controls.Add(this.label2);
             this.panelMoisture.Controls.Add(this.pictureBox2);
             this.panelMoisture.Controls.Add(this.lblMoisture);
-            this.panelMoisture.Location = new System.Drawing.Point(417, 217);
+            this.panelMoisture.Location = new System.Drawing.Point(556, 267);
+            this.panelMoisture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelMoisture.Name = "panelMoisture";
-            this.panelMoisture.Size = new System.Drawing.Size(248, 155);
+            this.panelMoisture.Size = new System.Drawing.Size(331, 191);
             this.panelMoisture.TabIndex = 2;
             this.panelMoisture.DoubleClick += new System.EventHandler(this.panelMoisture_DoubleClick);
             this.panelMoisture.MouseLeave += new System.EventHandler(this.panelMoisture_MouseLeave);
@@ -122,18 +129,20 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(8, 49);
+            this.label2.Location = new System.Drawing.Point(11, 60);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 31);
+            this.label2.Size = new System.Drawing.Size(125, 39);
             this.label2.TabIndex = 3;
             this.label2.Text = "Sensor";
             // 
             // pictureBox2
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(167, 52);
+            this.pictureBox2.Location = new System.Drawing.Point(223, 64);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(78, 81);
+            this.pictureBox2.Size = new System.Drawing.Size(104, 100);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
@@ -142,9 +151,10 @@
             // 
             this.lblMoisture.AutoSize = true;
             this.lblMoisture.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMoisture.Location = new System.Drawing.Point(8, 18);
+            this.lblMoisture.Location = new System.Drawing.Point(11, 22);
+            this.lblMoisture.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMoisture.Name = "lblMoisture";
-            this.lblMoisture.Size = new System.Drawing.Size(118, 31);
+            this.lblMoisture.Size = new System.Drawing.Size(147, 39);
             this.lblMoisture.TabIndex = 1;
             this.lblMoisture.Text = "Moisture";
             // 
@@ -154,9 +164,10 @@
             this.panelLight.Controls.Add(this.label3);
             this.panelLight.Controls.Add(this.pictureBox3);
             this.panelLight.Controls.Add(this.lblLight);
-            this.panelLight.Location = new System.Drawing.Point(770, 217);
+            this.panelLight.Location = new System.Drawing.Point(1027, 267);
+            this.panelLight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panelLight.Name = "panelLight";
-            this.panelLight.Size = new System.Drawing.Size(248, 155);
+            this.panelLight.Size = new System.Drawing.Size(331, 191);
             this.panelLight.TabIndex = 3;
             this.panelLight.DoubleClick += new System.EventHandler(this.panelLight_DoubleClick);
             this.panelLight.MouseLeave += new System.EventHandler(this.panelLight_MouseLeave);
@@ -166,18 +177,20 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(8, 49);
+            this.label3.Location = new System.Drawing.Point(11, 60);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 31);
+            this.label3.Size = new System.Drawing.Size(125, 39);
             this.label3.TabIndex = 4;
             this.label3.Text = "Sensor";
             // 
             // pictureBox3
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(167, 52);
+            this.pictureBox3.Location = new System.Drawing.Point(223, 64);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(78, 81);
+            this.pictureBox3.Size = new System.Drawing.Size(104, 100);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox3.TabIndex = 0;
             this.pictureBox3.TabStop = false;
@@ -186,23 +199,25 @@
             // 
             this.lblLight.AutoSize = true;
             this.lblLight.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLight.Location = new System.Drawing.Point(8, 18);
+            this.lblLight.Location = new System.Drawing.Point(11, 22);
+            this.lblLight.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLight.Name = "lblLight";
-            this.lblLight.Size = new System.Drawing.Size(73, 31);
+            this.lblLight.Size = new System.Drawing.Size(91, 39);
             this.lblLight.TabIndex = 1;
             this.lblLight.Text = "Light";
             // 
             // mainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
-            this.ClientSize = new System.Drawing.Size(1082, 595);
+            this.ClientSize = new System.Drawing.Size(1443, 732);
             this.Controls.Add(this.panelLight);
             this.Controls.Add(this.panelMoisture);
             this.Controls.Add(this.panelTemp);
             this.Controls.Add(this.btnLogout);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "mainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "mainForm";

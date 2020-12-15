@@ -149,6 +149,11 @@ namespace IOTProj
             {
                 ChangeLedState(red, SensorStatus.Off);
             }
+            if (strDataReceived.Equals("BUZZ"))
+            {
+                emeregency();
+                soundBuzzer();
+            }
 
             if (strDataReceived.Equals("RFIDMODE"))
             {
@@ -244,18 +249,14 @@ namespace IOTProj
             {
                 Sleep(300);
                 
-                sensorTemp = getTemp();
+                //sensorTemp = getTemp();
 
                 if (curMode == MODE_SENDTEMP)
                     handleModeSendTemp();
                 else if (curMode == MODE_RFID)
                     handleRFID();
                 getTempD();
-                if (strDataReceived.Equals("BUZZ"))
-                { 
-                    emeregency();
-                    soundBuzzer();
-                }
+                
                
                 sensorMoistureAdcValue = getMoisture(); //get moisture from sensor
                 //Debug.WriteLine("Moisture = " + sensorMoistureAdcValue);
