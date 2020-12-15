@@ -47,9 +47,9 @@
             this.button1 = new System.Windows.Forms.Button();
             this.btnRFID = new System.Windows.Forms.Button();
             this.panelSensors = new System.Windows.Forms.Panel();
-            this.panelSettings = new System.Windows.Forms.Panel();
-            this.lblHum = new System.Windows.Forms.Label();
             this.tb_Humidity = new System.Windows.Forms.TextBox();
+            this.lblHum = new System.Windows.Forms.Label();
+            this.panelSettings = new System.Windows.Forms.Panel();
             this.SideBar.SuspendLayout();
             this.panelSensors.SuspendLayout();
             this.panelSettings.SuspendLayout();
@@ -57,7 +57,6 @@
             // 
             // tb_Moisture
             // 
-            this.tb_Moisture.Enabled = false;
             this.tb_Moisture.Location = new System.Drawing.Point(33, 208);
             this.tb_Moisture.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tb_Moisture.Name = "tb_Moisture";
@@ -76,7 +75,6 @@
             // 
             // tb_light
             // 
-            this.tb_light.Enabled = false;
             this.tb_light.Location = new System.Drawing.Point(33, 127);
             this.tb_light.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tb_light.Name = "tb_light";
@@ -117,7 +115,7 @@
             this.lbDataComms.FormattingEnabled = true;
             this.lbDataComms.ItemHeight = 16;
             this.lbDataComms.Location = new System.Drawing.Point(422, 44);
-            this.lbDataComms.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbDataComms.Margin = new System.Windows.Forms.Padding(4);
             this.lbDataComms.Name = "lbDataComms";
             this.lbDataComms.Size = new System.Drawing.Size(438, 260);
             this.lbDataComms.TabIndex = 8;
@@ -125,7 +123,7 @@
             // btnClear
             // 
             this.btnClear.Location = new System.Drawing.Point(422, 324);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(181, 53);
             this.btnClear.TabIndex = 9;
@@ -136,7 +134,6 @@
             // tbtemp
             // 
             this.tbtemp.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.tbtemp.Enabled = false;
             this.tbtemp.Location = new System.Drawing.Point(33, 44);
             this.tbtemp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbtemp.Name = "tbtemp";
@@ -160,7 +157,7 @@
             this.SideBar.Controls.Add(this.btn_Dash);
             this.SideBar.Controls.Add(this.btn_Settings);
             this.SideBar.Location = new System.Drawing.Point(0, 0);
-            this.SideBar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.SideBar.Margin = new System.Windows.Forms.Padding(4);
             this.SideBar.Name = "SideBar";
             this.SideBar.Size = new System.Drawing.Size(291, 1006);
             this.SideBar.TabIndex = 16;
@@ -182,7 +179,7 @@
             this.btn_Dash.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btn_Dash.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Dash.Location = new System.Drawing.Point(0, 177);
-            this.btn_Dash.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Dash.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Dash.Name = "btn_Dash";
             this.btn_Dash.Size = new System.Drawing.Size(291, 106);
             this.btn_Dash.TabIndex = 1;
@@ -197,7 +194,7 @@
             this.btn_Settings.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btn_Settings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Settings.Location = new System.Drawing.Point(0, 304);
-            this.btn_Settings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Settings.Margin = new System.Windows.Forms.Padding(4);
             this.btn_Settings.Name = "btn_Settings";
             this.btn_Settings.Size = new System.Drawing.Size(291, 106);
             this.btn_Settings.TabIndex = 0;
@@ -252,25 +249,17 @@
             this.panelSensors.Controls.Add(this.tb_Moisture);
             this.panelSensors.Controls.Add(this.tb_light);
             this.panelSensors.Location = new System.Drawing.Point(286, 177);
-            this.panelSensors.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelSensors.Margin = new System.Windows.Forms.Padding(4);
             this.panelSensors.Name = "panelSensors";
             this.panelSensors.Size = new System.Drawing.Size(964, 457);
             this.panelSensors.TabIndex = 17;
             // 
-            // panelSettings
+            // tb_Humidity
             // 
-            this.panelSettings.BackColor = System.Drawing.Color.White;
-            this.panelSettings.Controls.Add(this.btnTempSettings);
-            this.panelSettings.Controls.Add(this.btnRFID);
-            this.panelSettings.Controls.Add(this.label2);
-            this.panelSettings.Controls.Add(this.button1);
-            this.panelSettings.Controls.Add(this.tbRFID);
-            this.panelSettings.Location = new System.Drawing.Point(290, 177);
-            this.panelSettings.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.panelSettings.Name = "panelSettings";
-            this.panelSettings.Size = new System.Drawing.Size(960, 478);
-            this.panelSettings.TabIndex = 2;
-            this.panelSettings.Visible = false;
+            this.tb_Humidity.Location = new System.Drawing.Point(33, 291);
+            this.tb_Humidity.Name = "tb_Humidity";
+            this.tb_Humidity.Size = new System.Drawing.Size(181, 22);
+            this.tb_Humidity.TabIndex = 18;
             // 
             // lblHum
             // 
@@ -281,12 +270,20 @@
             this.lblHum.TabIndex = 17;
             this.lblHum.Text = "Humidity:";
             // 
-            // tb_Humidity
+            // panelSettings
             // 
-            this.tb_Humidity.Location = new System.Drawing.Point(33, 291);
-            this.tb_Humidity.Name = "tb_Humidity";
-            this.tb_Humidity.Size = new System.Drawing.Size(181, 22);
-            this.tb_Humidity.TabIndex = 18;
+            this.panelSettings.BackColor = System.Drawing.Color.White;
+            this.panelSettings.Controls.Add(this.btnTempSettings);
+            this.panelSettings.Controls.Add(this.btnRFID);
+            this.panelSettings.Controls.Add(this.label2);
+            this.panelSettings.Controls.Add(this.button1);
+            this.panelSettings.Controls.Add(this.tbRFID);
+            this.panelSettings.Location = new System.Drawing.Point(290, 177);
+            this.panelSettings.Margin = new System.Windows.Forms.Padding(4);
+            this.panelSettings.Name = "panelSettings";
+            this.panelSettings.Size = new System.Drawing.Size(960, 478);
+            this.panelSettings.TabIndex = 2;
+            this.panelSettings.Visible = false;
             // 
             // SensorForm
             // 
@@ -299,7 +296,7 @@
             this.Controls.Add(this.panelSensors);
             this.Controls.Add(this.panelSettings);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "SensorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sensor Page";
