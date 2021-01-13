@@ -28,7 +28,7 @@ namespace IOTProj
         ILed red = DeviceFactory.Build.Led(Pin.DigitalPin5);
         IDHTTemperatureAndHumiditySensor humtemp = DeviceFactory.Build.DHTTemperatureAndHumiditySensor(Pin.DigitalPin2, 0);
 
-        private System.Threading.Semaphore sm = new System.Threading.Semaphore(1, 1);
+        private System.Threading.Semaphore sm = new System.Threading.Semaphore(1, 3);
 
         double temp = 23.00;
         double sensorTemp;
