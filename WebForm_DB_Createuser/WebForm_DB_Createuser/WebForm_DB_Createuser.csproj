@@ -191,6 +191,7 @@
     <Content Include="Account\Manage.aspx" />
     <Content Include="Account\ManageLogins.aspx" />
     <Content Include="Account\ManagePassword.aspx" />
+    <Content Include="Account\ManageUser.aspx" />
     <Content Include="Account\OpenAuthProviders.ascx" />
     <Content Include="Account\personal_details.aspx" />
     <Content Include="Account\Register.aspx" />
@@ -322,6 +323,13 @@
     <Compile Include="Account\ManagePassword.aspx.designer.cs">
       <DependentUpon>ManagePassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Account\ManageUser.aspx.cs">
+      <DependentUpon>ManageUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\ManageUser.aspx.designer.cs">
+      <DependentUpon>ManageUser.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Account\OpenAuthProviders.ascx.cs">
       <DependentUpon>OpenAuthProviders.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -371,6 +379,7 @@
     <Compile Include="Account\TwoFactorAuthenticationSignIn.aspx.designer.cs">
       <DependentUpon>TwoFactorAuthenticationSignIn.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Account\User.cs" />
     <Compile Include="Account\useraccount.aspx.cs">
       <DependentUpon>useraccount.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

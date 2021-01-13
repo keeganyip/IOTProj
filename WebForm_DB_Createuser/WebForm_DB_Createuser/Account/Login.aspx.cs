@@ -70,6 +70,8 @@ namespace WebForm_DB_Createuser.Account
             string checkuser = "select count(*) from UserTable where Email='" + Email.Text + "'";
             SqlCommand cmd = new SqlCommand(checkuser, conn);
             int temp = Convert.ToInt32(cmd.ExecuteScalar().ToString());
+
+
             
             if (temp == 1)
             {
