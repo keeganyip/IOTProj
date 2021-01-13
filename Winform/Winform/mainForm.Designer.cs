@@ -42,6 +42,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.lblLight = new System.Windows.Forms.Label();
+            this.btnDash = new System.Windows.Forms.Button();
             this.panelTemp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelMoisture.SuspendLayout();
@@ -53,7 +54,7 @@
             // btnLogout
             // 
             this.btnLogout.Location = new System.Drawing.Point(1203, 15);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(4);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(224, 55);
             this.btnLogout.TabIndex = 0;
@@ -68,7 +69,7 @@
             this.panelTemp.Controls.Add(this.pictureBox1);
             this.panelTemp.Controls.Add(this.lblTemperature);
             this.panelTemp.Location = new System.Drawing.Point(76, 267);
-            this.panelTemp.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelTemp.Margin = new System.Windows.Forms.Padding(4);
             this.panelTemp.Name = "panelTemp";
             this.panelTemp.Size = new System.Drawing.Size(331, 191);
             this.panelTemp.TabIndex = 1;
@@ -92,7 +93,7 @@
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(223, 64);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(104, 100);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -117,7 +118,7 @@
             this.panelMoisture.Controls.Add(this.pictureBox2);
             this.panelMoisture.Controls.Add(this.lblMoisture);
             this.panelMoisture.Location = new System.Drawing.Point(556, 267);
-            this.panelMoisture.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelMoisture.Margin = new System.Windows.Forms.Padding(4);
             this.panelMoisture.Name = "panelMoisture";
             this.panelMoisture.Size = new System.Drawing.Size(331, 191);
             this.panelMoisture.TabIndex = 2;
@@ -140,7 +141,7 @@
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(223, 64);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(104, 100);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -165,7 +166,7 @@
             this.panelLight.Controls.Add(this.pictureBox3);
             this.panelLight.Controls.Add(this.lblLight);
             this.panelLight.Location = new System.Drawing.Point(1027, 267);
-            this.panelLight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelLight.Margin = new System.Windows.Forms.Padding(4);
             this.panelLight.Name = "panelLight";
             this.panelLight.Size = new System.Drawing.Size(331, 191);
             this.panelLight.TabIndex = 3;
@@ -188,7 +189,7 @@
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
             this.pictureBox3.Location = new System.Drawing.Point(223, 64);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(104, 100);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -206,18 +207,30 @@
             this.lblLight.TabIndex = 1;
             this.lblLight.Text = "Light";
             // 
+            // btnDash
+            // 
+            this.btnDash.Location = new System.Drawing.Point(13, 15);
+            this.btnDash.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDash.Name = "btnDash";
+            this.btnDash.Size = new System.Drawing.Size(224, 55);
+            this.btnDash.TabIndex = 4;
+            this.btnDash.Text = "Back";
+            this.btnDash.UseVisualStyleBackColor = true;
+            this.btnDash.Click += new System.EventHandler(this.btnDash_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
             this.ClientSize = new System.Drawing.Size(1443, 732);
+            this.Controls.Add(this.btnDash);
             this.Controls.Add(this.panelLight);
             this.Controls.Add(this.panelMoisture);
             this.Controls.Add(this.panelTemp);
             this.Controls.Add(this.btnLogout);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "mainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "mainForm";
@@ -250,5 +263,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnDash;
     }
 }

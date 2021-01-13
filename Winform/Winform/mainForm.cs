@@ -37,7 +37,6 @@ namespace Winform
 
         private void panelTemp_DoubleClick(object sender, EventArgs e)
         {
-            this.Hide();
             TemperatureSettings fm = new TemperatureSettings();
             fm.Show();
         }
@@ -86,6 +85,11 @@ namespace Winform
         private void panelTemp_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnDash_Click(object sender, EventArgs e)
+        {
+            this.Hide();
         }
     }
 }

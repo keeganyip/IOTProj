@@ -188,7 +188,6 @@ namespace Winform
         {
             string strRFID = extractStringValue(strData, ID);
             //update GUI component in any tabs
-            tbRFID.Text = strRFID;
 
         }
         private void handleMoisture(string strData, string strTime, string ID)
@@ -320,15 +319,10 @@ namespace Winform
 
         private void btn_Dash_Click(object sender, EventArgs e)
         {
-            panelSensors.Visible = true;
-            panelSettings.Visible = false;
         }
 
         private void btn_Settings_Click(object sender, EventArgs e)
         {
-            panelSensors.Visible = false;
-            panelSettings.Visible = true;
-            //this.Hide();
             mainForm fm = new mainForm();
             fm.Show();
 
@@ -339,6 +333,13 @@ namespace Winform
             TemperatureSettings settings = new TemperatureSettings();
             settings.Show();
           
+        }
+
+        private void btn_logout_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            loginForm fl = new loginForm();
+            fl.Show();
         }
     }
 }
