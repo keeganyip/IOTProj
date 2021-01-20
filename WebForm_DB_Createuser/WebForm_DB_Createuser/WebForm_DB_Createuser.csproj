@@ -199,6 +199,7 @@
     <Content Include="Account\ResetPassword.aspx" />
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
+    <Content Include="Account\Adminaccount.aspx" />
     <Content Include="Account\useraccount.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="Contact.aspx" />
@@ -380,6 +381,13 @@
       <DependentUpon>TwoFactorAuthenticationSignIn.aspx</DependentUpon>
     </Compile>
     <Compile Include="Account\User.cs" />
+    <Compile Include="Account\Adminaccount.aspx.cs">
+      <DependentUpon>Adminaccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Adminaccount.aspx.designer.cs">
+      <DependentUpon>Adminaccount.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Account\useraccount.aspx.cs">
       <DependentUpon>useraccount.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

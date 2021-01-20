@@ -65,9 +65,6 @@ namespace WebForm_DB_Createuser.Account
 
         }
 
-        protected void gvUsers_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }

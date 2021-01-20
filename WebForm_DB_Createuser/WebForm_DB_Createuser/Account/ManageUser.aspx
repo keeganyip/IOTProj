@@ -19,7 +19,7 @@
     <body>
         <div class="GVcontainer">
 
-            <asp:GridView db ID="gvUsers" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="SqlDataSource1" ForeColor="#333333" GridLines="None" OnRowDeleting="gvUsers_RowDeleting" OnSelectedIndexChanged="gvUsers_SelectedIndexChanged" Width="1109px" DataKeyNames="UniqueUserId">
+            <asp:GridView db ID="gvUsers" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataSourceID="SqlDataSource1" ForeColor="#333333" GridLines="None" OnRowDeleting="gvUsers_RowDeleting" Width="1109px" DataKeyNames="UniqueUserId">
                 <AlternatingRowStyle BackColor="White" />
                 <Columns>
                     <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
@@ -38,7 +38,7 @@
                 <SortedDescendingCellStyle BackColor="#D4DFE1" />
                 <SortedDescendingHeaderStyle BackColor="#15524A" />
             </asp:GridView>
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:UserdbConnectionString %>" SelectCommand="SELECT [Email], [Name], [UniqueUserID] FROM [UserTable]"></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:UserdbConnectionString %>" SelectCommand="SELECT [Email], [Name], [UniqueUserID] FROM [UserTable] WHERE Type = 'User' "></asp:SqlDataSource>
 
         </div>
     </body>
