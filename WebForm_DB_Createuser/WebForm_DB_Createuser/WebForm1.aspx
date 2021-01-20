@@ -79,6 +79,8 @@
     </div>
     
     <script src="http://code.highcharts.com/stock/highstock.js"></script>
+    <script src="http://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
     <script>
         $("#temp").highcharts({
@@ -159,7 +161,7 @@
     </script>
 
     <script>
-        $("#humidity").highcharts({
+        $("#humidity").highcharts({            
             chart: {
                 type: 'Line'
             },
@@ -232,6 +234,14 @@
                 type: "line",
                 name: "Hourly Humidity",
                 data: <%=humidityData%>,
+            }, {
+                type: "line",
+                name: "Ideal Humidity",
+                data: <%=idealHumidityData%>,
+            }, {
+                type: "arearange",                
+                data: <%=diffHumidityData%>,
+                showInLegend: false
             }]
         });
     </script>
@@ -239,7 +249,7 @@
     <script>
         $("#moisture").highcharts({
             chart: {
-                type: 'Line'
+                type: 'area'
             },
             title: {
                 text: "Hourly Moisture Value"
@@ -306,10 +316,13 @@
                     text: "Soil Moisture %"
                 }
             },
-            series: [{
-                type: "area",
+            series: [{                
                 name: "Hourly Moisture",
                 data: <%=moistureData%>,
+            }, {                
+                type: "line",
+                name: "Ideal Moisture",
+                data: <%=idealMoistureData%>,
             }]
         });
     </script>
@@ -317,7 +330,7 @@
     <script>
         $("#light").highcharts({
             chart: {
-                type: 'Line'
+                type: "spline"
             },
             title: {
                 text: "Hourly Light Intensity Value"
@@ -384,10 +397,12 @@
                     text: "Light Intensity (lux)"
                 }
             },
-            series: [{
-                type: "spline",
+            series: [{                
                 name: "Hourly Light Intensity",
                 data: <%=lightData%>,
+            }, {
+                name: "Ideal Amount of Light",
+                data: <%=idealLightData%>,
             }]
         });
     </script>
