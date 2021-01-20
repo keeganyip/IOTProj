@@ -155,22 +155,22 @@ namespace IOTProj
                 soundBuzzer();
             }
 
-            if (strDataReceived.Equals("RFIDMODE"))
-            {
-                curMode = MODE_RFID;
-            }
-            strDataReceived = "";
-        }
-        private void handleRFID()
-        {
             if (!strRfidDetected.Equals(""))
             {
+                Debug.WriteLine(strRfidDetected);
                 if (strRfidDetected.Equals("6A003E7CF2DA"))
                 {
                     Debug.WriteLine("Hi Emran :)");
                     sendDataToWindows("RFID=" + strRfidDetected);
                 }
+                strRfidDetected = "";
             }
+
+            strDataReceived = "";
+        }
+        private void handleRFID()
+        {
+           
         }
         private int GetLightValue(Pin pin)
         {
@@ -255,6 +255,8 @@ namespace IOTProj
                     handleModeSendTemp();
                 else if (curMode == MODE_RFID)
                     handleRFID();
+               
+
                 getTempD();
                 
                

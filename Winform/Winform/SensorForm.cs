@@ -9,12 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace Winform
 {
     public partial class SensorForm : Form
     {
+        loginForm fl = new loginForm();
+        waitRFID wr = new waitRFID();
 
+        public bool loggedin = false;
+        public string rfid = "";
+        public string loginrfid = "";
         string strConnectionString =
            ConfigurationManager.ConnectionStrings["Winform.Properties.Settings.UserdbConnectionString"].ConnectionString;
 
@@ -101,7 +107,7 @@ namespace Winform
         private string extractStringValue(string strData, string ID)
         {
             string result = strData.Substring(strData.IndexOf(ID) + ID.Length);
-            return result;
+            return result;  
         }
 
         //utility method, you should not need to edit this
@@ -187,6 +193,8 @@ namespace Winform
         private void handleRfidData(string strData, string strTime, string ID)
         {
             string strRFID = extractStringValue(strData, ID);
+            rfid = strRFID;
+            Debug.WriteLine("SEND RFID" + rfid);
             //update GUI component in any tabs
 
         }
@@ -228,7 +236,7 @@ namespace Winform
                 handleTempSensorData(strData, strTime, "TEMP=");
             if (strData.IndexOf("LIGHT=") != -1)
                 handleLightSensorData(strData, strTime, "LIGHT=");
-            else if (strData.IndexOf("RFID=") != -1)
+            if (strData.IndexOf("RFID=") != -1)
                 handleRfidData(strData, strTime, "RFID=");
             if (strData.IndexOf("MOISTURE=") != -1)
                 handleMoisture(strData, strTime, "MOISTURE=");
@@ -243,9 +251,8 @@ namespace Winform
         //Raw data received from Hardware comes here
         public void handleSensorData(String strData)
         {
-            string dt = DateTime.Now.ToString("s"); //get current time
+            string dt = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss"); //get current time
             extractSensorData(strData, dt); //get sensor values out
-            Console.WriteLine(strData);
             //update raw data received to listbox
             string strMessage = dt + ":" + strData;
             lbDataComms.Items.Insert(0, strMessage);
@@ -287,6 +294,14 @@ namespace Winform
         private void Form1_Load(object sender, EventArgs e)
         {
             InitComms();
+            //if (loggedin == false)
+            //{
+                
+            //    fl.TopMost = true;
+            //    fl.Show();    
+            //}
+          // backgroundWorker1.RunWorkerAsync();
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -338,8 +353,38 @@ namespace Winform
         private void btn_logout_Click(object sender, EventArgs e)
         {
             this.Hide();
-            loginForm fl = new loginForm();
+            
             fl.Show();
         }
+
+        public void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+            bool rfidcheck = false;
+            wr.Show();
+            while (rfidcheck==false)
+            { 
+                if(rfid!="")
+                {
+                    Console.WriteLine(rfid);
+                    Console.WriteLine("LOGIN FORM" + loginrfid);
+                    if(rfid == loginrfid.Trim())
+                    {
+                        
+                        rfidcheck = true;
+                    }
+                }
+            }
+           
+            Console.WriteLine("RESULTS"+rfidcheck);
+            e.Result = rfidcheck;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            wr.Close();
+        }
+
+        
     }
 }

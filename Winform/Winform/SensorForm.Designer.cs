@@ -38,13 +38,14 @@
             this.tbtemp = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SideBar = new System.Windows.Forms.Panel();
+            this.btn_logout = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.btn_Dash = new System.Windows.Forms.Button();
             this.btn_Settings = new System.Windows.Forms.Button();
             this.panelSensors = new System.Windows.Forms.Panel();
             this.tb_Humidity = new System.Windows.Forms.TextBox();
             this.lblHum = new System.Windows.Forms.Label();
-            this.btn_logout = new System.Windows.Forms.Button();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.SideBar.SuspendLayout();
             this.panelSensors.SuspendLayout();
             this.SuspendLayout();
@@ -152,6 +153,21 @@
             this.SideBar.Size = new System.Drawing.Size(291, 1006);
             this.SideBar.TabIndex = 16;
             // 
+            // btn_logout
+            // 
+            this.btn_logout.BackColor = System.Drawing.Color.ForestGreen;
+            this.btn_logout.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btn_logout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_logout.Location = new System.Drawing.Point(0, 438);
+            this.btn_logout.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_logout.Name = "btn_logout";
+            this.btn_logout.Size = new System.Drawing.Size(291, 106);
+            this.btn_logout.TabIndex = 3;
+            this.btn_logout.TabStop = false;
+            this.btn_logout.Text = "Logout";
+            this.btn_logout.UseVisualStyleBackColor = false;
+            this.btn_logout.Click += new System.EventHandler(this.btn_logout_Click);
+            // 
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Rockwell Extra Bold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -232,20 +248,10 @@
             this.lblHum.TabIndex = 17;
             this.lblHum.Text = "Humidity:";
             // 
-            // btn_logout
+            // backgroundWorker1
             // 
-            this.btn_logout.BackColor = System.Drawing.Color.ForestGreen;
-            this.btn_logout.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btn_logout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_logout.Location = new System.Drawing.Point(0, 438);
-            this.btn_logout.Margin = new System.Windows.Forms.Padding(4);
-            this.btn_logout.Name = "btn_logout";
-            this.btn_logout.Size = new System.Drawing.Size(291, 106);
-            this.btn_logout.TabIndex = 3;
-            this.btn_logout.TabStop = false;
-            this.btn_logout.Text = "Logout";
-            this.btn_logout.UseVisualStyleBackColor = false;
-            this.btn_logout.Click += new System.EventHandler(this.btn_logout_Click);
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
             // SensorForm
             // 
@@ -286,6 +292,7 @@
         private System.Windows.Forms.TextBox tb_Humidity;
         private System.Windows.Forms.Label lblHum;
         private System.Windows.Forms.Button btn_logout;
+        public System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 

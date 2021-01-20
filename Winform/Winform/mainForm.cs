@@ -91,5 +91,26 @@ namespace Winform
         {
             this.Hide();
         }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PnHumSettings_DoubleClick(object sender, EventArgs e)
+        {
+            HumiditySettings hs = new HumiditySettings();
+            hs.Show();
+        }
+
+        private void PnHumSettings_MouseHover(object sender, EventArgs e)
+        {
+            PnHumSettings.BackColor = Color.LimeGreen;
+        }
+
+        private void PnHumSettings_MouseLeave(object sender, EventArgs e)
+        {
+            PnHumSettings.BackColor = Color.ForestGreen;
+        }
     }
 }

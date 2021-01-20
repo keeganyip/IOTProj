@@ -16,8 +16,8 @@ namespace Winform
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new loginForm());
-            Application.Run(new SensorForm());
+            Application.Run(new loginForm());
+            //Application.Run(new SensorForm());
         }
     }
 }

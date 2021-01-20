@@ -43,12 +43,18 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.lblLight = new System.Windows.Forms.Label();
             this.btnDash = new System.Windows.Forms.Button();
+            this.PnHumSettings = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.pictureboxhum = new System.Windows.Forms.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.panelTemp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelMoisture.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.panelLight.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.PnHumSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureboxhum)).BeginInit();
             this.SuspendLayout();
             // 
             // btnLogout
@@ -218,12 +224,62 @@
             this.btnDash.UseVisualStyleBackColor = true;
             this.btnDash.Click += new System.EventHandler(this.btnDash_Click);
             // 
+            // PnHumSettings
+            // 
+            this.PnHumSettings.BackColor = System.Drawing.Color.ForestGreen;
+            this.PnHumSettings.Controls.Add(this.label4);
+            this.PnHumSettings.Controls.Add(this.pictureboxhum);
+            this.PnHumSettings.Controls.Add(this.label5);
+            this.PnHumSettings.Location = new System.Drawing.Point(348, 513);
+            this.PnHumSettings.Margin = new System.Windows.Forms.Padding(4);
+            this.PnHumSettings.Name = "PnHumSettings";
+            this.PnHumSettings.Size = new System.Drawing.Size(331, 191);
+            this.PnHumSettings.TabIndex = 5;
+            this.PnHumSettings.DoubleClick += new System.EventHandler(this.PnHumSettings_DoubleClick);
+            this.PnHumSettings.MouseLeave += new System.EventHandler(this.PnHumSettings_MouseLeave);
+            this.PnHumSettings.MouseHover += new System.EventHandler(this.PnHumSettings_MouseHover);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(11, 60);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(125, 39);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Sensor";
+            // 
+            // pictureboxhum
+            // 
+            this.pictureboxhum.Image = ((System.Drawing.Image)(resources.GetObject("pictureboxhum.Image")));
+            this.pictureboxhum.Location = new System.Drawing.Point(223, 64);
+            this.pictureboxhum.Margin = new System.Windows.Forms.Padding(4);
+            this.pictureboxhum.Name = "pictureboxhum";
+            this.pictureboxhum.Size = new System.Drawing.Size(104, 100);
+            this.pictureboxhum.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureboxhum.TabIndex = 0;
+            this.pictureboxhum.TabStop = false;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(11, 22);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(150, 39);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "Humidity";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
             this.ClientSize = new System.Drawing.Size(1443, 732);
+            this.Controls.Add(this.PnHumSettings);
             this.Controls.Add(this.btnDash);
             this.Controls.Add(this.panelLight);
             this.Controls.Add(this.panelMoisture);
@@ -244,6 +300,9 @@
             this.panelLight.ResumeLayout(false);
             this.panelLight.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.PnHumSettings.ResumeLayout(false);
+            this.PnHumSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureboxhum)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -264,5 +323,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnDash;
+        private System.Windows.Forms.Panel PnHumSettings;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.PictureBox pictureboxhum;
+        private System.Windows.Forms.Label label5;
     }
 }
