@@ -8,6 +8,10 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
 
+using System.Data.SqlClient;
+using System.Configuration;
+using Salt_Password_Sample;
+
 namespace WebForm_DB_Createuser
 {
     public partial class SiteMaster : MasterPage

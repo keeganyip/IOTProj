@@ -8,6 +8,7 @@ using WebForm_DB_Createuser.Models;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Diagnostics;
+using Salt_Password_Sample;
 
 namespace WebForm_DB_Createuser.Account
 {
@@ -84,6 +85,7 @@ namespace WebForm_DB_Createuser.Account
                 {
 
                     string pass = Password.Text;
+                    bool flag = Hash.VerifyHash(pass, "SHA512", checkpw);
                     Response.Write(checkpw + Password.Text);
                     Response.Write(pass == checkpw);
                     Debug.WriteLine(pass, "pass");
@@ -93,7 +95,7 @@ namespace WebForm_DB_Createuser.Account
                     {
 
 
-                        if (pass == checkpw)
+                        if (flag == true)
                         {
 
                             string id = "select UniqueUserID from UserTable where Email='" + Email.Text + "'";
@@ -159,7 +161,8 @@ namespace WebForm_DB_Createuser.Account
 
 
                     string pass = Password.Text;
-                    if (pass != checkpw)
+                    bool flag = Hash.VerifyHash(pass, "SHA512", checkpw);
+                    if (flag == false)
                     {
                         customValidator1.ErrorMessage = " Wrong login Credentials";
                         args.IsValid = false;
