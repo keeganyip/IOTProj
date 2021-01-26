@@ -148,8 +148,7 @@ namespace WebForm_DB_Createuser
                 string temp = tempconverted.Trim();
                 temp = temp.Substring(0, 2);            
 
-                tempData += "{" + "x: Date(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), y: " + temp + "},";
-
+                tempData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + temp + "],";
 
             }
             tempData = tempData.Remove(tempData.Length - 1) + ']';
@@ -252,17 +251,20 @@ namespace WebForm_DB_Createuser
 
         public void LoadDataofHumidityChart()
         {
-            string strConnectionString = ConfigurationManager.ConnectionStrings["MyDBConnectStr"].ConnectionString;
+           string strConnectionString = ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString;
 
             SqlConnection myConnect = new SqlConnection(strConnectionString);
 
             myConnect.Open();
 
-            string strCommandText = "Select Date, Time, Humidity From Humidity Where EventType='HighHumidity'";
+            string strCommandText = "Select FORMAT(TimeOccured,'dd/MM/yyyy HH:mm:ss') as TimeOccured, HumValue From HumiditySensor";
+          
 
             SqlCommand comm = new SqlCommand(strCommandText, myConnect);
             DataTable dt = new DataTable();
+            
             dt.Load(comm.ExecuteReader());
+            
             gvhumidity.DataSource = dt;
             gvhumidity.DataBind();
 
@@ -271,15 +273,20 @@ namespace WebForm_DB_Createuser
             humidityData = "[";
             foreach (DataRow dr in dt.Rows)
             {
-                string date = Convert.ToString(dr["Date"]);
+                string date = Convert.ToString(dr["TimeOccured"]);
                 string year = date.Substring(6, 4);
-                string month = date.Substring(3, 2);
+                string monthbefore = date.Substring(3, 2);
+                int month = Convert.ToInt32(monthbefore);
+                month = month - 1;
                 string day = date.Substring(0, 2);
-                string time = Convert.ToString(dr["Time"]);
-                string hour = time.Substring(0, 2);
-                
+                string time = Convert.ToString(dr["TimeOccured"]);
+                string hour = time.Substring(11, 2);
+                string min = time.Substring(14, 2);
+                string sec = time.Substring(17, 2);
+                string humconverted = Convert.ToString(dr["HumValue"]);
+                string hum = humconverted.Trim();
 
-                humidityData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "), y: " + dr["Humidity"] + "},";
+                humidityData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), y: " + hum + "},";
                 
             }
             humidityData = humidityData.Remove(humidityData.Length - 1) + ']';
@@ -288,15 +295,18 @@ namespace WebForm_DB_Createuser
             idealHumidityData = "[";
             foreach (DataRow dr in dt.Rows)
             {
-                string date = Convert.ToString(dr["Date"]);
+                string date = Convert.ToString(dr["TimeOccured"]);
                 string year = date.Substring(6, 4);
-                string month = date.Substring(3, 2);
+                string monthbefore = date.Substring(3, 2);
+                int month = Convert.ToInt32(monthbefore);
+                month = month - 1;
                 string day = date.Substring(0, 2);
-                string time = Convert.ToString(dr["Time"]);
-                string hour = time.Substring(0, 2);
+                string time = Convert.ToString(dr["TimeOccured"]);
+                string hour = time.Substring(11, 2);
+                string min = time.Substring(14, 2);
+                string sec = time.Substring(17, 2);
 
-
-                idealHumidityData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "), y: " + 60 + "},";
+                idealHumidityData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + 50 + "," + 70 + "],";
 
             }
             idealHumidityData = idealHumidityData.Remove(idealHumidityData.Length - 1) + ']';
@@ -305,18 +315,23 @@ namespace WebForm_DB_Createuser
             diffHumidityData = "[";
             foreach (DataRow dr in dt.Rows)
             {
-                string date = Convert.ToString(dr["Date"]);
+                string date = Convert.ToString(dr["TimeOccured"]);
                 string year = date.Substring(6, 4);
-                string month = date.Substring(3, 2);
+                string monthbefore = date.Substring(3, 2);
+                int month = Convert.ToInt32(monthbefore);
+                month = month - 1;
                 string day = date.Substring(0, 2);
-                string time = Convert.ToString(dr["Time"]);
-                string hour = time.Substring(0, 2);
+                string time = Convert.ToString(dr["TimeOccured"]);
+                string hour = time.Substring(11, 2);
+                string min = time.Substring(14, 2);
+                string sec = time.Substring(17, 2);
+                string humconverted = Convert.ToString(dr["HumValue"]);
+                string hum = humconverted.Trim();
 
-                diffHumidityData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "), " + 60 + ", " + dr["Humidity"] + "],";
+                diffHumidityData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + 50 + ", " + hum + "],";
             }
             diffHumidityData = diffHumidityData.Remove(diffHumidityData.Length - 1) + ']';
-            Debug.WriteLine("DiffHUMID");
-            Debug.WriteLine(diffHumidityData);
+            
 
         }
 
@@ -379,7 +394,7 @@ namespace WebForm_DB_Createuser
                 string sec = time.Substring(17, 2);                             
 
 
-                idealMoistureData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), y: " + 16 + "},";
+                idealMoistureData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + 10 + "," + 45 + "],";
 
             }
             idealMoistureData = idealMoistureData.Remove(idealMoistureData.Length - 1) + ']';
@@ -402,7 +417,7 @@ namespace WebForm_DB_Createuser
                 moisturepercent = (moisturepercent / 2) / 10;
 
 
-                diffMoistureData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + 16 + ", " + moisturepercent + "],";
+                diffMoistureData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + 10 + ", " + moisturepercent + "],";
             }
             diffMoistureData = diffMoistureData.Remove(diffMoistureData.Length - 1) + ']';
             
