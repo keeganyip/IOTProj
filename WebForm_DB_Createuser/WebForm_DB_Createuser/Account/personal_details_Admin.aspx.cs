@@ -11,7 +11,7 @@ using Salt_Password_Sample;
 
 namespace WebForm_DB_Createuser.Account
 {
-    public partial class personal_details : System.Web.UI.Page
+    public partial class personal_details_Admin : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
 
@@ -34,7 +34,7 @@ namespace WebForm_DB_Createuser.Account
 
                     while (reader.Read())
                     {
-                        lblName.Text = "Name: ";
+                        lblName.Text = "Namelol: ";
                         lblEmail.Text = "Email: ";
                         lblContact.Text = "Contact ";
                         lblpw.Text = "Password";
@@ -92,7 +92,8 @@ namespace WebForm_DB_Createuser.Account
                     cmd.Parameters.AddWithValue("@Contact", TbContact.Text);
                     cmd.ExecuteNonQuery();
                     conn.Close();
-                    Response.Redirect("useraccount");
+                    Debug.WriteLine("redirected here");
+                    Response.Redirect("Adminaccount");
                 }
                 else
                 {
@@ -112,7 +113,8 @@ namespace WebForm_DB_Createuser.Account
                             cmd.Parameters.AddWithValue("@Password", epass);
                             cmd.ExecuteNonQuery();
                             conn.Close();
-                            Response.Redirect("useraccount");
+                            Debug.WriteLine("redirected here");
+                            Response.Redirect("Adminaccount");
                         }
                     }
                 }
@@ -133,7 +135,8 @@ namespace WebForm_DB_Createuser.Account
                     cmd.Parameters.AddWithValue("@Contact", TbContact.Text);
                     cmd.ExecuteNonQuery();
                     conn.Close();
-                    Response.Redirect("useraccount");
+                    Debug.WriteLine("redirected here");
+                    Response.Redirect("Adminaccount");
                 }
                 else
                 {
@@ -151,7 +154,8 @@ namespace WebForm_DB_Createuser.Account
                         cmd.Parameters.AddWithValue("@Password", epass);
                         cmd.ExecuteNonQuery();
                         conn.Close();
-                        Response.Redirect("useraccount");
+                        Debug.WriteLine("redirected here");
+                        Response.Redirect("Adminaccount");
                     }
 
 
