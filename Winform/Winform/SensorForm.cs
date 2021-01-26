@@ -399,6 +399,8 @@ namespace Winform
                     {
                         
                         rfidcheck = true;
+                        wr.Close();
+
                     }
                 }
             }
@@ -409,7 +411,6 @@ namespace Winform
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            wr.Close();
         }
 
         
