@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{4512a586-ff59-46c4-9abb-2544a903e124}</ProjectGuid>
+    <ProjectGuid>{4512A586-FF59-46C4-9ABB-2544A903E124}</ProjectGuid>
     <OutputType>winmdobj</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IOTProj</RootNamespace>
@@ -18,13 +18,10 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <AllowCrossPlatformRetargeting>false</AllowCrossPlatformRetargeting>
-
-    
     <PackageCertificateKeyFile>IOTProj_TemporaryKey.pfx</PackageCertificateKeyFile>
-    
     <AppxPackage>true</AppxPackage>
     <ContainsStartupTask>true</ContainsStartupTask>
-    
+    <PackageCertificateThumbprint>2E7805633A6BCE3F05FA609BECF048D2965EF1F7</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -97,9 +94,11 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="IOTProj_TemporaryKey.pfx" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SerialComms.cs" />
     <Compile Include="StartupTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -107,22 +106,48 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    
-    <None Include="IOTProj_TemporaryKey.pfx" />
-    
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="Assets\LockScreenLogo.scale-200.png"> <InProject>false</InProject> </Content>
-    <Content Include="Assets\SplashScreen.scale-200.png" > <InProject>false</InProject> </Content>
-    <Content Include="Assets\Square150x150Logo.scale-200.png" > <InProject>false</InProject> </Content>
-    <Content Include="Assets\Square44x44Logo.scale-200.png" > <InProject>false</InProject> </Content>
-    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" > <InProject>false</InProject> </Content>
-    <Content Include="Assets\StoreLogo.png" > <InProject>false</InProject> </Content>
-    <Content Include="Assets\Wide310x150Logo.scale-200.png" > <InProject>false</InProject> </Content>
+    <Content Include="Assets\LockScreenLogo.scale-200.png">
+      <InProject>false</InProject>
+    </Content>
+    <Content Include="Assets\SplashScreen.scale-200.png">
+      <InProject>false</InProject>
+    </Content>
+    <Content Include="Assets\Square150x150Logo.scale-200.png">
+      <InProject>false</InProject>
+    </Content>
+    <Content Include="Assets\Square44x44Logo.scale-200.png">
+      <InProject>false</InProject>
+    </Content>
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+      <InProject>false</InProject>
+    </Content>
+    <Content Include="Assets\StoreLogo.png">
+      <InProject>false</InProject>
+    </Content>
+    <Content Include="Assets\Wide310x150Logo.scale-200.png">
+      <InProject>false</InProject>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="GrovePi">
+      <HintPath>..\..\GrovePi.dll</HintPath>
+    </Reference>
+    <Reference Include="RpiCommsUtil">
+      <HintPath>..\..\RpiCommsUtil.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
