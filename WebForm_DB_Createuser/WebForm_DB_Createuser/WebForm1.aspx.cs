@@ -15,22 +15,32 @@ namespace WebForm_DB_Createuser
     public partial class WebForm1 : System.Web.UI.Page
     {
         public string tempData;
+        public string idealTempData;
+        public string diffTempData;
+        public string tempAnalysis;
         public string humidityData;
         public string idealHumidityData;
         public string diffHumidityData;
+        public string humidityAnalysis;
         public string moistureData;
         public string idealMoistureData;
+        public string diffMoistureData;
+        public string moistureAnalysis;
         public string lightData;
         public string idealLightData;
+        public string lightAnalysis;
+        public string diffLightData;
         public string RFIDData;
 
         protected void Page_Load(object sender, EventArgs e)
         {                     
             LoadDataofTempChart();
+            LoadTempAnalysis();
             LoadDataofHumidityChart();
             LoadDataofMoistureChart();
             LoadDataofLightChart();
             LoadDataofRFIDChart();        
+
             
         }
 
@@ -39,6 +49,7 @@ namespace WebForm_DB_Createuser
             if (DropDownList1.SelectedIndex == 0)
             {
                 LoadDataofTempChart();
+                LoadTempAnalysis();
                 LoadDataofHumidityChart();
                 LoadDataofMoistureChart();
                 LoadDataofLightChart();
@@ -52,6 +63,7 @@ namespace WebForm_DB_Createuser
             if (DropDownList1.SelectedIndex == 1)
             {
                 LoadDataofTempChart();
+                LoadTempAnalysis();
                 humidityTable.Visible = false;
                 tempTable.Visible = true;
                 moistureTable.Visible = false;
@@ -132,16 +144,105 @@ namespace WebForm_DB_Createuser
                 string sec = time.Substring(17, 2);
                 string tempconverted = Convert.ToString(dr["tempStatus"]);
                 string temp = tempconverted.Trim();
-                temp = temp.Substring(0, 2);
-                
-
+                temp = temp.Substring(0, 2);            
 
                 tempData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), y: " + temp + "},";
+
+
             }
             tempData = tempData.Remove(tempData.Length - 1) + ']';
-            Debug.WriteLine("TEMPERATURE");
-            Debug.WriteLine(tempData);
+
+            //data format is [  [x1,y1], [x2,y2], ...]
+            idealTempData = "[";
+            foreach (DataRow dr in dt.Rows)
+            {
+                string date = Convert.ToString(dr["TimeOccured"]);
+                string year = date.Substring(6, 4);
+                string month = date.Substring(3, 2);
+                string day = date.Substring(0, 2);
+                string time = Convert.ToString(dr["TimeOccured"]);
+                string hour = time.Substring(11, 2);
+                string min = time.Substring(14, 2);
+                string sec = time.Substring(17, 2);
+
+
+                idealTempData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + 26 + ", " + 30 + "],";
+
+            }
+            idealTempData = idealTempData.Remove(idealTempData.Length - 1) + ']';
+
+            //data format is [  [x1,y1], [x2,y2], ...]
+            diffTempData = "[";
+            foreach (DataRow dr in dt.Rows)
+            {
+                string date = Convert.ToString(dr["TimeOccured"]);
+                string year = date.Substring(6, 4);
+                string month = date.Substring(3, 2);
+                string day = date.Substring(0, 2);
+                string time = Convert.ToString(dr["TimeOccured"]);
+                string hour = time.Substring(11, 2);
+                string min = time.Substring(14, 2);
+                string sec = time.Substring(17, 2);
+                string tempconverted = Convert.ToString(dr["tempStatus"]);
+                string temp = tempconverted.Trim();
+                temp = temp.Substring(0, 2);
+
+                diffTempData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + 26 + ", " + temp + "],";
+            }
+            diffTempData = diffTempData.Remove(diffTempData.Length - 1) + ']';
+            
         }
+
+        public void LoadTempAnalysis()
+        {
+            string strConnectionString = ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString;
+
+            SqlConnection myConnect = new SqlConnection(strConnectionString);
+
+            myConnect.Open();
+
+            string strCommandText = "Select AVG(tempValue) as tempValue From tempSensor Where TimeOccured BETWEEN DATEADD(Hour, -1, GETDATE()) AND GETDATE()";
+
+
+            SqlCommand comm = new SqlCommand(strCommandText, myConnect);
+            DataTable dt = new DataTable();
+
+            dt.Load(comm.ExecuteReader());
+
+            gvtemp.DataSource = dt;
+            gvtemp.DataBind();
+
+
+            //data format is [  {x1,y1}, {x2,y2}, ...]
+            //date format: Date.UTC(2010, 1, 1, 12, 0, 0)
+            int avgTemp = 0;            
+            foreach (DataRow dr in dt.Rows)
+            {
+                string tempconverted = Convert.ToString(dr["tempValue"]);
+                string temp = tempconverted.Trim();
+                temp = temp.Substring(0, 2);
+                avgTemp = Convert.ToInt32(temp);              
+
+            }
+
+            if (avgTemp > 30)
+            {                
+                tempAnalysis = "Past Hour Average Temperature: " + avgTemp + "°C <br>" +
+                    "The Past Hour Average Temperature is higher than the ideal temperature by " + (avgTemp - 30) + "°C, PLEASE LOWER THE TEMPERATURE!";
+            }
+            else if (avgTemp < 26)
+            {
+                tempAnalysis = "Past Hour Average Temperature: " + avgTemp + "°C <br>" +
+                    "The Past Hour Average Temperature is higher than the ideal temperature by " + (26 - avgTemp) + "°C, PLEASE INCREASE THE TEMPERATURE!";
+            }
+            else
+            {
+                tempAnalysis = "Past Hour Average Temperature: " + avgTemp + "°C <br>" +
+                    "The Past Hour Average Temperature is ideal!";
+            }
+       
+        }
+        
 
         public void LoadDataofHumidityChart()
         {
@@ -215,34 +316,45 @@ namespace WebForm_DB_Createuser
 
         public void LoadDataofMoistureChart()
         {
-            string strConnectionString = ConfigurationManager.ConnectionStrings["MyDBConnectStr"].ConnectionString;
+            string strConnectionString = ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString;
 
             SqlConnection myConnect = new SqlConnection(strConnectionString);
 
             myConnect.Open();
 
-            string strCommandText = "Select Date, Time, Moisture From Moisture Where EventType='HighMoisture'";
+            string strCommandText = "Select FORMAT(TimeOccured,'dd/MM/yyyy HH:mm:ss') as TimeOccured, moistureLevel From moistureSensor";
+
 
             SqlCommand comm = new SqlCommand(strCommandText, myConnect);
             DataTable dt = new DataTable();
+
             dt.Load(comm.ExecuteReader());
-            gvmoisture.DataSource = dt;
-            gvmoisture.DataBind();
+
+            gvtemp.DataSource = dt;
+            gvtemp.DataBind();
 
 
             //data format is [  [x1,y1], [x2,y2], ...]
             moistureData = "[";
             foreach (DataRow dr in dt.Rows)
             {
-                string date = Convert.ToString(dr["Date"]);
+                string date = Convert.ToString(dr["TimeOccured"]);
                 string year = date.Substring(6, 4);
                 string month = date.Substring(3, 2);
                 string day = date.Substring(0, 2);
-                string time = Convert.ToString(dr["Time"]);
-                string hour = time.Substring(0, 2);
+                string time = Convert.ToString(dr["TimeOccured"]);
+                string hour = time.Substring(11, 2);
+                string min = time.Substring(14, 2);
+                string sec = time.Substring(17, 2);
+                string moistureconverted = Convert.ToString(dr["moistureLevel"]);
+                string moisture = moistureconverted.Trim();
+                int moisturepercent = Convert.ToInt32(moisture);
+                moisturepercent = (moisturepercent / 2) / 10;
+
+                
 
 
-                moistureData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "), y: " + dr["Moisture"] + "},";
+                moistureData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), y: " + moisturepercent + "},";
 
             }
             moistureData = moistureData.Remove(moistureData.Length - 1) + ']';
@@ -251,51 +363,83 @@ namespace WebForm_DB_Createuser
             idealMoistureData = "[";
             foreach (DataRow dr in dt.Rows)
             {
-                string date = Convert.ToString(dr["Date"]);
+                string date = Convert.ToString(dr["TimeOccured"]);
                 string year = date.Substring(6, 4);
                 string month = date.Substring(3, 2);
                 string day = date.Substring(0, 2);
-                string time = Convert.ToString(dr["Time"]);
-                string hour = time.Substring(0, 2);
+                string time = Convert.ToString(dr["TimeOccured"]);
+                string hour = time.Substring(11, 2);
+                string min = time.Substring(14, 2);
+                string sec = time.Substring(17, 2);                             
 
 
-                idealMoistureData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "), y: " + 16 + "},";
+                idealMoistureData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), y: " + 16 + "},";
 
             }
             idealMoistureData = idealMoistureData.Remove(idealMoistureData.Length - 1) + ']';
+
+            //data format is [  [x1,y1], [x2,y2], ...]
+            diffMoistureData = "[";
+            foreach (DataRow dr in dt.Rows)
+            {
+                string date = Convert.ToString(dr["TimeOccured"]);
+                string year = date.Substring(6, 4);
+                string month = date.Substring(3, 2);
+                string day = date.Substring(0, 2);
+                string time = Convert.ToString(dr["TimeOccured"]);
+                string hour = time.Substring(11, 2);
+                string min = time.Substring(14, 2);
+                string sec = time.Substring(17, 2);
+                string moistureconverted = Convert.ToString(dr["moistureLevel"]);
+                string moisture = moistureconverted.Trim();
+                int moisturepercent = Convert.ToInt32(moisture);
+                moisturepercent = (moisturepercent / 2) / 10;
+
+
+                diffMoistureData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + 16 + ", " + moisturepercent + "],";
+            }
+            diffMoistureData = diffMoistureData.Remove(diffMoistureData.Length - 1) + ']';
+            
 
         }
 
         public void LoadDataofLightChart()
         {
-            string strConnectionString = ConfigurationManager.ConnectionStrings["MyDBConnectStr"].ConnectionString;
+            string strConnectionString = ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString;
 
             SqlConnection myConnect = new SqlConnection(strConnectionString);
 
             myConnect.Open();
 
-            string strCommandText = "Select Date, Time, Light From Light Where EventType='HighIntensity'";
+            string strCommandText = "Select FORMAT(TimeOccured,'dd/MM/yyyy HH:mm:ss') as TimeOccured, lightValue From lightSensor";
+
 
             SqlCommand comm = new SqlCommand(strCommandText, myConnect);
             DataTable dt = new DataTable();
+
             dt.Load(comm.ExecuteReader());
-            gvlight.DataSource = dt;
-            gvlight.DataBind();
+
+            gvtemp.DataSource = dt;
+            gvtemp.DataBind();
 
 
             //data format is [  [x1,y1], [x2,y2], ...]
             lightData = "[";
             foreach (DataRow dr in dt.Rows)
             {
-                string date = Convert.ToString(dr["Date"]);
+                string date = Convert.ToString(dr["TimeOccured"]);
                 string year = date.Substring(6, 4);
                 string month = date.Substring(3, 2);
                 string day = date.Substring(0, 2);
-                string time = Convert.ToString(dr["Time"]);
-                string hour = time.Substring(0, 2);
+                string time = Convert.ToString(dr["TimeOccured"]);
+                string hour = time.Substring(11, 2);
+                string min = time.Substring(14, 2);
+                string sec = time.Substring(17, 2);
+                string lightconverted = Convert.ToString(dr["lightValue"]);
+                string light = lightconverted.Trim();
 
 
-                lightData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "), y: " + dr["Light"] + "},";
+                lightData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), y: " + light + "},";
 
             }
             lightData = lightData.Remove(lightData.Length - 1) + ']';
@@ -304,18 +448,40 @@ namespace WebForm_DB_Createuser
             idealLightData = "[";
             foreach (DataRow dr in dt.Rows)
             {
-                string date = Convert.ToString(dr["Date"]);
+                string date = Convert.ToString(dr["TimeOccured"]);
                 string year = date.Substring(6, 4);
                 string month = date.Substring(3, 2);
                 string day = date.Substring(0, 2);
-                string time = Convert.ToString(dr["Time"]);
-                string hour = time.Substring(0, 2);
+                string time = Convert.ToString(dr["TimeOccured"]);
+                string hour = time.Substring(11, 2);
+                string min = time.Substring(14, 2);
+                string sec = time.Substring(17, 2);
 
 
-                idealLightData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "), y: " + 4500 + "},";
+                idealLightData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), y: " + 4500 + "},";
 
             }
             idealLightData = idealLightData.Remove(idealLightData.Length - 1) + ']';
+
+            //data format is [  [x1,y1], [x2,y2], ...]
+            diffLightData = "[";
+            foreach (DataRow dr in dt.Rows)
+            {
+                string date = Convert.ToString(dr["TimeOccured"]);
+                string year = date.Substring(6, 4);
+                string month = date.Substring(3, 2);
+                string day = date.Substring(0, 2);
+                string time = Convert.ToString(dr["TimeOccured"]);
+                string hour = time.Substring(11, 2);
+                string min = time.Substring(14, 2);
+                string sec = time.Substring(17, 2);
+                string lightconverted = Convert.ToString(dr["lightValue"]);
+                string light = lightconverted.Trim();
+
+
+                diffLightData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + 4500 + ", " + light + "],";
+            }
+            diffLightData = diffLightData.Remove(diffLightData.Length - 1) + ']';
 
         }
 
