@@ -25,6 +25,13 @@
                     </asp:GridView>
                 </div>
             </td>
+        
+            <td>
+                <div>
+                    <p>TEMPERATURE ANALYSIS:</p>
+                    <p><%=tempAnalysis%></p>                    
+                </div>
+            </td>
         </tr>
     </table>
     </div>
@@ -75,10 +82,12 @@
                 </div>
             </td>
         </tr>
-    </table>     
+    </table>           
     </div>
     
     <script src="http://code.highcharts.com/stock/highstock.js"></script>
+    <script src="http://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
     <script>
         $("#temp").highcharts({
@@ -86,7 +95,7 @@
                 type: 'line'
             },
             title: {
-                text: "Hourly Temp"
+                text: "Hourly Temperature"
             },            
             navigator: {
                 enabled: true,
@@ -152,14 +161,42 @@
             },
             series: [{
                 type: "line",
+                zones: [{
+                    value: 26.6,
+                    color: '#add8e6',
+                }, {
+                    value: 100,
+                    color: '#FFCCCB',
+                }],
                 name: "Hourly Temp",
                 data: <%=tempData%>,
+            }, {
+                type: "arearange",
+                opacity: 0.3,
+                color: '#90ee90',
+                name: "Ideal Temperature",
+                    data: <%=idealTempData%>,
+                }, {                
+                type: "arearange",
+                lineWidth: 0,                
+                data: <%=diffTempData%>,
+                zones: [{
+                    value: 26,
+                    color: '#add8e6',
+                }, {
+                    value: 30,
+                    color: '#90ee90',  
+                }, {
+                    value: 100,
+                    color: '#FFCCCB',                        
+                }],
+                showInLegend: false,                
             }]
         });
     </script>
 
     <script>
-        $("#humidity").highcharts({
+        $("#humidity").highcharts({            
             chart: {
                 type: 'Line'
             },
@@ -230,8 +267,33 @@
             },
             series: [{
                 type: "line",
+                zones: [{
+                    value: 60,
+                    color: '#add8e6',
+                }, {
+                    value: 100,
+                    color: '#FFCCCB',
+                }],
                 name: "Hourly Humidity",
                 data: <%=humidityData%>,
+            }, {
+                type: "line",
+                color: '#90ee90',
+                name: "Ideal Humidity",
+                data: <%=idealHumidityData%>,
+                }, {
+                name: "Range",
+                type: "arearange",
+                zones: [{
+                    value: 60,
+                    color: '#add8e6',
+                }, {
+                    value: 100,
+                    color: '#FFCCCB',
+                }],
+                lineWidth: 0,
+                data: <%=diffHumidityData%>,
+                showInLegend: false
             }]
         });
     </script>
@@ -239,7 +301,7 @@
     <script>
         $("#moisture").highcharts({
             chart: {
-                type: 'Line'
+                type: 'line'
             },
             title: {
                 text: "Hourly Moisture Value"
@@ -306,10 +368,34 @@
                     text: "Soil Moisture %"
                 }
             },
-            series: [{
-                type: "area",
+            series: [{                
                 name: "Hourly Moisture",
+                zones: [{
+                    value: 16,
+                    color: '#add8e6',
+                }, {
+                    value: 100,
+                    color: '#FFCCCB',
+                }],
                 data: <%=moistureData%>,
+            }, {                
+                type: "line",
+                color: '#90ee90',
+                name: "Ideal Moisture",
+                data: <%=idealMoistureData%>,
+            }, {
+                type: "arearange",
+                zones: [{
+                    value: 16,
+                    color: '#add8e6',
+                }, {
+                value: 100,
+                color: '#FFCCCB',
+                    }],
+                name: "range",
+                lineWidth: 0,
+                data: <%=diffMoistureData%>,
+                showInLegend: false
             }]
         });
     </script>
@@ -317,7 +403,7 @@
     <script>
         $("#light").highcharts({
             chart: {
-                type: 'Line'
+                type: "spline"
             },
             title: {
                 text: "Hourly Light Intensity Value"
@@ -384,11 +470,79 @@
                     text: "Light Intensity (lux)"
                 }
             },
-            series: [{
-                type: "spline",
+            series: [{                
                 name: "Hourly Light Intensity",
+                zones: [{
+                    value: 4500,
+                    color: '#add8e6',
+                }, {
+                    value: 6000,
+                    color: '#FFCCCB',
+                }],
                 data: <%=lightData%>,
+            }, {
+                name: "Ideal Amount of Light",
+                color: '#90ee90',
+                data: <%=idealLightData%>,
+            }, {
+                name: "range",
+                type: "arearange",
+                zones: [{
+                    value: 4500,
+                    color: '#add8e6',
+                }, {
+                    value: 6000,
+                    color: '#FFCCCB',
+                }],
+                lineWidth: 0,
+                data: <%=diffLightData%>,
+                showInLegend: false
             }]
+        });
+    </script>
+
+    <script>
+        var chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'area'
+            },
+            plotOptions: {
+                area: {
+                    stacking: true,
+                    lineWidth: 0,
+                    shadow: false,
+                    marker: {
+                        enabled: false
+                    },
+                    enableMouseTracking: false,
+                    showInLegend: false
+                },
+                line: {
+                    zIndex: 5
+                }
+            },
+            series: [{
+                type: 'line',
+                color: '#555',
+                data: [60, 60, 50, 40, 35, 45, 50, 65, 70, 75]
+            }, {
+                type: 'line',
+                color: '#55e',
+                data: [50, 55, 50, 45, 45, 50, 50, 55, 55, 60]
+            }, {
+                color: '#5e5',
+                data: [10, 5, 0, 0, 0, 0, 0, 10, 15, 15]
+            }, {
+                color: '#e55',
+                data: [0, 0, 0, 5, 10, 5, 0, 0, 0, 0]
+            }, {
+                id: 'transparent',
+                color: 'rgba(255,255,255,0)',
+                data: [50, 55, 50, 40, 35, 45, 50, 55, 55, 60]
+            }]
+        }, function (chart) {
+            chart.get('transparent').area.hide();
         });
     </script>
 
