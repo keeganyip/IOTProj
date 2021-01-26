@@ -104,6 +104,30 @@ namespace Winform
             myConnect.Close();
         } //End saveMoistureSensorDataToDB
 
+        private void saveHumSensorDataToDB(string strTime, string strHumValue)
+        {
+            //Step 1: Create connection
+            SqlConnection myConnect = new SqlConnection(strConnectionString);
+
+            //Step 2: Create Command
+            String strCommandText =
+                "INSERT HumiditySensor (TimeOccured, HumValue) " +
+                " VALUES (@time, @value)";
+
+            SqlCommand updateCmd = new SqlCommand(strCommandText, myConnect);
+            updateCmd.Parameters.AddWithValue("@time", strTime);
+            updateCmd.Parameters.AddWithValue("@value", strHumValue);
+
+            //Step 3: Open Connection
+            myConnect.Open();
+
+            //Step 4: ExecuteCommand
+            int result = updateCmd.ExecuteNonQuery();
+
+            //Step 5: Close Connection
+            myConnect.Close();
+        } //End saveLightSensorDataToDB
+
         private string extractStringValue(string strData, string ID)
         {
             string result = strData.Substring(strData.IndexOf(ID) + ID.Length);
@@ -216,6 +240,7 @@ namespace Winform
         private void handleHumidity(string strData, string strTime, string ID)
         {
             float fHumiditiy = extractFlotValue(strData, ID);
+            string strHum = extractStringValue(strData, ID);
             string status = "";
             if (fHumiditiy > 50)
                 status = "Humid";
@@ -223,6 +248,8 @@ namespace Winform
                 status = "Not Humid";
             Console.WriteLine(status);
             tb_Humidity.Text = status;
+
+            saveHumSensorDataToDB(strTime, strHum);
 
         }
         private void extractSensorData(string strData, string strTime)
