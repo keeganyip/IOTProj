@@ -1,5 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Afterlogin.Master" AutoEventWireup="true" CodeBehind="Adminaccount.aspx.cs" Inherits="WebForm_DB_Createuser.Account.admin" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent1" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AfterloginAdmin.Master" AutoEventWireup="true" CodeBehind="Adminaccount.aspx.cs" Inherits="WebForm_DB_Createuser.Account.admin" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent2" runat="server">
   
 
     <div class="jumbotron">
