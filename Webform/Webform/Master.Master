@@ -39,13 +39,13 @@
             </div>
             <ul class="nav">
               <li class="active">
-                <a href="./dashboard.html">
+                <a href="test.aspx">
                   <i class="tim-icons icon-chart-pie-36"></i>
                   <p>Dashboard</p>
                 </a>
               </li>
               <li>
-                <a href="./icons.html">
+                <a href="greenhouse.aspx">
                     <i class="fas fa-warehouse"></i>
                   <p>Greenhouse</p>
                 </a>
@@ -148,10 +148,12 @@
                             </p>
                         </a>
                         <ul class="dropdown-menu dropdown-navbar">
-                            <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Profile</a></li>
+                            <li class="nav-link"><a href="userProfile.aspx" class="nav-item dropdown-item">Profile</a></li>
                             <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a></li>
                             <li class="dropdown-divider"></li>
-                            <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Log out</a></li>
+                            <li class="nav-link">
+                                <asp:Button ID="logOut" OnClick="signOutClick" runat="server" Text="Log out" CssClass="nav-item dropdown-item"/>
+                            </li>
                         </ul>
                         </li>
                         <li class="separator d-lg-none"></li>
@@ -172,13 +174,40 @@
                 </div>
             </div>
             <!-- End Navbar -->
-        </div>
-        <div class="content">
+            <div class="content">
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
 
+            </asp:ContentPlaceHolder>
         </div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        
-        </asp:ContentPlaceHolder>
+        <footer class="footer">
+                <div class="container-fluid">
+                  <ul class="nav">
+                    <li class="nav-item">
+                      <a href="javascript:void(0)" class="nav-link">
+                        Creative Tim
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="javascript:void(0)" class="nav-link">
+                        About Us
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="javascript:void(0)" class="nav-link">
+                        Blog
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="copyright">
+                    ©
+                    <script>
+                      document.write(new Date().getFullYear())
+                    </script>2018 made with <i class="tim-icons icon-heart-2"></i> by
+                    <a href="javascript:void(0)" target="_blank">Creative Tim</a> for a better web.
+                  </div>
+                </div>
+            </footer>
+        </div>
     </div>
     </form>
     <!--   Core JS Files   -->

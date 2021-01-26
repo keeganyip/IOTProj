@@ -34,17 +34,19 @@
                                         <img src="assets/img/logo.png" alt="Klorofil Logo" class="img-responsive logo mx-auto d-block" />
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user"
-                                            id="exampleInputEmail" aria-describedby="emailHelp"
+                                        <asp:TextBox runat="server" ID="Email"
+                                            CssClass="form-control form-control-user" 
+                                            TextMode="Email" 
                                             placeholder="Enter Email Address..." />
+                                        
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password" />
+                                        <asp:TextBox runat="server" ID="Password" 
+                                            TextMode="Password" 
+                                            CssClass="form-control form-control-user"
+                                            placeholder="Password" />
                                     </div>
-                                    <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                        Login
-                                    </a>
+                                    <asp:Button runat="server" OnClick="logInClick" Text="Login" CssClass="btn btn-primary btn-user btn-block" />
                                     <hr />
                                     <div class="text-center">
                                         <a class="small" href="forgotPassword.aspx">Forgot Password?</a>

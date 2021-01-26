@@ -96,6 +96,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Userdb.mdf" />
+    <Content Include="App_Data\Userdb_log.ldf">
+      <DependentUpon>Userdb.mdf</DependentUpon>
+    </Content>
     <Content Include="assets\css\black-dashboard.css" />
     <Content Include="assets\css\black-dashboard.min.css" />
     <Content Include="assets\css\nucleo-icons.css" />
@@ -125,6 +129,8 @@
     <Content Include="assets\js\plugins\bootstrap-notify.js" />
     <Content Include="assets\js\plugins\chartjs.min.js" />
     <Content Include="assets\js\plugins\perfect-scrollbar.jquery.min.js" />
+    <Content Include="assets\js\sb-admin-2.js" />
+    <Content Include="assets\js\sb-admin-2.min.js" />
     <Content Include="assets\vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="assets\vendor\bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="assets\vendor\bootstrap\js\bootstrap.js" />
@@ -1795,6 +1801,7 @@
     <Content Include="assets\vendor\jquery\jquery.slim.js" />
     <Content Include="assets\vendor\jquery\jquery.slim.min.js" />
     <Content Include="forgotPassword.aspx" />
+    <Content Include="index.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -2113,12 +2120,31 @@
     <Content Include="register.aspx" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="sessionTimeout.aspx" />
     <Content Include="Test.aspx" />
+    <Content Include="userProfile.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="userProfile.aspx.cs">
+      <DependentUpon>userProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="userProfile.aspx.designer.cs">
+      <DependentUpon>userProfile.aspx</DependentUpon>
+    </Compile>
+    <Content Include="App_Code\BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Content>
     <Compile Include="forgotPassword.aspx.cs">
       <DependentUpon>forgotPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2147,6 +2173,13 @@
     </Compile>
     <Compile Include="register.aspx.designer.cs">
       <DependentUpon>register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sessionTimeout.aspx.cs">
+      <DependentUpon>sessionTimeout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sessionTimeout.aspx.designer.cs">
+      <DependentUpon>sessionTimeout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Test.aspx.cs">
       <DependentUpon>Test.aspx</DependentUpon>
