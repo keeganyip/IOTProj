@@ -7,14 +7,12 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Diagnostics;
-using Salt_Password_Sample;
 
 namespace WebForm_DB_Createuser.Account
 {
-    public partial class personal_details_Admin : System.Web.UI.Page
+    public partial class Admin_Personal_Details : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-
         {
             if (!IsPostBack)
             {
@@ -34,7 +32,7 @@ namespace WebForm_DB_Createuser.Account
 
                     while (reader.Read())
                     {
-                        lblName.Text = "Namelol: ";
+                        lblName.Text = "Name: ";
                         lblEmail.Text = "Email: ";
                         lblContact.Text = "Contact ";
                         lblpw.Text = "Password";
@@ -51,7 +49,7 @@ namespace WebForm_DB_Createuser.Account
                 catch (Exception E)
                 {
 
-                    // Response.Redirect("useraccount");
+                    Response.Redirect("Adminaccount");
                     Response.Write(E);
 
 
@@ -75,8 +73,8 @@ namespace WebForm_DB_Createuser.Account
             string useremail = "select Email from UserTable where UniqueUserID ='" + Convert.ToInt32(logged) + "'";
             SqlCommand cmdcurrentemail = new SqlCommand(useremail, conn);
             string email = cmdcurrentemail.ExecuteScalar().ToString().Trim();
-            Debug.WriteLine("email from db",email);
-            Debug.WriteLine("email from txt",TbEmail.Text);
+            Debug.WriteLine("email from db", email);
+            Debug.WriteLine("email from txt", TbEmail.Text);
 
             int temp = Convert.ToInt32(cmdemail.ExecuteScalar().ToString());
             if (email == TbEmail.Text)  //email is current user's email
@@ -92,28 +90,24 @@ namespace WebForm_DB_Createuser.Account
                     cmd.Parameters.AddWithValue("@Contact", TbContact.Text);
                     cmd.ExecuteNonQuery();
                     conn.Close();
-                    Debug.WriteLine("redirected here");
                     Response.Redirect("Adminaccount");
                 }
                 else
                 {
                     string checkpw = cmdpw.ExecuteScalar().ToString().Trim();
                     string pass = TBPassword.Text;
-                    bool flag = Hash.VerifyHash(pass, "SHA512", checkpw);
-                    if (flag == true)
+                    if (pass == checkpw)
                     {
                         if (TbNewPw.Text.Length >= 8)
                         {
                             string sql = "UPDATE UserTable SET Email = @Email ,Name = @Name,Contact = @Contact , Password = @Password where UniqueUserID ='" + Convert.ToInt32(logged) + "'";
                             SqlCommand cmd = new SqlCommand(sql, conn);
-                            string epass = Hash.ComputeHash(TbNewPw.Text, "SHA512", null);
                             cmd.Parameters.AddWithValue("@Email", TbEmail.Text);
                             cmd.Parameters.AddWithValue("@Name", TbName.Text);
                             cmd.Parameters.AddWithValue("@Contact", TbContact.Text);
-                            cmd.Parameters.AddWithValue("@Password", epass);
+                            cmd.Parameters.AddWithValue("@Password", TbNewPw.Text);
                             cmd.ExecuteNonQuery();
                             conn.Close();
-                            Debug.WriteLine("redirected here");
                             Response.Redirect("Adminaccount");
                         }
                     }
@@ -135,26 +129,22 @@ namespace WebForm_DB_Createuser.Account
                     cmd.Parameters.AddWithValue("@Contact", TbContact.Text);
                     cmd.ExecuteNonQuery();
                     conn.Close();
-                    Debug.WriteLine("redirected here");
                     Response.Redirect("Adminaccount");
                 }
                 else
                 {
                     string checkpw1 = cmdpw1.ExecuteScalar().ToString().Trim();
                     string pass1 = TBPassword.Text;
-                    bool flag = Hash.VerifyHash(pass1, "SHA512", checkpw1);
-                    if (flag == true)
+                    if (pass1 == checkpw1)
                     {
                         string sql = "UPDATE UserTable SET Email = @Email ,Name = @Name,Contact = @Contact , Password = @Password where UniqueUserID ='" + Convert.ToInt32(logged) + "'";
                         SqlCommand cmd = new SqlCommand(sql, conn);
-                        string epass = Hash.ComputeHash(TbNewPw.Text, "SHA512", null);
                         cmd.Parameters.AddWithValue("@Email", TbEmail.Text);
                         cmd.Parameters.AddWithValue("@Name", TbName.Text);
                         cmd.Parameters.AddWithValue("@Contact", TbContact.Text);
-                        cmd.Parameters.AddWithValue("@Password", epass);
+                        cmd.Parameters.AddWithValue("@Password", TbNewPw.Text);
                         cmd.ExecuteNonQuery();
                         conn.Close();
-                        Debug.WriteLine("redirected here");
                         Response.Redirect("Adminaccount");
                     }
 
@@ -163,15 +153,15 @@ namespace WebForm_DB_Createuser.Account
             }
         }
 
-            
-                
-            
-        
 
-           
-           
-            
-        
+
+
+
+
+
+
+
+
 
         protected void customValidator_ServerValidate(object source, ServerValidateEventArgs args)
         {
@@ -182,8 +172,7 @@ namespace WebForm_DB_Createuser.Account
             SqlCommand cmds = new SqlCommand(correctpw, conn);
             string checkpw = cmds.ExecuteScalar().ToString().Trim();
             string pass = TBPassword.Text;
-            bool flag = Hash.VerifyHash(pass, "SHA512", checkpw);
- 
+
 
             string checkuser = "select count(*) from UserTable where Email='" + TbEmail.Text + "'";
             SqlCommand cmdemail = new SqlCommand(checkuser, conn);
@@ -191,34 +180,30 @@ namespace WebForm_DB_Createuser.Account
             string useremail = "select Email from UserTable where UniqueUserID ='" + Convert.ToInt32(logged) + "'";
             SqlCommand cmdcurrentemail = new SqlCommand(useremail, conn);
             string email = cmdcurrentemail.ExecuteScalar().ToString().Trim();
-            
 
-            if (temp == 1 && email != TbEmail.Text) 
-             
+
+            if (temp == 1 && email != TbEmail.Text)
+
             {
-                 
-            customValidator1.ErrorMessage = "Email exist";
-            args.IsValid = false;
-                               
+
+                customValidator1.ErrorMessage = "Email exist";
+                args.IsValid = false;
+
 
             }
-            else if (flag == false)
-                
-                {
-                    customValidator1.ErrorMessage = " Wrong current Password";
-                    args.IsValid = false;
-                }
+            else if (pass != checkpw)
 
-            else if ( TbNewPw.Text.Length < 8)
+            {
+                customValidator1.ErrorMessage = " Wrong current Password";
+                args.IsValid = false;
+            }
+
+            else if (TbNewPw.Text.Length < 8)
             {
                 customValidator1.ErrorMessage = "Password must be minimum 8 characters";
                 args.IsValid = false;
             }
 
-            }
-     
-           
-            }
-
         }
-    
+    }
+}

@@ -10,7 +10,7 @@
 namespace WebForm_DB_Createuser.Account {
     
     
-    public partial class personal_details_Admin {
+    public partial class Admin_Personal_Details {
         
         /// <summary>
         /// lblName control.

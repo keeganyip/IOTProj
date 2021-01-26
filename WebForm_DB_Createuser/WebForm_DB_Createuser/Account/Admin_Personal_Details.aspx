@@ -1,5 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AfterloginAdmin.Master" AutoEventWireup="true" CodeBehind="personal_details_Admin.aspx.cs" Inherits="WebForm_DB_Createuser.Account.personal_details" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent2" runat="server">
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Admin_Personal_Details.aspx.cs" Inherits="WebForm_DB_Createuser.Account.Admin_Personal_Details" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent1" runat="server">
 
 <br/>
 <asp:Label ID="lblName" runat="server"></asp:Label><asp:TextBox ID="TbName" runat="server"></asp:TextBox>
@@ -26,5 +27,3 @@
 <asp:Button ID="updateButton" runat="server" Text="Update" OnClick="updateButton_Click" />
 
     </div>
- 
-</asp:Content>
