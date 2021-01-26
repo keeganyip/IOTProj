@@ -221,6 +221,7 @@
       <DependentUpon>ProjectDB.mdf</DependentUpon>
     </Content>
     <Content Include="WebForm1.aspx" />
+    <Content Include="AfterloginAdmin.Master" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Account\ForgotPassword.aspx" />
     <Content Include="Images\Smart GreenHouse Logo.png" />
@@ -414,6 +415,13 @@
     </Compile>
     <Compile Include="Account\VerifyPhoneNumber.aspx.designer.cs">
       <DependentUpon>VerifyPhoneNumber.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AfterloginAdmin.Master.cs">
+      <DependentUpon>AfterloginAdmin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AfterloginAdmin.Master.designer.cs">
+      <DependentUpon>AfterloginAdmin.Master</DependentUpon>
     </Compile>
     <Compile Include="App_Data\Hash.cs" />
     <Compile Include="App_Data\User.cs" />
