@@ -136,7 +136,9 @@ namespace WebForm_DB_Createuser
             {
                 string date = Convert.ToString(dr["TimeOccured"]);
                 string year = date.Substring(6, 4);
-                string month = date.Substring(3, 2);
+                string monthbefore = date.Substring(3, 2);
+                int month = Convert.ToInt32(monthbefore);
+                month = month - 1;
                 string day = date.Substring(0, 2);
                 string time = Convert.ToString(dr["TimeOccured"]);               
                 string hour = time.Substring(11, 2);
@@ -146,19 +148,21 @@ namespace WebForm_DB_Createuser
                 string temp = tempconverted.Trim();
                 temp = temp.Substring(0, 2);            
 
-                tempData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), y: " + temp + "},";
+                tempData += "{" + "x: Date(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), y: " + temp + "},";
 
 
             }
             tempData = tempData.Remove(tempData.Length - 1) + ']';
-
+            Debug.WriteLine(tempData);
             //data format is [  [x1,y1], [x2,y2], ...]
             idealTempData = "[";
             foreach (DataRow dr in dt.Rows)
             {
                 string date = Convert.ToString(dr["TimeOccured"]);
                 string year = date.Substring(6, 4);
-                string month = date.Substring(3, 2);
+                string monthbefore = date.Substring(3, 2);
+                int month = Convert.ToInt32(monthbefore);
+                month = month - 1;
                 string day = date.Substring(0, 2);
                 string time = Convert.ToString(dr["TimeOccured"]);
                 string hour = time.Substring(11, 2);
@@ -177,7 +181,9 @@ namespace WebForm_DB_Createuser
             {
                 string date = Convert.ToString(dr["TimeOccured"]);
                 string year = date.Substring(6, 4);
-                string month = date.Substring(3, 2);
+                string monthbefore = date.Substring(3, 2);
+                int month = Convert.ToInt32(monthbefore);
+                month = month - 1;
                 string day = date.Substring(0, 2);
                 string time = Convert.ToString(dr["TimeOccured"]);
                 string hour = time.Substring(11, 2);
