@@ -159,23 +159,32 @@
                     text: "Temp"
                 }
             },
+            tooltip: {
+                shared: true,
+            },
             series: [{
                 type: "line",
                 zones: [{
-                    value: 26.6,
+                    value: 26,
                     color: '#add8e6',
+                }, {
+                    value: 30,
+                    color: '#90ee90',
                 }, {
                     value: 100,
                     color: '#FFCCCB',
                 }],
                 name: "Hourly Temp",
+                tooltip: {
+                    enabled: true,
+                },
                 data: <%=tempData%>,
             }, {
                 type: "arearange",
                 opacity: 0.3,
                 color: '#90ee90',
                 name: "Ideal Temperature",
-                    data: <%=idealTempData%>,
+                data: <%=idealTempData%>,
                 }, {                
                 type: "arearange",
                 lineWidth: 0,                
@@ -187,9 +196,10 @@
                     value: 30,
                     color: '#90ee90',  
                 }, {
-                    value: 100,
-                    color: '#FFCCCB',                        
-                }],
+                value: 100,
+                color: '#FFCCCB',                        
+                    }],
+                enableMouseTracking: false,
                 showInLegend: false,                
             }]
         });
@@ -198,7 +208,7 @@
     <script>
         $("#humidity").highcharts({            
             chart: {
-                type: 'Line'
+                type: 'line'
             },
             title: {
                 text: "Hourly Humidity %"
@@ -265,36 +275,46 @@
                     text: "Humidity %"
                 }
             },
+            tooltip: {
+                shared: true,
+            },
             series: [{
                 type: "line",
                 zones: [{
-                    value: 60,
+                    value: 50,
                     color: '#add8e6',
-                }, {
+                    }, {                   
+                    value: 70,
+                    color: '#90ee90',
+                    }, {
                     value: 100,
                     color: '#FFCCCB',
                 }],
                 name: "Hourly Humidity",
                 data: <%=humidityData%>,
             }, {
-                type: "line",
+                type: "arearange",
+                opacity: 0.3,
                 color: '#90ee90',
                 name: "Ideal Humidity",
                 data: <%=idealHumidityData%>,
-                }, {
-                name: "Range",
+            }, {                
                 type: "arearange",
-                zones: [{
-                    value: 60,
-                    color: '#add8e6',
-                }, {
-                    value: 100,
-                    color: '#FFCCCB',
-                }],
-                lineWidth: 0,
-                data: <%=diffHumidityData%>,
-                showInLegend: false
-            }]
+                enableMouseTracking: false,
+                lineWidth: 0,                
+                    data: <%=diffHumidityData%>,
+                    zones: [{
+                        value: 50,
+                        color: '#add8e6',
+                    }, {
+                        value: 70,
+                        color: '#90ee90',
+                    }, {
+                        value: 100,
+                        color: '#FFCCCB',
+                    }],
+                    showInLegend: false,
+                }]
         });
     </script>
 
@@ -371,28 +391,34 @@
             series: [{                
                 name: "Hourly Moisture",
                 zones: [{
-                    value: 16,
+                    value: 10,
                     color: '#add8e6',
+                }, {
+                    value: 45,
+                    color: '#90ee90',
                 }, {
                     value: 100,
                     color: '#FFCCCB',
                 }],
                 data: <%=moistureData%>,
             }, {                
-                type: "line",
+                type: "arearange",
+                opacity: 0.3,
                 color: '#90ee90',
                 name: "Ideal Moisture",
                 data: <%=idealMoistureData%>,
             }, {
                 type: "arearange",
                 zones: [{
-                    value: 16,
+                    value: 10,
                     color: '#add8e6',
                 }, {
-                value: 100,
-                color: '#FFCCCB',
-                    }],
-                name: "range",
+                    value: 45,
+                    color: '#90ee90',
+                }, {
+                    value: 100,
+                    color: '#FFCCCB',
+                }],                
                 lineWidth: 0,
                 data: <%=diffMoistureData%>,
                 showInLegend: false
