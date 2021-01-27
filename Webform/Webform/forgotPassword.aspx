@@ -36,13 +36,9 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user"
-                                            id="exampleInputEmail" aria-describedby="emailHelp"
-                                            placeholder="Enter Email Address..." />
+                                        <asp:TextBox runat="server" ID="Email" CssClass="form-control form-control-user" TextMode="Email" placeholder="Enter Email Address..." />
                                     </div>
-                                    <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                        Reset Password
-                                    </a>
+                                    <asp:Button ID="emailsubmit" runat="server" OnClick="submit" Text="Recover Password" CssClass="btn btn-primary btn-user btn-block" />
 
                                     <hr />
                                     <div class="text-center">

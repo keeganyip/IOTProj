@@ -13,15 +13,6 @@ namespace WebForm_DB_Createuser {
     public partial class ForgotPassword {
         
         /// <summary>
-        /// Email control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Email;
-        
-        /// <summary>
         /// emailsubmit control.
         /// </summary>
         /// <remarks>
