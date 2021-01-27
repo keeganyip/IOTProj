@@ -48,22 +48,42 @@ namespace Webform
 
                         if (pass == checkpw)
                         {
-
-                            string id = "select UniqueUserID from UserTable where Email='" + Email.Text + "'";
-                            SqlCommand cmdid = new SqlCommand(id, conn);
-                            string id_collected = cmdid.ExecuteScalar().ToString().Trim();
+                            string getUserType = "select type from UserTable where Email='" + Email.Text + "'";
+                            SqlCommand cmdType = new SqlCommand(getUserType, conn);
+                            string userType = cmdType.ExecuteScalar().ToString().Trim();
+                            Debug.WriteLine(userType);
                             conn.Close();
 
-                            Response.Write("password check");
-                            Response.Write(id_collected);
-                            Session["id"] = id_collected;
-                            Session["session"] = "logged";
+                            if (userType == "User")
+                            {
+                                conn.Open();
+                                string id = "select UniqueUserID from UserTable where Email='" + Email.Text + "'";
+                                SqlCommand cmdid = new SqlCommand(id, conn);
+                                string id_collected = cmdid.ExecuteScalar().ToString().Trim();
+                                conn.Close();
 
+                                Response.Write("password check");
+                                Response.Write(id_collected);
+                                Session["id"] = id_collected;
+                                Session["session"] = "logged";
+                                Response.Redirect("index.aspx");
+                            }
+                            else if (userType == "Admin")
+                            {
+                                conn.Open();
+                                string id = "select UniqueUserID from UserTable where Email='" + Email.Text + "'";
+                                SqlCommand cmdid = new SqlCommand(id, conn);
+                                string id_collected = cmdid.ExecuteScalar().ToString().Trim();
+                                conn.Close();
 
+                                Response.Write("password check");
+                                Response.Write(id_collected);
+                                Session["id"] = id_collected;
+                                Session["session"] = "adminlogged";
+                                Response.Redirect("index.aspx");
+                            }
 
                             Response.Write(Session["id"]);
-
-                            Response.Redirect("index.aspx");
 
                         }
                     }

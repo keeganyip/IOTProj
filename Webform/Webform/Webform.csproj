@@ -1801,6 +1801,7 @@
     <Content Include="assets\vendor\jquery\jquery.slim.js" />
     <Content Include="assets\vendor\jquery\jquery.slim.min.js" />
     <Content Include="forgotPassword.aspx" />
+    <Content Include="greenhouses.aspx" />
     <Content Include="index.aspx" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
@@ -2108,6 +2109,7 @@
     <Content Include="assets\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="assets\vendor\jquery\jquery.min.map" />
     <Content Include="assets\vendor\jquery\jquery.slim.min.map" />
+    <Content Include="AdminMaster.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2128,12 +2130,26 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="greenhouses.aspx.cs">
+      <DependentUpon>greenhouses.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="greenhouses.aspx.designer.cs">
+      <DependentUpon>greenhouses.aspx</DependentUpon>
+    </Compile>
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminMaster.Master.cs">
+      <DependentUpon>AdminMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminMaster.Master.designer.cs">
+      <DependentUpon>AdminMaster.Master</DependentUpon>
     </Compile>
     <Compile Include="userProfile.aspx.cs">
       <DependentUpon>userProfile.aspx</DependentUpon>

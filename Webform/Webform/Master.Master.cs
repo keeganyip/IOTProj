@@ -31,6 +31,7 @@ namespace Webform
                 Response.Redirect("sessionTimeout.aspx");
             }
         }
+
         protected void signOutClick(object sender, EventArgs e)
         {
             Session["id"] = null;
