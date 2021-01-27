@@ -160,7 +160,6 @@ namespace IOTProj
                 Debug.WriteLine(strRfidDetected);
                 if (strRfidDetected.Equals("6A003E7CF2DA"))
                 {
-                    Debug.WriteLine("Hi Emran :)");
                     sendDataToWindows("RFID=" + strRfidDetected);
                 }
                 strRfidDetected = "";

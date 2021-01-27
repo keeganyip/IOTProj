@@ -64,7 +64,7 @@ namespace WebForm_DB_Createuser.Account
 
 
 
-
+            Debug.WriteLine("PENIS");
             string logged = Session["id"] as string;
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString);
             conn.Open();
@@ -163,47 +163,48 @@ namespace WebForm_DB_Createuser.Account
 
 
 
-        protected void customValidator_ServerValidate(object source, ServerValidateEventArgs args)
-        {
-            string logged = Session["id"] as string;
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString);
-            conn.Open();
-            string correctpw = "select Password from UserTable where  UniqueUserID ='" + Convert.ToInt32(logged) + "'";
-            SqlCommand cmds = new SqlCommand(correctpw, conn);
-            string checkpw = cmds.ExecuteScalar().ToString().Trim();
-            string pass = TBPassword.Text;
+        //protected void customValidator_ServerValidate(object source, ServerValidateEventArgs args)
+        //{
+        //    string logged = Session["id"] as string;
+        //    SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString);
+        //    conn.Open();
+        //    string correctpw = "select Password from UserTable where  UniqueUserID ='" + Convert.ToInt32(logged) + "'";
+        //    SqlCommand cmds = new SqlCommand(correctpw, conn);
+        //    string checkpw = cmds.ExecuteScalar().ToString().Trim();
+        //    string pass = TBPassword.Text;
 
 
-            string checkuser = "select count(*) from UserTable where Email='" + TbEmail.Text + "'";
-            SqlCommand cmdemail = new SqlCommand(checkuser, conn);
-            int temp = Convert.ToInt32(cmdemail.ExecuteScalar().ToString());
-            string useremail = "select Email from UserTable where UniqueUserID ='" + Convert.ToInt32(logged) + "'";
-            SqlCommand cmdcurrentemail = new SqlCommand(useremail, conn);
-            string email = cmdcurrentemail.ExecuteScalar().ToString().Trim();
+        //    string checkuser = "select count(*) from UserTable where Email='" + TbEmail.Text + "'";
+        //    SqlCommand cmdemail = new SqlCommand(checkuser, conn);
+        //    int temp = Convert.ToInt32(cmdemail.ExecuteScalar().ToString());
+        //    string useremail = "select Email from UserTable where UniqueUserID ='" + Convert.ToInt32(logged) + "'";
+        //    SqlCommand cmdcurrentemail = new SqlCommand(useremail, conn);
+        //    string email = cmdcurrentemail.ExecuteScalar().ToString().Trim();
 
 
-            if (temp == 1 && email != TbEmail.Text)
+        //    if (temp == 1 && email != TbEmail.Text)
 
-            {
+        //    {
 
-                customValidator1.ErrorMessage = "Email exist";
-                args.IsValid = false;
+        //        customValidator1.ErrorMessage = "Email exist";
+        //        args.IsValid = false;
 
 
-            }
-            else if (pass != checkpw)
+        //    }
+        //    else if (pass != checkpw)
 
-            {
-                customValidator1.ErrorMessage = " Wrong current Password";
-                args.IsValid = false;
-            }
+        //    {
+        //        Debug.WriteLine(pass + "  " + checkpw);
+        //        customValidator1.ErrorMessage = " Wrong current Password";
+        //        args.IsValid = false;
+        //    }
 
-            else if (TbNewPw.Text.Length < 8)
-            {
-                customValidator1.ErrorMessage = "Password must be minimum 8 characters";
-                args.IsValid = false;
-            }
+        //    else if (TbNewPw.Text.Length < 8)
+        //    {
+        //        customValidator1.ErrorMessage = "Password must be minimum 8 characters";
+        //        args.IsValid = false;
+        //    }
 
-        }
+        //}
     }
 }

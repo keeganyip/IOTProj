@@ -31,9 +31,7 @@
             this.tbMax = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.tbWarn = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -64,15 +62,6 @@
             this.label2.Text = "Warning Temp:";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(75, 148);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(74, 17);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Min Temp:";
-            // 
             // tbWarn
             // 
             this.tbWarn.Location = new System.Drawing.Point(203, 98);
@@ -80,14 +69,6 @@
             this.tbWarn.Name = "tbWarn";
             this.tbWarn.Size = new System.Drawing.Size(100, 22);
             this.tbWarn.TabIndex = 4;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(203, 145);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 22);
-            this.textBox3.TabIndex = 5;
             // 
             // button1
             // 
@@ -108,9 +89,7 @@
             this.ClientSize = new System.Drawing.Size(389, 305);
             this.ControlBox = false;
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.tbWarn);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbMax);
@@ -130,9 +109,7 @@
         private System.Windows.Forms.TextBox tbMax;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tbWarn;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button button1;
     }
 }

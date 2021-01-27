@@ -94,6 +94,12 @@
     <Compile Include="waitRFID.Designer.cs">
       <DependentUpon>waitRFID.cs</DependentUpon>
     </Compile>
+    <Compile Include="WaterSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WaterSettings.Designer.cs">
+      <DependentUpon>WaterSettings.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="HumiditySettings.resx">
       <DependentUpon>HumiditySettings.cs</DependentUpon>
     </EmbeddedResource>
@@ -123,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="waitRFID.resx">
       <DependentUpon>waitRFID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WaterSettings.resx">
+      <DependentUpon>WaterSettings.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

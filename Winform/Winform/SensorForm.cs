@@ -17,7 +17,10 @@ namespace Winform
     {
         loginForm fl = new loginForm();
         waitRFID wr = new waitRFID();
-
+        static System.Windows.Forms.Timer myTimer = new System.Windows.Forms.Timer();
+        static bool exitFlag = false;
+        string TempStatus = "";
+        string WaterStatus = "";
         public bool loggedin = false;
         public string rfid = "";
         public string loginrfid = "";
@@ -153,14 +156,33 @@ namespace Winform
             float ftempValue = extractFlotValue(strData, ID);
 
             if (ftempValue > max)
-            { 
+            {
+                tbtemp.BackColor = Color.Red;
+                tbtemp.ForeColor = Color.White;
+                TempStatus = "OVER MAX! \n Activating Reduction now";
+                if (!lbLiveStatus.Items.Contains(TempStatus))
+                {
+                    lbLiveStatus.Items.Insert(0, TempStatus);
+                }
                 dataComms.sendData("BUZZ");
                 Console.WriteLine("BUZZING");
             }
             else if (ftempValue > warn)
+            {
+                TempStatus = "warning!!";
+                
                 dataComms.sendData("WARN");
+            }
             else
+            {
+                tbtemp.BackColor = Color.Gray;
+                tbtemp.ForeColor = Color.Black;
+                if(lbLiveStatus.Items.Contains(TempStatus))
+                {
+                    lbLiveStatus.Items.Remove(TempStatus);
+                }
                 dataComms.sendData("Normal");
+            }
             //string temp = strtempValue.Substring(0, 5) + "°C";
             tbtemp.Text = strtempValue + "°C";
             retrieveTempSetting();
@@ -222,17 +244,71 @@ namespace Winform
             //update GUI component in any tabs
 
         }
+        public string retrieveWaterSetting()
+        {
+            string threshold = "";
+            //Step 1: Create connection
+            SqlConnection myConnect = new SqlConnection(strConnectionString);
+
+            //Step 2: Create Command
+            String strCommandText =
+                "SELECT Threshold FROM WaterSettings";
+
+            //Step 3: Open Connection
+            myConnect.Open();
+
+            SqlCommand readcmd = new SqlCommand(strCommandText, myConnect);
+
+            SqlDataReader reader = readcmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                threshold = reader["Threshold"].ToString().Trim();
+            }
+            myConnect.Close();
+            return threshold;
+
+        }
+
+        // This is the method to run when the timer is raised.
+        private static void TimerEventProcessor(Object myObject,
+                                                EventArgs myEventArgs)
+        {
+            myTimer.Stop();
+
+            // Stops the timer.
+            exitFlag = true;
+        }
+
         private void handleMoisture(string strData, string strTime, string ID)
         {
             string strMoistureValue = extractStringValue(strData, ID);
             float fMoistureValue = extractFlotValue(strData, ID);
             string status = "";
-            if (fMoistureValue > 1000)
+            int threshold = Convert.ToInt32(retrieveWaterSetting());
+            if (fMoistureValue > threshold)
+            {
+                tb_Moisture.BackColor = Color.Red;
+                tb_Moisture.ForeColor = Color.White;
+                WaterStatus = "Water Turning On";
+                if((lbLiveStatus.Items.Contains(WaterStatus) == false))
+                {
+                    lbLiveStatus.Items.Insert(0, WaterStatus);
+                }
                 status = "Dry";
+            }
             else if (fMoistureValue < 100)
                 status = "There is water pending";
             else
+            { 
                 status = "Moderately Wet";
+                tb_Moisture.BackColor = Color.Gray;
+                tb_Moisture.ForeColor = Color.Black;
+                if (lbLiveStatus.Items.Contains(WaterStatus))
+                {
+                    lbLiveStatus.Items.Remove(WaterStatus);
+                }
+            }
             tb_Moisture.Text = status;
 
             saveMoistureSensorDataToDB(strTime, strMoistureValue, status);

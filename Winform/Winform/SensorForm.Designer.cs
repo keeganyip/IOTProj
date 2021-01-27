@@ -46,6 +46,8 @@
             this.tb_Humidity = new System.Windows.Forms.TextBox();
             this.lblHum = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lbLiveStatus = new System.Windows.Forms.ListBox();
             this.SideBar.SuspendLayout();
             this.panelSensors.SuspendLayout();
             this.SuspendLayout();
@@ -98,10 +100,10 @@
             this.lbDataComms.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbDataComms.FormattingEnabled = true;
             this.lbDataComms.ItemHeight = 16;
-            this.lbDataComms.Location = new System.Drawing.Point(421, 44);
+            this.lbDataComms.Location = new System.Drawing.Point(421, 198);
             this.lbDataComms.Margin = new System.Windows.Forms.Padding(4);
             this.lbDataComms.Name = "lbDataComms";
-            this.lbDataComms.Size = new System.Drawing.Size(439, 258);
+            this.lbDataComms.Size = new System.Drawing.Size(439, 114);
             this.lbDataComms.TabIndex = 8;
             // 
             // btnClear
@@ -109,7 +111,7 @@
             this.btnClear.BackColor = System.Drawing.Color.ForestGreen;
             this.btnClear.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClear.Location = new System.Drawing.Point(421, 324);
+            this.btnClear.Location = new System.Drawing.Point(679, 337);
             this.btnClear.Margin = new System.Windows.Forms.Padding(4);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(181, 53);
@@ -212,6 +214,8 @@
             // panelSensors
             // 
             this.panelSensors.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
+            this.panelSensors.Controls.Add(this.lbLiveStatus);
+            this.panelSensors.Controls.Add(this.label2);
             this.panelSensors.Controls.Add(this.tb_Humidity);
             this.panelSensors.Controls.Add(this.lblHum);
             this.panelSensors.Controls.Add(this.tbtemp);
@@ -253,6 +257,28 @@
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.SystemColors.Control;
+            this.label2.Location = new System.Drawing.Point(418, 20);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(103, 17);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "Current Status:";
+            // 
+            // lbLiveStatus
+            // 
+            this.lbLiveStatus.BackColor = System.Drawing.Color.Gray;
+            this.lbLiveStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbLiveStatus.FormattingEnabled = true;
+            this.lbLiveStatus.ItemHeight = 16;
+            this.lbLiveStatus.Location = new System.Drawing.Point(421, 44);
+            this.lbLiveStatus.Margin = new System.Windows.Forms.Padding(4);
+            this.lbLiveStatus.Name = "lbLiveStatus";
+            this.lbLiveStatus.Size = new System.Drawing.Size(439, 114);
+            this.lbLiveStatus.TabIndex = 20;
+            // 
             // SensorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -293,6 +319,8 @@
         private System.Windows.Forms.Label lblHum;
         private System.Windows.Forms.Button btn_logout;
         public System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ListBox lbLiveStatus;
     }
 }
 
