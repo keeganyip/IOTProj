@@ -9,7 +9,6 @@
     <div class="form-horizontal">
         <h4>Create a new account</h4>
         <hr />
-        <asp:ValidationSummary runat="server" CssClass="text-danger" />
         <div class="form-group">
             <asp:Label runat="server" AssociatedControlID="Email" CssClass="col-md-2 control-label">Email</asp:Label>
             <div class="col-md-10">
@@ -18,14 +17,32 @@
                     CssClass="text-danger" ErrorMessage="The email field is required." />
             </div>
         </div>
+         <div class="form-group">
+            <asp:Label runat="server" AssociatedControlID="Name" CssClass="col-md-2 control-label">Name</asp:Label>
+            <div class="col-md-10">
+                <asp:TextBox runat="server" ID="Name" CssClass="form-control" OnTextChanged="Name_TextChanged" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="Name"
+                    CssClass="text-danger" ErrorMessage="The name field is required." />
+            </div>
+        </div>
+          <div class="form-group">
+            <asp:Label runat="server" AssociatedControlID="Contact" CssClass="col-md-2 control-label">Contact Number</asp:Label>
+            <div class="col-md-10">
+                <asp:TextBox runat="server" ID="Contact" CssClass="form-control" OnTextChanged="Contact_TextChanged" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="Contact"
+                    CssClass="text-danger" ErrorMessage="The Contact field is required." />
+            </div>
+        </div>
         <div class="form-group">
             <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-2 control-label">Password</asp:Label>
             <div class="col-md-10">
-                <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" OnTextChanged="Password_TextChanged" />
+                <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="Password"
                     CssClass="text-danger" ErrorMessage="The password field is required." />
+                <br />
             </div>
         </div>
+   
         <div class="form-group">
             <asp:Label runat="server" AssociatedControlID="ConfirmPassword" CssClass="col-md-2 control-label">Confirm password</asp:Label>
             <div class="col-md-10">
@@ -38,7 +55,8 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:CreateConnectionString %>" OnSelecting="SqlDataSource1_Selecting" SelectCommand="SELECT * FROM [UserTable]"></asp:SqlDataSource>
+               <asp:CustomValidator runat="server" Display="Dynamic" ID="customValidator1"  ForeColor="Red" ErrorMessage="" OnServerValidate="customValidator_ServerValidate"></asp:CustomValidator>
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:UserdbConnectionString %>" OnSelecting="SqlDataSource1_Selecting" SelectCommand="SELECT * FROM [UserTable]"></asp:SqlDataSource>
                 <asp:Button runat="server" OnClick="CreateUser_Click" Text="Register" CssClass="btn btn-default" />
             </div>
         </div>
