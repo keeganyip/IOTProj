@@ -59,6 +59,7 @@ namespace Winform
 
         private void saveTempSensorDataToDB(string strTime, string strTempValue, string strTempStatus)
         {
+            string prev = "";
             //Step 1: Create connection
             SqlConnection myConnect = new SqlConnection(strConnectionString);
 
@@ -74,9 +75,20 @@ namespace Winform
 
             //Step 3: Open Connection
             myConnect.Open();
+            string checkCmdText = "SELECT TOP 1 * FROM tempSensor ORDER BY ID DESC";
 
+            SqlCommand readcmd = new SqlCommand(checkCmdText, myConnect);
+            SqlDataReader reader = readcmd.ExecuteReader();
+            while (reader.Read())
+            {
+                prev = reader["tempValue"].ToString().Trim();
+            }
+
+            if(prev != strTempValue)
+            { 
             //Step 4: ExecuteCommand
             int result = updateCmd.ExecuteNonQuery();
+            }
 
             //Step 5: Close Connection
             myConnect.Close();
@@ -84,6 +96,7 @@ namespace Winform
 
         private void saveMoistureSensorDataToDB(string strTime, string strMoistureValue, string strMoistureStatus)
         {
+            string prev = "";
             //Step 1: Create connection
             SqlConnection myConnect = new SqlConnection(strConnectionString);
 
@@ -100,8 +113,20 @@ namespace Winform
             //Step 3: Open Connection
             myConnect.Open();
 
-            //Step 4: ExecuteCommand
-            int result = updateCmd.ExecuteNonQuery();
+            string checkCmdText = "SELECT TOP 1 * FROM moistureSensor ORDER BY ID DESC";
+
+            SqlCommand readcmd = new SqlCommand(checkCmdText, myConnect);
+            SqlDataReader reader = readcmd.ExecuteReader();
+            while (reader.Read())
+            {
+                prev = reader["moistureLevel"].ToString().Trim();
+            }
+
+            if (prev != strMoistureValue)
+            {
+                //Step 4: ExecuteCommand
+                int result = updateCmd.ExecuteNonQuery();
+            }
 
             //Step 5: Close Connection
             myConnect.Close();
@@ -109,6 +134,7 @@ namespace Winform
 
         private void saveHumSensorDataToDB(string strTime, string strHumValue)
         {
+            string prev = "";
             //Step 1: Create connection
             SqlConnection myConnect = new SqlConnection(strConnectionString);
 
@@ -124,8 +150,20 @@ namespace Winform
             //Step 3: Open Connection
             myConnect.Open();
 
-            //Step 4: ExecuteCommand
-            int result = updateCmd.ExecuteNonQuery();
+            string checkCmdText = "SELECT TOP 1 * FROM HumiditySensor ORDER BY ID DESC";
+
+            SqlCommand readcmd = new SqlCommand(checkCmdText, myConnect);
+            SqlDataReader reader = readcmd.ExecuteReader();
+            while (reader.Read())
+            {
+                prev = reader["HumValue"].ToString().Trim();
+            }
+
+            if (prev != strHumValue)
+            {
+                //Step 4: ExecuteCommand
+                int result = updateCmd.ExecuteNonQuery();
+            }
 
             //Step 5: Close Connection
             myConnect.Close();
