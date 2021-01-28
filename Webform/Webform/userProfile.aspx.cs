@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace Webform
 {
-    public partial class userProfile : System.Web.UI.Page
+    public partial class userProfile : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

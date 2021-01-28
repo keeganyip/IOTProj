@@ -9,28 +9,22 @@ using System.Web;
 /// 
 public class BasePage : System.Web.UI.Page
 {
-    protected override void OnPreInit(EventArgs e)
+    protected void Page_PreInit(object sender, EventArgs e)
     {
-        if (Session["session"].ToString().Trim() == "logged")
+        if (Session["session"] != null)
         {
-            this.MasterPageFile = "~/Master.master";
-        }
-        else if (Session["session"].ToString().Trim() == "adminlogged")
-        {
-            this.MasterPageFile = "~/AdminMaster.master";
+            if (Session["session"].ToString().Trim() == "logged")
+            {
+                this.MasterPageFile = "~/Master.master";
+            }
+            else if (Session["session"].ToString().Trim() == "adminlogged")
+            {
+                this.MasterPageFile = "~/AdminMaster.master";
+            }
         }
         else
         {
             Response.Redirect("sessionTimeout.aspx");
         }
-        //if (Session["CHANGE_MASTERPAGE"] != null && Session["CHANGE_MASTERPAGE2"] == null)
-        //{
-        //    this.MasterPageFile = Session["CHANGE_MASTERPAGE"].ToString();
-        //}
-
-        //if (Session["CHANGE_MASTERPAGE2"] != null && Session["CHANGE_MASTERPAGE"] == null)
-        //{
-        //    this.MasterPageFile = Session["CHANGE_MASTERPAGE2"].ToString();
-        //}
     }
 }

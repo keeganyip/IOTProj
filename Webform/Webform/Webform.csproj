@@ -102,6 +102,7 @@
     </Content>
     <Content Include="assets\css\black-dashboard.css" />
     <Content Include="assets\css\black-dashboard.min.css" />
+    <Content Include="assets\css\bootstrap.css" />
     <Content Include="assets\css\nucleo-icons.css" />
     <Content Include="assets\css\sb-admin-2.css" />
     <Content Include="assets\css\sb-admin-2.min.css" />
@@ -1801,6 +1802,7 @@
     <Content Include="assets\vendor\jquery\jquery.slim.js" />
     <Content Include="assets\vendor\jquery\jquery.slim.min.js" />
     <Content Include="forgotPassword.aspx" />
+    <Content Include="greenhouseDetails.aspx" />
     <Content Include="greenhouses.aspx" />
     <Content Include="index.aspx" />
     <Content Include="packages.config" />
@@ -2110,6 +2112,7 @@
     <Content Include="assets\vendor\jquery\jquery.min.map" />
     <Content Include="assets\vendor\jquery\jquery.slim.min.map" />
     <Content Include="AdminMaster.Master" />
+    <Content Include="assets\css\bootstrap.css.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2130,6 +2133,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Code\Greenhouse.cs" />
+    <Compile Include="greenhouseDetails.aspx.cs">
+      <DependentUpon>greenhouseDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="greenhouseDetails.aspx.designer.cs">
+      <DependentUpon>greenhouseDetails.aspx</DependentUpon>
+    </Compile>
     <Compile Include="greenhouses.aspx.cs">
       <DependentUpon>greenhouses.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2158,9 +2169,9 @@
     <Compile Include="userProfile.aspx.designer.cs">
       <DependentUpon>userProfile.aspx</DependentUpon>
     </Compile>
-    <Content Include="App_Code\BasePage.cs">
+    <Compile Include="App_Code\BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
-    </Content>
+    </Compile>
     <Compile Include="forgotPassword.aspx.cs">
       <DependentUpon>forgotPassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

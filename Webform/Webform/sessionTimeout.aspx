@@ -19,12 +19,17 @@
 <body>
     <form id="form1" runat="server">
     <div class="container-fluid">
-        <!-- 404 Error Text -->
-        <div class="text-center">
-            <div class="error mx-auto" data-text="403">403</div>
-            <p class="lead text-gray-800 mb-5">Hey how did you get here?</p>
-            <p class="text-gray-500 mb-0">Please show us proof</p>
-            <a href="login.aspx">&larr; Back to Login</a>
+        <div class="row justify-content-center">
+
+            <div class="col-xl-6 col-lg-6 col-md-6">
+                <!-- 404 Error Text -->
+                <div class="text-center my-5">
+                    <div class="error mx-auto" data-text="403">403</div>
+                    <p class="lead text-gray-800 mb-5">Hey how did you get here?</p>
+                    <p class="text-gray-500 mb-0">Please show us proof</p>
+                    <a href="login.aspx">&larr; Back to Login</a>
+                </div>
+            </div>
         </div>
     </div>
     </form>
