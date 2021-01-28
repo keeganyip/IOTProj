@@ -361,7 +361,9 @@ namespace WebForm_DB_Createuser
             {
                 string date = Convert.ToString(dr["TimeOccured"]);
                 string year = date.Substring(6, 4);
-                string month = date.Substring(3, 2);
+                string monthbefore = date.Substring(3, 2);
+                int month = Convert.ToInt32(monthbefore);
+                month = month - 1;
                 string day = date.Substring(0, 2);
                 string time = Convert.ToString(dr["TimeOccured"]);
                 string hour = time.Substring(11, 2);
@@ -370,15 +372,14 @@ namespace WebForm_DB_Createuser
                 string moistureconverted = Convert.ToString(dr["moistureLevel"]);
                 string moisture = moistureconverted.Trim();
                 int moisturepercent = Convert.ToInt32(moisture);
-                moisturepercent = (moisturepercent / 2) / 10;
-
-                
+                moisturepercent = (moisturepercent / 2) / 10;                
 
 
-                moistureData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), y: " + moisturepercent + "},";
+                moistureData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + moisturepercent + "],";                
 
             }
             moistureData = moistureData.Remove(moistureData.Length - 1) + ']';
+            
 
             //data format is [  [x1,y1], [x2,y2], ...]
             idealMoistureData = "[";
@@ -386,7 +387,9 @@ namespace WebForm_DB_Createuser
             {
                 string date = Convert.ToString(dr["TimeOccured"]);
                 string year = date.Substring(6, 4);
-                string month = date.Substring(3, 2);
+                string monthbefore = date.Substring(3, 2);
+                int month = Convert.ToInt32(monthbefore);
+                month = month - 1;
                 string day = date.Substring(0, 2);
                 string time = Convert.ToString(dr["TimeOccured"]);
                 string hour = time.Substring(11, 2);
@@ -405,7 +408,9 @@ namespace WebForm_DB_Createuser
             {
                 string date = Convert.ToString(dr["TimeOccured"]);
                 string year = date.Substring(6, 4);
-                string month = date.Substring(3, 2);
+                string monthbefore = date.Substring(3, 2);
+                int month = Convert.ToInt32(monthbefore);
+                month = month - 1;
                 string day = date.Substring(0, 2);
                 string time = Convert.ToString(dr["TimeOccured"]);
                 string hour = time.Substring(11, 2);
@@ -450,7 +455,9 @@ namespace WebForm_DB_Createuser
             {
                 string date = Convert.ToString(dr["TimeOccured"]);
                 string year = date.Substring(6, 4);
-                string month = date.Substring(3, 2);
+                string monthbefore = date.Substring(3, 2);
+                int month = Convert.ToInt32(monthbefore);
+                month = month - 1;
                 string day = date.Substring(0, 2);
                 string time = Convert.ToString(dr["TimeOccured"]);
                 string hour = time.Substring(11, 2);
@@ -460,7 +467,7 @@ namespace WebForm_DB_Createuser
                 string light = lightconverted.Trim();
 
 
-                lightData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), y: " + light + "},";
+                lightData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + light + "],";
 
             }
             lightData = lightData.Remove(lightData.Length - 1) + ']';
@@ -471,7 +478,9 @@ namespace WebForm_DB_Createuser
             {
                 string date = Convert.ToString(dr["TimeOccured"]);
                 string year = date.Substring(6, 4);
-                string month = date.Substring(3, 2);
+                string monthbefore = date.Substring(3, 2);
+                int month = Convert.ToInt32(monthbefore);
+                month = month - 1;
                 string day = date.Substring(0, 2);
                 string time = Convert.ToString(dr["TimeOccured"]);
                 string hour = time.Substring(11, 2);
@@ -479,7 +488,7 @@ namespace WebForm_DB_Createuser
                 string sec = time.Substring(17, 2);
 
 
-                idealLightData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), y: " + 4500 + "},";
+                idealLightData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + 4500 + "],";
 
             }
             idealLightData = idealLightData.Remove(idealLightData.Length - 1) + ']';
@@ -490,7 +499,9 @@ namespace WebForm_DB_Createuser
             {
                 string date = Convert.ToString(dr["TimeOccured"]);
                 string year = date.Substring(6, 4);
-                string month = date.Substring(3, 2);
+                string monthbefore = date.Substring(3, 2);
+                int month = Convert.ToInt32(monthbefore);
+                month = month - 1;
                 string day = date.Substring(0, 2);
                 string time = Convert.ToString(dr["TimeOccured"]);
                 string hour = time.Substring(11, 2);

@@ -302,19 +302,19 @@
                 type: "arearange",
                 enableMouseTracking: false,
                 lineWidth: 0,                
-                    data: <%=diffHumidityData%>,
-                    zones: [{
-                        value: 50,
-                        color: '#add8e6',
-                    }, {
-                        value: 70,
-                        color: '#90ee90',
-                    }, {
-                        value: 100,
-                        color: '#FFCCCB',
-                    }],
-                    showInLegend: false,
-                }]
+                data: <%=diffHumidityData%>,
+                zones: [{
+                    value: 50,
+                    color: '#add8e6',
+                }, {
+                    value: 70,
+                    color: '#90ee90',
+                }, {
+                    value: 100,
+                    color: '#FFCCCB',
+                }],
+                showInLegend: false,
+            }]
         });
     </script>
 
@@ -388,6 +388,9 @@
                     text: "Soil Moisture %"
                 }
             },
+            tooltip: {
+                shared: true,
+            },
             series: [{                
                 name: "Hourly Moisture",
                 zones: [{
@@ -399,7 +402,10 @@
                 }, {
                     value: 100,
                     color: '#FFCCCB',
-                }],
+                    }],               
+                tooltip: {
+                    enabled: true,
+                },
                 data: <%=moistureData%>,
             }, {                
                 type: "arearange",
@@ -419,10 +425,11 @@
                     value: 100,
                     color: '#FFCCCB',
                 }],                
-                lineWidth: 0,
+                lineWidth: 0,                
                 data: <%=diffMoistureData%>,
-                showInLegend: false
-            }]
+                enableMouseTracking: false,
+                showInLegend: false,
+           }]
         });
     </script>
 
@@ -496,6 +503,9 @@
                     text: "Light Intensity (lux)"
                 }
             },
+            tooltip: {
+                shared: true,
+            },
             series: [{                
                 name: "Hourly Light Intensity",
                 zones: [{
@@ -522,6 +532,7 @@
                 }],
                 lineWidth: 0,
                 data: <%=diffLightData%>,
+                enableMouseTracking: false,
                 showInLegend: false
             }]
         });
