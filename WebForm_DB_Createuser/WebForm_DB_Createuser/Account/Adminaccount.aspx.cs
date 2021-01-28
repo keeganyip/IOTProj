@@ -35,7 +35,7 @@ namespace WebForm_DB_Createuser.Account
             catch (Exception s)
             {
                 Debug.WriteLine(s);
-                //Response.Redirect("Login");
+                Response.Redirect("Login");
 
             }
 
