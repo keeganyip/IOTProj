@@ -43,11 +43,13 @@
             this.btn_Dash = new System.Windows.Forms.Button();
             this.btn_Settings = new System.Windows.Forms.Button();
             this.panelSensors = new System.Windows.Forms.Panel();
+            this.lbLiveStatus = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.tb_Humidity = new System.Windows.Forms.TextBox();
             this.lblHum = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lbLiveStatus = new System.Windows.Forms.ListBox();
+            this.tbHeight = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.SideBar.SuspendLayout();
             this.panelSensors.SuspendLayout();
             this.SuspendLayout();
@@ -214,6 +216,8 @@
             // panelSensors
             // 
             this.panelSensors.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
+            this.panelSensors.Controls.Add(this.label6);
+            this.panelSensors.Controls.Add(this.tbHeight);
             this.panelSensors.Controls.Add(this.lbLiveStatus);
             this.panelSensors.Controls.Add(this.label2);
             this.panelSensors.Controls.Add(this.tb_Humidity);
@@ -232,6 +236,28 @@
             this.panelSensors.Size = new System.Drawing.Size(977, 457);
             this.panelSensors.TabIndex = 17;
             // 
+            // lbLiveStatus
+            // 
+            this.lbLiveStatus.BackColor = System.Drawing.Color.Gray;
+            this.lbLiveStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbLiveStatus.FormattingEnabled = true;
+            this.lbLiveStatus.ItemHeight = 16;
+            this.lbLiveStatus.Location = new System.Drawing.Point(421, 44);
+            this.lbLiveStatus.Margin = new System.Windows.Forms.Padding(4);
+            this.lbLiveStatus.Name = "lbLiveStatus";
+            this.lbLiveStatus.Size = new System.Drawing.Size(439, 114);
+            this.lbLiveStatus.TabIndex = 20;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.SystemColors.Control;
+            this.label2.Location = new System.Drawing.Point(418, 20);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(103, 17);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "Current Status:";
+            // 
             // tb_Humidity
             // 
             this.tb_Humidity.BackColor = System.Drawing.Color.Gray;
@@ -246,7 +272,7 @@
             // 
             this.lblHum.AutoSize = true;
             this.lblHum.ForeColor = System.Drawing.Color.White;
-            this.lblHum.Location = new System.Drawing.Point(87, 261);
+            this.lblHum.Location = new System.Drawing.Point(85, 261);
             this.lblHum.Name = "lblHum";
             this.lblHum.Size = new System.Drawing.Size(66, 17);
             this.lblHum.TabIndex = 17;
@@ -257,27 +283,24 @@
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // label2
+            // tbHeight
             // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.SystemColors.Control;
-            this.label2.Location = new System.Drawing.Point(418, 20);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(103, 17);
-            this.label2.TabIndex = 19;
-            this.label2.Text = "Current Status:";
+            this.tbHeight.BackColor = System.Drawing.Color.Gray;
+            this.tbHeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbHeight.Location = new System.Drawing.Point(33, 385);
+            this.tbHeight.Name = "tbHeight";
+            this.tbHeight.Size = new System.Drawing.Size(182, 22);
+            this.tbHeight.TabIndex = 21;
             // 
-            // lbLiveStatus
+            // label6
             // 
-            this.lbLiveStatus.BackColor = System.Drawing.Color.Gray;
-            this.lbLiveStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbLiveStatus.FormattingEnabled = true;
-            this.lbLiveStatus.ItemHeight = 16;
-            this.lbLiveStatus.Location = new System.Drawing.Point(421, 44);
-            this.lbLiveStatus.Margin = new System.Windows.Forms.Padding(4);
-            this.lbLiveStatus.Name = "lbLiveStatus";
-            this.lbLiveStatus.Size = new System.Drawing.Size(439, 114);
-            this.lbLiveStatus.TabIndex = 20;
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.SystemColors.Control;
+            this.label6.Location = new System.Drawing.Point(85, 355);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(89, 17);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Plant Height:";
             // 
             // SensorForm
             // 
@@ -321,6 +344,8 @@
         public System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox lbLiveStatus;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox tbHeight;
     }
 }
 

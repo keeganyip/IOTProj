@@ -83,7 +83,7 @@ namespace Winform
             {
                 prev = reader["tempValue"].ToString().Trim();
             }
-
+            reader.Close();
             if(prev != strTempValue)
             { 
             //Step 4: ExecuteCommand
@@ -121,7 +121,7 @@ namespace Winform
             {
                 prev = reader["moistureLevel"].ToString().Trim();
             }
-
+            reader.Close();
             if (prev != strMoistureValue)
             {
                 //Step 4: ExecuteCommand
@@ -158,7 +158,7 @@ namespace Winform
             {
                 prev = reader["HumValue"].ToString().Trim();
             }
-
+            reader.Close();
             if (prev != strHumValue)
             {
                 //Step 4: ExecuteCommand
@@ -168,6 +168,42 @@ namespace Winform
             //Step 5: Close Connection
             myConnect.Close();
         } //End saveLightSensorDataToDB
+        private void savePlantHeightToDB(string strTime, string plantHeight)
+        {
+            string prev = "";
+            //Step 1: Create connection
+            SqlConnection myConnect = new SqlConnection(strConnectionString);
+
+            //Step 2: Create Command
+            String strCommandText =
+                "INSERT PlantHeight (timeOccured, plantHeight) " +
+                " VALUES (@time, @height)";
+
+            SqlCommand updateCmd = new SqlCommand(strCommandText, myConnect);
+            updateCmd.Parameters.AddWithValue("@time", strTime);
+            updateCmd.Parameters.AddWithValue("@height", plantHeight);
+
+            //Step 3: Open Connection
+            myConnect.Open();
+
+            string checkCmdText = "SELECT TOP 1 * FROM PlantHeight ORDER BY ID DESC";
+
+            SqlCommand readcmd = new SqlCommand(checkCmdText, myConnect);
+            SqlDataReader reader = readcmd.ExecuteReader();
+            while (reader.Read())
+            {
+                prev = reader["plantHeight"].ToString().Trim();
+            }
+            reader.Close();
+            if (prev != plantHeight)
+            {
+                //Step 4: ExecuteCommand
+                int result = updateCmd.ExecuteNonQuery();
+            }
+
+            //Step 5: Close Connection
+            myConnect.Close();
+        }
 
         private string extractStringValue(string strData, string ID)
         {
@@ -197,7 +233,7 @@ namespace Winform
             {
                 tbtemp.BackColor = Color.Red;
                 tbtemp.ForeColor = Color.White;
-                TempStatus = "OVER MAX! \n Activating Reduction now";
+                TempStatus = "OVER MAX! Activating Reduction now";
                 if (!lbLiveStatus.Items.Contains(TempStatus))
                 {
                     lbLiveStatus.Items.Insert(0, TempStatus);
@@ -366,6 +402,16 @@ namespace Winform
             saveHumSensorDataToDB(strTime, strHum);
 
         }
+        private void handleDistance(string strData, string strTime, string ID)
+        {
+            int distFromPlant = Convert.ToInt32(extractFlotValue(strData, ID));
+            int plantHeight = 300 - distFromPlant;
+            string strplantHeight = plantHeight + " cm";
+            tbHeight.Text = strplantHeight;
+            Console.WriteLine(plantHeight);
+
+            savePlantHeightToDB(strTime, strplantHeight);
+        }
         private void extractSensorData(string strData, string strTime)
         {
             //Any type of data may be sent over by hardware
@@ -383,7 +429,8 @@ namespace Winform
                 handleMoisture(strData, strTime, "MOISTURE=");
             if (strData.IndexOf("HUMIDITY=") != -1)
                 handleHumidity(strData, strTime, "HUMIDITY=");
-
+            if (strData.IndexOf("DISTANCE=") != -1)
+                handleDistance(strData, strTime, "DISTANCE=");
 
             //else if (strData.IndexOf("BUTTON=") != -1) //check button status
             //    handleButtonData(strData, strTime, "BUTTON=");

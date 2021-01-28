@@ -23,15 +23,21 @@ namespace IOTProj
         Pin tempPin = Pin.AnalogPin0;
         Pin lightPin = Pin.AnalogPin1;
         Pin waterPin = Pin.AnalogPin2;
+
         Pin buzzerPin = Pin.DigitalPin3;
+        IUltrasonicRangerSensor DistSens = DeviceFactory.Build.UltraSonicSensor(Pin.DigitalPin8);
+
 
         ILed red = DeviceFactory.Build.Led(Pin.DigitalPin5);
         IDHTTemperatureAndHumiditySensor humtemp = DeviceFactory.Build.DHTTemperatureAndHumiditySensor(Pin.DigitalPin2, 0);
 
-        private System.Threading.Semaphore sm = new System.Threading.Semaphore(1, 3);
+        private System.Threading.Semaphore sm = new System.Threading.Semaphore(1, 5);
 
         double temp = 23.00;
         double sensorTemp;
+        private int distance = 400;
+        int sensorDistance;
+
         //used by sensor for internal processing
         // 1023 : completely dry , more water : value will drop
         int moistureAdcValue = 1023;
@@ -102,6 +108,17 @@ namespace IOTProj
             return val;
         }
 
+        private int getDistance()
+        {
+            sm.WaitOne();
+            int distanceRead = DistSens.MeasureInCentimeters();
+            sm.Release();
+            if (distanceRead < 400 && distanceRead > 0)
+                distance = distanceRead;
+            return distance;
+
+        }
+
         private double getTemp()
         {
             int adcValue; double tempCalculated = 0, R;
@@ -136,6 +153,7 @@ namespace IOTProj
             Debug.WriteLine("Light ADC = " + adcValue);
             //sendDataToWindows("TEMP=" + humtemp.TemperatureInCelsius);
             getTempD();
+            handleSensorDistance();
             sendDataToWindows("LIGHT=" + GetLightValue(lightPin));
             sendDataToWindows("MOISTURE=" + getMoisture());
 
@@ -170,6 +188,14 @@ namespace IOTProj
         private void handleRFID()
         {
            
+        }
+
+        private void handleSensorDistance()
+        {
+            sensorDistance = getDistance();
+            Debug.WriteLine(sensorDistance);
+            sendDataToWindows("DISTANCE=" + sensorDistance);
+
         }
         private int GetLightValue(Pin pin)
         {
