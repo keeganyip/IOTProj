@@ -13,6 +13,15 @@ namespace Webform {
     public partial class greenhouseDetails {
         
         /// <summary>
+        /// gvtemp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvtemp;
+        
+        /// <summary>
         /// Repeater1 control.
         /// </summary>
         /// <remarks>
@@ -20,5 +29,32 @@ namespace Webform {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater Repeater1;
+        
+        /// <summary>
+        /// gvhumidity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvhumidity;
+        
+        /// <summary>
+        /// gvmoisture control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvmoisture;
+        
+        /// <summary>
+        /// gvRFID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvRFID;
     }
 }
