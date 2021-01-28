@@ -23,7 +23,6 @@ namespace Webform
             string gHouseID = Request.QueryString["Gid"].ToString();
             gHouse = oGHouse.getGHouse(gHouseID);
 
-            lblMembers.Text = gHouse.gHouse_Members.ToString();
         }
 
 
