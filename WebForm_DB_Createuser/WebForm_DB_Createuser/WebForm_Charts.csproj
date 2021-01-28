@@ -202,6 +202,7 @@
     <Content Include="Account\ResetPassword.aspx" />
     <Content Include="Account\ResetPasswordConfirmation.aspx" />
     <Content Include="Account\TwoFactorAuthenticationSignIn.aspx" />
+    <Content Include="Account\UpdateRFID.aspx" />
     <Content Include="Account\useraccount.aspx" />
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="Contact.aspx" />
@@ -401,6 +402,13 @@
     </Compile>
     <Compile Include="Account\TwoFactorAuthenticationSignIn.aspx.designer.cs">
       <DependentUpon>TwoFactorAuthenticationSignIn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Account\UpdateRFID.aspx.cs">
+      <DependentUpon>UpdateRFID.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\UpdateRFID.aspx.designer.cs">
+      <DependentUpon>UpdateRFID.aspx</DependentUpon>
     </Compile>
     <Compile Include="Account\useraccount.aspx.cs">
       <DependentUpon>useraccount.aspx</DependentUpon>

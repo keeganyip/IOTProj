@@ -25,7 +25,12 @@ namespace WebForm_DB_Createuser.Account
                 string getname = "select Name from UserTable where UniqueUserID ='" + logged + "'";
                 SqlCommand cmd = new SqlCommand(getname, conn);
                 string name = cmd.ExecuteScalar().ToString().Trim();
-                lblname.Text = name;
+                
+               lblname.Text = name;
+                
+                
+                    
+                
                 /*
                 Label lblUserVal = (Label)Page.Master.FindControl("accoutname");
                 lblUserVal.Text = name;
