@@ -18,8 +18,6 @@
                                 <div class="card-body">
                                     <h4 class="card-title"><asp:Label ID="lblGreenhouseName" runat="server" CssClass="card-title" Text='<%#Eval("Name")%>'></asp:Label></h4>
                                     <h6 class="card-subtitle mb-2 text-muted"><asp:Label ID="lblGreenhouseID" runat="server" CssClass="card-subtitle mb-2 text-muted" Text='<%#Eval("Gid") %>' ></asp:Label></h6>
-                                    <span class="card-link">Members -</span><asp:Label ID="Label2" runat="server" CssClass="btn btn-link stretched-link" Text='<%#Eval("Members").ToString()%>'></asp:Label>
-                                    <br />
                                     <span class="card-link">Status -</span><asp:Label ID="Label3" runat="server" CssClass="btn btn-link stretched-link" Text='<%#Eval("Status") %>'></asp:Label>
                                 </div>
                                 </asp:LinkButton>
