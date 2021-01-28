@@ -28,7 +28,7 @@ namespace IOTProj
         ILed red = DeviceFactory.Build.Led(Pin.DigitalPin5);
         IDHTTemperatureAndHumiditySensor humtemp = DeviceFactory.Build.DHTTemperatureAndHumiditySensor(Pin.DigitalPin2, 0);
 
-        private System.Threading.Semaphore sm = new System.Threading.Semaphore(1, 1);
+        private System.Threading.Semaphore sm = new System.Threading.Semaphore(1, 3);
 
         double temp = 23.00;
         double sensorTemp;
@@ -149,23 +149,27 @@ namespace IOTProj
             {
                 ChangeLedState(red, SensorStatus.Off);
             }
-
-            if (strDataReceived.Equals("RFIDMODE"))
+            if (strDataReceived.Equals("BUZZ"))
             {
-                curMode = MODE_RFID;
+                emeregency();
+                soundBuzzer();
             }
+
+            if (!strRfidDetected.Equals(""))
+            {
+                Debug.WriteLine(strRfidDetected);
+                if (strRfidDetected.Equals("6A003E7CF2DA"))
+                {
+                    sendDataToWindows("RFID=" + strRfidDetected);
+                }
+                strRfidDetected = "";
+            }
+
             strDataReceived = "";
         }
         private void handleRFID()
         {
-            if (!strRfidDetected.Equals(""))
-            {
-                if (strRfidDetected.Equals("6A003E7CF2DA"))
-                {
-                    Debug.WriteLine("Hi Emran :)");
-                    sendDataToWindows("RFID=" + strRfidDetected);
-                }
-            }
+           
         }
         private int GetLightValue(Pin pin)
         {
@@ -244,18 +248,16 @@ namespace IOTProj
             {
                 Sleep(300);
                 
-                sensorTemp = getTemp();
+                //sensorTemp = getTemp();
 
                 if (curMode == MODE_SENDTEMP)
                     handleModeSendTemp();
                 else if (curMode == MODE_RFID)
                     handleRFID();
+               
+
                 getTempD();
-                if (strDataReceived.Equals("BUZZ"))
-                { 
-                    emeregency();
-                    soundBuzzer();
-                }
+                
                
                 sensorMoistureAdcValue = getMoisture(); //get moisture from sensor
                 //Debug.WriteLine("Moisture = " + sensorMoistureAdcValue);

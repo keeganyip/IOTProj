@@ -37,8 +37,7 @@ namespace Winform
 
         private void panelTemp_DoubleClick(object sender, EventArgs e)
         {
-            this.Hide();
-            SettingsForm fm = new SettingsForm();
+            TemperatureSettings fm = new TemperatureSettings();
             fm.Show();
         }
 
@@ -81,6 +80,37 @@ namespace Winform
         private void mainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void panelTemp_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnDash_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PnHumSettings_DoubleClick(object sender, EventArgs e)
+        {
+            HumiditySettings hs = new HumiditySettings();
+            hs.Show();
+        }
+
+        private void PnHumSettings_MouseHover(object sender, EventArgs e)
+        {
+            PnHumSettings.BackColor = Color.LimeGreen;
+        }
+
+        private void PnHumSettings_MouseLeave(object sender, EventArgs e)
+        {
+            PnHumSettings.BackColor = Color.ForestGreen;
         }
     }
 }
