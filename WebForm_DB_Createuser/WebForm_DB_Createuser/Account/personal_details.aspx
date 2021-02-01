@@ -19,7 +19,9 @@
 <asp:Label ID="lblrfid" runat="server"></asp:Label>
 
 <br/>
- 
+ <asp:Label ID="lblhours" runat="server"></asp:Label>
+   
+<br />
     <div>
 <asp:CustomValidator runat="server" Display="Dynamic" ID="customValidator1"  ForeColor="Red" ErrorMessage="" OnServerValidate="customValidator_ServerValidate"></asp:CustomValidator>
  <br />

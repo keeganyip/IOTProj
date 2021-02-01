@@ -22,6 +22,10 @@ namespace WebForm_DB_Createuser.Account
                 gvbind();
             }
             string logged = Session["id"] as string;
+            if (logged == null)
+            {
+                Response.Redirect("Login");
+            }
 
 
 

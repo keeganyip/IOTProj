@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebForm_DB_Createuser.Account {
-    
-    
-    public partial class personal_details {
-        
+namespace WebForm_DB_Createuser.Account
+{
+
+
+    public partial class personal_details
+    {
+
         /// <summary>
         /// lblName control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace WebForm_DB_Createuser.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblName;
-        
+
         /// <summary>
         /// TbName control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace WebForm_DB_Createuser.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbName;
-        
+
         /// <summary>
         /// lblEmail control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace WebForm_DB_Createuser.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblEmail;
-        
+
         /// <summary>
         /// TbEmail control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace WebForm_DB_Createuser.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbEmail;
-        
+
         /// <summary>
         /// lblContact control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace WebForm_DB_Createuser.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblContact;
-        
+
         /// <summary>
         /// TbContact control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace WebForm_DB_Createuser.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbContact;
-        
+
         /// <summary>
         /// lblpw control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace WebForm_DB_Createuser.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblpw;
-        
+
         /// <summary>
         /// TBPassword control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace WebForm_DB_Createuser.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TBPassword;
-        
+
         /// <summary>
         /// lblnewpw control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace WebForm_DB_Createuser.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblnewpw;
-        
+
         /// <summary>
         /// TbNewPw control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace WebForm_DB_Createuser.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TbNewPw;
-        
+
         /// <summary>
         /// lblrfid control.
         /// </summary>
@@ -110,7 +112,16 @@ namespace WebForm_DB_Createuser.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblrfid;
-        
+
+        /// <summary>
+        /// lblhours control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblhours;
+
         /// <summary>
         /// customValidator1 control.
         /// </summary>
@@ -119,7 +130,7 @@ namespace WebForm_DB_Createuser.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator customValidator1;
-        
+
         /// <summary>
         /// updateButton control.
         /// </summary>
