@@ -49,6 +49,7 @@ namespace WebForm_DB_Createuser
             LoadDataofMoistureChart();
             LoadDataofLightChart();
             LoadDataofHeightChart();
+            LoadHeightAnalysis();
             LoadDataofRFIDChart();           
 
         }
@@ -64,6 +65,7 @@ namespace WebForm_DB_Createuser
                 LoadDataofLightChart();
                 LoadDataofRFIDChart();
                 LoadDataofHeightChart();
+                LoadHeightAnalysis();
                 heightTable.Visible = true;
                 tempTable.Visible = true;
                 humidityTable.Visible = true;
@@ -115,6 +117,7 @@ namespace WebForm_DB_Createuser
             if (DropDownList1.SelectedIndex == 5)
             {
                 LoadDataofHeightChart();
+                LoadHeightAnalysis();
                 lightTable.Visible = false;
                 moistureTable.Visible = false;
                 humidityTable.Visible = false;
@@ -173,7 +176,7 @@ namespace WebForm_DB_Createuser
                 string sec = time.Substring(17, 2);
                 string tempconverted = Convert.ToString(dr["tempStatus"]);
                 string temp = tempconverted.Trim();
-                temp = temp.Substring(0, 2);            
+                           
 
                 tempData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + temp + "],";
                 
@@ -217,7 +220,7 @@ namespace WebForm_DB_Createuser
                 string sec = time.Substring(17, 2);
                 string tempconverted = Convert.ToString(dr["tempStatus"]);
                 string temp = tempconverted.Trim();
-                temp = temp.Substring(0, 2);
+                
 
                 diffTempData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + 26 + ", " + temp + "],";
             }
@@ -255,7 +258,7 @@ namespace WebForm_DB_Createuser
             {
                 string tempconverted = Convert.ToString(dr["tempValue"]);
                 string temp = tempconverted.Trim();
-                temp = temp.Substring(0, 2);
+                
                 avgTemp = Convert.ToInt32(temp);              
 
             }
@@ -263,12 +266,14 @@ namespace WebForm_DB_Createuser
             if (avgTemp > 30)
             {                
                 tempAnalysis = "Past Hour Average Temperature: " + avgTemp + "°C <br>" +
-                    "The Past Hour Average Temperature is higher than the ideal temperature by " + (avgTemp - 30) + "°C, PLEASE LOWER THE TEMPERATURE!";
+                    "The Past Hour Average Temperature is higher than the ideal temperature by " + (avgTemp - 30) + "°C <br>" + 
+                    "Action Taken: Temperature is currently being lowered!";
             }
             else if (avgTemp < 26)
             {
                 tempAnalysis = "Past Hour Average Temperature: " + avgTemp + "°C <br>" +
-                    "The Past Hour Average Temperature is higher than the ideal temperature by " + (26 - avgTemp) + "°C, PLEASE INCREASE THE TEMPERATURE!";
+                    "The Past Hour Average Temperature is lower than the ideal temperature by " + (26 - avgTemp) + "°C <br>" +
+                    "Action Taken: Temperature is currently being increased!";
             }
             else
             {
@@ -636,6 +641,69 @@ namespace WebForm_DB_Createuser
 
         }
 
+
+        public void LoadHeightAnalysis()
+        {
+            string strConnectionString = ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString;
+
+            SqlConnection myConnect = new SqlConnection(strConnectionString);
+
+            myConnect.Open();
+
+            string strCommandText = "Select MAX(plantHeight) AS MaxPlantHeight, MIN(plantHeight) AS MinPlantHeight From PlantHeight Where TimeOccured BETWEEN DATEADD(DAY, -5, GETDATE()) AND GETDATE()";
+
+
+            SqlCommand comm = new SqlCommand(strCommandText, myConnect);
+            DataTable dt = new DataTable();
+
+            dt.Load(comm.ExecuteReader());
+
+            gvtemp.DataSource = dt;
+            gvtemp.DataBind();
+
+
+            //data format is [  {x1,y1}, {x2,y2}, ...]
+            //date format: Date.UTC(2010, 1, 1, 12, 0, 0)
+            double avgHeight = 0;
+            foreach (DataRow dr in dt.Rows)
+            {
+                string maxheightconverted = Convert.ToString(dr["MaxPlantHeight"]);
+                string smaxheight = maxheightconverted.Trim();
+                double maxheight = Convert.ToDouble(smaxheight);
+
+                string minheightconverted = Convert.ToString(dr["MinPlantHeight"]);
+                string sminheight = minheightconverted.Trim();
+                double minheight = Convert.ToDouble(sminheight);
+                
+                avgHeight = ((maxheight - minheight) / 5);               
+
+
+            }
+
+            //avg rate of growth of tomatoes in cm is 15cm 
+            Debug.WriteLine(avgHeight);
+
+            if (avgHeight > 10)
+            {
+                heightAnalysis = "Past 5 Days Average Growth: " + avgHeight + "cm <br>" +
+                    "The Past 5 Days Average Growth is faster than the ideal growth rate by " + (avgHeight - 10) + "cm <br>" + 
+                    "Advice: Keep it up and maintain!";
+            }
+            else if (avgHeight < 4)
+            {
+                heightAnalysis = "Past 5 Days Average Growth: " + avgHeight + "cm <br>" +
+                    "The Past 5 Days Average Growth is slower than the ideal growth rate by " + (5 - avgHeight) + "cm <br>" +
+                    "Advice: Please check on the plant and the other conditions!";
+            }
+            else
+            {
+                heightAnalysis = "Past 5 Days Average Growth: " + avgHeight + "cm <br>" +
+                    "The Past 5 Days Average Growth is ideal!";
+            }
+
+        }
+
+
         public void LoadDataofRFIDChart()
         {
             string strConnectionString = ConfigurationManager.ConnectionStrings["MyDBConnectStr"].ConnectionString;
@@ -654,9 +722,9 @@ namespace WebForm_DB_Createuser
             gvRFID.DataSource = dt;
             gvRFID.DataBind();
 
-            Debug.WriteLine("gvRFID DATAAAAA");
+            
             string datadata = Convert.ToString(dt.Rows[1]["Date"]);
-            Debug.WriteLine(datadata);
+           
 
             for (int i = 0; i < dt.Rows.Count - 1; )
             {
@@ -698,6 +766,7 @@ namespace WebForm_DB_Createuser
             LoadDataofMoistureChart();
             LoadDataofLightChart();
             LoadDataofHeightChart();
+            LoadHeightAnalysis();
             LoadDataofRFIDChart();
 
             ScriptManager.RegisterStartupScript(this,
@@ -706,6 +775,7 @@ namespace WebForm_DB_Createuser
                                                         "temdata = " + tempData + ";" +
                                                         "idealtempdata = " + idealTempData + ";" +
                                                         "difftempdata = " + diffTempData + ";" +
+                                                        "tempanalysis = " + "'" + tempAnalysis + "'" + ";" +
                                                         "humdata = " + humidityData + ";" +
                                                         "idealhumdata = " + idealHumidityData + ";" +
                                                         "diffhumdata = " + diffHumidityData + ";" +
@@ -717,7 +787,8 @@ namespace WebForm_DB_Createuser
                                                         "difflightdata = " + diffLightData + ";" +
                                                         "heightdata = " + heightData + ";" +
                                                         "idealheightdata = " + idealHeightData + ";" +
-                                                        "diffheightdata = " + diffHeightData + ";",
+                                                        "diffheightdata = " + diffHeightData + ";" +
+                                                        "heightanalysis = " + "'" + heightAnalysis + "'" + ";",
                                                         true);
             
         }
@@ -731,6 +802,7 @@ namespace WebForm_DB_Createuser
             LoadDataofMoistureChart();
             LoadDataofLightChart();
             LoadDataofHeightChart();
+            LoadHeightAnalysis();
             LoadDataofRFIDChart();
             Debug.WriteLine("NEWSUCCESS");
         }

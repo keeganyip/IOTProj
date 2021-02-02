@@ -38,12 +38,11 @@
                     <asp:GridView ID="gvtemp" runat="server">
                     </asp:GridView>
                 </div>
-            </td>
-        
-            <td>
+            </td>        
+            <td>                            
                 <div>
-                    <p>TEMPERATURE ANALYSIS:</p>
-                    <p><%=tempAnalysis%></p>                    
+                    <p>TEMPERATURE ANALYSIS:</p>                    
+                    <p id="tempreport"></p>   
                 </div>
             </td>
         </tr>
@@ -94,6 +93,12 @@
                     </asp:GridView>
                 </div>
             </td>
+            <td>                            
+                <div>
+                    <p>PLANT GROWTH ANALYSIS:</p>                    
+                    <p id="heightreport"></p>   
+                </div>
+            </td>
         </tr>
     </table>
     <table id="RFIDTable" runat="server">
@@ -117,10 +122,10 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
 
-    
-    <script>      
-
-        //document.getElementById('MainContent_hdf_Test').value;
+    <script>
+        //report        
+        var tempanalysis = "<%=tempAnalysis%>";
+        document.getElementById("tempreport").innerHTML = tempanalysis;
         var temdata = <%=tempData%>;
         var idealtempdata = <%=idealTempData%>;
         var difftempdata = <%=diffTempData%>;
@@ -134,9 +139,11 @@
 
                         // set up the updating of the chart each second
                        
-                        setInterval(function () {                            
-                                                       
+                        setInterval(function () {
+                             
                             document.getElementById("<%=btnSubmit.ClientID %>").click();
+                            
+                            document.getElementById("tempreport").innerHTML = tempanalysis;
                             var tempchart =  $("#temp").highcharts();
                             tempchart.series[0].update({ data: temdata }, false)
                             tempchart.series[1].update({ data: idealtempdata }, false)
@@ -545,16 +552,14 @@
 
                         setInterval(function () {
 
-                            console.log('light start');
-                            console.log(lightdata);
-                            console.log(difflightdata);
+                            
                             document.getElementById("<%=btnSubmit.ClientID %>").click();
                             var lightchart = $("#light").highcharts();
                             lightchart.series[0].update({ data: lightdata }, false)
                             lightchart.series[1].update({ data: ideallightdata }, false)
                             lightchart.series[2].update({ data: difflightdata }, false)
                             lightchart.redraw();
-                            console.log('light end');
+                            
                         }, 20000);
                     }
                 }
@@ -669,6 +674,9 @@
     </script>
     
     <script>
+        //report        
+        var heightanalysis = "<%=heightAnalysis%>";
+        document.getElementById("heightreport").innerHTML = heightanalysis;
         var heightdata = <%=heightData%>;
         var idealheightdata = <%=idealHeightData%>;
         var diffheightdata = <%=diffHeightData%>;
@@ -683,17 +691,17 @@
                         // set up the updating of the chart each second
 
                         setInterval(function () {
-
-                            console.log('height start');
-                            console.log(heightdata);
-                            console.log(diffheightdata);
+                            
                             document.getElementById("<%=btnSubmit.ClientID %>").click();
+
+                            document.getElementById("heightreport").innerHTML = heightanalysis;
+
                             var heightchart = $("#height").highcharts();
                             heightchart.series[0].update({ data: heightdata }, false)
                             heightchart.series[1].update({ data: idealheightdata }, false)
                             heightchart.series[2].update({ data: diffheightdata }, false)
                             heightchart.redraw();
-                            console.log('height end');
+                            
                         }, 20000);
                     }
                 }
