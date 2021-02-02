@@ -73,8 +73,8 @@ namespace Winform
         private void panelLight_DoubleClick(object sender, EventArgs e)
         {
             this.Hide();
-            SettingsForm fm = new SettingsForm();
-            fm.Show();
+            LightSettings ls = new LightSettings();
+            ls.Show();
         }
 
         private void mainForm_FormClosing(object sender, FormClosingEventArgs e)

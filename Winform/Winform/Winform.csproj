@@ -50,11 +50,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Hash.cs" />
     <Compile Include="HumiditySettings.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HumiditySettings.Designer.cs">
       <DependentUpon>HumiditySettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LightSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LightSettings.Designer.cs">
+      <DependentUpon>LightSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="loginForm.cs">
       <SubType>Form</SubType>
@@ -102,6 +109,9 @@
     </Compile>
     <EmbeddedResource Include="HumiditySettings.resx">
       <DependentUpon>HumiditySettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LightSettings.resx">
+      <DependentUpon>LightSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="loginForm.resx">
       <DependentUpon>loginForm.cs</DependentUpon>

@@ -169,7 +169,7 @@ namespace Winform
             //Step 5: Close Connection
             myConnect.Close();
         } //End saveLightSensorDataToDB
-        private void savePlantHeightToDB(string strTime, string plantHeight)
+        private void savePlantHeightToDB(string strTime, int plantHeight)
         {
             string prev = "";
             //Step 1: Create connection
@@ -196,7 +196,7 @@ namespace Winform
                 prev = reader["plantHeight"].ToString().Trim();
             }
             reader.Close();
-            if (prev != plantHeight)
+            if (prev != plantHeight.ToString())
             {
                 //Step 4: ExecuteCommand
                 int result = updateCmd.ExecuteNonQuery();
@@ -411,7 +411,7 @@ namespace Winform
             tbHeight.Text = strplantHeight;
             Console.WriteLine(plantHeight);
 
-            savePlantHeightToDB(strTime, strplantHeight);
+            savePlantHeightToDB(strTime, plantHeight);
         }
         private void extractSensorData(string strData, string strTime)
         {

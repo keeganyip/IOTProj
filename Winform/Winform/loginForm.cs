@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Diagnostics;
+using Salt_Password_Sample;
 
 namespace Winform
 {
@@ -87,6 +88,7 @@ namespace Winform
         private void btnLogin_Click(object sender, EventArgs e)
         {
             bool userexists = false;
+            bool flag = false;
             string rfid = "";
             string userid = "";
             //Step 1: Open Connection
@@ -95,10 +97,12 @@ namespace Winform
             //Step 2: Create Command
             string strCommandText = "SELECT Email, UniqueUserID,Password, UniqueRFID FROM UserTable";
             //Add a WHERE clause to SQL Statement
-            strCommandText += " WHERE Email=@Email AND Password=@Password";
+            strCommandText += " WHERE Email=@Email";
             SqlCommand cmd = new SqlCommand(strCommandText, myConnect);
             cmd.Parameters.AddWithValue("@Email", tbUserName.Text);
-            cmd.Parameters.AddWithValue("@Password", tbPassword.Text);
+
+            string epass = Hash.ComputeHash(tbPassword.Text, "SHA512", null);
+            Debug.WriteLine(epass);
 
             try
             {
@@ -109,14 +113,15 @@ namespace Winform
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-
+                    Debug.WriteLine("TEST");
                     userexists = true;
+                    flag = Hash.VerifyHash(tbPassword.Text, "SHA512", reader["Password"].ToString());
                     userid = reader["UniqueUserID"].ToString();
                     rfid = reader.GetString(3);
 
                 }
                 reader.Close();
-                if (userexists == true)
+                if (userexists == true && flag == true)
                 {
                     SensorForm fm = new SensorForm();
                     MessageBox.Show("Login Successful");
