@@ -43,6 +43,7 @@ namespace WebForm_DB_Createuser
             LoadDataofHumidityChart();
             LoadDataofMoistureChart();
             LoadDataofLightChart();
+            LoadDataofHeightChart();
             LoadDataofRFIDChart();        
 
             
@@ -58,6 +59,8 @@ namespace WebForm_DB_Createuser
                 LoadDataofMoistureChart();
                 LoadDataofLightChart();
                 LoadDataofRFIDChart();
+                LoadDataofHeightChart();
+                heightTable.Visible = true;
                 tempTable.Visible = true;
                 humidityTable.Visible = true;
                 moistureTable.Visible = true;
@@ -73,6 +76,7 @@ namespace WebForm_DB_Createuser
                 moistureTable.Visible = false;
                 lightTable.Visible = false;
                 RFIDTable.Visible = false;
+                heightTable.Visible = false;
             }
             if (DropDownList1.SelectedIndex == 2)
             {
@@ -82,6 +86,7 @@ namespace WebForm_DB_Createuser
                 tempTable.Visible = false;
                 lightTable.Visible = false;
                 RFIDTable.Visible = false;
+                heightTable.Visible = false;
             }
             if (DropDownList1.SelectedIndex == 3)
             {
@@ -90,6 +95,7 @@ namespace WebForm_DB_Createuser
                 moistureTable.Visible = true;
                 humidityTable.Visible = false;
                 tempTable.Visible = false;
+                heightTable.Visible = false;
                 RFIDTable.Visible = false;
             }
             if (DropDownList1.SelectedIndex == 4)
@@ -99,9 +105,21 @@ namespace WebForm_DB_Createuser
                 moistureTable.Visible = false;
                 humidityTable.Visible = false;
                 tempTable.Visible = false;
+                heightTable.Visible = false;
                 RFIDTable.Visible = false;
             }
             if (DropDownList1.SelectedIndex == 5)
+            {
+                LoadDataofHeightChart();
+                lightTable.Visible = false;
+                moistureTable.Visible = false;
+                humidityTable.Visible = false;
+                tempTable.Visible = false;
+                heightTable.Visible = true;
+                RFIDTable.Visible = false;
+            }
+
+            if (DropDownList1.SelectedIndex == 6)
             {
                 LoadDataofRFIDChart();
                 lightTable.Visible = false;

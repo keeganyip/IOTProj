@@ -10,6 +10,7 @@
         <asp:ListItem Value="Humidity">Humidity</asp:ListItem>
         <asp:ListItem Value="Moisture">Moisture</asp:ListItem>
         <asp:ListItem Value="Light">Light Intensity</asp:ListItem>
+        <asp:ListItem Value="Height">Plant Height</asp:ListItem>
         <asp:ListItem Value="RFID">RFID</asp:ListItem>
     </asp:DropDownList>
 
