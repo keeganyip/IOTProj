@@ -14,14 +14,27 @@
         <asp:ListItem Value="RFID">RFID</asp:ListItem>
     </asp:DropDownList>
 
+    <asp:HiddenField runat="server" ID="hdf_Test" />
+    <asp:ScriptManager ID="ScriptManager1" runat="server" />
+    <asp:Timer ID="Timer1" runat="server" Interval="20000" ontick="Timer1_Tick">
+    </asp:Timer>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+            <asp:Button ID="btnSubmit" runat="server" OnClick="RepeatLoadingData" style = "display:none"/>
+        </ContentTemplate>
+        
+        <Triggers>
+        <asp:AsyncPostBackTrigger ControlID="Timer1" EventName="Tick">
+        </asp:AsyncPostBackTrigger>
+    </Triggers>
+    </asp:UpdatePanel>
     <div class="container">
     <div class="row">
     <div class="col-sm-12">
     <table id="tempTable" runat="server">
         <tr>
             <td>&nbsp;</td>
-            <td>
-                <div>Registration closes in <span id="time">01:00</span> minutes!</div>
+            <td>               
                 <div id="temp" style="min-height: 600px; min-width:800px;">
                     <asp:GridView ID="gvtemp" runat="server">
                     </asp:GridView>
@@ -105,10 +118,10 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
 
-
+    
     <script>      
 
-        
+        var temdata = document.getElementById('MainContent_hdf_Test').value;
         $("#temp").highcharts({
             chart: {
                 animation: Highcharts.svg,
@@ -121,10 +134,12 @@
                        
                         setInterval(function () {
                             console.log('PENIS');
+                            console.log(temdata);
+                            document.getElementById("<%=btnSubmit.ClientID %>").click();
                             var tempchart =  $("#temp").highcharts();
-                            tempchart.series[0].update({data: <%=tempData%>}, false)
+                            tempchart.series[0].update({data: temdata}, false)
                             tempchart.redraw();
-                        }, 3000);
+                        }, 5000);
                     }
                 }
             },

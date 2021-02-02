@@ -9,10 +9,12 @@ using System.Configuration;
 using System.Data;
 using System.Diagnostics;
 using System.Timers;
+using System.Windows;
 
 
 namespace WebForm_DB_Createuser
 {
+
     public partial class LiveCharts : System.Web.UI.Page
     {
         public string tempData;
@@ -37,25 +39,19 @@ namespace WebForm_DB_Createuser
         public string heightAnalysis;
         public string RFIDData;
 
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             LoadDataofTempChart();
             LoadTempAnalysis();
             LoadDataofHumidityChart();
             LoadDataofMoistureChart();
             LoadDataofLightChart();
             LoadDataofHeightChart();
-            LoadDataofRFIDChart();
+            LoadDataofRFIDChart();           
 
-            
         }
-
-        private  void OnTimedEvent(object source, ElapsedEventArgs e)
-        {
-            Console.WriteLine("Hello World!");
-        }
-
-
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -139,6 +135,7 @@ namespace WebForm_DB_Createuser
 
         }
 
+
         public void LoadDataofTempChart()
         {
             string strConnectionString = ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString;
@@ -179,7 +176,7 @@ namespace WebForm_DB_Createuser
                 temp = temp.Substring(0, 2);            
 
                 tempData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + temp + "],";
-
+                hdf_Test.Value = tempData;
             }
             tempData = tempData.Remove(tempData.Length - 1) + ']';
             Debug.WriteLine(tempData);
@@ -225,8 +222,9 @@ namespace WebForm_DB_Createuser
                 diffTempData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + 26 + ", " + temp + "],";
             }
             diffTempData = diffTempData.Remove(diffTempData.Length - 1) + ']';
+
             
-        }
+        }       
 
  
 
@@ -690,5 +688,50 @@ namespace WebForm_DB_Createuser
 
         }
 
+        public void RepeatLoadingData(object sender, EventArgs e)
+        {
+            
+            Debug.WriteLine("REPEATEDDDD");
+            LoadDataofTempChart();
+            LoadTempAnalysis();
+            LoadDataofHumidityChart();
+            LoadDataofMoistureChart();
+            LoadDataofLightChart();
+            LoadDataofHeightChart();
+            LoadDataofRFIDChart();
+            Debug.WriteLine("REPEATEDDDD");
+            
+        }
+
+        public async System.Threading.Tasks.Task DoSomethingEveryTenSeconds()
+        {
+            while (true)
+            {
+                var delayTask = System.Threading.Tasks.Task.Delay(20000);
+                Debug.WriteLine("NEW");
+                LoadDataofTempChart();
+                LoadTempAnalysis();
+                LoadDataofHumidityChart();
+                LoadDataofMoistureChart();
+                LoadDataofLightChart();
+                LoadDataofHeightChart();
+                LoadDataofRFIDChart();
+                Debug.WriteLine("NEWSUCCESS");
+                await delayTask; // wait until at least 10s elapsed since delayTask created
+            }
+        }
+
+        protected void Timer1_Tick(object sender, EventArgs e)
+        {
+            Debug.WriteLine("NEW");            
+            LoadDataofTempChart();
+            LoadTempAnalysis();
+            LoadDataofHumidityChart();
+            LoadDataofMoistureChart();
+            LoadDataofLightChart();
+            LoadDataofHeightChart();
+            LoadDataofRFIDChart();
+            Debug.WriteLine("NEWSUCCESS");
+        }
     }
 }
