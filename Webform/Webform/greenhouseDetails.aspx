@@ -28,39 +28,15 @@
                             <div class="row">
                                 <div class="col-5">
                                     <div class="text-center mt-3">
-                                        <i class="fas fa-bolt fa-3x" style="font-size: 50px;"></i>
-                                    </div>
-                                </div>
-                                <div class="col-7">
-                                    <div class="float-end text-end">
-                                        <p class="card-category">Electric Bill</p>
-                                        <h3 class="card-title">$567</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <hr />
-                            <div class="stats">
-                                <i class="tim-icons icon-trophy"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card card-stats" style="height: 185px;">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-5">
-                                    <div class="text-center mt-3">
                                         <i class="far fa-clock fa-3x"></i>
                                     </div>
                                 </div>
                                 <div class="col-7">
                                     <div class="float-end text-end">
                                         <p class="card-category">Last Activity</p>
-                                        <h3 class="card-title">150,000</h3>
+                                        <h3 class="card-title">
+                                            <asp:Label ID="lblActivity" runat="server" Text="Label" Font-Size="Small"></asp:Label>
+                                        </h3>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +62,9 @@
                                 <div class="col-7">
                                     <div class="float-end text-end">
                                         <p class="card-category">Number of staff</p>
-                                        <h3 class="card-title">10</h3>
+                                        <h3 class="card-title">
+                                            <asp:Label ID="lblStaff" runat="server"></asp:Label>
+                                        </h3>
                                     </div>
                                 </div>
                             </div>

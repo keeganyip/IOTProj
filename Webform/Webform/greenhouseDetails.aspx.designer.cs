@@ -31,6 +31,24 @@ namespace Webform {
         protected global::System.Web.UI.WebControls.Button btnChangeStatus;
         
         /// <summary>
+        /// lblActivity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblActivity;
+        
+        /// <summary>
+        /// lblStaff control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStaff;
+        
+        /// <summary>
         /// gvtemp control.
         /// </summary>
         /// <remarks>

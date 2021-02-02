@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace Webform
 {
@@ -67,7 +68,104 @@ namespace Webform
                 btnChangeStatus.CssClass = "btn btn-success";
                 btnChangeStatus.Text = "Enable";
             }
-            
+
+            SqlConnection conn = new SqlConnection(constr);
+            conn.Open();
+
+            SqlCommand checkcmd = new SqlCommand("SELECT COUNT(*) FROM TEMPSENSOR", conn);
+            int check = int.Parse(checkcmd.ExecuteScalar().ToString());
+
+            string tempdate;
+            if (check == 0)
+            {
+                Debug.WriteLine("No temp data");
+            }
+            SqlCommand tempcmd = new SqlCommand("SELECT MAX(TIMEOCCURED) FROM TEMPSENSOR", conn);
+            tempdate = tempcmd.ExecuteScalar().ToString();
+            Debug.WriteLine(tempdate);
+
+            checkcmd = new SqlCommand("SELECT COUNT(*) FROM HUMIDITYSENSOR", conn);
+            check = int.Parse(checkcmd.ExecuteScalar().ToString());
+
+            string humdate;
+            if (check == 0)
+            {
+                Debug.WriteLine("No humidity data");
+            }
+            SqlCommand humcmd = new SqlCommand("SELECT MAX(TIMEOCCURED) FROM HUMIDITYSENSOR", conn);
+            humdate = humcmd.ExecuteScalar().ToString();
+            Debug.WriteLine(humdate);
+
+            //SqlCommand humcmd = new SqlCommand("SELECT MAX(TIMEOCCURED) FROM HUMIDITYSENSOR", conn);
+            //Debug.WriteLine(humcmd.ExecuteScalar().ToString());
+
+            checkcmd = new SqlCommand("SELECT COUNT(*) FROM LIGHTSENSOR", conn);
+            check = int.Parse(checkcmd.ExecuteScalar().ToString());
+
+            string lightdate;
+            if (check == 0)
+            {
+                Debug.WriteLine("no light data");
+            }
+
+            SqlCommand lightcmd = new SqlCommand("SELECT MAX(TIMEOCCURED) FROM LIGHTSENSOR", conn);
+            lightdate = lightcmd.ExecuteScalar().ToString();
+            Debug.WriteLine(lightdate);
+
+            //SqlCommand lightcmd = new SqlCommand("SELECT MAX(TIMEOCCURED) FROM LIGHTSENSOR", conn);
+            //Debug.WriteLine(lightcmd.ExecuteScalar().ToString());
+
+            checkcmd = new SqlCommand("SELECT COUNT(*) FROM MOISTURESENSOR", conn);
+            check = int.Parse(checkcmd.ExecuteScalar().ToString());
+
+            string moistdate;
+            if (check == 0)
+            {
+                Debug.WriteLine("no moisture data");
+            }
+            SqlCommand moistcmd = new SqlCommand("SELECT MAX(TIMEOCCURED) FROM MOISTURESENSOR", conn);
+            moistdate = moistcmd.ExecuteScalar().ToString();
+            Debug.WriteLine(moistdate);
+
+            //SqlCommand moistcmd = new SqlCommand("SELECT MAX(TIMEOCCURED) FROM MOISTURESENSOR", conn);
+            //Debug.WriteLine(moistcmd.ExecuteScalar().ToString());
+
+            checkcmd = new SqlCommand("SELECT COUNT(*) FROM PLANTHEIGHT", conn);
+            check = int.Parse(checkcmd.ExecuteScalar().ToString());
+
+            string sonicdate;
+            if (check == 0)
+            {
+                Debug.WriteLine("no sonic data");
+            }
+            SqlCommand soniccmd = new SqlCommand("SELECT MAX(TIMEOCCURED) FROM PLANTHEIGHT", conn);
+            sonicdate = soniccmd.ExecuteScalar().ToString();
+            Debug.WriteLine(sonicdate);
+
+            CultureInfo provider = CultureInfo.InvariantCulture;
+            CultureInfo frFR = new CultureInfo("fr-FR");
+
+            lblActivity.Text = tempdate;
+
+            SqlCommand staffcmd = new SqlCommand("SELECT COUNT(*) FROM USERTABLE", conn);
+            string staffno = staffcmd.ExecuteScalar().ToString();
+
+            lblStaff.Text = staffno;
+            //SqlCommand soniccmd = new SqlCommand("SELECT MAX(TIMEOCCURED) FROM PLANTHEIGHT", conn);
+            //Debug.WriteLine(soniccmd.ExecuteScalar().ToString());
+            //DateTime latestTemp = Convert.ToDateTime(tempdate.ToUpper());
+            //DateTime latestHum = DateTime.ParseExact(humdate, "G", provider);
+            //DateTime latestLight = Convert.ToDateTime(lightdate.ToUpper(), frFR);
+            //DateTime latestMoist = Convert.ToDateTime(moistdate.ToUpper(), frFR);
+            //DateTime latestSonic = Convert.ToDateTime(sonicdate.ToUpper(), frFR);
+            //Debug.WriteLine("conversion");
+            //DateTime latestDateTime = new[] { latestTemp, latestHum, latestLight, latestMoist, latestSonic }.Max();
+            //Debug.WriteLine(latestDateTime.ToString());
+
+            ////int result = DateTime.Compare(latest, Convert.ToDateTime(humdate.ToUpper(), enUS));
+            ////Debug.WriteLine(result);
+
+            conn.Close();
         }
 
         protected void changeStatusClick(object sender, EventArgs e)
