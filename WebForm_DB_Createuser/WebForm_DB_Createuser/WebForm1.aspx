@@ -554,9 +554,7 @@
                 showInLegend: false
             }]
         });
-    </script>
-    
-    <script>
+   
         $("#height").highcharts({
             chart: {
                 type: "line"
