@@ -23,6 +23,38 @@ namespace WebForm_DB_Createuser.Account
                 {
                     Response.Redirect("Login");
                 }
+                SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString);
+                try
+                {
+                    string count1 = null;
+                    string Id = null;
+                    conn1.Open();
+                    string loginamount = "select count(*) as count, UserID from TimeLog where Event ='Login' group by UserID";
+                    SqlCommand cmd = new SqlCommand(loginamount, conn1);
+                    SqlDataReader read = cmd.ExecuteReader();
+                    while (read.Read())
+                    {
+                        count1 = read["count"].ToString();
+                        Id = read["UserId"].ToString();
+                        SqlConnection conn2 = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString);
+                        conn2.Open();
+                        string update = "Update UserTable set Greenhouse_Entry_Amount = " + count1 + " where UniqueUserID ='" + Id + "'";
+                        Debug.WriteLine(update);
+                        SqlCommand cmd2 = new SqlCommand(update, conn2);
+                        cmd2.ExecuteNonQuery();
+
+                    }
+
+                    Debug.WriteLine(Id);
+                    Debug.WriteLine(count1);
+
+                }
+                catch (Exception)
+                {
+
+                }
+                conn1.Close();
+
 
                 SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString);
                 try
@@ -49,7 +81,7 @@ namespace WebForm_DB_Createuser.Account
                         TbEmail.Text = reader["Email"].ToString().Trim();
                         TbContact.Text = reader["Contact"].ToString().Trim();
                         lblrfid.Text = "RFID: " + reader["UniqueRFID"].ToString();
-                        lblhours.Text = "Hours Worked:" + reader["Hours"].ToString();
+                        lblentry.Text = "Amount of times you entered Greenhouse:" + reader["Greenhouse_Entry_Amount"].ToString();
 
 
                     }
@@ -57,8 +89,8 @@ namespace WebForm_DB_Createuser.Account
                 catch (Exception E)
                 {
 
-                    // Response.Redirect("useraccount");
-                    Response.Write(E);
+                    Response.Redirect("useraccount");
+                    //Response.Write(E);
 
 
                 }
