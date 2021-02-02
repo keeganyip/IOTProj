@@ -17,6 +17,11 @@ namespace WebForm_DB_Createuser.Account
             if (!IsPostBack)
             {
                 string logged = Session["id"] as string;
+                if (logged == null)
+                {
+                    Response.Redirect("Login");
+                }
+
 
                 SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString);
                 try

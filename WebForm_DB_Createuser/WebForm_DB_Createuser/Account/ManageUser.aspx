@@ -25,6 +25,7 @@
                     <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
                     <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
                     <asp:BoundField DataField="UniqueUserID" HeaderText="UniqueUserID" InsertVisible="False" ReadOnly="True" SortExpression="UniqueUserID" />
+                    <asp:BoundField DataField="Hours" HeaderText="Hours" SortExpression="Hours" />
                     <asp:CommandField ShowDeleteButton="True" />
                 </Columns>
                 <EditRowStyle BackColor="#7C6F57" />
@@ -38,7 +39,7 @@
                 <SortedDescendingCellStyle BackColor="#D4DFE1" />
                 <SortedDescendingHeaderStyle BackColor="#15524A" />
             </asp:GridView>
-            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:UserdbConnectionString %>" SelectCommand="SELECT [Email], [Name], [UniqueUserID] FROM [UserTable] WHERE Type = 'User' "></asp:SqlDataSource>
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:UserdbConnectionString %>" SelectCommand="SELECT [Email], [Name], [UniqueUserID], [Hours] FROM [UserTable]"></asp:SqlDataSource>
 
         </div>
     </body>

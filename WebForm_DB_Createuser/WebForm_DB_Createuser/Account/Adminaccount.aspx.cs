@@ -15,8 +15,12 @@ namespace WebForm_DB_Createuser.Account
         protected void Page_Load(object sender, EventArgs e)
         {
             string logged = Session["id"] as string;
-            
-            
+            if (logged == null)
+            {
+                Response.Redirect("Login");
+            }
+
+
 
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString); 
             try
@@ -35,7 +39,7 @@ namespace WebForm_DB_Createuser.Account
             catch (Exception s)
             {
                 Debug.WriteLine(s);
-                //Response.Redirect("Login");
+                Response.Redirect("Login");
 
             }
 

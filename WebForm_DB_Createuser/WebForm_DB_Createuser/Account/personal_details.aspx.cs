@@ -19,6 +19,10 @@ namespace WebForm_DB_Createuser.Account
             if (!IsPostBack)
             {
                 string logged = Session["id"] as string;
+                if(logged == null)
+                {
+                    Response.Redirect("Login");
+                }
 
                 SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString);
                 try
@@ -39,11 +43,13 @@ namespace WebForm_DB_Createuser.Account
                         lblContact.Text = "Contact ";
                         lblpw.Text = "Password";
                         lblnewpw.Text = "New Password";
+                        
 
                         TbName.Text = reader["Name"].ToString().Trim();
                         TbEmail.Text = reader["Email"].ToString().Trim();
                         TbContact.Text = reader["Contact"].ToString().Trim();
                         lblrfid.Text = "RFID: " + reader["UniqueRFID"].ToString();
+                        lblhours.Text = "Hours Worked:" + reader["Hours"].ToString();
 
 
                     }

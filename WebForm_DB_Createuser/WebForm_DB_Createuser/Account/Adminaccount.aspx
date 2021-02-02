@@ -21,7 +21,7 @@
             <h2>Update RFID</h2>
            
             <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301949">Click here &raquo;</a>
+                <a class="btn btn-default" href="UpdateRFID.aspx"> Configure RFID &raquo;</a>
             </p>
         </div>
     </div>

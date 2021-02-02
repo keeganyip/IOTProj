@@ -15,8 +15,12 @@ namespace WebForm_DB_Createuser.Account
         protected void Page_Load(object sender, EventArgs e)
         {
             string logged = Session["id"] as string;
-            
-            
+            if (logged == null)
+            {
+                Response.Redirect("Login");
+            }
+
+
 
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString); 
             try
@@ -25,7 +29,12 @@ namespace WebForm_DB_Createuser.Account
                 string getname = "select Name from UserTable where UniqueUserID ='" + logged + "'";
                 SqlCommand cmd = new SqlCommand(getname, conn);
                 string name = cmd.ExecuteScalar().ToString().Trim();
-                lblname.Text = name;
+                
+               lblname.Text = name;
+                
+                
+                    
+                
                 /*
                 Label lblUserVal = (Label)Page.Master.FindControl("accoutname");
                 lblUserVal.Text = name;
