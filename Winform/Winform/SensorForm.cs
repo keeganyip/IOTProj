@@ -35,6 +35,8 @@ namespace Winform
         //To save sensor data to DB, you need to change to suite your project needs
         private void saveLightSensorDataToDB(string strTime, string strlightValue, string strStatus)
         {
+            string prev = "";
+
             //Step 1: Create connection
             SqlConnection myConnect = new SqlConnection(strConnectionString);
 
@@ -50,9 +52,20 @@ namespace Winform
 
             //Step 3: Open Connection
             myConnect.Open();
+            string checkCmdText = "SELECT TOP 1 * FROM lightSensor ORDER BY ID DESC";
 
-            //Step 4: ExecuteCommand
-            int result = updateCmd.ExecuteNonQuery();
+            SqlCommand readcmd = new SqlCommand(checkCmdText, myConnect);
+            SqlDataReader reader = readcmd.ExecuteReader();
+            while (reader.Read())
+            {
+                prev = reader["lightValue"].ToString().Trim();
+            }
+            reader.Close();
+            if (prev != strlightValue)
+            {
+                //Step 4: ExecuteCommand
+                int result = updateCmd.ExecuteNonQuery();
+            }
 
             //Step 5: Close Connection
             myConnect.Close();
@@ -293,20 +306,55 @@ namespace Winform
             return Settings;
 
         }
+
+        public string retrieveLightSetting()
+        {
+            string min = "";
+            //Step 1: Create connection
+            SqlConnection myConnect = new SqlConnection(strConnectionString);
+
+            //Step 2: Create Command
+            String strCommandText =
+                "SELECT MinLight FROM LightSettings";
+
+            //Step 3: Open Connection
+            myConnect.Open();
+
+            SqlCommand readcmd = new SqlCommand(strCommandText, myConnect);
+
+            SqlDataReader reader = readcmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                min = reader["MinLight"].ToString().Trim();
+            }
+            myConnect.Close();
+            return min;
+
+        }
         private void handleLightSensorData(string strData, string strTime, string ID)
         {
             //update GUI component in any tabs
             string strlightValue = extractStringValue(strData, ID);
-            
+
             //tb_light.Text = strlightValue;
+            int lightThreshold = Convert.ToInt32(retrieveLightSetting());
 
             float fLightValue = extractFlotValue(strData, ID);
             string status = "";
-            if (fLightValue <= 500)
+            if (fLightValue <= lightThreshold)
+            { 
                  status = "Dark";
+                tb_light.BackColor = Color.Red;
+                tb_light.ForeColor = Color.White;
+            }
             else
+            { 
                  status = "Bright";
-             tb_light.Text = status;
+                tb_light.BackColor = Color.Gray;
+                tb_light.ForeColor = Color.Black;
+            }
+            tb_light.Text = status;
 
             //update database
             saveLightSensorDataToDB(strTime, strlightValue, status);
@@ -586,6 +634,29 @@ namespace Winform
         {
         }
 
-        
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblHum_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
