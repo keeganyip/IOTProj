@@ -106,16 +106,27 @@
     <script src="https://code.highcharts.com/highcharts.js"></script>
 
 
-    <script>
-       
+    <script>      
 
-        var tempchart = 
+        
         $("#temp").highcharts({
             chart: {
                 animation: Highcharts.svg,
                 type: 'line',
                 marginRight: 10,
-                
+                events: {
+                    load: function () {
+
+                        // set up the updating of the chart each second
+                       
+                        setInterval(function () {
+                            console.log('PENIS');
+                            var tempchart =  $("#temp").highcharts();
+                            tempchart.series[0].update({data: <%=tempData%>}, false)
+                            tempchart.redraw();
+                        }, 3000);
+                    }
+                }
             },
             title: {
                 text: "Hourly Temperature"

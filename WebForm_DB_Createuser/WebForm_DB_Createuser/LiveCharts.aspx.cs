@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 using System.Diagnostics;
+using System.Timers;
 
 
 namespace WebForm_DB_Createuser
@@ -45,23 +46,16 @@ namespace WebForm_DB_Createuser
             LoadDataofLightChart();
             LoadDataofHeightChart();
             LoadDataofRFIDChart();
-           
 
+            
         }
 
-        protected void loaddata()
+        private  void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-           
-            LoadDataofTempChart();
-            LoadTempAnalysis();
-            LoadDataofHumidityChart();
-            LoadDataofMoistureChart();
-            LoadDataofLightChart();
-            LoadDataofHeightChart();
-            LoadDataofRFIDChart();
+            Console.WriteLine("Hello World!");
         }
 
-        
+
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
