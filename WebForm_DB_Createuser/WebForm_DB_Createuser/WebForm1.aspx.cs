@@ -30,6 +30,10 @@ namespace WebForm_DB_Createuser
         public string idealLightData;
         public string lightAnalysis;
         public string diffLightData;
+        public string heightData;
+        public string idealHeightData;
+        public string diffHeightData;
+        public string heightAnalysis;
         public string RFIDData;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -39,6 +43,7 @@ namespace WebForm_DB_Createuser
             LoadDataofHumidityChart();
             LoadDataofMoistureChart();
             LoadDataofLightChart();
+            LoadDataofHeightChart();
             LoadDataofRFIDChart();        
 
             
@@ -54,6 +59,8 @@ namespace WebForm_DB_Createuser
                 LoadDataofMoistureChart();
                 LoadDataofLightChart();
                 LoadDataofRFIDChart();
+                LoadDataofHeightChart();
+                heightTable.Visible = true;
                 tempTable.Visible = true;
                 humidityTable.Visible = true;
                 moistureTable.Visible = true;
@@ -69,6 +76,7 @@ namespace WebForm_DB_Createuser
                 moistureTable.Visible = false;
                 lightTable.Visible = false;
                 RFIDTable.Visible = false;
+                heightTable.Visible = false;
             }
             if (DropDownList1.SelectedIndex == 2)
             {
@@ -78,6 +86,7 @@ namespace WebForm_DB_Createuser
                 tempTable.Visible = false;
                 lightTable.Visible = false;
                 RFIDTable.Visible = false;
+                heightTable.Visible = false;
             }
             if (DropDownList1.SelectedIndex == 3)
             {
@@ -86,6 +95,7 @@ namespace WebForm_DB_Createuser
                 moistureTable.Visible = true;
                 humidityTable.Visible = false;
                 tempTable.Visible = false;
+                heightTable.Visible = false;
                 RFIDTable.Visible = false;
             }
             if (DropDownList1.SelectedIndex == 4)
@@ -95,9 +105,21 @@ namespace WebForm_DB_Createuser
                 moistureTable.Visible = false;
                 humidityTable.Visible = false;
                 tempTable.Visible = false;
+                heightTable.Visible = false;
                 RFIDTable.Visible = false;
             }
             if (DropDownList1.SelectedIndex == 5)
+            {
+                LoadDataofHeightChart();
+                lightTable.Visible = false;
+                moistureTable.Visible = false;
+                humidityTable.Visible = false;
+                tempTable.Visible = false;
+                heightTable.Visible = true;
+                RFIDTable.Visible = false;
+            }
+
+            if (DropDownList1.SelectedIndex == 6)
             {
                 LoadDataofRFIDChart();
                 lightTable.Visible = false;
@@ -375,7 +397,7 @@ namespace WebForm_DB_Createuser
                 
 
 
-                moistureData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), y: " + moisturepercent + "},";
+                moistureData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + moisturepercent + "],";
 
             }
             moistureData = moistureData.Remove(moistureData.Length - 1) + ']';
@@ -460,7 +482,7 @@ namespace WebForm_DB_Createuser
                 string light = lightconverted.Trim();
 
 
-                lightData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), y: " + light + "},";
+                lightData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + light + "],";
 
             }
             lightData = lightData.Remove(lightData.Length - 1) + ']';
@@ -479,7 +501,7 @@ namespace WebForm_DB_Createuser
                 string sec = time.Substring(17, 2);
 
 
-                idealLightData += "{" + "x: Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), y: " + 4500 + "},";
+                idealLightData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + 3500 + "," + 4500 + "],";
 
             }
             idealLightData = idealLightData.Remove(idealLightData.Length - 1) + ']';
@@ -500,9 +522,91 @@ namespace WebForm_DB_Createuser
                 string light = lightconverted.Trim();
 
 
-                diffLightData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + 4500 + ", " + light + "],";
+                diffLightData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + 3500 + ", " + light + "],";
             }
             diffLightData = diffLightData.Remove(diffLightData.Length - 1) + ']';
+
+        }
+
+        public void LoadDataofHeightChart()
+        {
+            string strConnectionString = ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString;
+
+            SqlConnection myConnect = new SqlConnection(strConnectionString);
+
+            myConnect.Open();
+
+            string strCommandText = "Select FORMAT(TimeOccured,'dd/MM/yyyy HH:mm:ss') as TimeOccured, plantHeight From PlantHeight";
+
+
+            SqlCommand comm = new SqlCommand(strCommandText, myConnect);
+            DataTable dt = new DataTable();
+
+            dt.Load(comm.ExecuteReader());
+
+            gvtemp.DataSource = dt;
+            gvtemp.DataBind();
+
+
+            //data format is [  [x1,y1], [x2,y2], ...]
+            heightData = "[";
+            foreach (DataRow dr in dt.Rows)
+            {
+                string date = Convert.ToString(dr["TimeOccured"]);
+                string year = date.Substring(6, 4);
+                string month = date.Substring(3, 2);
+                string day = date.Substring(0, 2);
+                string time = Convert.ToString(dr["TimeOccured"]);
+                string hour = time.Substring(11, 2);
+                string min = time.Substring(14, 2);
+                string sec = time.Substring(17, 2);
+                string heightconverted = Convert.ToString(dr["plantHeight"]);
+                string height = heightconverted.Trim();
+
+
+                heightData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + height + "],";
+
+            }
+            heightData = heightData.Remove(heightData.Length - 1) + ']';
+
+            //data format is [  [x1,y1], [x2,y2], ...]
+            idealHeightData = "[";
+            foreach (DataRow dr in dt.Rows)
+            {
+                string date = Convert.ToString(dr["TimeOccured"]);
+                string year = date.Substring(6, 4);
+                string month = date.Substring(3, 2);
+                string day = date.Substring(0, 2);
+                string time = Convert.ToString(dr["TimeOccured"]);
+                string hour = time.Substring(11, 2);
+                string min = time.Substring(14, 2);
+                string sec = time.Substring(17, 2);
+
+
+                idealHeightData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + 120 + "," + 150 + "],";
+
+            }
+            idealHeightData = idealHeightData.Remove(idealHeightData.Length - 1) + ']';
+
+            //data format is [  [x1,y1], [x2,y2], ...]
+            diffHeightData = "[";
+            foreach (DataRow dr in dt.Rows)
+            {
+                string date = Convert.ToString(dr["TimeOccured"]);
+                string year = date.Substring(6, 4);
+                string month = date.Substring(3, 2);
+                string day = date.Substring(0, 2);
+                string time = Convert.ToString(dr["TimeOccured"]);
+                string hour = time.Substring(11, 2);
+                string min = time.Substring(14, 2);
+                string sec = time.Substring(17, 2);
+                string heightconverted = Convert.ToString(dr["plantHeight"]);
+                string height = heightconverted.Trim();
+
+
+                diffHeightData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + 120 + ", " + height + "],";
+            }
+            diffHeightData = diffHeightData.Remove(diffHeightData.Length - 1) + ']';
 
         }
 

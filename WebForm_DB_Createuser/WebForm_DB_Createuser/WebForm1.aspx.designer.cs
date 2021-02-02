@@ -105,6 +105,24 @@ namespace WebForm_DB_Createuser
         protected global::System.Web.UI.WebControls.GridView gvlight;
 
         /// <summary>
+        /// heightTable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTable heightTable;
+
+        /// <summary>
+        /// gvheight control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvheight;
+
+        /// <summary>
         /// RFIDTable control.
         /// </summary>
         /// <remarks>
