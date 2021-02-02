@@ -19,7 +19,7 @@
 <asp:Label ID="lblrfid" runat="server"></asp:Label>
 
 <br/>
- <asp:Label ID="lblhours" runat="server"></asp:Label>
+ <asp:Label ID="lblentry" runat="server"></asp:Label>
    
 <br />
     <div>
