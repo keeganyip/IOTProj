@@ -176,10 +176,10 @@ namespace WebForm_DB_Createuser
                 temp = temp.Substring(0, 2);            
 
                 tempData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + temp + "],";
-                hdf_Test.Value = tempData;
+                
             }
             tempData = tempData.Remove(tempData.Length - 1) + ']';
-            Debug.WriteLine(tempData);
+            
             //data format is [  [x1,y1], [x2,y2], ...]
             idealTempData = "[";
             foreach (DataRow dr in dt.Rows)
@@ -691,7 +691,7 @@ namespace WebForm_DB_Createuser
         public void RepeatLoadingData(object sender, EventArgs e)
         {
             
-            Debug.WriteLine("REPEATEDDDD");
+            Debug.WriteLine("REPEATEDDDD START");
             LoadDataofTempChart();
             LoadTempAnalysis();
             LoadDataofHumidityChart();
@@ -699,26 +699,27 @@ namespace WebForm_DB_Createuser
             LoadDataofLightChart();
             LoadDataofHeightChart();
             LoadDataofRFIDChart();
-            Debug.WriteLine("REPEATEDDDD");
-            
-        }
 
-        public async System.Threading.Tasks.Task DoSomethingEveryTenSeconds()
-        {
-            while (true)
-            {
-                var delayTask = System.Threading.Tasks.Task.Delay(20000);
-                Debug.WriteLine("NEW");
-                LoadDataofTempChart();
-                LoadTempAnalysis();
-                LoadDataofHumidityChart();
-                LoadDataofMoistureChart();
-                LoadDataofLightChart();
-                LoadDataofHeightChart();
-                LoadDataofRFIDChart();
-                Debug.WriteLine("NEWSUCCESS");
-                await delayTask; // wait until at least 10s elapsed since delayTask created
-            }
+            ScriptManager.RegisterStartupScript(this,
+                                                        this.GetType(),
+                                                        "Funct",
+                                                        "temdata = " + tempData + ";" +
+                                                        "idealtempdata = " + idealTempData + ";" +
+                                                        "difftempdata = " + diffTempData + ";" +
+                                                        "humdata = " + humidityData + ";" +
+                                                        "idealhumdata = " + idealHumidityData + ";" +
+                                                        "diffhumdata = " + diffHumidityData + ";" +
+                                                        "moistdata = " + moistureData + ";" +
+                                                        "idealmoistdata = " + idealMoistureData + ";" +
+                                                        "diffmoistdata = " + diffMoistureData + ";" +
+                                                        "lightdata = " + lightData + ";" +
+                                                        "ideallightdata = " + idealLightData + ";" +
+                                                        "difflightdata = " + diffLightData + ";" +
+                                                        "heightdata = " + heightData + ";" +
+                                                        "idealheightdata = " + idealHeightData + ";" +
+                                                        "diffheightdata = " + diffHeightData + ";",
+                                                        true);
+            
         }
 
         protected void Timer1_Tick(object sender, EventArgs e)

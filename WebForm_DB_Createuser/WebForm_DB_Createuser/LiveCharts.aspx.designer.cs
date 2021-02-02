@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WebForm_DB_Createuser {
-    
-    
-    public partial class LiveCharts {
-        
+namespace WebForm_DB_Createuser
+{
+
+
+    public partial class LiveCharts
+    {
+
         /// <summary>
         /// Label1 control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace WebForm_DB_Createuser {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label1;
-        
+
         /// <summary>
         /// DropDownList1 control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace WebForm_DB_Createuser {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
-        
+
         /// <summary>
         /// hdf_Test control.
         /// </summary>
@@ -38,16 +40,7 @@ namespace WebForm_DB_Createuser {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdf_Test;
-        
-        /// <summary>
-        /// ScriptManager1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
-        
+
         /// <summary>
         /// Timer1 control.
         /// </summary>
@@ -56,7 +49,7 @@ namespace WebForm_DB_Createuser {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.Timer Timer1;
-        
+
         /// <summary>
         /// UpdatePanel1 control.
         /// </summary>
@@ -65,7 +58,7 @@ namespace WebForm_DB_Createuser {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
+
         /// <summary>
         /// btnSubmit control.
         /// </summary>
@@ -74,7 +67,7 @@ namespace WebForm_DB_Createuser {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSubmit;
-        
+
         /// <summary>
         /// tempTable control.
         /// </summary>
@@ -83,7 +76,7 @@ namespace WebForm_DB_Createuser {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTable tempTable;
-        
+
         /// <summary>
         /// gvtemp control.
         /// </summary>
@@ -92,7 +85,7 @@ namespace WebForm_DB_Createuser {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvtemp;
-        
+
         /// <summary>
         /// humidityTable control.
         /// </summary>
@@ -101,7 +94,7 @@ namespace WebForm_DB_Createuser {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTable humidityTable;
-        
+
         /// <summary>
         /// gvhumidity control.
         /// </summary>
@@ -110,7 +103,7 @@ namespace WebForm_DB_Createuser {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvhumidity;
-        
+
         /// <summary>
         /// moistureTable control.
         /// </summary>
@@ -119,7 +112,7 @@ namespace WebForm_DB_Createuser {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTable moistureTable;
-        
+
         /// <summary>
         /// gvmoisture control.
         /// </summary>
@@ -128,7 +121,7 @@ namespace WebForm_DB_Createuser {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvmoisture;
-        
+
         /// <summary>
         /// lightTable control.
         /// </summary>
@@ -137,7 +130,7 @@ namespace WebForm_DB_Createuser {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTable lightTable;
-        
+
         /// <summary>
         /// gvlight control.
         /// </summary>
@@ -146,7 +139,7 @@ namespace WebForm_DB_Createuser {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvlight;
-        
+
         /// <summary>
         /// heightTable control.
         /// </summary>
@@ -155,7 +148,7 @@ namespace WebForm_DB_Createuser {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTable heightTable;
-        
+
         /// <summary>
         /// gvheight control.
         /// </summary>
@@ -164,7 +157,7 @@ namespace WebForm_DB_Createuser {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvheight;
-        
+
         /// <summary>
         /// RFIDTable control.
         /// </summary>
@@ -173,7 +166,7 @@ namespace WebForm_DB_Createuser {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlTable RFIDTable;
-        
+
         /// <summary>
         /// gvRFID control.
         /// </summary>

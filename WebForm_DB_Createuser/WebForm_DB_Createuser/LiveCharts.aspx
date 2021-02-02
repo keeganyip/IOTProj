@@ -15,7 +15,6 @@
     </asp:DropDownList>
 
     <asp:HiddenField runat="server" ID="hdf_Test" />
-    <asp:ScriptManager ID="ScriptManager1" runat="server" />
     <asp:Timer ID="Timer1" runat="server" Interval="20000" ontick="Timer1_Tick">
     </asp:Timer>
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -121,7 +120,10 @@
     
     <script>      
 
-        var temdata = document.getElementById('MainContent_hdf_Test').value;
+        //document.getElementById('MainContent_hdf_Test').value;
+        var temdata = <%=tempData%>;
+        var idealtempdata = <%=idealTempData%>;
+        var difftempdata = <%=diffTempData%>;
         $("#temp").highcharts({
             chart: {
                 animation: Highcharts.svg,
@@ -132,14 +134,16 @@
 
                         // set up the updating of the chart each second
                        
-                        setInterval(function () {
-                            console.log('PENIS');
-                            console.log(temdata);
+                        setInterval(function () {                            
+                                                       
                             document.getElementById("<%=btnSubmit.ClientID %>").click();
                             var tempchart =  $("#temp").highcharts();
-                            tempchart.series[0].update({data: temdata}, false)
+                            tempchart.series[0].update({ data: temdata }, false)
+                            tempchart.series[1].update({ data: idealtempdata }, false)
+                            tempchart.series[2].update({ data: difftempdata }, false)
                             tempchart.redraw();
-                        }, 5000);
+                            
+                        }, 20000);
                     }
                 }
             },
@@ -228,17 +232,17 @@
                 tooltip: {
                     enabled: true,
                 },
-                data: <%=tempData%>,
+                data: temdata,
             }, {
                 type: "arearange",
                 opacity: 0.3,
                 color: '#90ee90',
                 name: "Ideal Temperature",
-                data: <%=idealTempData%>,
+                data: idealtempdata,
                 }, {                
                 type: "arearange",
                 lineWidth: 0,                
-                data: <%=diffTempData%>,
+                data: difftempdata,
                 zones: [{
                     value: 26,
                     color: '#add8e6',
@@ -256,9 +260,32 @@
     </script>
 
     <script>
+
+        var humdata = <%=humidityData%>;
+        var idealhumdata = <%=idealHumidityData%>;
+        var diffhumdata = <%=diffHumidityData%>;
         $("#humidity").highcharts({            
             chart: {
-                type: 'line'
+                animation: Highcharts.svg,
+                type: 'line',
+                marginRight: 10,
+                events: {
+                    load: function () {
+
+                        // set up the updating of the chart each second
+
+                        setInterval(function () {
+                            
+                            document.getElementById("<%=btnSubmit.ClientID %>").click();
+                            var humchart = $("#humidity").highcharts();
+                            humchart.series[0].update({ data: humdata }, false)
+                            humchart.series[1].update({ data: idealhumdata }, false)
+                            humchart.series[2].update({ data: diffhumdata }, false)
+                            humchart.redraw();
+                            
+                        }, 20000);
+                    }
+                }
             },
             title: {
                 text: "Hourly Humidity %"
@@ -341,18 +368,18 @@
                     color: '#FFCCCB',
                 }],
                 name: "Hourly Humidity",
-                data: <%=humidityData%>,
+                data: humdata,
             }, {
                 type: "arearange",
                 opacity: 0.3,
                 color: '#90ee90',
                 name: "Ideal Humidity",
-                data: <%=idealHumidityData%>,
+                data: idealhumdata,
             }, {                
                 type: "arearange",
                 enableMouseTracking: false,
                 lineWidth: 0,                
-                    data: <%=diffHumidityData%>,
+                    data: diffhumdata,
                     zones: [{
                         value: 50,
                         color: '#add8e6',
@@ -369,9 +396,31 @@
     </script>
 
     <script>
+        var moistdata = <%=moistureData%>;
+        var idealmoistdata = <%=idealMoistureData%>;
+        var diffmoistdata = <%=diffMoistureData%>;
         $("#moisture").highcharts({
             chart: {
-                type: 'line'
+                animation: Highcharts.svg,
+                type: 'line',
+                marginRight: 10,
+                events: {
+                    load: function () {
+
+                        // set up the updating of the chart each second
+
+                        setInterval(function () {
+
+                            document.getElementById("<%=btnSubmit.ClientID %>").click();
+                            var moistchart = $("#moisture").highcharts();
+                            moistchart.series[0].update({ data: moistdata }, false)
+                            moistchart.series[1].update({ data: idealmoistdata }, false)
+                            moistchart.series[2].update({ data: diffmoistdata }, false)
+                            moistchart.redraw();
+                            
+                        }, 20000);
+                    }
+                }
             },
             title: {
                 text: "Hourly Moisture Value"
@@ -453,13 +502,13 @@
                     value: 100,
                     color: '#FFCCCB',
                 }],
-                data: <%=moistureData%>,
+                data: moistdata,
             }, {                
                 type: "arearange",
                 opacity: 0.3,
                 color: '#90ee90',
                 name: "Ideal Moisture",
-                data: <%=idealMoistureData%>,
+                data: idealmoistdata,
             }, {
                 type: "arearange",
                 zones: [{
@@ -474,16 +523,41 @@
                 }],                
                 lineWidth: 0,                    
                 enableMouseTracking: false,                   
-                data: <%=diffMoistureData%>,
+                data: diffmoistdata,
                 showInLegend: false
             }]
         });
     </script>
 
     <script>
+        var lightdata = <%=lightData%>;
+        var ideallightdata = <%=idealLightData%>;
+        var difflightdata = <%=diffLightData%>;
         $("#light").highcharts({
             chart: {
-                type: "line"
+                animation: Highcharts.svg,
+                type: 'line',
+                marginRight: 10,
+                events: {
+                    load: function () {
+
+                        // set up the updating of the chart each second
+
+                        setInterval(function () {
+
+                            console.log('light start');
+                            console.log(lightdata);
+                            console.log(difflightdata);
+                            document.getElementById("<%=btnSubmit.ClientID %>").click();
+                            var lightchart = $("#light").highcharts();
+                            lightchart.series[0].update({ data: lightdata }, false)
+                            lightchart.series[1].update({ data: ideallightdata }, false)
+                            lightchart.series[2].update({ data: difflightdata }, false)
+                            lightchart.redraw();
+                            console.log('light end');
+                        }, 20000);
+                    }
+                }
             },
             title: {
                 text: "Hourly Light Intensity Value"
@@ -566,13 +640,13 @@
                     value: 6000,
                     color: '#FFCCCB',
                 }],
-                data: <%=lightData%>,
+                data: lightdata,
             }, {
                 type: "arearange",
                 name: "Ideal Amount of Light",
                 opacity: 0.3,
                 color: '#90ee90',
-                data: <%=idealLightData%>,
+                data: ideallightdata,
             }, {
                 name: "range",
                 type: "arearange",
@@ -588,16 +662,41 @@
                 }],
                 lineWidth: 0,                    
                 enableMouseTracking: false, 
-                data: <%=diffLightData%>,
+                data: difflightdata,
                 showInLegend: false
             }]
         });
     </script>
     
     <script>
+        var heightdata = <%=heightData%>;
+        var idealheightdata = <%=idealHeightData%>;
+        var diffheightdata = <%=diffHeightData%>;
         $("#height").highcharts({
             chart: {
-                type: "line"
+                animation: Highcharts.svg,
+                type: 'line',
+                marginRight: 10,
+                events: {
+                    load: function () {
+
+                        // set up the updating of the chart each second
+
+                        setInterval(function () {
+
+                            console.log('height start');
+                            console.log(heightdata);
+                            console.log(diffheightdata);
+                            document.getElementById("<%=btnSubmit.ClientID %>").click();
+                            var heightchart = $("#height").highcharts();
+                            heightchart.series[0].update({ data: heightdata }, false)
+                            heightchart.series[1].update({ data: idealheightdata }, false)
+                            heightchart.series[2].update({ data: diffheightdata }, false)
+                            heightchart.redraw();
+                            console.log('height end');
+                        }, 20000);
+                    }
+                }
             },
             title: {
                 text: "Plant Height (cm)"
@@ -668,7 +767,7 @@
                 }
             },
             series: [{
-                name: "Hourly Plant Growth",
+                name: "Hourly Plant Height",
                 type: "line",
                 zones: [{
                     value: 120,
@@ -680,13 +779,13 @@
                     value: 300,
                     color: '#FFCCCB',
                 }],
-                data: <%=heightData%>,
+                data: heightdata,
             }, {
                     type: "arearange",
                     name: "Ideal Plant Height",
                     opacity: 0.3,
                     color: '#90ee90',
-                    data: <%=idealHeightData%>,
+                    data: idealheightdata,
             }, {
                 name: "range",
                 type: "arearange",
@@ -702,8 +801,8 @@
                 }],
                 lineWidth: 0,                    
                 enableMouseTracking: false, 
-                data: <%=diffHeightData%>,
-                    showInLegend: false
+                data: diffheightdata,
+                showInLegend: false
                 }]
         });
 
