@@ -24,6 +24,7 @@ namespace Winform
         public bool loggedin = false;
         public string rfid = "";
         public string loginrfid = "";
+        public string userid = "";
         string strConnectionString =
            ConfigurationManager.ConnectionStrings["Winform.Properties.Settings.UserdbConnectionString"].ConnectionString;
 
@@ -445,7 +446,7 @@ namespace Winform
             string strMessage = dt + ":" + strData;
             lbDataComms.Items.Insert(0, strMessage);
         }
-
+        
         //This method is automatically called when data is received
         public void processDataReceive(String strData)
         {
@@ -541,7 +542,18 @@ namespace Winform
         private void btn_logout_Click(object sender, EventArgs e)
         {
             this.Hide();
+
+            //Step 1: Open Connection
+            SqlConnection myConnect = new SqlConnection(strConnectionString);
+            myConnect.Open();
             
+            string strLog = "INSERT INTO TimeLog (UserID,Time,Event) VALUES(@userID,@time,'Logout')";
+            SqlCommand cmd2 = new SqlCommand(strLog, myConnect);
+            cmd2.Parameters.AddWithValue("@userID", userid);
+            cmd2.Parameters.AddWithValue("@time", DateTime.Now);
+
+            cmd2.ExecuteNonQuery();
+
             fl.Show();
         }
 

@@ -86,11 +86,14 @@ namespace Winform
         //}
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            bool userexists = false;
+            string rfid = "";
+            string userid = "";
             //Step 1: Open Connection
             SqlConnection myConnect = new SqlConnection(strConnectionString);
 
             //Step 2: Create Command
-            string strCommandText = "SELECT Email, Password, UniqueRFID FROM UserTable";
+            string strCommandText = "SELECT Email, UniqueUserID,Password, UniqueRFID FROM UserTable";
             //Add a WHERE clause to SQL Statement
             strCommandText += " WHERE Email=@Email AND Password=@Password";
             SqlCommand cmd = new SqlCommand(strCommandText, myConnect);
@@ -104,22 +107,37 @@ namespace Winform
 
                 //Step 4: Access Data
                 SqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
+                while (reader.Read())
+                {
+
+                    userexists = true;
+                    userid = reader["UniqueUserID"].ToString();
+                    rfid = reader.GetString(3);
+
+                }
+                reader.Close();
+                if (userexists == true)
                 {
                     SensorForm fm = new SensorForm();
                     MessageBox.Show("Login Successful");
                     this.Hide();
-                    
-                    fm.loginrfid = reader.GetString(2);
+
+                    string strLog = "INSERT INTO TimeLog (UserID,Time,Event) VALUES(@userID,@time,'Login')";
+                    SqlCommand cmd2 = new SqlCommand(strLog, myConnect);
+                    cmd2.Parameters.AddWithValue("@userID", userid);
+                    cmd2.Parameters.AddWithValue("@time", DateTime.Now);
+
+                    cmd2.ExecuteNonQuery();
+                    fm.loginrfid = rfid;
+                    fm.userid = userid;
                     Console.WriteLine(rfid);
                     fm.Show();
                     fm.backgroundWorker1.RunWorkerAsync();
-
                 }
                 else
-                    MessageBox.Show("Login Fail");
+                    MessageBox.Show("FAIL");
 
-                reader.Close();
+                
             }
 
             catch (SqlException ex)
