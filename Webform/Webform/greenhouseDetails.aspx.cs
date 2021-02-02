@@ -53,6 +53,48 @@ namespace Webform
             string gHouseID = Request.QueryString["Gid"].ToString();
             gHouse = oGHouse.getGHouse(gHouseID);
 
+            if (gHouse.gHouse_Status == "Active")
+            {
+                lblStatus.Text = gHouse.gHouse_Status;
+                lblStatus.ForeColor = System.Drawing.Color.Green;
+                btnChangeStatus.CssClass = "btn btn-warning";
+                btnChangeStatus.Text = "Disable";
+            }
+            else
+            {
+                lblStatus.Text = gHouse.gHouse_Status;
+                lblStatus.ForeColor = System.Drawing.Color.Red;
+                btnChangeStatus.CssClass = "btn btn-success";
+                btnChangeStatus.Text = "Enable";
+            }
+            
+        }
+
+        protected void changeStatusClick(object sender, EventArgs e)
+        {
+            Greenhouse oGHouse = new Greenhouse();
+
+            string gHouseID = Request.QueryString["Gid"].ToString();
+            gHouse = oGHouse.getGHouse(gHouseID);
+
+            SqlConnection conn = new SqlConnection(constr);
+            SqlCommand cmd = new SqlCommand("UPDATE GREENHOUSESTABLE SET STATUS = @STATUS WHERE GID = @GID", conn);
+
+            if (gHouse.gHouse_Status == "Active")
+            {
+                cmd.Parameters.AddWithValue("@STATUS", "Inactive");
+                cmd.Parameters.AddWithValue("@GID", gHouse.gHouse_ID);
+            }
+            else
+            {
+                cmd.Parameters.AddWithValue("@STATUS", "Active");
+                cmd.Parameters.AddWithValue("@GID", gHouse.gHouse_ID);
+            }
+
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            Response.Redirect(Request.Url.AbsoluteUri);
         }
 
         private DataSet GetUser()

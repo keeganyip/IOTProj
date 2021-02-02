@@ -4,6 +4,22 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col my-auto">
+                            <p style="font-size: large;">Status: <asp:Label ID="lblStatus" Font-Size="Large" runat="server"></asp:Label></p>
+                        </div>
+                        <div class="col float-end text-right">
+                            <asp:Button ID="btnChangeStatus" runat="server" OnClick="changeStatusClick" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-lg-9">
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 <div class="col">
@@ -17,8 +33,8 @@
                                 </div>
                                 <div class="col-7">
                                     <div class="float-end text-end">
-                                        <p class="card-category">Members</p>
-                                        <h3 class="card-title">150,000</h3>
+                                        <p class="card-category">Electric Bill</p>
+                                        <h3 class="card-title">$567</h3>
                                     </div>
                                 </div>
                             </div>
@@ -26,7 +42,7 @@
                         <div class="card-footer">
                             <hr />
                             <div class="stats">
-                                <i class="tim-icons icon-trophy"></i>Customers feedback
+                                <i class="tim-icons icon-trophy"></i>
                             </div>
                         </div>
                     </div>
@@ -43,7 +59,7 @@
                                 </div>
                                 <div class="col-7">
                                     <div class="float-end text-end">
-                                        <p class="card-category"></p>
+                                        <p class="card-category">Last Activity</p>
                                         <h3 class="card-title">150,000</h3>
                                     </div>
                                 </div>
@@ -69,8 +85,8 @@
                                 </div>
                                 <div class="col-7">
                                     <div class="float-end text-end">
-                                        <p class="card-category">Users</p>
-                                        <h3 class="card-title">150,000</h3>
+                                        <p class="card-category">Number of staff</p>
+                                        <h3 class="card-title">10</h3>
                                     </div>
                                 </div>
                             </div>
