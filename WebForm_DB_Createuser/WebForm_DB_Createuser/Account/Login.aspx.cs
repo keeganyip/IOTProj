@@ -8,6 +8,7 @@ using WebForm_DB_Createuser.Models;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Diagnostics;
+using Salt_Password_Sample;
 
 namespace WebForm_DB_Createuser.Account
 {
@@ -70,10 +71,11 @@ namespace WebForm_DB_Createuser.Account
             string checkuser = "select count(*) from UserTable where Email='" + Email.Text + "'";
             SqlCommand cmd = new SqlCommand(checkuser, conn);
             int temp = Convert.ToInt32(cmd.ExecuteScalar().ToString());
-            
+
+           
             if (temp == 1)
             {
-
+                Debug.WriteLine("user");
                 string correctpw = "select Password from UserTable where Email='" + Email.Text + "'";
               
                 SqlCommand cmds = new SqlCommand(correctpw, conn);
@@ -83,6 +85,7 @@ namespace WebForm_DB_Createuser.Account
                 {
 
                     string pass = Password.Text;
+                    bool flag = Hash.VerifyHash(pass, "SHA512", checkpw);
                     Response.Write(checkpw + Password.Text);
                     Response.Write(pass == checkpw);
                     Debug.WriteLine(pass, "pass");
@@ -92,24 +95,31 @@ namespace WebForm_DB_Createuser.Account
                     {
 
 
-                        if (pass == checkpw)
+                        if (flag == true)
                         {
 
                             string id = "select UniqueUserID from UserTable where Email='" + Email.Text + "'";
                             SqlCommand cmdid = new SqlCommand(id, conn);
                             string id_collected = cmdid.ExecuteScalar().ToString().Trim();
+                            string type = "select Type from UserTable where Email ='" + Email.Text + "'";
+                            SqlCommand cmdtype = new SqlCommand(type, conn);
+                            string type_collected = cmdtype.ExecuteScalar().ToString().Trim();
+                            
                             conn.Close();
 
-                            Response.Write("password check");
-                            Response.Write(id_collected);
-                            Session["id"] = id_collected;
+                           
+                        
+                            if (type_collected == "Admin")
+                            {
+                                Session["id"] = id_collected;
+                                Response.Redirect("Adminaccount");
+                            }
 
-
-
-                            Response.Write(Session["id"]);
-
-                            Response.Redirect("Useraccount");
-
+                            else
+                            {
+                                Session["id"] = id_collected;
+                                Response.Redirect("Useraccount");
+                            }
                         }
                     }
                     catch (Exception s)
@@ -121,9 +131,13 @@ namespace WebForm_DB_Createuser.Account
 
         
 
-
+                
             }
-        }
+            
+
+                }
+            
+        
 
         protected void Email_TextChanged(object sender, EventArgs e)
         {
@@ -137,32 +151,38 @@ namespace WebForm_DB_Createuser.Account
             string correctpw = "select Password from UserTable where Email='" + Email.Text + "'";
             SqlCommand cmds = new SqlCommand(correctpw, conn);
 
+            
+
 
 
             try
-            {
-                string checkpw = cmds.ExecuteScalar().ToString().Trim();
-              
-                
-                string pass = Password.Text;
-                if (pass != checkpw)
                 {
-                    customValidator1.ErrorMessage = " Wrong login Credentials";
+                    string checkpw = cmds.ExecuteScalar().ToString().Trim();
+
+
+                    string pass = Password.Text;
+                    bool flag = Hash.VerifyHash(pass, "SHA512", checkpw);
+                    if (flag == false)
+                    {
+                        customValidator1.ErrorMessage = " Wrong login Credentials";
+                        args.IsValid = false;
+                    }
+
+
+
+                }
+                catch (Exception s)
+                {
+                    Debug.WriteLine(s);
+                    customValidator1.ErrorMessage = "Email does not exist ";
                     args.IsValid = false;
                 }
 
-
-                
-            }
-            catch(Exception s)
-            {
-                Debug.WriteLine(s);
-                customValidator1.ErrorMessage = "Email does not exist ";
-                args.IsValid = false;
-            }
+           
+        }
+            
         }
            
-           
-    }
+    
     
 }

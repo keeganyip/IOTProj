@@ -12,6 +12,7 @@ using System.Net.Mail;
 using System.Drawing;
 using System.Configuration;
 using System.Data.SqlClient;
+using Salt_Password_Sample;
 
 namespace WebForm_DB_Createuser
 {
@@ -40,7 +41,8 @@ namespace WebForm_DB_Createuser
                 stringchars[i] = chars[random.Next(chars.Length)];
             }
             var randompw = new string(stringchars);
-            changingpw.Parameters.AddWithValue("@Password", randompw);
+            string epass = Hash.ComputeHash(randompw, "SHA512", null);
+            changingpw.Parameters.AddWithValue("@Password", epass);
             changingpw.Parameters.AddWithValue("@Email", Email.Text.Trim());
 
             changingpw.ExecuteNonQuery();

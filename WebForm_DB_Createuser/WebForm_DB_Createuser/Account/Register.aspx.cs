@@ -8,6 +8,7 @@ using Owin;
 using WebForm_DB_Createuser.Models;
 using System.Data.SqlClient;
 using System.Configuration;
+using Salt_Password_Sample;
 
 
 namespace WebForm_DB_Createuser.Account
@@ -57,8 +58,9 @@ namespace WebForm_DB_Createuser.Account
 
                     string insertQuery = "insert into UserTable(Email,Password,Name,Contact,Type,UniqueRFID)values(@Email,@password,@Name,@Contact,@Type,@UniqueRFID)";
                     SqlCommand cmd = new SqlCommand(insertQuery, conn);
+                    string epass = Hash.ComputeHash(Password.Text,"SHA512",null);
                     cmd.Parameters.AddWithValue("@Email", Email.Text);
-                    cmd.Parameters.AddWithValue("@password", Password.Text);
+                    cmd.Parameters.AddWithValue("@password", epass);
                     cmd.Parameters.AddWithValue("@Name", Name.Text);
                     cmd.Parameters.AddWithValue("@Contact", Contact.Text);
                     cmd.Parameters.AddWithValue("@Type", "User");

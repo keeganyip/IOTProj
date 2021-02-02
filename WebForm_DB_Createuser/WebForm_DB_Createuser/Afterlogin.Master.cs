@@ -13,7 +13,7 @@ namespace WebForm_DB_Createuser
     public partial class SiteMaster : MasterPage
 
     {
-        
+        /*        
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
         private string _antiXsrfTokenValue;
@@ -69,7 +69,7 @@ namespace WebForm_DB_Createuser
             }
         }
         
-        
+        */
       
     }
 

@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CommsUtil">
-      <HintPath>..\..\..\CommsUtil.dll</HintPath>
+      <HintPath>D:\School\Year 2\Sem 2\IOT Project\CommsUtil.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -50,6 +50,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HumiditySettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HumiditySettings.Designer.cs">
+      <DependentUpon>HumiditySettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="loginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="loginForm.designer.cs">
+      <DependentUpon>loginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="mainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mainForm.Designer.cs">
+      <DependentUpon>mainForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SensorForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,12 +76,39 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TemperatureSettings.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TemperatureSettings.Designer.cs">
       <DependentUpon>TemperatureSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="waitRFID.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="waitRFID.Designer.cs">
+      <DependentUpon>waitRFID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WaterSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WaterSettings.Designer.cs">
+      <DependentUpon>WaterSettings.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="HumiditySettings.resx">
+      <DependentUpon>HumiditySettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="loginForm.resx">
+      <DependentUpon>loginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mainForm.resx">
+      <DependentUpon>mainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SensorForm.resx">
       <DependentUpon>SensorForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -76,8 +121,17 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TemperatureSettings.resx">
       <DependentUpon>TemperatureSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="waitRFID.resx">
+      <DependentUpon>waitRFID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WaterSettings.resx">
+      <DependentUpon>WaterSettings.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

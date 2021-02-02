@@ -23,15 +23,21 @@ namespace IOTProj
         Pin tempPin = Pin.AnalogPin0;
         Pin lightPin = Pin.AnalogPin1;
         Pin waterPin = Pin.AnalogPin2;
+
         Pin buzzerPin = Pin.DigitalPin3;
+        IUltrasonicRangerSensor DistSens = DeviceFactory.Build.UltraSonicSensor(Pin.DigitalPin8);
+
 
         ILed red = DeviceFactory.Build.Led(Pin.DigitalPin5);
         IDHTTemperatureAndHumiditySensor humtemp = DeviceFactory.Build.DHTTemperatureAndHumiditySensor(Pin.DigitalPin2, 0);
 
-        private System.Threading.Semaphore sm = new System.Threading.Semaphore(1, 1);
+        private System.Threading.Semaphore sm = new System.Threading.Semaphore(1, 5);
 
         double temp = 23.00;
         double sensorTemp;
+        private int distance = 400;
+        int sensorDistance;
+
         //used by sensor for internal processing
         // 1023 : completely dry , more water : value will drop
         int moistureAdcValue = 1023;
@@ -102,6 +108,17 @@ namespace IOTProj
             return val;
         }
 
+        private int getDistance()
+        {
+            sm.WaitOne();
+            int distanceRead = DistSens.MeasureInCentimeters();
+            sm.Release();
+            if (distanceRead < 400 && distanceRead > 0)
+                distance = distanceRead;
+            return distance;
+
+        }
+
         private double getTemp()
         {
             int adcValue; double tempCalculated = 0, R;
@@ -136,6 +153,7 @@ namespace IOTProj
             Debug.WriteLine("Light ADC = " + adcValue);
             //sendDataToWindows("TEMP=" + humtemp.TemperatureInCelsius);
             getTempD();
+            handleSensorDistance();
             sendDataToWindows("LIGHT=" + GetLightValue(lightPin));
             sendDataToWindows("MOISTURE=" + getMoisture());
 
@@ -149,23 +167,35 @@ namespace IOTProj
             {
                 ChangeLedState(red, SensorStatus.Off);
             }
-
-            if (strDataReceived.Equals("RFIDMODE"))
+            if (strDataReceived.Equals("BUZZ"))
             {
-                curMode = MODE_RFID;
+                emeregency();
+                soundBuzzer();
             }
+
+            if (!strRfidDetected.Equals(""))
+            {
+                Debug.WriteLine(strRfidDetected);
+                if (strRfidDetected.Equals("6A003E7CF2DA"))
+                {
+                    sendDataToWindows("RFID=" + strRfidDetected);
+                }
+                strRfidDetected = "";
+            }
+
             strDataReceived = "";
         }
         private void handleRFID()
         {
-            if (!strRfidDetected.Equals(""))
-            {
-                if (strRfidDetected.Equals("6A003E7CF2DA"))
-                {
-                    Debug.WriteLine("Hi Emran :)");
-                    sendDataToWindows("RFID=" + strRfidDetected);
-                }
-            }
+           
+        }
+
+        private void handleSensorDistance()
+        {
+            sensorDistance = getDistance();
+            Debug.WriteLine(sensorDistance);
+            sendDataToWindows("DISTANCE=" + sensorDistance);
+
         }
         private int GetLightValue(Pin pin)
         {
@@ -244,18 +274,16 @@ namespace IOTProj
             {
                 Sleep(300);
                 
-                sensorTemp = getTemp();
+                //sensorTemp = getTemp();
 
                 if (curMode == MODE_SENDTEMP)
                     handleModeSendTemp();
                 else if (curMode == MODE_RFID)
                     handleRFID();
+               
+
                 getTempD();
-                if (strDataReceived.Equals("BUZZ"))
-                { 
-                    emeregency();
-                    soundBuzzer();
-                }
+                
                
                 sensorMoistureAdcValue = getMoisture(); //get moisture from sensor
                 //Debug.WriteLine("Moisture = " + sensorMoistureAdcValue);
