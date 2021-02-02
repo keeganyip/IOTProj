@@ -71,6 +71,17 @@
             </td>
         </tr>
     </table>
+    <table id="heightTable" runat="server">
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <div id="height" style="min-height: 600px; min-width:800px;">
+                    <asp:GridView ID="gvheight" runat="server">
+                    </asp:GridView>
+                </div>
+            </td>
+        </tr>
+    </table>
     <table id="RFIDTable" runat="server">
         <tr>
             <td>&nbsp;</td>
@@ -388,6 +399,9 @@
                     text: "Soil Moisture %"
                 }
             },
+            tooltip: {
+                shared: true,
+            },
             series: [{                
                 name: "Hourly Moisture",
                 zones: [{
@@ -419,7 +433,8 @@
                     value: 100,
                     color: '#FFCCCB',
                 }],                
-                lineWidth: 0,
+                lineWidth: 0,                    
+                enableMouseTracking: false,                   
                 data: <%=diffMoistureData%>,
                 showInLegend: false
             }]
@@ -429,7 +444,7 @@
     <script>
         $("#light").highcharts({
             chart: {
-                type: "spline"
+                type: "line"
             },
             title: {
                 text: "Hourly Light Intensity Value"
@@ -477,6 +492,9 @@
                     text: 'All'
                 }],
             },
+            tooltip: {
+                shared: true,
+            },
             xAxis: {
                 type: 'datetime',
                 tickAmount: 24,
@@ -498,77 +516,156 @@
             },
             series: [{                
                 name: "Hourly Light Intensity",
+                type: "line",
                 zones: [{
-                    value: 4500,
+                    value: 3500,
                     color: '#add8e6',
+                }, {
+                    value: 4500,
+                    color: '#90ee90',
                 }, {
                     value: 6000,
                     color: '#FFCCCB',
                 }],
                 data: <%=lightData%>,
             }, {
+                type: "arearange",
                 name: "Ideal Amount of Light",
+                opacity: 0.3,
                 color: '#90ee90',
                 data: <%=idealLightData%>,
             }, {
                 name: "range",
                 type: "arearange",
                 zones: [{
-                    value: 4500,
+                    value: 3500,
                     color: '#add8e6',
+                }, {
+                    value: 4500,
+                    color: '#90ee90',
                 }, {
                     value: 6000,
                     color: '#FFCCCB',
                 }],
-                lineWidth: 0,
+                lineWidth: 0,                    
+                enableMouseTracking: false, 
                 data: <%=diffLightData%>,
                 showInLegend: false
             }]
         });
     </script>
-
+    
     <script>
-        var chart = new Highcharts.Chart({
+        $("#height").highcharts({
             chart: {
-                renderTo: 'container',
-                type: 'area'
+                type: "line"
             },
-            plotOptions: {
-                area: {
-                    stacking: true,
-                    lineWidth: 0,
-                    shadow: false,
-                    marker: {
-                        enabled: false
-                    },
-                    enableMouseTracking: false,
-                    showInLegend: false
+            title: {
+                text: "Plant Height (cm)"
+            },
+            navigator: {
+                enabled: true,
+            },
+            rangeSelector: {
+                //allButtonsEnabled: true,
+                enabled: true,
+                inputEnabled: false,
+                buttonPosition: {
+                    align: 'left'
                 },
-                line: {
-                    zIndex: 5
+                labelStyle: {
+                    display: 'none'
+                },
+                buttons: [{
+                    type: 'hour',
+                    count: 1,
+                    text: '1h'
+                },
+                {
+                    type: 'hour',
+                    count: 3,
+                    text: '3h'
+                },
+                {
+                    type: 'hour',
+                    count: 6,
+                    text: '6h'
+                },
+                {
+                    type: 'day',
+                    count: 1,
+                    text: 'day'
+                },
+                {
+                    type: 'week',
+                    count: 1,
+                    text: 'week'
+                },
+                {
+                    type: 'all',
+                    text: 'All'
+                }],
+            },
+            tooltip: {
+                shared: true,
+            },
+            xAxis: {
+                type: 'datetime',
+                tickAmount: 24,
+                tickInterval: 3600 * 1000,
+                minTickInterval: 3600 * 1000,
+                lineWidth: 1,
+                title: {
+                    text: "Time"
+                },
+                minRange: 1,
+                scrollbar: {
+                    enabled: true
+                },
+            },
+            yAxis: {
+                title: {
+                    text: "Height (cm)"
                 }
             },
             series: [{
-                type: 'line',
-                color: '#555',
-                data: [60, 60, 50, 40, 35, 45, 50, 65, 70, 75]
+                name: "Hourly Plant Growth",
+                type: "line",
+                zones: [{
+                    value: 120,
+                    color: '#add8e6',
+                }, {
+                    value: 150,
+                    color: '#90ee90',
+                }, {
+                    value: 300,
+                    color: '#FFCCCB',
+                }],
+                data: <%=heightData%>,
             }, {
-                type: 'line',
-                color: '#55e',
-                data: [50, 55, 50, 45, 45, 50, 50, 55, 55, 60]
+                    type: "arearange",
+                    name: "Ideal Plant Height",
+                    opacity: 0.3,
+                    color: '#90ee90',
+                    data: <%=idealHeightData%>,
             }, {
-                color: '#5e5',
-                data: [10, 5, 0, 0, 0, 0, 0, 10, 15, 15]
-            }, {
-                color: '#e55',
-                data: [0, 0, 0, 5, 10, 5, 0, 0, 0, 0]
-            }, {
-                id: 'transparent',
-                color: 'rgba(255,255,255,0)',
-                data: [50, 55, 50, 40, 35, 45, 50, 55, 55, 60]
-            }]
-        }, function (chart) {
-            chart.get('transparent').area.hide();
+                name: "range",
+                type: "arearange",
+                zones: [{
+                    value: 120,
+                    color: '#add8e6',
+                }, {
+                    value: 150,
+                    color: '#90ee90',
+                }, {
+                    value: 300,
+                    color: '#FFCCCB',
+                }],
+                lineWidth: 0,                    
+                enableMouseTracking: false, 
+                data: <%=diffHeightData%>,
+                    showInLegend: false
+                }]
         });
     </script>
 
