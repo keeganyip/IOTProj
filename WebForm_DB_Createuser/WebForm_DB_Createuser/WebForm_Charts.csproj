@@ -221,6 +221,7 @@
     <Content Include="ProjectDB_log.ldf">
       <DependentUpon>ProjectDB.mdf</DependentUpon>
     </Content>
+    <Content Include="LiveCharts.aspx" />
     <Content Include="WebForm1.aspx" />
     <Content Include="AfterloginAdmin.Master" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -498,6 +499,13 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="LiveCharts.aspx.cs">
+      <DependentUpon>LiveCharts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LiveCharts.aspx.designer.cs">
+      <DependentUpon>LiveCharts.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
