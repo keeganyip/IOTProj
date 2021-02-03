@@ -221,11 +221,11 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="LiveCharts.aspx" />
     <Content Include="ProjectDB.mdf" />
     <Content Include="ProjectDB_log.ldf">
       <DependentUpon>ProjectDB.mdf</DependentUpon>
     </Content>
-    <Content Include="LiveCharts.aspx" />
     <Content Include="WebForm1.aspx" />
     <Content Include="AfterloginAdmin.Master" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -473,6 +473,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LiveCharts.aspx.cs">
+      <DependentUpon>LiveCharts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LiveCharts.aspx.designer.cs">
+      <DependentUpon>LiveCharts.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Afterlogin.Master.cs">
@@ -503,13 +510,6 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="LiveCharts.aspx.cs">
-      <DependentUpon>LiveCharts.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="LiveCharts.aspx.designer.cs">
-      <DependentUpon>LiveCharts.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebForm1.aspx.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
