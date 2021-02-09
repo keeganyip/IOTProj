@@ -15,16 +15,23 @@
                             <ItemTemplate>
                                 <div class="col-3">
                                     <div class="card">
-                                        <asp:LinkButton ID="LinkButton2" PostBackUrl='<%# ResolveClientUrl("userDetails.aspx?UniqueUserID=" + Eval("UniqueUserID")) %>' runat="server">
-                                            <div class="card-body">
-                                                <h4 class="card-title">
-                                                    <asp:Label ID="lblGreenhouseName" runat="server" CssClass="card-title" Text='<%#Eval("Name")%>'></asp:Label></h4>
-                                                <h6 class="card-subtitle mb-2 text-muted">
-                                                    <asp:Label ID="lblGreenhouseID" runat="server" CssClass="card-subtitle mb-2 text-muted" Text='<%#Eval("UniqueUserID") %>'></asp:Label>
-                                                </h6>
-                                                <asp:Label ID="Label3" runat="server" CssClass="card-link" Text='<%#Eval("Type") %>'></asp:Label>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-lg-9">
+                                                    <h4 class="card-title">
+                                                        <asp:Label ID="lblUserName" runat="server" CssClass="card-title" Text='<%#Eval("Name")%>'></asp:Label></h4>
+                                                    <h6 class="card-subtitle mb-2 text-muted">
+                                                        <asp:Label ID="lblUserID" runat="server" CssClass="card-subtitle mb-2 text-muted" Text='<%#Eval("UniqueUserID") %>' ></asp:Label>
+                                                    </h6>
+                                                    <asp:Label ID="Label3" runat="server" CssClass="card-link" Text='<%#Eval("Type") %>'></asp:Label>
+                                                </div>
+                                                <div class="col-lg-3 text-center mt-3">
+                                                    <asp:LinkButton ID="LinkButton1" runat="server" OnClientClick="return confirm('Do you want to delete this Customer?');" OnClick="deleteUser">
+                                                        <i class="far fa-trash-alt fa-3x"></i>
+                                                    </asp:LinkButton>
+                                                </div>
                                             </div>
-                                        </asp:LinkButton>
+                                        </div>
                                     </div>
                                 </div>
                             </ItemTemplate>

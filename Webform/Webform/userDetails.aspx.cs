@@ -34,7 +34,7 @@ namespace Webform
                 }
                 catch (Exception E)
                 {
-                    // Response.Redirect("useraccount");
+                    // Response.Redirect("userList.aspx");
                     Response.Write(E);
                 }
 
@@ -44,7 +44,7 @@ namespace Webform
 
         protected void updateButton_Click(object sender, EventArgs e)
         {
-            string logged = Session["id"] as string;
+            string logged = Request.QueryString["UniqueUserID"].ToString();
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString);
             conn.Open();
             string checkuser = "select count(*) from UserTable where Email='" + TbEmail.Text + "'";
@@ -69,7 +69,7 @@ namespace Webform
                     cmd.Parameters.AddWithValue("@Contact", TbContact.Text);
                     cmd.ExecuteNonQuery();
                     conn.Close();
-                    Response.Redirect("useraccount");
+                    Response.Redirect("userList.aspx");
                 }
                 else
                 {
@@ -87,7 +87,7 @@ namespace Webform
                             cmd.Parameters.AddWithValue("@Password", TbNewPw.Text);
                             cmd.ExecuteNonQuery();
                             conn.Close();
-                            Response.Redirect("useraccount");
+                            Response.Redirect("userList.aspx");
                         }
                     }
                 }
@@ -105,7 +105,7 @@ namespace Webform
                     cmd.Parameters.AddWithValue("@Contact", TbContact.Text);
                     cmd.ExecuteNonQuery();
                     conn.Close();
-                    Response.Redirect("useraccount");
+                    Response.Redirect("userList.aspx");
                 }
                 else
                 {
@@ -121,7 +121,7 @@ namespace Webform
                         cmd.Parameters.AddWithValue("@Password", TbNewPw.Text);
                         cmd.ExecuteNonQuery();
                         conn.Close();
-                        Response.Redirect("useraccount");
+                        Response.Redirect("userList.aspx");
                     }
                 }
             }
