@@ -80,7 +80,7 @@ namespace Webform
                                 Response.Write(id_collected);
                                 Session["id"] = id_collected;
                                 Session["session"] = "adminlogged";
-                                Response.Redirect("index.aspx");
+                                Response.Redirect("greenhouses.aspx");
                             }
 
                             Response.Write(Session["id"]);

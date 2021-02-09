@@ -1801,6 +1801,7 @@
     <Content Include="assets\vendor\jquery\jquery.min.js" />
     <Content Include="assets\vendor\jquery\jquery.slim.js" />
     <Content Include="assets\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="devices.aspx" />
     <Content Include="forgotPassword.aspx" />
     <Content Include="greenhouseDetails.aspx" />
     <Content Include="greenhouses.aspx" />
@@ -2134,6 +2135,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\Greenhouse.cs" />
+    <Compile Include="devices.aspx.cs">
+      <DependentUpon>devices.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="devices.aspx.designer.cs">
+      <DependentUpon>devices.aspx</DependentUpon>
+    </Compile>
     <Compile Include="greenhouseDetails.aspx.cs">
       <DependentUpon>greenhouseDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
