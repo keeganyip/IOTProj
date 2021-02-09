@@ -68,6 +68,7 @@ namespace Webform
                                 Session["session"] = "logged";
                                 Response.Redirect("index.aspx");
                             }
+
                             else if (userType == "Admin")
                             {
                                 conn.Open();
@@ -83,8 +84,22 @@ namespace Webform
                                 Response.Redirect("greenhouses.aspx");
                             }
 
-                            Response.Write(Session["id"]);
+                            else if (userType == "UserAdmin")
+                            {
+                                conn.Open();
+                                string id = "select UniqueUserID from UserTable where Email='" + Email.Text + "'";
+                                SqlCommand cmdid = new SqlCommand(id, conn);
+                                string id_collected = cmdid.ExecuteScalar().ToString().Trim();
+                                conn.Close();
 
+                                Response.Write("password check");
+                                Response.Write(id_collected);
+                                Session["id"] = id_collected;
+                                Session["session"] = "useradminlogged";
+                                Response.Redirect("userList.aspx");
+                            }
+
+                            Response.Write(Session["id"]);
                         }
                     }
                     catch (Exception s)

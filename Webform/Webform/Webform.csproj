@@ -1801,7 +1801,6 @@
     <Content Include="assets\vendor\jquery\jquery.min.js" />
     <Content Include="assets\vendor\jquery\jquery.slim.js" />
     <Content Include="assets\vendor\jquery\jquery.slim.min.js" />
-    <Content Include="devices.aspx" />
     <Content Include="forgotPassword.aspx" />
     <Content Include="greenhouseDetails.aspx" />
     <Content Include="greenhouses.aspx" />
@@ -2114,6 +2113,7 @@
     <Content Include="assets\vendor\jquery\jquery.slim.min.map" />
     <Content Include="AdminMaster.Master" />
     <Content Include="assets\css\bootstrap.css.map" />
+    <Content Include="UserAdmin.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2128,6 +2128,8 @@
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="sessionTimeout.aspx" />
     <Content Include="Test.aspx" />
+    <Content Include="userDetails.aspx" />
+    <Content Include="userList.aspx" />
     <Content Include="userProfile.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -2135,13 +2137,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\Greenhouse.cs" />
-    <Compile Include="devices.aspx.cs">
-      <DependentUpon>devices.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="devices.aspx.designer.cs">
-      <DependentUpon>devices.aspx</DependentUpon>
-    </Compile>
     <Compile Include="greenhouseDetails.aspx.cs">
       <DependentUpon>greenhouseDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2169,6 +2164,27 @@
     </Compile>
     <Compile Include="AdminMaster.Master.designer.cs">
       <DependentUpon>AdminMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="UserAdmin.Master.cs">
+      <DependentUpon>UserAdmin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserAdmin.Master.designer.cs">
+      <DependentUpon>UserAdmin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="userDetails.aspx.cs">
+      <DependentUpon>userDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="userDetails.aspx.designer.cs">
+      <DependentUpon>userDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="userList.aspx.cs">
+      <DependentUpon>userList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="userList.aspx.designer.cs">
+      <DependentUpon>userList.aspx</DependentUpon>
     </Compile>
     <Compile Include="userProfile.aspx.cs">
       <DependentUpon>userProfile.aspx</DependentUpon>

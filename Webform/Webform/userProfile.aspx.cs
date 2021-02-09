@@ -77,7 +77,7 @@ namespace Webform
                     cmd.Parameters.AddWithValue("@Contact", TbContact.Text);
                     cmd.ExecuteNonQuery();
                     conn.Close();
-                    Response.Redirect("useraccount");
+                    Response.Redirect("userList.aspx");
                 }
                 else
                 {
@@ -95,7 +95,7 @@ namespace Webform
                             cmd.Parameters.AddWithValue("@Password", TbNewPw.Text);
                             cmd.ExecuteNonQuery();
                             conn.Close();
-                            Response.Redirect("useraccount");
+                            Response.Redirect("userList.aspx");
                         }
                     }
                 }
@@ -113,7 +113,7 @@ namespace Webform
                     cmd.Parameters.AddWithValue("@Contact", TbContact.Text);
                     cmd.ExecuteNonQuery();
                     conn.Close();
-                    Response.Redirect("useraccount");
+                    Response.Redirect("userList.aspx");
                 }
                 else
                 {
@@ -129,7 +129,7 @@ namespace Webform
                         cmd.Parameters.AddWithValue("@Password", TbNewPw.Text);
                         cmd.ExecuteNonQuery();
                         conn.Close();
-                        Response.Redirect("useraccount");
+                        Response.Redirect("userList.aspx");
                     }
 
 
