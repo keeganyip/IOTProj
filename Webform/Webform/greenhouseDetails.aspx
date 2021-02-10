@@ -112,8 +112,7 @@
     <asp:HiddenField runat="server" ID="hdf_Test" />
     <asp:Timer ID="Timer1" runat="server" Interval="20000" ontick="Timer1_Tick">
     </asp:Timer>
-    <asp:ScriptManager ID="ScriptManager1" runat="server">
-    </asp:ScriptManager>
+    
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <asp:Button ID="btnSubmit" runat="server" OnClick="RepeatLoadingData" style = "display:none"/>
