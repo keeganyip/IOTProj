@@ -216,8 +216,8 @@
         </tr>
     </table>          
     </div>
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js%22%3E"></script>
+
+    <script src="assets/js/core/jquery.min.js"></script>
     <script src="http://code.highcharts.com/stock/highstock.js"></script>
     <script src="http://code.highcharts.com/highcharts-more.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -791,11 +791,12 @@
         var heightdata = <%=heightData%>;
         var idealheightdata = <%=idealHeightData%>;
         var diffheightdata = <%=diffHeightData%>;
-        $("#height").highcharts({
+        var chart = new Highcharts.Chart({
             chart: {
                 animation: Highcharts.svg,
                 type: 'line',
                 marginRight: 10,
+                renderTo: "height",
                 events: {
                     load: function () {
 
