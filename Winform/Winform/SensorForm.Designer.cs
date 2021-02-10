@@ -43,11 +43,11 @@
             this.btn_Dash = new System.Windows.Forms.Button();
             this.btn_Settings = new System.Windows.Forms.Button();
             this.panelSensors = new System.Windows.Forms.Panel();
-            this.tbHeight = new System.Windows.Forms.TextBox();
             this.lbLiveStatus = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tb_Humidity = new System.Windows.Forms.TextBox();
             this.lblHum = new System.Windows.Forms.Label();
+            this.tbHeight = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.label7 = new System.Windows.Forms.Label();
             this.SideBar.SuspendLayout();
@@ -61,7 +61,7 @@
             this.tb_Moisture.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_Moisture.ForeColor = System.Drawing.SystemColors.Window;
             this.tb_Moisture.Location = new System.Drawing.Point(473, 66);
-            this.tb_Moisture.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_Moisture.Margin = new System.Windows.Forms.Padding(2);
             this.tb_Moisture.Name = "tb_Moisture";
             this.tb_Moisture.ReadOnly = true;
             this.tb_Moisture.Size = new System.Drawing.Size(137, 38);
@@ -88,7 +88,7 @@
             this.tb_light.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_light.ForeColor = System.Drawing.SystemColors.Window;
             this.tb_light.Location = new System.Drawing.Point(247, 66);
-            this.tb_light.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_light.Margin = new System.Windows.Forms.Padding(2);
             this.tb_light.Name = "tb_light";
             this.tb_light.ReadOnly = true;
             this.tb_light.Size = new System.Drawing.Size(137, 38);
@@ -146,7 +146,7 @@
             this.tbtemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbtemp.ForeColor = System.Drawing.SystemColors.Window;
             this.tbtemp.Location = new System.Drawing.Point(38, 66);
-            this.tbtemp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbtemp.Margin = new System.Windows.Forms.Padding(2);
             this.tbtemp.Name = "tbtemp";
             this.tbtemp.ReadOnly = true;
             this.tbtemp.Size = new System.Drawing.Size(137, 38);
@@ -161,9 +161,9 @@
             this.label1.Location = new System.Drawing.Point(39, 26);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 31);
+            this.label1.Size = new System.Drawing.Size(177, 31);
             this.label1.TabIndex = 10;
-            this.label1.Text = "Temp:";
+            this.label1.Text = "Temperature:";
             this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // SideBar
@@ -256,18 +256,6 @@
             this.panelSensors.Size = new System.Drawing.Size(883, 516);
             this.panelSensors.TabIndex = 17;
             // 
-            // tbHeight
-            // 
-            this.tbHeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.tbHeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tbHeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbHeight.ForeColor = System.Drawing.SystemColors.Window;
-            this.tbHeight.Location = new System.Drawing.Point(231, 56);
-            this.tbHeight.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tbHeight.Name = "tbHeight";
-            this.tbHeight.Size = new System.Drawing.Size(137, 38);
-            this.tbHeight.TabIndex = 21;
-            // 
             // lbLiveStatus
             // 
             this.lbLiveStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
@@ -302,7 +290,7 @@
             this.tb_Humidity.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_Humidity.ForeColor = System.Drawing.SystemColors.Window;
             this.tb_Humidity.Location = new System.Drawing.Point(705, 66);
-            this.tb_Humidity.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_Humidity.Margin = new System.Windows.Forms.Padding(2);
             this.tb_Humidity.Name = "tb_Humidity";
             this.tb_Humidity.Size = new System.Drawing.Size(137, 38);
             this.tb_Humidity.TabIndex = 18;
@@ -320,6 +308,18 @@
             this.lblHum.TabIndex = 17;
             this.lblHum.Text = "Humidity:";
             this.lblHum.Click += new System.EventHandler(this.lblHum_Click);
+            // 
+            // tbHeight
+            // 
+            this.tbHeight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.tbHeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbHeight.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbHeight.ForeColor = System.Drawing.SystemColors.Window;
+            this.tbHeight.Location = new System.Drawing.Point(231, 56);
+            this.tbHeight.Margin = new System.Windows.Forms.Padding(2);
+            this.tbHeight.Name = "tbHeight";
+            this.tbHeight.Size = new System.Drawing.Size(137, 38);
+            this.tbHeight.TabIndex = 21;
             // 
             // backgroundWorker1
             // 

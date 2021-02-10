@@ -263,7 +263,7 @@ namespace Winform
             }
             else
             {
-                tbtemp.BackColor = Color.Gray;
+                tbtemp.BackColor = Color.FromArgb(0,192,0);
                 tbtemp.ForeColor = Color.Black;
                 if(lbLiveStatus.Items.Contains(TempStatus))
                 {
@@ -351,7 +351,7 @@ namespace Winform
             else
             { 
                  status = "Bright";
-                tb_light.BackColor = Color.Gray;
+                tb_light.BackColor = Color.FromArgb(0,192,0);
                 tb_light.ForeColor = Color.Black;
             }
             tb_light.Text = status;
@@ -425,7 +425,7 @@ namespace Winform
             else
             { 
                 status = "Moderately Wet";
-                tb_Moisture.BackColor = Color.Gray;
+                tb_Moisture.BackColor = Color.FromArgb(0,192,0);
                 tb_Moisture.ForeColor = Color.Black;
                 if (lbLiveStatus.Items.Contains(WaterStatus))
                 {
