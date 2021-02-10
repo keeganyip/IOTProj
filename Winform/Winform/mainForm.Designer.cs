@@ -59,11 +59,11 @@
             // 
             // btnLogout
             // 
-            this.btnLogout.BackColor = System.Drawing.Color.ForestGreen;
+            this.btnLogout.BackColor = System.Drawing.Color.LimeGreen;
             this.btnLogout.FlatAppearance.BorderSize = 0;
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLogout.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnLogout.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnLogout.Location = new System.Drawing.Point(902, 12);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(168, 45);
@@ -74,7 +74,7 @@
             // 
             // panelTemp
             // 
-            this.panelTemp.BackColor = System.Drawing.Color.ForestGreen;
+            this.panelTemp.BackColor = System.Drawing.Color.LimeGreen;
             this.panelTemp.Controls.Add(this.label1);
             this.panelTemp.Controls.Add(this.pictureBox1);
             this.panelTemp.Controls.Add(this.lblTemperature);
@@ -119,7 +119,7 @@
             // 
             // panelMoisture
             // 
-            this.panelMoisture.BackColor = System.Drawing.Color.ForestGreen;
+            this.panelMoisture.BackColor = System.Drawing.Color.LimeGreen;
             this.panelMoisture.Controls.Add(this.label2);
             this.panelMoisture.Controls.Add(this.pictureBox2);
             this.panelMoisture.Controls.Add(this.lblMoisture);
@@ -163,7 +163,7 @@
             // 
             // panelLight
             // 
-            this.panelLight.BackColor = System.Drawing.Color.ForestGreen;
+            this.panelLight.BackColor = System.Drawing.Color.LimeGreen;
             this.panelLight.Controls.Add(this.label3);
             this.panelLight.Controls.Add(this.pictureBox3);
             this.panelLight.Controls.Add(this.lblLight);
@@ -207,11 +207,11 @@
             // 
             // btnDash
             // 
-            this.btnDash.BackColor = System.Drawing.Color.ForestGreen;
+            this.btnDash.BackColor = System.Drawing.Color.LimeGreen;
             this.btnDash.FlatAppearance.BorderSize = 0;
             this.btnDash.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDash.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDash.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnDash.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnDash.Location = new System.Drawing.Point(10, 12);
             this.btnDash.Name = "btnDash";
             this.btnDash.Size = new System.Drawing.Size(168, 45);
@@ -222,7 +222,7 @@
             // 
             // PnHumSettings
             // 
-            this.PnHumSettings.BackColor = System.Drawing.Color.ForestGreen;
+            this.PnHumSettings.BackColor = System.Drawing.Color.LimeGreen;
             this.PnHumSettings.Controls.Add(this.label4);
             this.PnHumSettings.Controls.Add(this.pictureboxhum);
             this.PnHumSettings.Controls.Add(this.label5);
@@ -269,7 +269,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
+            this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(1082, 595);
             this.Controls.Add(this.PnHumSettings);
             this.Controls.Add(this.btnDash);

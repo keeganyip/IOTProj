@@ -29,9 +29,9 @@
             // 
             // btnLogin
             // 
-            this.btnLogin.BackColor = System.Drawing.Color.ForestGreen;
+            this.btnLogin.BackColor = System.Drawing.Color.LimeGreen;
             this.btnLogin.FlatAppearance.BorderSize = 0;
-            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.Location = new System.Drawing.Point(130, 179);
             this.btnLogin.Name = "btnLogin";
@@ -43,7 +43,7 @@
             // 
             // tbUserName
             // 
-            this.tbUserName.BackColor = System.Drawing.Color.Gray;
+            this.tbUserName.BackColor = System.Drawing.Color.White;
             this.tbUserName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbUserName.ForeColor = System.Drawing.SystemColors.WindowText;
             this.tbUserName.Location = new System.Drawing.Point(76, 63);
@@ -53,7 +53,7 @@
             // 
             // tbPassword
             // 
-            this.tbPassword.BackColor = System.Drawing.Color.Gray;
+            this.tbPassword.BackColor = System.Drawing.Color.White;
             this.tbPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbPassword.ForeColor = System.Drawing.SystemColors.WindowText;
             this.tbPassword.Location = new System.Drawing.Point(76, 120);
@@ -89,7 +89,7 @@
             this.AcceptButton = this.btnLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
+            this.BackColor = System.Drawing.Color.SteelBlue;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(412, 245);
             this.Controls.Add(this.lblPassword);

@@ -55,14 +55,14 @@
             // 
             // btnSubmit
             // 
-            this.btnSubmit.BackColor = System.Drawing.Color.ForestGreen;
+            this.btnSubmit.BackColor = System.Drawing.Color.LimeGreen;
             this.btnSubmit.FlatAppearance.BorderSize = 0;
             this.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSubmit.Location = new System.Drawing.Point(76, 131);
             this.btnSubmit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(153, 45);
+            this.btnSubmit.Size = new System.Drawing.Size(177, 44);
             this.btnSubmit.TabIndex = 2;
             this.btnSubmit.Text = "Save Changes";
             this.btnSubmit.UseVisualStyleBackColor = false;
@@ -72,8 +72,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(51)))), ((int)(((byte)(76)))));
-            this.ClientSize = new System.Drawing.Size(338, 232);
+            this.BackColor = System.Drawing.Color.SteelBlue;
+            this.ClientSize = new System.Drawing.Size(338, 213);
             this.Controls.Add(this.btnSubmit);
             this.Controls.Add(this.txtLightReq);
             this.Controls.Add(this.label1);
