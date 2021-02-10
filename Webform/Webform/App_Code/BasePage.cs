@@ -21,6 +21,10 @@ public class BasePage : System.Web.UI.Page
             {
                 this.MasterPageFile = "~/AdminMaster.master";
             }
+            else if (Session["session"].ToString().Trim() == "useradminlogged")
+            {
+                this.MasterPageFile = "~/UserAdmin.master";
+            }
         }
         else
         {
