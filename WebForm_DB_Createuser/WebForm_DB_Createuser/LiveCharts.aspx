@@ -11,7 +11,7 @@
         <asp:ListItem Value="Moisture">Moisture</asp:ListItem>
         <asp:ListItem Value="Light">Light Intensity</asp:ListItem>
         <asp:ListItem Value="Height">Plant Height</asp:ListItem>
-        <asp:ListItem Value="RFID">RFID</asp:ListItem>
+       
     </asp:DropDownList>
 
     <asp:HiddenField runat="server" ID="hdf_Test" />
@@ -58,6 +58,12 @@
                     </asp:GridView>
                 </div>
             </td>
+            <td>                            
+                <div>
+                    <p>HUMIDITY ANALYSIS:</p>                    
+                    <p id="humidityreport"></p>   
+                </div>
+            </td>
         </tr>
     </table>
     </div>
@@ -71,6 +77,12 @@
                     </asp:GridView>
                 </div>
             </td>
+            <td>                            
+                <div>
+                    <p>SOIL MOISTURE LEVEL ANALYSIS:</p>                    
+                    <p id="moisturereport"></p>   
+                </div>
+            </td>
         </tr>
     </table>
     <table id="lightTable" runat="server">
@@ -80,6 +92,12 @@
                 <div id="light" style="min-height: 600px; min-width:800px;">
                     <asp:GridView ID="gvlight" runat="server">
                     </asp:GridView>
+                </div>
+            </td>
+            <td>                            
+                <div>
+                    <p>LIGHT ANALYSIS:</p>                    
+                    <p id="lightreport"></p>   
                 </div>
             </td>
         </tr>
@@ -100,19 +118,7 @@
                 </div>
             </td>
         </tr>
-    </table>
-    <table id="RFIDTable" runat="server">
-        <tr>
-            <td>&nbsp;</td>
-            <td>
-                <div id="RFID" style="min-height: 600px; min-width:800px;">
-                    <p>User Entry Records</p>
-                    <asp:GridView ID="gvRFID" runat="server" CssClass="table table-striped">
-                    </asp:GridView>
-                </div>
-            </td>
-        </tr>
-    </table>           
+    </table>          
     </div>
     
     <script src="http://code.highcharts.com/stock/highstock.js"></script>
@@ -217,7 +223,7 @@
             },
             yAxis: {
                 title: {
-                    text: "Temp"
+                    text: "Temperature"
                 }
             },
             tooltip: {
@@ -267,7 +273,8 @@
     </script>
 
     <script>
-
+        var humidityAnalysis = "<%=humidityAnalysis%>";
+        document.getElementById("humidityreport").innerHTML = humidityAnalysis;
         var humdata = <%=humidityData%>;
         var idealhumdata = <%=idealHumidityData%>;
         var diffhumdata = <%=diffHumidityData%>;
@@ -284,6 +291,7 @@
                         setInterval(function () {
                             
                             document.getElementById("<%=btnSubmit.ClientID %>").click();
+                            document.getElementById("humidityreport").innerHTML = humidityAnalysis;
                             var humchart = $("#humidity").highcharts();
                             humchart.series[0].update({ data: humdata }, false)
                             humchart.series[1].update({ data: idealhumdata }, false)
@@ -403,6 +411,8 @@
     </script>
 
     <script>
+        var moistureAnalysis = "<%=moistureAnalysis%>";
+        document.getElementById("moisturereport").innerHTML = moistureAnalysis;
         var moistdata = <%=moistureData%>;
         var idealmoistdata = <%=idealMoistureData%>;
         var diffmoistdata = <%=diffMoistureData%>;
@@ -419,6 +429,7 @@
                         setInterval(function () {
 
                             document.getElementById("<%=btnSubmit.ClientID %>").click();
+                            document.getElementById("moisturereport").innerHTML = moistureAnalysis;
                             var moistchart = $("#moisture").highcharts();
                             moistchart.series[0].update({ data: moistdata }, false)
                             moistchart.series[1].update({ data: idealmoistdata }, false)
@@ -537,6 +548,8 @@
     </script>
 
     <script>
+        var lightAnalysis = "<%=lightAnalysis%>";
+        document.getElementById("lightreport").innerHTML = lightAnalysis;
         var lightdata = <%=lightData%>;
         var ideallightdata = <%=idealLightData%>;
         var difflightdata = <%=diffLightData%>;
@@ -554,6 +567,7 @@
 
                             
                             document.getElementById("<%=btnSubmit.ClientID %>").click();
+                            document.getElementById("lightreport").innerHTML = lightAnalysis;
                             var lightchart = $("#light").highcharts();
                             lightchart.series[0].update({ data: lightdata }, false)
                             lightchart.series[1].update({ data: ideallightdata }, false)

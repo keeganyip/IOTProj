@@ -46,11 +46,14 @@ namespace WebForm_DB_Createuser
             LoadDataofTempChart();
             LoadTempAnalysis();
             LoadDataofHumidityChart();
+            LoadHumAnalysis();
             LoadDataofMoistureChart();
+            LoadMoistureAnalysis();
             LoadDataofLightChart();
+            LoadLightAnalysis();
             LoadDataofHeightChart();
             LoadHeightAnalysis();
-            LoadDataofRFIDChart();           
+                       
 
         }
 
@@ -61,17 +64,20 @@ namespace WebForm_DB_Createuser
                 LoadDataofTempChart();
                 LoadTempAnalysis();
                 LoadDataofHumidityChart();
+                LoadHumAnalysis();
                 LoadDataofMoistureChart();
+                LoadMoistureAnalysis();
                 LoadDataofLightChart();
-                LoadDataofRFIDChart();
+                LoadLightAnalysis();
                 LoadDataofHeightChart();
                 LoadHeightAnalysis();
+                
                 heightTable.Visible = true;
                 tempTable.Visible = true;
                 humidityTable.Visible = true;
                 moistureTable.Visible = true;
                 lightTable.Visible = true;
-                RFIDTable.Visible = true;
+                
             }
             if (DropDownList1.SelectedIndex == 1)
             {
@@ -81,38 +87,41 @@ namespace WebForm_DB_Createuser
                 tempTable.Visible = true;
                 moistureTable.Visible = false;
                 lightTable.Visible = false;
-                RFIDTable.Visible = false;
+                
                 heightTable.Visible = false;
             }
             if (DropDownList1.SelectedIndex == 2)
             {
                 LoadDataofHumidityChart();
+                LoadHumAnalysis();
                 moistureTable.Visible = false;
                 humidityTable.Visible = true;
                 tempTable.Visible = false;
                 lightTable.Visible = false;
-                RFIDTable.Visible = false;
+                
                 heightTable.Visible = false;
             }
             if (DropDownList1.SelectedIndex == 3)
             {
                 LoadDataofMoistureChart();
+                LoadMoistureAnalysis();
                 lightTable.Visible = false;
                 moistureTable.Visible = true;
                 humidityTable.Visible = false;
                 tempTable.Visible = false;
                 heightTable.Visible = false;
-                RFIDTable.Visible = false;
+                
             }
             if (DropDownList1.SelectedIndex == 4)
             {
                 LoadDataofLightChart();
+                LoadLightAnalysis();
                 lightTable.Visible = true;
                 moistureTable.Visible = false;
                 humidityTable.Visible = false;
                 tempTable.Visible = false;
                 heightTable.Visible = false;
-                RFIDTable.Visible = false;
+                
             }
             if (DropDownList1.SelectedIndex == 5)
             {
@@ -123,18 +132,9 @@ namespace WebForm_DB_Createuser
                 humidityTable.Visible = false;
                 tempTable.Visible = false;
                 heightTable.Visible = true;
-                RFIDTable.Visible = false;
+                
             }
-
-            if (DropDownList1.SelectedIndex == 6)
-            {
-                LoadDataofRFIDChart();
-                lightTable.Visible = false;
-                moistureTable.Visible = false;
-                humidityTable.Visible = false;
-                tempTable.Visible = false;
-                RFIDTable.Visible = true;
-            }
+                        
 
         }
 
@@ -253,32 +253,39 @@ namespace WebForm_DB_Createuser
 
             //data format is [  {x1,y1}, {x2,y2}, ...]
             //date format: Date.UTC(2010, 1, 1, 12, 0, 0)
-            int avgTemp = 0;            
-            foreach (DataRow dr in dt.Rows)
+            double avgTemp = 0;
+            try
             {
-                string tempconverted = Convert.ToString(dr["tempValue"]);
-                string temp = tempconverted.Trim();
-                
-                avgTemp = Convert.ToInt32(temp);              
+                foreach (DataRow dr in dt.Rows)
+                {
+                    string tempconverted = Convert.ToString(dr["tempValue"]);
+                    string temp = tempconverted.Trim();
 
-            }
+                    avgTemp = Convert.ToDouble(temp);
 
-            if (avgTemp > 30)
-            {                
-                tempAnalysis = "Past Hour Average Temperature: " + avgTemp + "°C <br>" +
-                    "The Past Hour Average Temperature is higher than the ideal temperature by " + (avgTemp - 30) + "°C <br>" + 
-                    "Action Taken: Temperature is currently being lowered!";
+                }
+
+                if (avgTemp > 30)
+                {
+                    tempAnalysis = "Past Hour Average Temperature: " + avgTemp + "°C <br>" +
+                        "The Past Hour Average Temperature is higher than the ideal temperature by " + (avgTemp - 30) + "°C <br>" +
+                        "Action Taken: Temperature is currently being lowered!";
+                }
+                else if (avgTemp < 26)
+                {
+                    tempAnalysis = "Past Hour Average Temperature: " + avgTemp + "°C <br>" +
+                        "The Past Hour Average Temperature is lower than the ideal temperature by " + (26 - avgTemp) + "°C <br>" +
+                        "Action Taken: Temperature is currently being increased!";
+                }
+                else
+                {
+                    tempAnalysis = "Past Hour Average Temperature: " + avgTemp + "°C <br>" +
+                        "The Past Hour Average Temperature is ideal!";
+                }
             }
-            else if (avgTemp < 26)
+            catch(Exception)
             {
-                tempAnalysis = "Past Hour Average Temperature: " + avgTemp + "°C <br>" +
-                    "The Past Hour Average Temperature is lower than the ideal temperature by " + (26 - avgTemp) + "°C <br>" +
-                    "Action Taken: Temperature is currently being increased!";
-            }
-            else
-            {
-                tempAnalysis = "Past Hour Average Temperature: " + avgTemp + "°C <br>" +
-                    "The Past Hour Average Temperature is ideal!";
+                tempAnalysis = "No data captured in the past hour!";                
             }
        
         }
@@ -367,6 +374,65 @@ namespace WebForm_DB_Createuser
             }
             diffHumidityData = diffHumidityData.Remove(diffHumidityData.Length - 1) + ']';
             
+
+        }
+
+        public void LoadHumAnalysis()
+        {
+            string strConnectionString = ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString;
+
+            SqlConnection myConnect = new SqlConnection(strConnectionString);
+
+            myConnect.Open();
+
+            string strCommandText = "Select AVG(HumValue) as HumValue From HumiditySensor Where TimeOccured BETWEEN DATEADD(Hour, -1, GETDATE()) AND GETDATE()";
+
+
+            SqlCommand comm = new SqlCommand(strCommandText, myConnect);
+            DataTable dt = new DataTable();
+
+            dt.Load(comm.ExecuteReader());
+
+            gvtemp.DataSource = dt;
+            gvtemp.DataBind();
+
+
+            //data format is [  {x1,y1}, {x2,y2}, ...]
+            //date format: Date.UTC(2010, 1, 1, 12, 0, 0)
+            double avgHum = 0;
+            try
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    string humconverted = Convert.ToString(dr["HumValue"]);
+                    string hum = humconverted.Trim();
+
+                    avgHum = Convert.ToDouble(hum);
+
+                }
+
+                if (avgHum > 70)
+                {
+                    humidityAnalysis = "Past Hour Average Humidity: " + avgHum + "% <br>" +
+                        "The Past Hour Average Humidity is higher than the ideal Humidity by " + (avgHum - 70) + "% <br>" +
+                        "Action Taken: Humidity is currently being lowered!";
+                }
+                else if (avgHum < 50)
+                {
+                    humidityAnalysis = "Past Hour Average Humidity: " + avgHum + "% <br>" +
+                        "The Past Hour Average Humidity is lower than the ideal Humidity by " + (50 - avgHum) + "% <br>" +
+                        "Action Taken: Humidity is currently being increased!";
+                }
+                else
+                {
+                    humidityAnalysis = "Past Hour Average Humidity: " + avgHum + "% <br>" +
+                        "The Past Hour Average Humidity is ideal!";
+                }
+            }
+            catch (Exception)
+            {
+                humidityAnalysis = "No data captured in the past hour!";
+            }
 
         }
 
@@ -465,6 +531,68 @@ namespace WebForm_DB_Createuser
 
         }
 
+        public void LoadMoistureAnalysis()
+        {
+            string strConnectionString = ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString;
+
+            SqlConnection myConnect = new SqlConnection(strConnectionString);
+
+            myConnect.Open();
+
+            string strCommandText = "Select AVG(moistureLevel) as moistureLevel From moistureSensor Where TimeOccured BETWEEN DATEADD(Hour, -1, GETDATE()) AND GETDATE()";
+
+
+            SqlCommand comm = new SqlCommand(strCommandText, myConnect);
+            DataTable dt = new DataTable();
+
+            dt.Load(comm.ExecuteReader());
+
+            gvtemp.DataSource = dt;
+            gvtemp.DataBind();
+
+
+            //data format is [  {x1,y1}, {x2,y2}, ...]
+            //date format: Date.UTC(2010, 1, 1, 12, 0, 0)
+            double avgMoisture = 0;
+            try
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    string moistconverted = Convert.ToString(dr["moistureLevel"]);
+                    string moist = moistconverted.Trim();
+
+                    int moisturepercent = Convert.ToInt32(moist);
+                    moisturepercent = (moisturepercent / 2) / 10;
+
+                    avgMoisture = Convert.ToDouble(moisturepercent);
+                    
+                }
+
+                if (avgMoisture > 45)
+                {
+                    moistureAnalysis = "Past Hour Average Soil Moisture Level: " + avgMoisture + "% <br>" +
+                        "The Past Hour Average Moisture is higher than the ideal Level by " + (avgMoisture - 45) + "% <br>" +
+                        "Action Taken: Soil Moisture Level is currently being lowered!";
+                }
+                else if (avgMoisture < 10)
+                {
+                    moistureAnalysis = "Past Hour Average Soil Moisture Level: " + avgMoisture + "% <br>" +
+                        "The Past Hour Average Soil Moisture Level is lower than the ideal Level by " + (10 - avgMoisture) + "% <br>" +
+                        "Action Taken: Soil Moisture Level is currently being increased!";
+                }
+                else
+                {
+                    moistureAnalysis = "Past Hour Average Soil Moisture Level: " + avgMoisture + "% <br>" +
+                        "The Past Hour Average Soil Moisture Level is ideal!";
+                }
+            }
+            catch (Exception)
+            {
+                moistureAnalysis = "No data captured in the past hour!";
+            }
+
+        }
+
         public void LoadDataofLightChart()
         {
             string strConnectionString = ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString;
@@ -550,6 +678,65 @@ namespace WebForm_DB_Createuser
                 diffLightData += "[" + "Date.UTC(" + year + "," + month + "," + day + "," + hour + "," + min + "," + sec + "), " + 3500 + ", " + light + "],";
             }
             diffLightData = diffLightData.Remove(diffLightData.Length - 1) + ']';
+
+        }
+
+        public void LoadLightAnalysis()
+        {
+            string strConnectionString = ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString;
+
+            SqlConnection myConnect = new SqlConnection(strConnectionString);
+
+            myConnect.Open();
+
+            string strCommandText = "Select AVG(lightValue) as lightValue From lightSensor Where TimeOccured BETWEEN DATEADD(Hour, -1, GETDATE()) AND GETDATE()";
+
+
+            SqlCommand comm = new SqlCommand(strCommandText, myConnect);
+            DataTable dt = new DataTable();
+
+            dt.Load(comm.ExecuteReader());
+
+            gvtemp.DataSource = dt;
+            gvtemp.DataBind();
+
+
+            //data format is [  {x1,y1}, {x2,y2}, ...]
+            //date format: Date.UTC(2010, 1, 1, 12, 0, 0)
+            double avgLight = 0;
+            try
+            {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    string lightconverted = Convert.ToString(dr["lightValue"]);
+                    string light = lightconverted.Trim();
+
+                    avgLight = Convert.ToDouble(light);
+
+                }
+
+                if (avgLight > 70)
+                {
+                    lightAnalysis = "Past Hour Average Light Intensity: " + avgLight + "lux <br>" +
+                        "The Past Hour Average Light Intensity is higher than the ideal by " + (avgLight - 70) + "lux <br>" +
+                        "Action Taken: Light Intensity is currently being lowered!";
+                }
+                else if (avgLight < 50)
+                {
+                    lightAnalysis = "Past Hour Average Light Intensity: " + avgLight + "lux <br>" +
+                        "The Past Hour Average Light Intensity is lower than the ideal by " + (50 - avgLight) + "lux <br>" +
+                        "Action Taken: Light Intensity is currently being increased!";
+                }
+                else
+                {
+                    lightAnalysis = "Past Hour Average Light Intensity: " + avgLight + "lux <br>" +
+                        "The Past Hour Average Light Intensity is ideal!";
+                }
+            }
+            catch (Exception)
+            {
+                lightAnalysis = "No data captured in the past hour!";
+            }
 
         }
 
@@ -681,80 +868,31 @@ namespace WebForm_DB_Createuser
             }
 
             //avg rate of growth of tomatoes in cm is 15cm 
-            Debug.WriteLine(avgHeight);
-
-            if (avgHeight > 10)
+            try
             {
-                heightAnalysis = "Past 5 Days Average Growth: " + avgHeight + "cm <br>" +
-                    "The Past 5 Days Average Growth is faster than the ideal growth rate by " + (avgHeight - 10) + "cm <br>" + 
-                    "Advice: Keep it up and maintain!";
+                if (avgHeight > 10)
+                {
+                    heightAnalysis = "Past 5 Days Average Growth: " + avgHeight + "cm <br>" +
+                        "The Past 5 Days Average Growth is faster than the ideal growth rate by " + (avgHeight - 10) + "cm <br>" +
+                        "Advice: Keep it up and maintain!";
+                }
+                else if (avgHeight < 4)
+                {
+                    heightAnalysis = "Past 5 Days Average Growth: " + avgHeight + "cm <br>" +
+                        "The Past 5 Days Average Growth is slower than the ideal growth rate by " + (5 - avgHeight) + "cm <br>" +
+                        "Advice: Please check on the plant and the other conditions!";
+                }
+                else
+                {
+                    heightAnalysis = "Past 5 Days Average Growth: " + avgHeight + "cm <br>" +
+                        "The Past 5 Days Average Growth is ideal!";
+                }
             }
-            else if (avgHeight < 4)
+            catch(Exception)
             {
-                heightAnalysis = "Past 5 Days Average Growth: " + avgHeight + "cm <br>" +
-                    "The Past 5 Days Average Growth is slower than the ideal growth rate by " + (5 - avgHeight) + "cm <br>" +
-                    "Advice: Please check on the plant and the other conditions!";
+                heightAnalysis = "No data captured in the past hour!";
             }
-            else
-            {
-                heightAnalysis = "Past 5 Days Average Growth: " + avgHeight + "cm <br>" +
-                    "The Past 5 Days Average Growth is ideal!";
-            }
-
-        }
-
-
-        public void LoadDataofRFIDChart()
-        {
-            string strConnectionString = ConfigurationManager.ConnectionStrings["MyDBConnectStr"].ConnectionString;
-
-            SqlConnection myConnect = new SqlConnection(strConnectionString);
-
-            myConnect.Open();
-
-            //string strCommandText = "Select UserID, Date, Time From RFID Where EventType='NormalUser' ORDER BY 'UserID'";
-
-            string strCommandText = "Select UserID, CONVERT(VARCHAR(10), Date, 111) AS Date, Time From RFID Where EventType='NormalUser' ORDER BY 'UserID'";
-
-            SqlCommand comm = new SqlCommand(strCommandText, myConnect);
-            DataTable dt = new DataTable();
-            dt.Load(comm.ExecuteReader());
-            gvRFID.DataSource = dt;
-            gvRFID.DataBind();
-
-            
-            string datadata = Convert.ToString(dt.Rows[1]["Date"]);
-           
-
-            for (int i = 0; i < dt.Rows.Count - 1; )
-            {
-                DataRow row = dt.Rows[i];
-                DataRow nextRow = dt.Rows[i + 1];
-                string datemin = Convert.ToString(row["Date"]);
-                string yearmin = datemin.Substring(6, 4);
-                string monthmin = datemin.Substring(3, 2);
-                string daymin = datemin.Substring(0, 2);
-                string timemin = Convert.ToString(row["Time"]);
-                string hourmin = timemin.Substring(0, 2);
-
-                string datemax = Convert.ToString(nextRow["Date"]);
-                string yearmax = datemax.Substring(6, 4);
-                string monthmax = datemax.Substring(3, 2);
-                string daymax = datemax.Substring(0, 2);
-                string timemax = Convert.ToString(nextRow["Time"]);
-                string hourmax = timemax.Substring(0, 2);
-                int userID = Convert.ToInt32(row["UserID"]);
-
-
-                RFIDData += "{" + "x: Date.UTC(" + yearmin + "," + monthmin + "," + daymin + "," + hourmin + "), x2: Date.UTC(" + yearmax + "," + monthmax + "," + daymax + "," + hourmax + "), y:" + (userID - 1) + "},";
-
-                i = i + 2;
-
-            }
-            RFIDData = RFIDData.Remove(RFIDData.Length - 1);
-            Debug.WriteLine(RFIDData);       
-
-        }
+        }        
 
         public void RepeatLoadingData(object sender, EventArgs e)
         {
@@ -763,11 +901,14 @@ namespace WebForm_DB_Createuser
             LoadDataofTempChart();
             LoadTempAnalysis();
             LoadDataofHumidityChart();
+            LoadHumAnalysis();
             LoadDataofMoistureChart();
+            LoadMoistureAnalysis();
             LoadDataofLightChart();
+            LoadLightAnalysis();
             LoadDataofHeightChart();
             LoadHeightAnalysis();
-            LoadDataofRFIDChart();
+
 
             ScriptManager.RegisterStartupScript(this,
                                                         this.GetType(),
@@ -779,12 +920,15 @@ namespace WebForm_DB_Createuser
                                                         "humdata = " + humidityData + ";" +
                                                         "idealhumdata = " + idealHumidityData + ";" +
                                                         "diffhumdata = " + diffHumidityData + ";" +
+                                                        "humidityAnalysis = " + "'" + humidityAnalysis + "'" + ";" +
                                                         "moistdata = " + moistureData + ";" +
                                                         "idealmoistdata = " + idealMoistureData + ";" +
                                                         "diffmoistdata = " + diffMoistureData + ";" +
+                                                        "moistureAnalysis = " + "'" + moistureAnalysis + "'" + ";" +
                                                         "lightdata = " + lightData + ";" +
                                                         "ideallightdata = " + idealLightData + ";" +
                                                         "difflightdata = " + diffLightData + ";" +
+                                                        "lightAnalysis = " + "'" + lightAnalysis + "'" + ";" +
                                                         "heightdata = " + heightData + ";" +
                                                         "idealheightdata = " + idealHeightData + ";" +
                                                         "diffheightdata = " + diffHeightData + ";" +
@@ -795,15 +939,18 @@ namespace WebForm_DB_Createuser
 
         protected void Timer1_Tick(object sender, EventArgs e)
         {
-            Debug.WriteLine("NEW");            
+            Debug.WriteLine("NEW");
             LoadDataofTempChart();
             LoadTempAnalysis();
             LoadDataofHumidityChart();
+            LoadHumAnalysis();
             LoadDataofMoistureChart();
+            LoadMoistureAnalysis();
             LoadDataofLightChart();
+            LoadLightAnalysis();
             LoadDataofHeightChart();
             LoadHeightAnalysis();
-            LoadDataofRFIDChart();
+
             Debug.WriteLine("NEWSUCCESS");
         }
     }
