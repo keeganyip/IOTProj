@@ -78,67 +78,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col">
-                    <div class="card">
-                        <div class="col-12">
-                            <div class="card card-chart">
-                                <div class="card-header ">
-                                    <div class="row">
-                                        <div class="col-sm-6 text-left">
-                                            <h5 class="card-category">Total Shipments</h5>
-                                            <h2 class="card-title">Performance</h2>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                                                <label class="btn btn-sm btn-primary btn-simple active" id="0">
-                                                    <input type="radio" name="options" checked="">
-                                                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Accounts</span>
-                                                    <span class="d-block d-sm-none">
-                                                        <i class="tim-icons icon-single-02"></i>
-                                                    </span>
-                                                </label>
-                                                <label class="btn btn-sm btn-primary btn-simple" id="1">
-                                                    <input type="radio" class="d-none d-sm-none" name="options">
-                                                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Purchases</span>
-                                                    <span class="d-block d-sm-none">
-                                                        <i class="tim-icons icon-gift-2"></i>
-                                                    </span>
-                                                </label>
-                                                <label class="btn btn-sm btn-primary btn-simple" id="2">
-                                                    <input type="radio" class="d-none" name="options">
-                                                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Sessions</span>
-                                                    <span class="d-block d-sm-none">
-                                                        <i class="tim-icons icon-tap-02"></i>
-                                                    </span>
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                            <div class="chartjs-size-monitor-expand" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                                <div style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>
-                                            </div>
-                                            <div class="chartjs-size-monitor-shrink" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                                <div style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>
-                                            </div>
-                                        </div>
-                                        <%--<canvas id="chartBig1" width="1123" height="220" class="chartjs-render-monitor" style="display: block; width: 1123px; height: 220px;"></canvas>--%>
-                                        <div id="temp" style="min-height: 600px; min-width: 800px;">
-                                            <asp:GridView ID="gvtemp" runat="server">
-                                            </asp:GridView>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div>          
         <div class="col-lg-3">
             <div class="card">
                 <div class="card-header">
@@ -156,185 +96,171 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card card-chart">
-                <div class="card-header ">
-                    <div class="row">
-                        <div class="col-sm-6 text-left">
-                            <h5 class="card-category">Total Shipments</h5>
-                            <h2 class="card-title">Performance</h2>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                                <label class="btn btn-sm btn-primary btn-simple active" id="0">
-                                    <input type="radio" name="options" checked="">
-                                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Accounts</span>
-                                    <span class="d-block d-sm-none">
-                                        <i class="tim-icons icon-single-02"></i>
-                                    </span>
-                                </label>
-                                <label class="btn btn-sm btn-primary btn-simple" id="1">
-                                    <input type="radio" class="d-none d-sm-none" name="options">
-                                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Purchases</span>
-                                    <span class="d-block d-sm-none">
-                                        <i class="tim-icons icon-gift-2"></i>
-                                    </span>
-                                </label>
-                                <label class="btn btn-sm btn-primary btn-simple" id="2">
-                                    <input type="radio" class="d-none" name="options">
-                                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Sessions</span>
-                                    <span class="d-block d-sm-none">
-                                        <i class="tim-icons icon-tap-02"></i>
-                                    </span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="chart-area">
-                        <div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                            <div class="chartjs-size-monitor-expand" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                <div style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>
-                            </div>
-                            <div class="chartjs-size-monitor-shrink" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                <div style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>
-                            </div>
-                        </div>
-                        <%--<canvas id="chartBig1" width="1123" height="220" class="chartjs-render-monitor" style="display: block; width: 1123px; height: 220px;"></canvas>--%>
-                        <div id="humidity" style="min-height: 600px; min-width: 800px;">
-                            <asp:GridView ID="gvhumidity" runat="server">
-                            </asp:GridView>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <asp:Label ID="Label1" runat="server" Text="Please select a Chart Type:"></asp:Label>
+    <br />
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card card-chart">
-                <div class="card-header ">
-                    <div class="row">
-                        <div class="col-sm-6 text-left">
-                            <h5 class="card-category">Total Shipments</h5>
-                            <h2 class="card-title">Performance</h2>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                                <label class="btn btn-sm btn-primary btn-simple active" id="0">
-                                    <input type="radio" name="options" checked="">
-                                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Accounts</span>
-                                    <span class="d-block d-sm-none">
-                                        <i class="tim-icons icon-single-02"></i>
-                                    </span>
-                                </label>
-                                <label class="btn btn-sm btn-primary btn-simple" id="1">
-                                    <input type="radio" class="d-none d-sm-none" name="options">
-                                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Purchases</span>
-                                    <span class="d-block d-sm-none">
-                                        <i class="tim-icons icon-gift-2"></i>
-                                    </span>
-                                </label>
-                                <label class="btn btn-sm btn-primary btn-simple" id="2">
-                                    <input type="radio" class="d-none" name="options">
-                                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Sessions</span>
-                                    <span class="d-block d-sm-none">
-                                        <i class="tim-icons icon-tap-02"></i>
-                                    </span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="chart-area">
-                        <div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                            <div class="chartjs-size-monitor-expand" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                <div style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>
-                            </div>
-                            <div class="chartjs-size-monitor-shrink" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                <div style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>
-                            </div>
-                        </div>
-                        <%--<canvas id="chartBig1" width="1123" height="220" class="chartjs-render-monitor" style="display: block; width: 1123px; height: 220px;"></canvas>--%>
-                        <div id="moisture" style="min-height: 600px; min-width: 800px;">
-                            <asp:GridView ID="gvmoisture" runat="server">
-                            </asp:GridView>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" AutoPostBack="True">
+        <asp:ListItem Value="All" Selected="True">Display All</asp:ListItem>
+        <asp:ListItem Value="Temp">Temperature</asp:ListItem>
+        <asp:ListItem Value="Humidity">Humidity</asp:ListItem>
+        <asp:ListItem Value="Moisture">Moisture</asp:ListItem>
+        <asp:ListItem Value="Light">Light Intensity</asp:ListItem>
+        <asp:ListItem Value="Height">Plant Height</asp:ListItem>
+       
+    </asp:DropDownList>
 
+    <asp:HiddenField runat="server" ID="hdf_Test" />
+    <asp:Timer ID="Timer1" runat="server" Interval="20000" ontick="Timer1_Tick">
+    </asp:Timer>
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+            <asp:Button ID="btnSubmit" runat="server" OnClick="RepeatLoadingData" style = "display:none"/>
+        </ContentTemplate>
+        
+        <Triggers>
+        <asp:AsyncPostBackTrigger ControlID="Timer1" EventName="Tick">
+        </asp:AsyncPostBackTrigger>
+    </Triggers>
+    </asp:UpdatePanel>
+    <div class="container">
     <div class="row">
-        <div class="col-12">
-            <div class="card card-chart">
-                <div class="card-header ">
-                    <div class="row">
-                        <div class="col-sm-6 text-left">
-                            <h5 class="card-category">Total Shipments</h5>
-                            <h2 class="card-title">Performance</h2>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-                                <label class="btn btn-sm btn-primary btn-simple active" id="0">
-                                    <input type="radio" name="options" checked="">
-                                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Accounts</span>
-                                    <span class="d-block d-sm-none">
-                                        <i class="tim-icons icon-single-02"></i>
-                                    </span>
-                                </label>
-                                <label class="btn btn-sm btn-primary btn-simple" id="1">
-                                    <input type="radio" class="d-none d-sm-none" name="options">
-                                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Purchases</span>
-                                    <span class="d-block d-sm-none">
-                                        <i class="tim-icons icon-gift-2"></i>
-                                    </span>
-                                </label>
-                                <label class="btn btn-sm btn-primary btn-simple" id="2">
-                                    <input type="radio" class="d-none" name="options">
-                                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Sessions</span>
-                                    <span class="d-block d-sm-none">
-                                        <i class="tim-icons icon-tap-02"></i>
-                                    </span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
+    <div class="col-sm-12">
+    <table id="tempTable" runat="server">
+        <tr>
+            <td>&nbsp;</td>
+            <td>               
+                <div id="temp" style="min-height: 600px; min-width:800px;">
+                    <asp:GridView ID="gvtemp" runat="server">
+                    </asp:GridView>
                 </div>
-                <div class="card-body">
-                    <div class="chart-area">
-                        <div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                            <div class="chartjs-size-monitor-expand" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                <div style="position: absolute; width: 1000000px; height: 1000000px; left: 0; top: 0"></div>
-                            </div>
-                            <div class="chartjs-size-monitor-shrink" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-                                <div style="position: absolute; width: 200%; height: 200%; left: 0; top: 0"></div>
-                            </div>
-                        </div>
-                        <%--<canvas id="chartBig1" width="1123" height="220" class="chartjs-render-monitor" style="display: block; width: 1123px; height: 220px;"></canvas>--%>
-                        <div id="RFID" style="min-height: 600px; min-width: 800px;">
-                            <p>User Entry Records</p>
-                            <asp:GridView ID="gvRFID" runat="server" CssClass="table table-striped">
-                            </asp:GridView>
-                        </div>
-                    </div>
+            </td>        
+            <td>                            
+                <div>
+                    <p>TEMPERATURE ANALYSIS:</p>                    
+                    <p id="tempreport"></p>   
                 </div>
-            </div>
-        </div>
+            </td>
+        </tr>
+    </table>
     </div>
+    <div class="col-sm-12">
+    <table id="humidityTable" runat="server">
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <div id="humidity" style="min-height: 600px; min-width:800px;">
+                    <asp:GridView ID="gvhumidity" runat="server">
+                    </asp:GridView>
+                </div>
+            </td>
+            <td>                            
+                <div>
+                    <p>HUMIDITY ANALYSIS:</p>                    
+                    <p id="humidityreport"></p>   
+                </div>
+            </td>
+        </tr>
+    </table>
+    </div>
+    </div>
+    <table id="moistureTable" runat="server">
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <div id="moisture" style="min-height: 600px; min-width:800px;">
+                    <asp:GridView ID="gvmoisture" runat="server">
+                    </asp:GridView>
+                </div>
+            </td>
+            <td>                            
+                <div>
+                    <p>SOIL MOISTURE LEVEL ANALYSIS:</p>                    
+                    <p id="moisturereport"></p>   
+                </div>
+            </td>
+        </tr>
+    </table>
+    <table id="lightTable" runat="server">
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <div id="light" style="min-height: 600px; min-width:800px;">
+                    <asp:GridView ID="gvlight" runat="server">
+                    </asp:GridView>
+                </div>
+            </td>
+            <td>                            
+                <div>
+                    <p>LIGHT ANALYSIS:</p>                    
+                    <p id="lightreport"></p>   
+                </div>
+            </td>
+        </tr>
+    </table>
+    <table id="heightTable" runat="server">
+        <tr>
+            <td>&nbsp;</td>
+            <td>
+                <div id="height" style="min-height: 600px; min-width:800px;">
+                    <asp:GridView ID="gvheight" runat="server">
+                    </asp:GridView>
+                </div>
+            </td>
+            <td>                            
+                <div>
+                    <p>PLANT GROWTH ANALYSIS:</p>                    
+                    <p id="heightreport"></p>   
+                </div>
+            </td>
+        </tr>
+    </table>          
+    </div>
+    
+    <script src="http://code.highcharts.com/stock/highstock.js"></script>
+    <script src="http://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
     <script>
+        //report        
+        var tempanalysis = "<%=tempAnalysis%>";
+        document.getElementById("tempreport").innerHTML = tempanalysis;
+        var temdata = <%=tempData%>;
+        var idealtempdata = <%=idealTempData%>;
+        var difftempdata = <%=diffTempData%>;
         $("#temp").highcharts({
             chart: {
-                type: 'line'
+                animation: Highcharts.svg,
+                type: 'line',
+                marginRight: 10,
+                events: {
+                    load: function () {
+
+                        // set up the updating of the chart each second
+                       
+                        setInterval(function () {
+                             
+                            document.getElementById("<%=btnSubmit.ClientID %>").click();
+                            
+                            document.getElementById("tempreport").innerHTML = tempanalysis;
+                            var tempchart =  $("#temp").highcharts();
+                            tempchart.series[0].update({ data: temdata }, false)
+                            tempchart.series[1].update({ data: idealtempdata }, false)
+                            tempchart.series[2].update({ data: difftempdata }, false)
+                            tempchart.redraw();
+                            
+                        }, 20000);
+                    }
+                }
             },
             title: {
                 text: "Hourly Temperature"
-            },
+            },            
+
             navigator: {
                 enabled: true,
             },
@@ -372,18 +298,18 @@
                     type: 'week',
                     count: 1,
                     text: 'week'
-                },
+                },                
                 {
                     type: 'all',
                     text: 'All'
-                }],
+                }],                
             },
             xAxis: {
                 type: 'datetime',
                 tickAmount: 24,
                 tickInterval: 3600 * 1000,
                 minTickInterval: 3600 * 1000,
-                lineWidth: 1,
+                lineWidth: 1,                
                 title: {
                     text: "Time"
                 },
@@ -394,7 +320,7 @@
             },
             yAxis: {
                 title: {
-                    text: "Temp"
+                    text: "Temperature"
                 }
             },
             tooltip: {
@@ -416,37 +342,62 @@
                 tooltip: {
                     enabled: true,
                 },
-                data: <%=tempData%>,
+                data: temdata,
             }, {
                 type: "arearange",
                 opacity: 0.3,
                 color: '#90ee90',
                 name: "Ideal Temperature",
-                data: <%=idealTempData%>,
-            }, {
+                data: idealtempdata,
+                }, {                
                 type: "arearange",
-                lineWidth: 0,
-                data: <%=diffTempData%>,
+                lineWidth: 0,                
+                data: difftempdata,
                 zones: [{
                     value: 26,
                     color: '#add8e6',
                 }, {
                     value: 30,
-                    color: '#90ee90',
+                    color: '#90ee90',  
                 }, {
-                    value: 100,
-                    color: '#FFCCCB',
-                }],
+                value: 100,
+                color: '#FFCCCB',                        
+                    }],
                 enableMouseTracking: false,
-                showInLegend: false,
-                }]
+                showInLegend: false,                
+            }]
         });
     </script>
 
     <script>
-        $("#humidity").highcharts({
+        var humidityAnalysis = "<%=humidityAnalysis%>";
+        document.getElementById("humidityreport").innerHTML = humidityAnalysis;
+        var humdata = <%=humidityData%>;
+        var idealhumdata = <%=idealHumidityData%>;
+        var diffhumdata = <%=diffHumidityData%>;
+        $("#humidity").highcharts({            
             chart: {
-                type: 'line'
+                animation: Highcharts.svg,
+                type: 'line',
+                marginRight: 10,
+                events: {
+                    load: function () {
+
+                        // set up the updating of the chart each second
+
+                        setInterval(function () {
+                            
+                            document.getElementById("<%=btnSubmit.ClientID %>").click();
+                            document.getElementById("humidityreport").innerHTML = humidityAnalysis;
+                            var humchart = $("#humidity").highcharts();
+                            humchart.series[0].update({ data: humdata }, false)
+                            humchart.series[1].update({ data: idealhumdata }, false)
+                            humchart.series[2].update({ data: diffhumdata }, false)
+                            humchart.redraw();
+                            
+                        }, 20000);
+                    }
+                }
             },
             title: {
                 text: "Hourly Humidity %"
@@ -521,45 +472,70 @@
                 zones: [{
                     value: 50,
                     color: '#add8e6',
-                }, {
+                    }, {                   
                     value: 70,
                     color: '#90ee90',
-                }, {
+                    }, {
                     value: 100,
                     color: '#FFCCCB',
                 }],
                 name: "Hourly Humidity",
-                data: <%=humidityData%>,
+                data: humdata,
             }, {
                 type: "arearange",
                 opacity: 0.3,
                 color: '#90ee90',
                 name: "Ideal Humidity",
-                data: <%=idealHumidityData%>,
-            }, {
+                data: idealhumdata,
+            }, {                
                 type: "arearange",
                 enableMouseTracking: false,
-                lineWidth: 0,
-                data: <%=diffHumidityData%>,
-                zones: [{
-                    value: 50,
-                    color: '#add8e6',
-                }, {
-                    value: 70,
-                    color: '#90ee90',
-                }, {
-                    value: 100,
-                    color: '#FFCCCB',
-                }],
-                showInLegend: false,
-            }]
+                lineWidth: 0,                
+                    data: diffhumdata,
+                    zones: [{
+                        value: 50,
+                        color: '#add8e6',
+                    }, {
+                        value: 70,
+                        color: '#90ee90',
+                    }, {
+                        value: 100,
+                        color: '#FFCCCB',
+                    }],
+                    showInLegend: false,
+                }]
         });
     </script>
 
     <script>
+        var moistureAnalysis = "<%=moistureAnalysis%>";
+        document.getElementById("moisturereport").innerHTML = moistureAnalysis;
+        var moistdata = <%=moistureData%>;
+        var idealmoistdata = <%=idealMoistureData%>;
+        var diffmoistdata = <%=diffMoistureData%>;
         $("#moisture").highcharts({
             chart: {
-                type: 'line'
+                animation: Highcharts.svg,
+                type: 'line',
+                marginRight: 10,
+                events: {
+                    load: function () {
+
+                        // set up the updating of the chart each second
+
+                        setInterval(function () {
+
+                            document.getElementById("<%=btnSubmit.ClientID %>").click();
+                            document.getElementById("moisturereport").innerHTML = moistureAnalysis;
+                            var moistchart = $("#moisture").highcharts();
+                            moistchart.series[0].update({ data: moistdata }, false)
+                            moistchart.series[1].update({ data: idealmoistdata }, false)
+                            moistchart.series[2].update({ data: diffmoistdata }, false)
+                            moistchart.redraw();
+                            
+                        }, 20000);
+                    }
+                }
             },
             title: {
                 text: "Hourly Moisture Value"
@@ -626,7 +602,10 @@
                     text: "Soil Moisture %"
                 }
             },
-            series: [{
+            tooltip: {
+                shared: true,
+            },
+            series: [{                
                 name: "Hourly Moisture",
                 zones: [{
                     value: 10,
@@ -638,13 +617,13 @@
                     value: 100,
                     color: '#FFCCCB',
                 }],
-                data: <%=moistureData%>,
-            }, {
+                data: moistdata,
+            }, {                
                 type: "arearange",
                 opacity: 0.3,
                 color: '#90ee90',
                 name: "Ideal Moisture",
-                data: <%=idealMoistureData%>,
+                data: idealmoistdata,
             }, {
                 type: "arearange",
                 zones: [{
@@ -656,18 +635,45 @@
                 }, {
                     value: 100,
                     color: '#FFCCCB',
-                }],
-                lineWidth: 0,
-                data: <%=diffMoistureData%>,
+                }],                
+                lineWidth: 0,                    
+                enableMouseTracking: false,                   
+                data: diffmoistdata,
                 showInLegend: false
             }]
         });
     </script>
 
     <script>
+        var lightAnalysis = "<%=lightAnalysis%>";
+        document.getElementById("lightreport").innerHTML = lightAnalysis;
+        var lightdata = <%=lightData%>;
+        var ideallightdata = <%=idealLightData%>;
+        var difflightdata = <%=diffLightData%>;
         $("#light").highcharts({
             chart: {
-                type: "spline"
+                animation: Highcharts.svg,
+                type: 'line',
+                marginRight: 10,
+                events: {
+                    load: function () {
+
+                        // set up the updating of the chart each second
+
+                        setInterval(function () {
+
+                            
+                            document.getElementById("<%=btnSubmit.ClientID %>").click();
+                            document.getElementById("lightreport").innerHTML = lightAnalysis;
+                            var lightchart = $("#light").highcharts();
+                            lightchart.series[0].update({ data: lightdata }, false)
+                            lightchart.series[1].update({ data: ideallightdata }, false)
+                            lightchart.series[2].update({ data: difflightdata }, false)
+                            lightchart.redraw();
+                            
+                        }, 20000);
+                    }
+                }
             },
             title: {
                 text: "Hourly Light Intensity Value"
@@ -715,6 +721,9 @@
                     text: 'All'
                 }],
             },
+            tooltip: {
+                shared: true,
+            },
             xAxis: {
                 type: 'datetime',
                 tickAmount: 24,
@@ -734,94 +743,128 @@
                     text: "Light Intensity (lux)"
                 }
             },
-            series: [{
+            series: [{                
                 name: "Hourly Light Intensity",
+                type: "line",
                 zones: [{
-                    value: 4500,
+                    value: 3500,
                     color: '#add8e6',
+                }, {
+                    value: 4500,
+                    color: '#90ee90',
                 }, {
                     value: 6000,
                     color: '#FFCCCB',
                 }],
-                data: <%=lightData%>,
+                data: lightdata,
             }, {
+                type: "arearange",
                 name: "Ideal Amount of Light",
+                opacity: 0.3,
                 color: '#90ee90',
-                data: <%=idealLightData%>,
+                data: ideallightdata,
             }, {
                 name: "range",
                 type: "arearange",
                 zones: [{
-                    value: 4500,
+                    value: 3500,
                     color: '#add8e6',
+                }, {
+                    value: 4500,
+                    color: '#90ee90',
                 }, {
                     value: 6000,
                     color: '#FFCCCB',
                 }],
-                lineWidth: 0,
-                data: <%=diffLightData%>,
+                lineWidth: 0,                    
+                enableMouseTracking: false, 
+                data: difflightdata,
                 showInLegend: false
             }]
         });
     </script>
-
+    
     <script>
-        var chart = new Highcharts.Chart({
+        //report        
+        var heightanalysis = "<%=heightAnalysis%>";
+        document.getElementById("heightreport").innerHTML = heightanalysis;
+        var heightdata = <%=heightData%>;
+        var idealheightdata = <%=idealHeightData%>;
+        var diffheightdata = <%=diffHeightData%>;
+        $("#height").highcharts({
             chart: {
-                renderTo: 'container',
-                type: 'area'
-            },
-            plotOptions: {
-                area: {
-                    stacking: true,
-                    lineWidth: 0,
-                    shadow: false,
-                    marker: {
-                        enabled: false
-                    },
-                    enableMouseTracking: false,
-                    showInLegend: false
-                },
-                line: {
-                    zIndex: 5
+                animation: Highcharts.svg,
+                type: 'line',
+                marginRight: 10,
+                events: {
+                    load: function () {
+
+                        // set up the updating of the chart each second
+
+                        setInterval(function () {
+                            
+                            document.getElementById("<%=btnSubmit.ClientID %>").click();
+
+                            document.getElementById("heightreport").innerHTML = heightanalysis;
+
+                            var heightchart = $("#height").highcharts();
+                            heightchart.series[0].update({ data: heightdata }, false)
+                            heightchart.series[1].update({ data: idealheightdata }, false)
+                            heightchart.series[2].update({ data: diffheightdata }, false)
+                            heightchart.redraw();
+                            
+                        }, 20000);
+                    }
                 }
             },
-            series: [{
-                type: 'line',
-                color: '#555',
-                data: [60, 60, 50, 40, 35, 45, 50, 65, 70, 75]
-            }, {
-                type: 'line',
-                color: '#55e',
-                data: [50, 55, 50, 45, 45, 50, 50, 55, 55, 60]
-            }, {
-                color: '#5e5',
-                data: [10, 5, 0, 0, 0, 0, 0, 10, 15, 15]
-            }, {
-                color: '#e55',
-                data: [0, 0, 0, 5, 10, 5, 0, 0, 0, 0]
-            }, {
-                id: 'transparent',
-                color: 'rgba(255,255,255,0)',
-                data: [50, 55, 50, 40, 35, 45, 50, 55, 55, 60]
-            }]
-        }, function (chart) {
-            chart.get('transparent').area.hide();
-        });
-    </script>
-
-    <!-- RFID x-range chart using high charts -->
-    <!--
-    <script src="https://code.highcharts.com/modules/xrange.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script>
-
-        $("#RFID").highcharts({
-            chart: {
-                type: 'xrange'
-            },
             title: {
-                text: "Daily Record of Greenhouse User Entry"
+                text: "Plant Height (cm)"
+            },
+            navigator: {
+                enabled: true,
+            },
+            rangeSelector: {
+                //allButtonsEnabled: true,
+                enabled: true,
+                inputEnabled: false,
+                buttonPosition: {
+                    align: 'left'
+                },
+                labelStyle: {
+                    display: 'none'
+                },
+                buttons: [{
+                    type: 'hour',
+                    count: 1,
+                    text: '1h'
+                },
+                {
+                    type: 'hour',
+                    count: 3,
+                    text: '3h'
+                },
+                {
+                    type: 'hour',
+                    count: 6,
+                    text: '6h'
+                },
+                {
+                    type: 'day',
+                    count: 1,
+                    text: 'day'
+                },
+                {
+                    type: 'week',
+                    count: 1,
+                    text: 'week'
+                },
+                {
+                    type: 'all',
+                    text: 'All'
+                }],
+            },
+            tooltip: {
+                shared: true,
             },
             xAxis: {
                 type: 'datetime',
@@ -829,29 +872,59 @@
                 tickInterval: 3600 * 1000,
                 minTickInterval: 3600 * 1000,
                 lineWidth: 1,
-                dateTimeLabelFormats: {
-                    day: '%H:%M'
-                },
                 title: {
                     text: "Time"
-                }
+                },
+                minRange: 1,
+                scrollbar: {
+                    enabled: true
+                },
             },
-
             yAxis: {
                 title: {
-                    text: ""
-                },
-                categories: ["User 1", "User 2", "User 3"],
-                reversed: true
+                    text: "Height (cm)"
+                }
             },
             series: [{
-                name: "User Record Entry",
-                data: [<%=RFIDData%>],
-                dataLabels: {
-                    enabled: true
-                }
-            }]
+                name: "Hourly Plant Height",
+                type: "line",
+                zones: [{
+                    value: 120,
+                    color: '#add8e6',
+                }, {
+                    value: 150,
+                    color: '#90ee90',
+                }, {
+                    value: 300,
+                    color: '#FFCCCB',
+                }],
+                data: heightdata,
+            }, {
+                    type: "arearange",
+                    name: "Ideal Plant Height",
+                    opacity: 0.3,
+                    color: '#90ee90',
+                    data: idealheightdata,
+            }, {
+                name: "range",
+                type: "arearange",
+                zones: [{
+                    value: 120,
+                    color: '#add8e6',
+                }, {
+                    value: 150,
+                    color: '#90ee90',
+                }, {
+                    value: 300,
+                    color: '#FFCCCB',
+                }],
+                lineWidth: 0,                    
+                enableMouseTracking: false, 
+                data: diffheightdata,
+                showInLegend: false
+                }]
         });
+
+        
     </script>
-    -->
 </asp:Content>
