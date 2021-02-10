@@ -2113,6 +2113,7 @@
     <Content Include="assets\vendor\jquery\jquery.slim.min.map" />
     <Content Include="AdminMaster.Master" />
     <Content Include="assets\css\bootstrap.css.map" />
+    <Content Include="updateRFID.aspx" />
     <Content Include="UserAdmin.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2164,6 +2165,13 @@
     </Compile>
     <Compile Include="AdminMaster.Master.designer.cs">
       <DependentUpon>AdminMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="updateRFID.aspx.cs">
+      <DependentUpon>updateRFID.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="updateRFID.aspx.designer.cs">
+      <DependentUpon>updateRFID.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserAdmin.Master.cs">
       <DependentUpon>UserAdmin.Master</DependentUpon>

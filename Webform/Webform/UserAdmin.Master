@@ -40,8 +40,14 @@
                     <ul class="nav">
                         <li>
                             <a href="userList.aspx">
-                                <i class="fas fa-warehouse"></i>
+                                <i class="fas fa-users"></i>
                                 <p>Users</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="updateRFID.aspx">
+                                <i class="fab fa-orcid"></i>
+                                <p>Manage RFID</p>
                             </a>
                         </li>
                     </ul>
