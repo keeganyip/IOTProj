@@ -2130,6 +2130,7 @@
     <Content Include="sessionTimeout.aspx" />
     <Content Include="Test.aspx" />
     <Content Include="userDetails.aspx" />
+    <Content Include="userGreenhouse.aspx" />
     <Content Include="userList.aspx" />
     <Content Include="userProfile.aspx" />
     <Content Include="Web.config">
@@ -2186,6 +2187,13 @@
     </Compile>
     <Compile Include="userDetails.aspx.designer.cs">
       <DependentUpon>userDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="userGreenhouse.aspx.cs">
+      <DependentUpon>userGreenhouse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="userGreenhouse.aspx.designer.cs">
+      <DependentUpon>userGreenhouse.aspx</DependentUpon>
     </Compile>
     <Compile Include="userList.aspx.cs">
       <DependentUpon>userList.aspx</DependentUpon>

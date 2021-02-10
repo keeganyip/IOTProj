@@ -38,19 +38,12 @@
               </a>
             </div>
             <ul class="nav">
-              <li class="active">
-                <a href="test.aspx">
-                  <i class="tim-icons icon-chart-pie-36"></i>
-                  <p>Dashboard</p>
-                </a>
-              </li>
               <li>
-                <a href="greenhouse.aspx">
+                <a href="userGreenhouse.aspx">
                     <i class="fas fa-warehouse"></i>
                   <p>Greenhouse</p>
                 </a>
               </li>
-              
             </ul>
           </div>
         </div>
