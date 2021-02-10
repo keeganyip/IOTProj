@@ -66,7 +66,7 @@ namespace Webform
                                 Response.Write(id_collected);
                                 Session["id"] = id_collected;
                                 Session["session"] = "logged";
-                                Response.Redirect("index.aspx");
+                                Response.Redirect("userGreenhouse.aspx");
                             }
 
                             else if (userType == "Admin")
@@ -82,21 +82,6 @@ namespace Webform
                                 Session["id"] = id_collected;
                                 Session["session"] = "adminlogged";
                                 Response.Redirect("greenhouses.aspx");
-                            }
-
-                            else if (userType == "UserAdmin")
-                            {
-                                conn.Open();
-                                string id = "select UniqueUserID from UserTable where Email='" + Email.Text + "'";
-                                SqlCommand cmdid = new SqlCommand(id, conn);
-                                string id_collected = cmdid.ExecuteScalar().ToString().Trim();
-                                conn.Close();
-
-                                Response.Write("password check");
-                                Response.Write(id_collected);
-                                Session["id"] = id_collected;
-                                Session["session"] = "useradminlogged";
-                                Response.Redirect("userList.aspx");
                             }
 
                             Response.Write(Session["id"]);

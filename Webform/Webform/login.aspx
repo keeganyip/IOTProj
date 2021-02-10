@@ -30,8 +30,8 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="p-5">
-                                    <div class="text-center mb-5">
-                                        <img src="assets/img/logo.png" alt="Klorofil Logo" class="img-responsive logo mx-auto d-block" />
+                                    <div class="text-center mb-3">
+                                        <img src="assets/img/logo.png" alt="Klorofil Logo" class="img-responsive logo mx-auto d-block" style="height: 200px;" />
                                     </div>
                                     <div class="form-group">
                                         <asp:TextBox runat="server" ID="Email"

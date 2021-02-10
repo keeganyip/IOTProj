@@ -6,7 +6,7 @@ using System.Globalization;
 
 namespace Webform
 {
-    public partial class userDetails : System.Web.UI.Page
+    public partial class userDetails : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

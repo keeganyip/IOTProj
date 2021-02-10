@@ -10,7 +10,7 @@ using System.Configuration;
 
 namespace Webform
 {
-    public partial class userList : System.Web.UI.Page
+    public partial class userList : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
