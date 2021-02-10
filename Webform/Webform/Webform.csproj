@@ -1839,6 +1839,7 @@
     <Content Include="assets\vendor\jquery\jquery.slim.js" />
     <Content Include="assets\vendor\jquery\jquery.slim.min.js" />
     <Content Include="forgotPassword.aspx" />
+    <Content Include="Global.asax" />
     <Content Include="greenhouseDetails.aspx" />
     <Content Include="greenhouses.aspx" />
     <Content Include="index.aspx" />
@@ -2215,6 +2216,9 @@
   <ItemGroup>
     <Compile Include="App_Code\Greenhouse.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="greenhouseDetails.aspx.cs">
       <DependentUpon>greenhouseDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
