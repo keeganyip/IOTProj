@@ -243,15 +243,19 @@
                         // set up the updating of the chart each second
                        
                         setInterval(function () {
-                             
+                            console.log("button error");
                             document.getElementById("<%=btnSubmit.ClientID %>").click();
-                            
+                            console.log("button error");
+                            console.log("analysis error");
                             document.getElementById("tempreport").innerHTML = tempanalysis;
+                            console.log("analysis error");
+                            console.log("chart error");
                             var tempchart =  $("#temp").highcharts();
                             tempchart.series[0].update({ data: temdata }, false)
                             tempchart.series[1].update({ data: idealtempdata }, false)
                             tempchart.series[2].update({ data: difftempdata }, false)
                             tempchart.redraw();
+                            console.log("chart error");
                             
                         }, 20000);
                     }
