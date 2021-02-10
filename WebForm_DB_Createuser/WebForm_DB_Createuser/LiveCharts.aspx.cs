@@ -852,24 +852,25 @@ namespace WebForm_DB_Createuser
             //data format is [  {x1,y1}, {x2,y2}, ...]
             //date format: Date.UTC(2010, 1, 1, 12, 0, 0)
             double avgHeight = 0;
-            foreach (DataRow dr in dt.Rows)
-            {
-                string maxheightconverted = Convert.ToString(dr["MaxPlantHeight"]);
-                string smaxheight = maxheightconverted.Trim();
-                double maxheight = Convert.ToDouble(smaxheight);
-
-                string minheightconverted = Convert.ToString(dr["MinPlantHeight"]);
-                string sminheight = minheightconverted.Trim();
-                double minheight = Convert.ToDouble(sminheight);
-                
-                avgHeight = ((maxheight - minheight) / 5);               
-
-
-            }
-
-            //avg rate of growth of tomatoes in cm is 15cm 
             try
             {
+                foreach (DataRow dr in dt.Rows)
+                {
+                    string maxheightconverted = Convert.ToString(dr["MaxPlantHeight"]);
+                    string smaxheight = maxheightconverted.Trim();
+                    double maxheight = Convert.ToDouble(smaxheight);
+
+                    string minheightconverted = Convert.ToString(dr["MinPlantHeight"]);
+                    string sminheight = minheightconverted.Trim();
+                    double minheight = Convert.ToDouble(sminheight);
+                
+                    avgHeight = ((maxheight - minheight) / 5);               
+
+
+                }
+
+                //avg rate of growth of tomatoes in cm is 15cm 
+            
                 if (avgHeight > 10)
                 {
                     heightAnalysis = "Past 5 Days Average Growth: " + avgHeight + "cm <br>" +
