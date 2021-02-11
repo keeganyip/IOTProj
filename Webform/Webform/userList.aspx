@@ -23,7 +23,9 @@
                                                     <h6 class="card-subtitle mb-2 text-muted">
                                                         <asp:Label ID="lblUserID" runat="server" CssClass="card-subtitle mb-2 text-muted" Text='<%#Eval("UniqueUserID") %>' ></asp:Label>
                                                     </h6>
-                                                    <asp:Label ID="Label3" runat="server" CssClass="card-link" Text='<%#Eval("Type") %>'></asp:Label>
+                                                    <asp:Label ID="lblEmail" runat="server" CssClass="card-link" Text='<%#Eval("Email") %>'></asp:Label>
+                                                    <br />
+                                                    <asp:Label ID="lblType" runat="server" CssClass="card-link" Text='<%#Eval("Type") %>'></asp:Label>
                                                 </div>
                                                 <div class="col-lg-3 text-center mt-3">
                                                     <asp:LinkButton ID="LinkButton1" runat="server" OnClientClick="return confirm('Do you want to delete this Customer?');" OnClick="deleteUser">

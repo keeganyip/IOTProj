@@ -19,9 +19,12 @@
                                                 <div class="col-lg-12">
                                                     <h4 class="card-title">
                                                         <asp:Label ID="lblUserName" runat="server" CssClass="card-title" Text='<%#Eval("Name")%>'></asp:Label></h4>
+                                                        <asp:TextBox ID="txtUserName" runat="server" Text='<%#Eval("Name").ToString().Trim() %>' Visible="false" CssClass="form-control"></asp:TextBox>
                                                     <h6 class="card-subtitle mb-2 text-muted">
                                                         <asp:Label ID="lblUserID" runat="server" CssClass="card-subtitle mb-2 text-muted" Text='<%#Eval("UniqueUserID") %>' ></asp:Label>
                                                     </h6>
+                                                    <asp:Label ID="lblEmail" runat="server" CssClass="card-link" Text='<%#Eval("Email").ToString().Trim() %>'></asp:Label>
+                                                    <br />
                                                     <asp:Label ID="lblRFID" runat="server" CssClass="card-link" Text='<%#Eval("UniqueRFID").ToString().Trim() %>'></asp:Label>
                                                     <asp:TextBox ID="txtRFID" runat="server" Text='<%#Eval("UniqueRFID").ToString().Trim() %>' Visible="false" CssClass="form-control"></asp:TextBox>
                                                     <asp:LinkButton ID="lnkSave" runat="server" Visible="false" Font-Size="X-Small" OnClick="saveRFID" Text="Save |"></asp:LinkButton>

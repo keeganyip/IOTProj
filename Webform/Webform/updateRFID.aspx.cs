@@ -75,9 +75,13 @@ namespace Webform
             edit.FindControl("lnkCancel").Visible = isEdit;
 
             //Toggle Label
+            edit.FindControl("lblUserName").Visible = !isEdit;
+            edit.FindControl("lblUserID").Visible = !isEdit;
+            edit.FindControl("lblEmail").Visible = !isEdit;
             edit.FindControl("lblRFID").Visible = !isEdit;
 
             //Togle TextBox
+            edit.FindControl("txtUserName").Visible = isEdit;
             edit.FindControl("txtRFID").Visible = isEdit;
         }
 
@@ -92,10 +96,17 @@ namespace Webform
                 rfid = "-";
             }
 
+            string username = ((sender as LinkButton).NamingContainer.FindControl("txtUserName") as TextBox).Text;
+            if (string.IsNullOrEmpty(username) || string.IsNullOrWhiteSpace(username))
+            {
+                username = ((sender as LinkButton).NamingContainer.FindControl("lblUserName") as Label).Text;
+            }
+
             using (SqlConnection conn = new SqlConnection(userdb))
             {
-                SqlCommand cmd = new SqlCommand("UPDATE USERTABLE SET UNIQUERFID = @RFID WHERE UNIQUEUSERID = @ID", conn);
+                SqlCommand cmd = new SqlCommand("UPDATE USERTABLE SET UNIQUERFID = @RFID, NAME = @NAME WHERE UNIQUEUSERID = @ID", conn);
                 cmd.Parameters.AddWithValue("@RFID", rfid);
+                cmd.Parameters.AddWithValue("@NAME", username);
                 cmd.Parameters.AddWithValue("@ID", userId);
 
                 conn.Open();
