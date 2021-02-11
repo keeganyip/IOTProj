@@ -143,6 +143,7 @@
     <Content Include="assets\css\nucleo-icons.css" />
     <Content Include="assets\css\sb-admin-2.css" />
     <Content Include="assets\css\sb-admin-2.min.css" />
+    <Content Include="assets\css\highcharts.css" />
     <Content Include="assets\demo\demo.css" />
     <Content Include="assets\demo\demo.js" />
     <Content Include="assets\img\12345.png" />

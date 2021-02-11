@@ -78,6 +78,10 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+
+            </div>
         </div>          
         <div class="col-lg-3">
             <div class="card">
@@ -223,7 +227,8 @@
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/js/highcharts.js"></script>
+    <script src="https://code.highcharts.com/themes/dark-unica.js"></script>
 
     <script>
         //report        
