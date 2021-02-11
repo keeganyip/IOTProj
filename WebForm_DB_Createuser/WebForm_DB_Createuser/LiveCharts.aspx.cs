@@ -715,16 +715,16 @@ namespace WebForm_DB_Createuser
 
                 }
 
-                if (avgLight > 70)
+                if (avgLight > 4500)
                 {
                     lightAnalysis = "Past Hour Average Light Intensity: " + avgLight + "lux <br>" +
-                        "The Past Hour Average Light Intensity is higher than the ideal by " + (avgLight - 70) + "lux <br>" +
+                        "The Past Hour Average Light Intensity is higher than the ideal by " + (avgLight - 4500) + "lux <br>" +
                         "Action Taken: Light Intensity is currently being lowered!";
                 }
-                else if (avgLight < 50)
+                else if (avgLight < 3500)
                 {
                     lightAnalysis = "Past Hour Average Light Intensity: " + avgLight + "lux <br>" +
-                        "The Past Hour Average Light Intensity is lower than the ideal by " + (50 - avgLight) + "lux <br>" +
+                        "The Past Hour Average Light Intensity is lower than the ideal by " + (3500 - avgLight) + "lux <br>" +
                         "Action Taken: Light Intensity is currently being increased!";
                 }
                 else
@@ -938,21 +938,6 @@ namespace WebForm_DB_Createuser
             
         }
 
-        protected void Timer1_Tick(object sender, EventArgs e)
-        {
-            Debug.WriteLine("NEW");
-            LoadDataofTempChart();
-            LoadTempAnalysis();
-            LoadDataofHumidityChart();
-            LoadHumAnalysis();
-            LoadDataofMoistureChart();
-            LoadMoistureAnalysis();
-            LoadDataofLightChart();
-            LoadLightAnalysis();
-            LoadDataofHeightChart();
-            LoadHeightAnalysis();
-
-            Debug.WriteLine("NEWSUCCESS");
-        }
+       
     }
 }

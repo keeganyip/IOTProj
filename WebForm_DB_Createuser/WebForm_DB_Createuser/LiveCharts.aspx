@@ -14,18 +14,13 @@
        
     </asp:DropDownList>
 
-    <asp:HiddenField runat="server" ID="hdf_Test" />
-    <asp:Timer ID="Timer1" runat="server" Interval="20000" ontick="Timer1_Tick">
-    </asp:Timer>
+    
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <ContentTemplate>
             <asp:Button ID="btnSubmit" runat="server" OnClick="RepeatLoadingData" style = "display:none"/>
         </ContentTemplate>
         
-        <Triggers>
-        <asp:AsyncPostBackTrigger ControlID="Timer1" EventName="Tick">
-        </asp:AsyncPostBackTrigger>
-    </Triggers>
+        
     </asp:UpdatePanel>
     <div class="container">
     <div class="row">
@@ -161,7 +156,7 @@
                 }
             },
             title: {
-                text: "Hourly Temperature"
+                text: "Temperature(°C)"
             },            
 
             navigator: {
@@ -241,7 +236,7 @@
                     value: 100,
                     color: '#FFCCCB',
                 }],
-                name: "Hourly Temp",
+                name: "Temperature",
                 tooltip: {
                     enabled: true,
                 },
@@ -303,7 +298,7 @@
                 }
             },
             title: {
-                text: "Hourly Humidity %"
+                text: "Humidity(%)"
             },
             navigator: {
                 enabled: true,
@@ -382,7 +377,7 @@
                     value: 100,
                     color: '#FFCCCB',
                 }],
-                name: "Hourly Humidity",
+                name: "Humidity",
                 data: humdata,
             }, {
                 type: "arearange",
@@ -441,7 +436,7 @@
                 }
             },
             title: {
-                text: "Hourly Moisture Value"
+                text: "Soil Moisture Level(%)"
             },
             navigator: {
                 enabled: true,
@@ -509,7 +504,7 @@
                 shared: true,
             },
             series: [{                
-                name: "Hourly Moisture",
+                name: "Moisture",
                 zones: [{
                     value: 10,
                     color: '#add8e6',
@@ -579,7 +574,7 @@
                 }
             },
             title: {
-                text: "Hourly Light Intensity Value"
+                text: "Light Intensity(lux)"
             },
             navigator: {
                 enabled: true,
@@ -647,7 +642,7 @@
                 }
             },
             series: [{                
-                name: "Hourly Light Intensity",
+                name: "Light Intensity",
                 type: "line",
                 zones: [{
                     value: 3500,
@@ -721,7 +716,7 @@
                 }
             },
             title: {
-                text: "Plant Height (cm)"
+                text: "Plant Height(cm)"
             },
             navigator: {
                 enabled: true,
@@ -789,7 +784,7 @@
                 }
             },
             series: [{
-                name: "Hourly Plant Height",
+                name: "Plant Height",
                 type: "line",
                 zones: [{
                     value: 120,
