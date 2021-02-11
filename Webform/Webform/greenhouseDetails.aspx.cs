@@ -39,14 +39,21 @@ namespace Webform
         {
             LoadDataofTempChart();
             LoadTempAnalysis();
-            LoadDataofHumidityChart();
-            LoadHumAnalysis();
-            LoadDataofMoistureChart();
-            LoadMoistureAnalysis();
-            LoadDataofLightChart();
-            LoadLightAnalysis();
-            LoadDataofHeightChart();
-            LoadHeightAnalysis();
+
+            humidityTable.Visible = false;
+            tempTable.Visible = true;
+            moistureTable.Visible = false;
+            lightTable.Visible = false;
+            heightTable.Visible = false;
+            //LoadDataofHumidityChart();
+            //LoadHumAnalysis();
+            //LoadDataofMoistureChart();
+            //LoadMoistureAnalysis();
+            //LoadDataofLightChart();
+            //LoadLightAnalysis();
+            //LoadDataofHeightChart();
+            //LoadHeightAnalysis();
+
             DataSet user = GetUser();
             Repeater1.DataSource = user;
             Repeater1.DataBind();
@@ -216,45 +223,26 @@ namespace Webform
             {
                 LoadDataofTempChart();
                 LoadTempAnalysis();
-                LoadDataofHumidityChart();
-                LoadHumAnalysis();
-                LoadDataofMoistureChart();
-                LoadMoistureAnalysis();
-                LoadDataofLightChart();
-                LoadLightAnalysis();
-                LoadDataofHeightChart();
-                LoadHeightAnalysis();
-
-                heightTable.Visible = true;
-                tempTable.Visible = true;
-                humidityTable.Visible = true;
-                moistureTable.Visible = true;
-                lightTable.Visible = true;
-            }
-            if (DropDownList1.SelectedIndex == 1)
-            {
-                LoadDataofTempChart();
-                LoadTempAnalysis();
                 humidityTable.Visible = false;
                 tempTable.Visible = true;
                 moistureTable.Visible = false;
+                lightTable.Visible = false;
+
+                heightTable.Visible = false;
+            }
+            if (DropDownList1.SelectedIndex == 1)
+            {
+                LoadDataofHumidityChart();
+                LoadHumAnalysis();
+                moistureTable.Visible = false;
+                humidityTable.Visible = true;
+                tempTable.Visible = false;
                 lightTable.Visible = false;
 
                 heightTable.Visible = false;
             }
             if (DropDownList1.SelectedIndex == 2)
             {
-                LoadDataofHumidityChart();
-                LoadHumAnalysis();
-                moistureTable.Visible = false;
-                humidityTable.Visible = true;
-                tempTable.Visible = false;
-                lightTable.Visible = false;
-
-                heightTable.Visible = false;
-            }
-            if (DropDownList1.SelectedIndex == 3)
-            {
                 LoadDataofMoistureChart();
                 LoadMoistureAnalysis();
                 lightTable.Visible = false;
@@ -263,7 +251,7 @@ namespace Webform
                 tempTable.Visible = false;
                 heightTable.Visible = false;
             }
-            if (DropDownList1.SelectedIndex == 4)
+            if (DropDownList1.SelectedIndex == 3)
             {
                 LoadDataofLightChart();
                 LoadLightAnalysis();
@@ -273,7 +261,7 @@ namespace Webform
                 tempTable.Visible = false;
                 heightTable.Visible = false;
             }
-            if (DropDownList1.SelectedIndex == 5)
+            if (DropDownList1.SelectedIndex == 4)
             {
                 LoadDataofHeightChart();
                 LoadHeightAnalysis();

@@ -9,7 +9,10 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col my-auto">
-                            <p style="font-size: large;">Status: <asp:Label ID="lblStatus" Font-Size="Large" runat="server"></asp:Label></p>
+                            <p style="font-size: large;">
+                                Status:
+                                <asp:Label ID="lblStatus" Font-Size="Large" runat="server"></asp:Label>
+                            </p>
                         </div>
                         <div class="col float-end text-right">
                             <asp:Button ID="btnChangeStatus" runat="server" OnClick="changeStatusClick" />
@@ -80,9 +83,131 @@
             </div>
 
             <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row float-end">
+                                <div class="form-group">
+                                    <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" AutoPostBack="True" CssClass="form-control" Width="117px">
+                                        <asp:ListItem Value="Temp" style="color: black;" Selected="True">Temperature</asp:ListItem>
+                                        <asp:ListItem Value="Humidity" style="color: black;">Humidity</asp:ListItem>
+                                        <asp:ListItem Value="Moisture" style="color: black;">Moisture</asp:ListItem>
+                                        <asp:ListItem Value="Light" style="color: black;">Light Intensity</asp:ListItem>
+                                        <asp:ListItem Value="Height" style="color: black;">Plant Height</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
+                            </div>
+                            <asp:HiddenField runat="server" ID="hdf_Test" />
+                            <asp:Timer ID="Timer1" runat="server" Interval="20000" OnTick="Timer1_Tick">
+                            </asp:Timer>
 
+                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                <ContentTemplate>
+                                    <asp:Button ID="btnSubmit" runat="server" OnClick="RepeatLoadingData" Style="display: none" />
+                                </ContentTemplate>
+
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="Timer1" EventName="Tick"></asp:AsyncPostBackTrigger>
+                                </Triggers>
+                            </asp:UpdatePanel>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="tempTable" runat="server">
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>
+                                                    <div id="temp" style="min-height: 600px; min-width: 800px;">
+                                                        <asp:GridView ID="gvtemp" runat="server">
+                                                        </asp:GridView>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div>
+                                                        <p>TEMPERATURE ANALYSIS:</p>
+                                                        <p id="tempreport"></p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <table id="humidityTable" runat="server">
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>
+                                                    <div id="humidity" style="min-height: 600px; min-width: 800px;">
+                                                        <asp:GridView ID="gvhumidity" runat="server">
+                                                        </asp:GridView>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div>
+                                                        <p>HUMIDITY ANALYSIS:</p>
+                                                        <p id="humidityreport"></p>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <table id="moistureTable" runat="server">
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>
+                                            <div id="moisture" style="min-height: 600px; min-width: 800px;">
+                                                <asp:GridView ID="gvmoisture" runat="server">
+                                                </asp:GridView>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <p>SOIL MOISTURE LEVEL ANALYSIS:</p>
+                                                <p id="moisturereport"></p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table id="lightTable" runat="server">
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>
+                                            <div id="light" style="min-height: 600px; min-width: 800px;">
+                                                <asp:GridView ID="gvlight" runat="server">
+                                                </asp:GridView>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <p>LIGHT ANALYSIS:</p>
+                                                <p id="lightreport"></p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <table id="heightTable" runat="server">
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td>
+                                            <div id="height" style="min-height: 600px; min-width: 800px;">
+                                                <asp:GridView ID="gvheight" runat="server">
+                                                </asp:GridView>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div>
+                                                <p>PLANT GROWTH ANALYSIS:</p>
+                                                <p id="heightreport"></p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>          
+        </div>
         <div class="col-lg-3">
             <div class="card">
                 <div class="card-header">
@@ -100,127 +225,6 @@
         </div>
     </div>
 
-    <asp:Label ID="Label1" runat="server" Text="Please select a Chart Type:"></asp:Label>
-    <br />
-
-    <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged" AutoPostBack="True">
-        <asp:ListItem Value="All" Selected="True">Display All</asp:ListItem>
-        <asp:ListItem Value="Temp">Temperature</asp:ListItem>
-        <asp:ListItem Value="Humidity">Humidity</asp:ListItem>
-        <asp:ListItem Value="Moisture">Moisture</asp:ListItem>
-        <asp:ListItem Value="Light">Light Intensity</asp:ListItem>
-        <asp:ListItem Value="Height">Plant Height</asp:ListItem>
-       
-    </asp:DropDownList>
-
-    <asp:HiddenField runat="server" ID="hdf_Test" />
-    <asp:Timer ID="Timer1" runat="server" Interval="20000" ontick="Timer1_Tick">
-    </asp:Timer>
-    
-    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-        <ContentTemplate>
-            <asp:Button ID="btnSubmit" runat="server" OnClick="RepeatLoadingData" style = "display:none"/>
-        </ContentTemplate>
-        
-        <Triggers>
-        <asp:AsyncPostBackTrigger ControlID="Timer1" EventName="Tick">
-        </asp:AsyncPostBackTrigger>
-    </Triggers>
-    </asp:UpdatePanel>
-    <div class="container">
-    <div class="row">
-    <div class="col-sm-12">
-    <table id="tempTable" runat="server">
-        <tr>
-            <td>&nbsp;</td>
-            <td>               
-                <div id="temp" style="min-height: 600px; min-width:800px;">
-                    <asp:GridView ID="gvtemp" runat="server">
-                    </asp:GridView>
-                </div>
-            </td>        
-            <td>                            
-                <div>
-                    <p>TEMPERATURE ANALYSIS:</p>                    
-                    <p id="tempreport"></p>   
-                </div>
-            </td>
-        </tr>
-    </table>
-    </div>
-    <div class="col-sm-12">
-    <table id="humidityTable" runat="server">
-        <tr>
-            <td>&nbsp;</td>
-            <td>
-                <div id="humidity" style="min-height: 600px; min-width:800px;">
-                    <asp:GridView ID="gvhumidity" runat="server">
-                    </asp:GridView>
-                </div>
-            </td>
-            <td>                            
-                <div>
-                    <p>HUMIDITY ANALYSIS:</p>                    
-                    <p id="humidityreport"></p>   
-                </div>
-            </td>
-        </tr>
-    </table>
-    </div>
-    </div>
-    <table id="moistureTable" runat="server">
-        <tr>
-            <td>&nbsp;</td>
-            <td>
-                <div id="moisture" style="min-height: 600px; min-width:800px;">
-                    <asp:GridView ID="gvmoisture" runat="server">
-                    </asp:GridView>
-                </div>
-            </td>
-            <td>                            
-                <div>
-                    <p>SOIL MOISTURE LEVEL ANALYSIS:</p>                    
-                    <p id="moisturereport"></p>   
-                </div>
-            </td>
-        </tr>
-    </table>
-    <table id="lightTable" runat="server">
-        <tr>
-            <td>&nbsp;</td>
-            <td>
-                <div id="light" style="min-height: 600px; min-width:800px;">
-                    <asp:GridView ID="gvlight" runat="server">
-                    </asp:GridView>
-                </div>
-            </td>
-            <td>                            
-                <div>
-                    <p>LIGHT ANALYSIS:</p>                    
-                    <p id="lightreport"></p>   
-                </div>
-            </td>
-        </tr>
-    </table>
-    <table id="heightTable" runat="server">
-        <tr>
-            <td>&nbsp;</td>
-            <td>
-                <div id="height" style="min-height: 600px; min-width:800px;">
-                    <asp:GridView ID="gvheight" runat="server">
-                    </asp:GridView>
-                </div>
-            </td>
-            <td>                            
-                <div>
-                    <p>PLANT GROWTH ANALYSIS:</p>                    
-                    <p id="heightreport"></p>   
-                </div>
-            </td>
-        </tr>
-    </table>          
-    </div>
-
     <script src="assets/js/core/jquery.min.js"></script>
     <script src="http://code.highcharts.com/stock/highstock.js"></script>
     <script src="http://code.highcharts.com/highcharts-more.js"></script>
@@ -231,7 +235,7 @@
     <script src="https://code.highcharts.com/themes/dark-unica.js"></script>
 
     <script>
-        //report        
+        //report
         var tempanalysis = "<%=tempAnalysis%>";
         document.getElementById("tempreport").innerHTML = tempanalysis;
         var temdata = <%=tempData%>;
@@ -246,25 +250,25 @@
                     load: function () {
 
                         // set up the updating of the chart each second
-                       
+
                         setInterval(function () {
-                             
+
                             document.getElementById("<%=btnSubmit.ClientID %>").click();
-                            
+
                             document.getElementById("tempreport").innerHTML = tempanalysis;
                             var tempchart =  $("#temp").highcharts();
                             tempchart.series[0].update({ data: temdata }, false)
                             tempchart.series[1].update({ data: idealtempdata }, false)
                             tempchart.series[2].update({ data: difftempdata }, false)
                             tempchart.redraw();
-                            
+
                         }, 20000);
                     }
                 }
             },
             title: {
                 text: "Hourly Temperature"
-            },            
+            },
 
             navigator: {
                 enabled: true,
@@ -303,18 +307,18 @@
                     type: 'week',
                     count: 1,
                     text: 'week'
-                },                
+                },
                 {
                     type: 'all',
                     text: 'All'
-                }],                
+                }],
             },
             xAxis: {
                 type: 'datetime',
                 tickAmount: 24,
                 tickInterval: 3600 * 1000,
                 minTickInterval: 3600 * 1000,
-                lineWidth: 1,                
+                lineWidth: 1,
                 title: {
                     text: "Time"
                 },
@@ -354,22 +358,22 @@
                 color: '#90ee90',
                 name: "Ideal Temperature",
                 data: idealtempdata,
-                }, {                
+            }, {
                 type: "arearange",
-                lineWidth: 0,                
+                lineWidth: 0,
                 data: difftempdata,
                 zones: [{
                     value: 26,
                     color: '#add8e6',
                 }, {
                     value: 30,
-                    color: '#90ee90',  
+                    color: '#90ee90',
                 }, {
-                value: 100,
-                color: '#FFCCCB',                        
-                    }],
+                    value: 100,
+                    color: '#FFCCCB',
+                }],
                 enableMouseTracking: false,
-                showInLegend: false,                
+                showInLegend: false,
             }]
         });
     </script>
@@ -380,7 +384,7 @@
         var humdata = <%=humidityData%>;
         var idealhumdata = <%=idealHumidityData%>;
         var diffhumdata = <%=diffHumidityData%>;
-        $("#humidity").highcharts({            
+        $("#humidity").highcharts({
             chart: {
                 animation: Highcharts.svg,
                 type: 'line',
@@ -391,7 +395,7 @@
                         // set up the updating of the chart each second
 
                         setInterval(function () {
-                            
+
                             document.getElementById("<%=btnSubmit.ClientID %>").click();
                             document.getElementById("humidityreport").innerHTML = humidityAnalysis;
                             var humchart = $("#humidity").highcharts();
@@ -399,7 +403,7 @@
                             humchart.series[1].update({ data: idealhumdata }, false)
                             humchart.series[2].update({ data: diffhumdata }, false)
                             humchart.redraw();
-                            
+
                         }, 20000);
                     }
                 }
@@ -477,10 +481,10 @@
                 zones: [{
                     value: 50,
                     color: '#add8e6',
-                    }, {                   
+                }, {
                     value: 70,
                     color: '#90ee90',
-                    }, {
+                }, {
                     value: 100,
                     color: '#FFCCCB',
                 }],
@@ -492,23 +496,23 @@
                 color: '#90ee90',
                 name: "Ideal Humidity",
                 data: idealhumdata,
-            }, {                
+            }, {
                 type: "arearange",
                 enableMouseTracking: false,
-                lineWidth: 0,                
-                    data: diffhumdata,
-                    zones: [{
-                        value: 50,
-                        color: '#add8e6',
-                    }, {
-                        value: 70,
-                        color: '#90ee90',
-                    }, {
-                        value: 100,
-                        color: '#FFCCCB',
-                    }],
-                    showInLegend: false,
-                }]
+                lineWidth: 0,
+                data: diffhumdata,
+                zones: [{
+                    value: 50,
+                    color: '#add8e6',
+                }, {
+                    value: 70,
+                    color: '#90ee90',
+                }, {
+                    value: 100,
+                    color: '#FFCCCB',
+                }],
+                showInLegend: false,
+            }]
         });
     </script>
 
@@ -537,7 +541,7 @@
                             moistchart.series[1].update({ data: idealmoistdata }, false)
                             moistchart.series[2].update({ data: diffmoistdata }, false)
                             moistchart.redraw();
-                            
+
                         }, 20000);
                     }
                 }
@@ -610,7 +614,7 @@
             tooltip: {
                 shared: true,
             },
-            series: [{                
+            series: [{
                 name: "Hourly Moisture",
                 zones: [{
                     value: 10,
@@ -623,7 +627,7 @@
                     color: '#FFCCCB',
                 }],
                 data: moistdata,
-            }, {                
+            }, {
                 type: "arearange",
                 opacity: 0.3,
                 color: '#90ee90',
@@ -640,9 +644,9 @@
                 }, {
                     value: 100,
                     color: '#FFCCCB',
-                }],                
-                lineWidth: 0,                    
-                enableMouseTracking: false,                   
+                }],
+                lineWidth: 0,
+                enableMouseTracking: false,
                 data: diffmoistdata,
                 showInLegend: false
             }]
@@ -667,7 +671,6 @@
 
                         setInterval(function () {
 
-                            
                             document.getElementById("<%=btnSubmit.ClientID %>").click();
                             document.getElementById("lightreport").innerHTML = lightAnalysis;
                             var lightchart = $("#light").highcharts();
@@ -675,7 +678,7 @@
                             lightchart.series[1].update({ data: ideallightdata }, false)
                             lightchart.series[2].update({ data: difflightdata }, false)
                             lightchart.redraw();
-                            
+
                         }, 20000);
                     }
                 }
@@ -748,7 +751,7 @@
                     text: "Light Intensity (lux)"
                 }
             },
-            series: [{                
+            series: [{
                 name: "Hourly Light Intensity",
                 type: "line",
                 zones: [{
@@ -781,16 +784,16 @@
                     value: 6000,
                     color: '#FFCCCB',
                 }],
-                lineWidth: 0,                    
-                enableMouseTracking: false, 
+                lineWidth: 0,
+                enableMouseTracking: false,
                 data: difflightdata,
                 showInLegend: false
             }]
         });
     </script>
-    
+
     <script>
-        //report        
+        //report
         var heightanalysis = "<%=heightAnalysis%>";
         document.getElementById("heightreport").innerHTML = heightanalysis;
         var heightdata = <%=heightData%>;
@@ -808,7 +811,7 @@
                         // set up the updating of the chart each second
 
                         setInterval(function () {
-                            
+
                             document.getElementById("<%=btnSubmit.ClientID %>").click();
 
                             document.getElementById("heightreport").innerHTML = heightanalysis;
@@ -818,7 +821,7 @@
                             heightchart.series[1].update({ data: idealheightdata }, false)
                             heightchart.series[2].update({ data: diffheightdata }, false)
                             heightchart.redraw();
-                            
+
                         }, 20000);
                     }
                 }
@@ -906,11 +909,11 @@
                 }],
                 data: heightdata,
             }, {
-                    type: "arearange",
-                    name: "Ideal Plant Height",
-                    opacity: 0.3,
-                    color: '#90ee90',
-                    data: idealheightdata,
+                type: "arearange",
+                name: "Ideal Plant Height",
+                opacity: 0.3,
+                color: '#90ee90',
+                data: idealheightdata,
             }, {
                 name: "range",
                 type: "arearange",
@@ -924,13 +927,11 @@
                     value: 300,
                     color: '#FFCCCB',
                 }],
-                lineWidth: 0,                    
-                enableMouseTracking: false, 
+                lineWidth: 0,
+                enableMouseTracking: false,
                 data: diffheightdata,
                 showInLegend: false
-                }]
+            }]
         });
-
-        
     </script>
 </asp:Content>
