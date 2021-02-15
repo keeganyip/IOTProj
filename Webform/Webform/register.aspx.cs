@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Diagnostics;
+using Salt_Password_Sample;
 
 namespace Webform
 {
@@ -47,8 +48,7 @@ namespace Webform
             if (temp == 1)
             {
 
-                //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Email already exist');", true);
-                //ScriptManager.RegisterStartupScript(Page, Page.GetType(), "Alert", ";alert('email already exit ');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Email already exists');", true);
             }
             else
             {
@@ -57,16 +57,17 @@ namespace Webform
                 {
                     string insertQuery = "insert into UserTable(Email,Password,Name,Contact,Type,UniqueRFID)values(@Email,@password,@Name,@Contact,@Type,@UniqueRFID)";
                     SqlCommand cmd = new SqlCommand(insertQuery, conn);
+                    string epass = Hash.ComputeHash(Password.Text, "SHA512", null);
                     cmd.Parameters.AddWithValue("@Email", Email.Text);
-                    cmd.Parameters.AddWithValue("@password", Password.Text);
+                    cmd.Parameters.AddWithValue("@password", epass);
                     cmd.Parameters.AddWithValue("@Name", Name.Text);
                     cmd.Parameters.AddWithValue("@Contact", Contact.Text);
                     cmd.Parameters.AddWithValue("@Type", "User");
                     cmd.Parameters.AddWithValue("@UniqueRFID", "-");
                     cmd.ExecuteNonQuery();
-                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "notification", ";alert('account created');", true);
-                    Response.Redirect("Login.aspx");
                 }
+                ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Account Created');", true);
+                Response.Redirect("Login.aspx");
             }
             conn.Close();
         }

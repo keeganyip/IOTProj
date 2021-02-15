@@ -51,6 +51,28 @@ namespace Webform
             //LoadDataofHeightChart();
             //LoadHeightAnalysis();
 
+            SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString);
+
+            string count1 = null;
+            string Id = null;
+            conn1.Open();
+            string loginamount = "select count(*) as count, UserID from TimeLog where Event ='Login' group by UserID";
+            SqlCommand cmd1 = new SqlCommand(loginamount, conn1);
+            SqlDataReader read = cmd1.ExecuteReader();
+
+            while (read.Read())
+            {
+                count1 = read["count"].ToString();
+                Id = read["UserId"].ToString();
+                SqlConnection conn2 = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString);
+                conn2.Open();
+                string update = "Update UserTable set Greenhouse_Entry_Amount = " + count1 + " where UniqueUserID ='" + Id + "'";
+                Debug.WriteLine(update);
+                SqlCommand cmd2 = new SqlCommand(update, conn2);
+                cmd2.ExecuteNonQuery();
+
+            }
+
             int userId = Convert.ToInt32(Session["id"].ToString());
             using (SqlConnection conn = new SqlConnection(constr))
             {

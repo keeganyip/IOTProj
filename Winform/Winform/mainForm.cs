@@ -55,7 +55,7 @@ namespace Winform
         private void panelMoisture_DoubleClick(object sender, EventArgs e)
         {
             this.Hide();
-            SettingsForm fm = new SettingsForm();
+            WaterSettings fm = new WaterSettings();
             fm.Show();
         }
 

@@ -102,7 +102,6 @@
                                     </a>
                                     <ul class="dropdown-menu dropdown-navbar">
                                         <li class="nav-link"><a href="userProfile.aspx" class="nav-item dropdown-item">Profile</a></li>
-                                        <li class="nav-link"><a href="javascript:void(0)" class="nav-item dropdown-item">Settings</a></li>
                                         <li class="dropdown-divider"></li>
                                         <li class="nav-link">
                                             <asp:Button ID="logOut" OnClick="signOutClick" runat="server" Text="Log out" CssClass="nav-item dropdown-item" />

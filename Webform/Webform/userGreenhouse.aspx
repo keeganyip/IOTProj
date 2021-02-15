@@ -89,7 +89,7 @@
                                     <div class="float-end text-end">
                                         <p class="card-category">Humidity</p>
                                         <h3 class="card-title">
-                                            <asp:Label ID="lblHumuidity" runat="server" Text="Label"></asp:Label>
+                                            <asp:Label ID="lblHumuidity" runat="server" Text="Active"></asp:Label>
                                         </h3>
                                     </div>
                                 </div>

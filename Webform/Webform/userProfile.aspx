@@ -39,6 +39,7 @@
                             <div class="form-group">
                                 <asp:Label ID="lblpw" runat="server" Text="Current Password"></asp:Label>
                                 <asp:TextBox ID="TBPassword" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Must have at least 8 characters" ForeColor="Red" ControlToValidate="TBPassword" Display="Dynamic" ValidationExpression="^.{8,}$"></asp:RegularExpressionValidator>
                             </div>
                         </div>
                     </div>
@@ -47,6 +48,15 @@
                             <div class="form-group">
                                 <asp:Label ID="lblnewpw" runat="server" Text="Change Password"></asp:Label>
                                 <asp:TextBox ID="TbNewPw" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Must have at least 8 characters" ForeColor="Red" ControlToValidate="TbNewPw" Display="Dynamic" ValidationExpression="^.{8,}$"></asp:RegularExpressionValidator>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <asp:Label ID="Label1" runat="server" Text="Greenhouse Entries:"></asp:Label>
+                                <asp:Label ID="lblGreenhouseEntries" runat="server"></asp:Label>
                             </div>
                         </div>
                         <div class="card-footer">

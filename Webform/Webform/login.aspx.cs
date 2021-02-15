@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Diagnostics;
+using Salt_Password_Sample;
 
 namespace Webform
 {
@@ -33,12 +34,12 @@ namespace Webform
                 SqlCommand cmds = new SqlCommand(correctpw, conn);
 
                 string checkpw = cmds.ExecuteScalar().ToString().Trim();
+                Debug.WriteLine(checkpw);
                 if (checkpw != null)
                 {
 
                     string pass = Password.Text;
-                    Response.Write(checkpw + Password.Text);
-                    Response.Write(pass == checkpw);
+                    bool flag = Hash.VerifyHash(pass, "SHA512", checkpw);
                     Debug.WriteLine(pass, "pass");
                     Debug.WriteLine(checkpw, "checkpw");
 
@@ -46,45 +47,65 @@ namespace Webform
                     {
 
 
-                        if (pass == checkpw)
+                        if (flag == true)
                         {
-                            string getUserType = "select type from UserTable where Email='" + Email.Text + "'";
-                            SqlCommand cmdType = new SqlCommand(getUserType, conn);
-                            string userType = cmdType.ExecuteScalar().ToString().Trim();
-                            Debug.WriteLine(userType);
+                            string id = "select UniqueUserID from UserTable where Email='" + Email.Text + "'";
+                            SqlCommand cmdid = new SqlCommand(id, conn);
+                            string id_collected = cmdid.ExecuteScalar().ToString().Trim();
+                            string type = "select Type from UserTable where Email ='" + Email.Text + "'";
+                            SqlCommand cmdtype = new SqlCommand(type, conn);
+                            string type_collected = cmdtype.ExecuteScalar().ToString().Trim();
+
                             conn.Close();
 
-                            if (userType == "User")
+                            if (type_collected == "Admin")
                             {
-                                conn.Open();
-                                string id = "select UniqueUserID from UserTable where Email='" + Email.Text + "'";
-                                SqlCommand cmdid = new SqlCommand(id, conn);
-                                string id_collected = cmdid.ExecuteScalar().ToString().Trim();
-                                conn.Close();
-
-                                Response.Write("password check");
-                                Response.Write(id_collected);
+                                Session["id"] = id_collected;
+                                Session["session"] = "adminlogged";
+                                Response.Redirect("greenhouses.aspx");
+                            }
+                            else
+                            {
                                 Session["id"] = id_collected;
                                 Session["session"] = "logged";
                                 Response.Redirect("userGreenhouse.aspx");
                             }
 
-                            else if (userType == "Admin")
-                            {
-                                conn.Open();
-                                string id = "select UniqueUserID from UserTable where Email='" + Email.Text + "'";
-                                SqlCommand cmdid = new SqlCommand(id, conn);
-                                string id_collected = cmdid.ExecuteScalar().ToString().Trim();
-                                conn.Close();
+                            //string getUserType = "select type from UserTable where Email='" + Email.Text + "'";
+                            //SqlCommand cmdType = new SqlCommand(getUserType, conn);
+                            //string userType = cmdType.ExecuteScalar().ToString().Trim();
+                            //Debug.WriteLine(userType);
+                            //conn.Close();
 
-                                Response.Write("password check");
-                                Response.Write(id_collected);
-                                Session["id"] = id_collected;
-                                Session["session"] = "adminlogged";
-                                Response.Redirect("greenhouses.aspx");
-                            }
+                            //if (userType == "User")
+                            //{
+                            //    conn.Open();
+                            //    string id = "select UniqueUserID from UserTable where Email='" + Email.Text + "'";
+                            //    SqlCommand cmdid = new SqlCommand(id, conn);
+                            //    string id_collected = cmdid.ExecuteScalar().ToString().Trim();
+                            //    conn.Close();
 
-                            Response.Write(Session["id"]);
+                            //    Response.Write("password check");
+                            //    Response.Write(id_collected);
+                            //    Session["id"] = id_collected;
+                            //    Session["session"] = "logged";
+                            //    Response.Redirect("userGreenhouse.aspx");
+                            //}
+
+                            //else if (userType == "Admin")
+                            //{
+                            //    conn.Open();
+                            //    string id = "select UniqueUserID from UserTable where Email='" + Email.Text + "'";
+                            //    SqlCommand cmdid = new SqlCommand(id, conn);
+                            //    string id_collected = cmdid.ExecuteScalar().ToString().Trim();
+                            //    conn.Close();
+
+                            //    Response.Write("password check");
+                            //    Response.Write(id_collected);
+                            //    Session["id"] = id_collected;
+                            //    Session["session"] = "adminlogged";
+                            //    Response.Redirect("greenhouses.aspx");
+                            //}
                         }
                     }
                     catch (Exception s)

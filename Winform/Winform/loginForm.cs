@@ -16,6 +16,7 @@ namespace Winform
 {
     public partial class loginForm : Form
     {
+
         public string rfid = "";
         //retrieve connection information from App.Config
         private string strConnectionString =
@@ -95,9 +96,6 @@ namespace Winform
             SqlCommand cmd = new SqlCommand(strCommandText, myConnect);
             cmd.Parameters.AddWithValue("@Email", tbUserName.Text);
 
-            string epass = Hash.ComputeHash(tbPassword.Text, "SHA512", null);
-            Debug.WriteLine(epass);
-
             try
             {
                 //Step 3: Open Connection and Retrieve Data by calling ExecuteReader
@@ -107,17 +105,18 @@ namespace Winform
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    Debug.WriteLine("TEST");
                     userexists = true;
-                    flag = Hash.VerifyHash(tbPassword.Text, "SHA512", reader["Password"].ToString());
+                    flag = Hash.VerifyHash(tbPassword.Text.Trim(), "SHA512", reader["Password"].ToString().Trim());
                     userid = reader["UniqueUserID"].ToString();
                     rfid = reader.GetString(3);
-
+                    Debug.WriteLine(reader["Password"].ToString().Trim());
+                    Debug.WriteLine(flag + " FLAG");
                 }
                 reader.Close();
                 if (userexists == true && flag == true)
                 {
                     SensorForm fm = new SensorForm();
+
                     MessageBox.Show("Login Successful");
                     this.Hide();
 

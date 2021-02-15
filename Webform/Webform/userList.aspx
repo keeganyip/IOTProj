@@ -26,9 +26,11 @@
                                                     <asp:Label ID="lblEmail" runat="server" CssClass="card-link" Text='<%#Eval("Email") %>'></asp:Label>
                                                     <br />
                                                     <asp:Label ID="lblType" runat="server" CssClass="card-link" Text='<%#Eval("Type") %>'></asp:Label>
+                                                    <br />
+                                                    Greenhouse Entries: <asp:Label ID="lblGreenhouseEntries" runat="server" CssClass="card-link" Text='<%#Eval("Greenhouse_Entry_Amount") %>'></asp:Label>
                                                 </div>
                                                 <div class="col-lg-3 text-center mt-3">
-                                                    <asp:LinkButton ID="LinkButton1" runat="server" OnClientClick="return confirm('Do you want to delete this Customer?');" OnClick="deleteUser">
+                                                    <asp:LinkButton ID="LinkButton1" runat="server" OnClientClick="return confirm('Do you want to delete this Staff?');" OnClick="deleteUser">
                                                         <i class="far fa-trash-alt fa-3x"></i>
                                                     </asp:LinkButton>
                                                 </div>

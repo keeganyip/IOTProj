@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Diagnostics;
+using Salt_Password_Sample;
 
 using System.Net;
 using System.Net.Mail;
@@ -38,7 +39,8 @@ namespace Webform
                 stringchars[i] = chars[random.Next(chars.Length)];
             }
             var randompw = new string(stringchars);
-            changingpw.Parameters.AddWithValue("@Password", randompw);
+            string epass = Hash.ComputeHash(randompw, "SHA512", null);
+            changingpw.Parameters.AddWithValue("@Password", epass);
             changingpw.Parameters.AddWithValue("@Email", Email.Text.Trim());
 
             changingpw.ExecuteNonQuery();
@@ -82,8 +84,9 @@ namespace Webform
                     //Label1.Visible = true;
                     //Label1.ForeColor = System.Drawing.Color.Green;
                     //Label1.Text = "email sent";
-                    Response.Write("alert('Email Sent')");
-
+                    string script = "<script type=\"text/javascript\">alert('Email Sent!');</script>";
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", script);
+                    Response.Redirect("login.aspx");
                 }
 
                 catch (Exception ex)
@@ -96,7 +99,8 @@ namespace Webform
                 //Label1.Visible = true;
                 //Label1.Text = "Email does not have an account yet";
                 //Debug.WriteLine("email doesnt have an account that exist");
-                Response.Write("alert('You are not registered')");
+                string script = "<script type=\"text/javascript\">alert('You are not registered!');</script>";
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", script);
             }
 
             /*

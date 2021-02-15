@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Configuration;
 using System.Diagnostics;
+using Salt_Password_Sample;
 
 namespace Webform
 {
@@ -20,6 +21,28 @@ namespace Webform
                 SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString);
                 try
                 {
+                    SqlConnection conn1 = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString);
+
+                    string count1 = null;
+                    string Id = null;
+                    conn1.Open();
+                    string loginamount = "select count(*) as count, UserID from TimeLog where Event ='Login' group by UserID";
+                    SqlCommand cmd1 = new SqlCommand(loginamount, conn1);
+                    SqlDataReader read = cmd1.ExecuteReader();
+
+                    while (read.Read())
+                    {
+                        count1 = read["count"].ToString();
+                        Id = read["UserId"].ToString();
+                        SqlConnection conn2 = new SqlConnection(ConfigurationManager.ConnectionStrings["UserdbConnectionString"].ConnectionString);
+                        conn2.Open();
+                        string update = "Update UserTable set Greenhouse_Entry_Amount = " + count1 + " where UniqueUserID ='" + Id + "'";
+                        Debug.WriteLine(update);
+                        SqlCommand cmd2 = new SqlCommand(update, conn2);
+                        cmd2.ExecuteNonQuery();
+
+                    }
+
                     conn.Open();
                     string getdetails = "select * from UserTable where UniqueUserID ='" + logged + "'";
 
@@ -35,6 +58,7 @@ namespace Webform
                         TbEmail.Text = reader["Email"].ToString().Trim();
                         TbContact.Text = reader["Contact"].ToString().Trim();
                         TBPassword.Text = reader["Password"].ToString().Trim();
+                        lblGreenhouseEntries.Text = reader["Greenhouse_Entry_Amount"].ToString().Trim();
                     }
                 }
                 catch (Exception E)
@@ -77,24 +101,38 @@ namespace Webform
                     cmd.Parameters.AddWithValue("@Contact", TbContact.Text);
                     cmd.ExecuteNonQuery();
                     conn.Close();
+                    if (Session["session"].ToString() == "logged")
+                    {
+                        string script = "<script type=\"text/javascript\">alert('Changed Password!');</script>";
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", script);
+                        Response.Redirect("userGreenhouse.aspx");
+                    }
                     Response.Redirect("userList.aspx");
                 }
                 else
                 {
                     string checkpw = cmdpw.ExecuteScalar().ToString().Trim();
                     string pass = TBPassword.Text;
-                    if (pass == checkpw)
+                    bool flag = Hash.VerifyHash(pass, "SHA512", checkpw);
+                    if (flag == true)
                     {
                         if (TbNewPw.Text.Length >= 8)
                         {
                             string sql = "UPDATE UserTable SET Email = @Email ,Name = @Name,Contact = @Contact , Password = @Password where UniqueUserID ='" + Convert.ToInt32(logged) + "'";
                             SqlCommand cmd = new SqlCommand(sql, conn);
+                            string epass = Hash.ComputeHash(TbNewPw.Text, "SHA512", null);
                             cmd.Parameters.AddWithValue("@Email", TbEmail.Text);
                             cmd.Parameters.AddWithValue("@Name", TbName.Text);
                             cmd.Parameters.AddWithValue("@Contact", TbContact.Text);
-                            cmd.Parameters.AddWithValue("@Password", TbNewPw.Text);
+                            cmd.Parameters.AddWithValue("@Password", epass);
                             cmd.ExecuteNonQuery();
                             conn.Close();
+                            if (Session["session"].ToString() == "logged")
+                            {
+                                string script = "<script type=\"text/javascript\">alert('Changed Password!');</script>";
+                                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", script);
+                                Response.Redirect("userGreenhouse.aspx");
+                            }
                             Response.Redirect("userList.aspx");
                         }
                     }
@@ -113,25 +151,42 @@ namespace Webform
                     cmd.Parameters.AddWithValue("@Contact", TbContact.Text);
                     cmd.ExecuteNonQuery();
                     conn.Close();
+                    if (Session["session"].ToString() == "logged")
+                    {
+                        string script = "<script type=\"text/javascript\">alert('Changed Password!');</script>";
+                        Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", script);
+                        Response.Redirect("userGreenhouse.aspx");
+                    }
                     Response.Redirect("userList.aspx");
                 }
                 else
                 {
                     string checkpw1 = cmdpw1.ExecuteScalar().ToString().Trim();
                     string pass1 = TBPassword.Text;
-                    if (pass1 == checkpw1)
+                    bool flag = Hash.VerifyHash(pass1, "SHA512", checkpw1);
+                    if (flag == true)
                     {
                         string sql = "UPDATE UserTable SET Email = @Email ,Name = @Name,Contact = @Contact , Password = @Password where UniqueUserID ='" + Convert.ToInt32(logged) + "'";
                         SqlCommand cmd = new SqlCommand(sql, conn);
+                        string epass = Hash.ComputeHash(TbNewPw.Text, "SHA512", null);
                         cmd.Parameters.AddWithValue("@Email", TbEmail.Text);
                         cmd.Parameters.AddWithValue("@Name", TbName.Text);
                         cmd.Parameters.AddWithValue("@Contact", TbContact.Text);
-                        cmd.Parameters.AddWithValue("@Password", TbNewPw.Text);
+                        cmd.Parameters.AddWithValue("@Password", epass);
                         cmd.ExecuteNonQuery();
                         conn.Close();
+                        if (Session["session"].ToString() == "logged")
+                        {
+                            string script = "<script type=\"text/javascript\">alert('Changed Password!');</script>";
+                            Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", script);
+                            Response.Redirect("userGreenhouse.aspx");
+                        }
                         Response.Redirect("userList.aspx");
                     }
-
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Wrong Current Password');", true);
+                    }
 
                 }
             }

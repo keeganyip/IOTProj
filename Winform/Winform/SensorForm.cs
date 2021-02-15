@@ -342,17 +342,26 @@ namespace Winform
 
             float fLightValue = extractFlotValue(strData, ID);
             string status = "";
+            string lightstatus = "Lights Turning on";
             if (fLightValue <= lightThreshold)
             { 
-                 status = "Dark";
+                status = "Dark";
                 tb_light.BackColor = Color.Red;
                 tb_light.ForeColor = Color.White;
+                if ((lbLiveStatus.Items.Contains(lightstatus) == false))
+                {
+                    lbLiveStatus.Items.Insert(0, lightstatus);
+                }
             }
             else
             { 
-                 status = "Bright";
+                status = "Bright";
                 tb_light.BackColor = Color.FromArgb(0,192,0);
                 tb_light.ForeColor = Color.Black;
+                if (lbLiveStatus.Items.Contains(lightstatus))
+                {
+                    lbLiveStatus.Items.Remove(lightstatus);
+                }
             }
             tb_light.Text = status;
 
@@ -622,6 +631,11 @@ namespace Winform
                         rfidcheck = true;
                         wr.Close();
 
+
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
             }

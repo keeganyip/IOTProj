@@ -2216,6 +2216,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Code\Greenhouse.cs" />
+    <Compile Include="App_Code\Hash.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

@@ -45,11 +45,12 @@
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
                                             <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control form-control-user" placeholder="Password" />
-                                        
+                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Must have at least 8 characters"
+                                                 ControlToValidate="Password" ValidationExpression="^.{8,}$" ForeColor="Red" Display="Dynamic" Font-Size="X-Small"></asp:RegularExpressionValidator>
                                         </div>
                                         <div class="col-sm-6">
                                             <asp:TextBox runat="server" ID="ConfirmPassword" TextMode="Password" CssClass="form-control form-control-user" placeholder="Confirm Password" />
-                                        
+                                            <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="Password does not match" ForeColor="Red" Font-Size="X-Small" ControlToValidate="ConfirmPassword" ControlToCompare="Password" Display="Dynamic"></asp:CompareValidator>
                                         </div>
                                     </div>
                                     <asp:Button runat="server" OnClick="CreateUser_Click" Text="Register Account" CssClass="btn btn-primary btn-user btn-block" />
