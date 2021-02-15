@@ -27,12 +27,6 @@ namespace Winform
             InitializeComponent();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            Application.Exit();
-        }
-
         private string extractStringValue(string strData, string ID)
         {
             string result = strData.Substring(strData.IndexOf(ID) + ID.Length);

@@ -178,7 +178,7 @@ namespace Winform
                 //Step 4: ExecuteCommand
                 int result = updateCmd.ExecuteNonQuery();
             }
- 
+
             //Step 5: Close Connection
             myConnect.Close();
         } //End saveLightSensorDataToDB
@@ -263,7 +263,7 @@ namespace Winform
             }
             else
             {
-                tbtemp.BackColor = Color.Gray;
+                tbtemp.BackColor = Color.FromArgb(0,192,0);
                 tbtemp.ForeColor = Color.Black;
                 if(lbLiveStatus.Items.Contains(TempStatus))
                 {
@@ -343,17 +343,15 @@ namespace Winform
             float fLightValue = extractFlotValue(strData, ID);
             string status = "";
             if (fLightValue <= lightThreshold)
-            {
-                dataComms.sendData("WARN");
-                status = "Dark";
+            { 
+                 status = "Dark";
                 tb_light.BackColor = Color.Red;
                 tb_light.ForeColor = Color.White;
             }
             else
-            {
-                dataComms.sendData("Normal");
-                status = "Bright";
-                tb_light.BackColor = Color.Gray;
+            { 
+                 status = "Bright";
+                tb_light.BackColor = Color.FromArgb(0,192,0);
                 tb_light.ForeColor = Color.Black;
             }
             tb_light.Text = status;
@@ -413,7 +411,6 @@ namespace Winform
             int threshold = Convert.ToInt32(retrieveWaterSetting());
             if (fMoistureValue > threshold)
             {
-                dataComms.sendData("WARN");
                 tb_Moisture.BackColor = Color.Red;
                 tb_Moisture.ForeColor = Color.White;
                 WaterStatus = "Water Turning On";
@@ -426,10 +423,9 @@ namespace Winform
             else if (fMoistureValue < 100)
                 status = "There is water pending";
             else
-            {
-                dataComms.sendData("Normal");
+            { 
                 status = "Moderately Wet";
-                tb_Moisture.BackColor = Color.Gray;
+                tb_Moisture.BackColor = Color.FromArgb(0,192,0);
                 tb_Moisture.ForeColor = Color.Black;
                 if (lbLiveStatus.Items.Contains(WaterStatus))
                 {
