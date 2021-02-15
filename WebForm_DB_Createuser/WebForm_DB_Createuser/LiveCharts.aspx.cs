@@ -182,6 +182,10 @@ namespace WebForm_DB_Createuser
                 
             }
             tempData = tempData.Remove(tempData.Length - 1) + ']';
+            Debug.WriteLine("temp start");
+            Debug.WriteLine(tempData);
+            Debug.WriteLine("temp end");
+
             
             //data format is [  [x1,y1], [x2,y2], ...]
             idealTempData = "[";
@@ -253,13 +257,13 @@ namespace WebForm_DB_Createuser
 
             //data format is [  {x1,y1}, {x2,y2}, ...]
             //date format: Date.UTC(2010, 1, 1, 12, 0, 0)
-            int avgTemp = 0;            
+            double avgTemp = 0;            
             foreach (DataRow dr in dt.Rows)
             {
                 string tempconverted = Convert.ToString(dr["tempValue"]);
                 string temp = tempconverted.Trim();
-                
-                avgTemp = Convert.ToInt32(temp);              
+
+                avgTemp = Convert.ToDouble(temp);              
 
             }
 

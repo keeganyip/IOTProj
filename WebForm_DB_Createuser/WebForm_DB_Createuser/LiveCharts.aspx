@@ -142,7 +142,10 @@
                         setInterval(function () {
                              
                             document.getElementById("<%=btnSubmit.ClientID %>").click();
-                            
+                            console.log("temp start");
+                            console.log(temdata);
+                            console.log(difftempdata);
+                            console.log("temp end");
                             document.getElementById("tempreport").innerHTML = tempanalysis;
                             var tempchart =  $("#temp").highcharts();
                             tempchart.series[0].update({ data: temdata }, false)

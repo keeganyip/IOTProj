@@ -178,7 +178,7 @@ namespace Winform
                 //Step 4: ExecuteCommand
                 int result = updateCmd.ExecuteNonQuery();
             }
-
+ 
             //Step 5: Close Connection
             myConnect.Close();
         } //End saveLightSensorDataToDB
@@ -343,14 +343,16 @@ namespace Winform
             float fLightValue = extractFlotValue(strData, ID);
             string status = "";
             if (fLightValue <= lightThreshold)
-            { 
-                 status = "Dark";
+            {
+                dataComms.sendData("WARN");
+                status = "Dark";
                 tb_light.BackColor = Color.Red;
                 tb_light.ForeColor = Color.White;
             }
             else
-            { 
-                 status = "Bright";
+            {
+                dataComms.sendData("Normal");
+                status = "Bright";
                 tb_light.BackColor = Color.Gray;
                 tb_light.ForeColor = Color.Black;
             }
@@ -411,6 +413,7 @@ namespace Winform
             int threshold = Convert.ToInt32(retrieveWaterSetting());
             if (fMoistureValue > threshold)
             {
+                dataComms.sendData("WARN");
                 tb_Moisture.BackColor = Color.Red;
                 tb_Moisture.ForeColor = Color.White;
                 WaterStatus = "Water Turning On";
@@ -423,7 +426,8 @@ namespace Winform
             else if (fMoistureValue < 100)
                 status = "There is water pending";
             else
-            { 
+            {
+                dataComms.sendData("Normal");
                 status = "Moderately Wet";
                 tb_Moisture.BackColor = Color.Gray;
                 tb_Moisture.ForeColor = Color.Black;
